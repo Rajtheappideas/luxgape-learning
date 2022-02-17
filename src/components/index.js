@@ -1,0 +1,10 @@
+export { default as Navbar } from "./Navbar";
+export { default as Herosection } from "./Herosection";
+export { default as CourseHistory } from "./CourseHistory";
+export { default as WhyChooseUs } from "./WhyChooseUs";
+export { default as MostPopularCourse } from "./MostPopularCourse";
+export { default as LearnAnytimeAnywhere } from "./LearnAnytimeAnywhere";
+export { default as MoreAboutUs } from "./MoreAboutUs";
+export { default as WhatOurEmployerSay } from "./WhatOurEmployerSay";
+export { default as ContactUs } from "./ContactUs";
+export { default as Footer } from "./Footer";
