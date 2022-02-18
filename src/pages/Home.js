@@ -11,11 +11,15 @@ import {
   WhatOurEmployerSay,
   ContactUs,
 } from "../components/index";
+import { MetaTags } from "react-meta-tags";
 const Home = () => {
   return (
     <div className="bg-bgblank">
+      <MetaTags>
+        <title>Home</title>
+      </MetaTags>
       {/* -------------------navbar=------------------ */}
-      <Navbar />
+      <Navbar activeText="Home" />
 
       {/* ---------------------herosection---------------------- */}
       <Herosection />
@@ -40,7 +44,7 @@ const Home = () => {
 
       {/* --------------------ContactUs------------------ */}
       <ContactUs />
-      
+
       {/* ----------------------------------foooter---------------------------- */}
       <Footer />
     </div>

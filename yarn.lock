@@ -5756,6 +5756,12 @@ language-tags@^1.0.5:
   dependencies:
     language-subtag-registry "~0.3.2"
 
+"less-common-words@github:azer/less-common-words":
+  version "0.0.0"
+  resolved "https://codeload.github.com/azer/less-common-words/tar.gz/c908514616c834b0d626955ff43ff0b285e83444"
+  dependencies:
+    most-common-words azer/most-common-words
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
@@ -5967,6 +5973,15 @@ merge2@^1.3.0, merge2@^1.4.1:
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
   integrity sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
 
+meta-tags@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/meta-tags/-/meta-tags-1.0.0.tgz#d7e0c526bb0530df8db9380b5eb5e95e661cc1d2"
+  integrity sha1-1+DFJrsFMN+NuTgLXrXpXmYcwdI=
+  dependencies:
+    less-common-words azer/less-common-words
+    most-common-words azer/most-common-words
+    uniques azer/uniques
+
 methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
@@ -6044,6 +6059,11 @@ mkdirp@^0.5.5, mkdirp@~0.5.1:
   integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
   dependencies:
     minimist "^1.2.5"
+
+most-common-words@azer/most-common-words, "most-common-words@github:azer/most-common-words":
+  version "0.0.1"
+  uid eefe2f9cccccef34fbc6f55369c95fb35caaa3e0
+  resolved "https://codeload.github.com/azer/most-common-words/tar.gz/eefe2f9cccccef34fbc6f55369c95fb35caaa3e0"
 
 ms@2.0.0:
   version "2.0.0"
@@ -8484,6 +8504,10 @@ unique-string@^2.0.0:
   integrity sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg==
   dependencies:
     crypto-random-string "^2.0.0"
+
+"uniques@github:azer/uniques":
+  version "0.0.1"
+  resolved "https://codeload.github.com/azer/uniques/tar.gz/a09a66eb6bfce1a3802bda33575893decf5bf545"
 
 universalify@^0.1.2:
   version "0.1.2"

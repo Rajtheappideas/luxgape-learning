@@ -1,26 +1,56 @@
 import React from "react";
 import logo from "../assets/LXG_RVB.png";
 import tw from "tailwind-styled-components";
+import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ activeText }) => {
   return (
     <Wrapper>
       {/* ----------------logo------------------------- */}
       <div className="cursor-pointer">
-        <img src={logo} className="w-full h-20" alt="logo" />
+        <Link to="/">
+          <img
+            src={logo}
+            className="w-full h-20 object-contain cursor-pointer"
+            alt="logo"
+          />
+        </Link>
       </div>
 
       {/* ------------------links------------------------ */}
       <div className="space-x-14 cursor-pointer text-lg text-secondary font-semibold">
-        <span className="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to">
-          Home
+        <span
+          className={`${
+            activeText ==="Home" &&
+            "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+          }`}
+        >
+          <Link to="/">Home</Link>
         </span>
-        <span>Course</span>
-        <span>About Us</span>
-        <span>Log In</span>
-        <span className="rounded-br-full rounded-tl-full text-white text-center font-semibold bg-primary px-9 py-3">
-          Sign up
+        <span
+          className={`${
+            activeText === "Course" &&
+            "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+          }`}
+        >
+          Course
         </span>
+        <span
+          className={`${
+            activeText === "About Us" &&
+            "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+          }`}
+        >
+          <Link to="/aboutus">About Us</Link>
+        </span>
+        <span>
+          <Link to="/signin">Log In</Link>
+        </span>
+        <Link to="/signup">
+          <span className="rounded-br-full rounded-tl-full text-white text-center font-semibold bg-primary px-9 py-3">
+            Sign up
+          </span>
+        </Link>
       </div>
     </Wrapper>
   );

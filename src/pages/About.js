@@ -1,9 +1,53 @@
-import React from 'react'
+import React from "react";
+import { MetaTags } from "react-meta-tags";
+import {
+  AboutUsimg,
+  ClassDetails,
+  ContactUs,
+  Footer,
+  MostPopularCourse,
+  Navbar,
+  ServiceWeProvide,
+  WhatOurEmployerSay,
+} from "../components";
 
 const About = () => {
   return (
-    <div>About</div>
-  )
-}
+    <>
+      <MetaTags>
+        <title>About Us</title>
+      </MetaTags>
+      {/* ------------------main div-------------- */}
+      <div>
+        {/* --------------navbar------------ */}
+        <Navbar activeText="About Us" />
+        <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-l text-center from-to to-from">
+          About Us
+        </h1>
 
-export default About
+        {/* --------------images------------ */}
+        <AboutUsimg />
+
+        {/* ------------------------Class details--------------------------- */}
+        <ClassDetails />
+
+        {/* -----------------ServiceWeProvide---------------- */}
+        <ServiceWeProvide />
+
+        {/* ------------------------WhatOurEmployerSay--------------------------- */}
+        <WhatOurEmployerSay />
+
+        {/* -------------most popular cousrse----------------- */}
+        <MostPopularCourse />
+
+        {/* --------------------ContactUs------------------ */}
+        <ContactUs />
+
+        {/* ---------------footer---------------------- */}
+        <Footer />
+      </div>
+    </>
+  );
+};
+
+export default About;

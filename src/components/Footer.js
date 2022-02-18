@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../assets/LXG_RVB.png";
 import tw from "tailwind-styled-components";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,11 +10,13 @@ const Footer = () => {
       <div className="pb-14 pt-28 px-16 grid grid-cols-5 items-start justify-items-center">
         {/* --------------logo & description-------------- */}
         <div className="w-full col-span-2">
-          <img
-            src={logo}
-            alt="companylogo"
-            className="w-40 h-20 cursor-pointer object-center object-contain"
-          />
+          <Link to="/">
+            <img
+              src={logo}
+              alt="companylogo"
+              className="w-40 h-20 cursor-pointer object-center object-contain"
+            />
+          </Link>
           <p className="text-2xl leading-loose tracking-wide text-left font-semibold w-full">
             learn with us anytime and anywhere, let's hone your skills and be
             professional, with certified mentors and competitive prices
@@ -34,10 +37,16 @@ const Footer = () => {
         {/* ------------------company-------------------------- */}
         <div className="pt-4">
           <Label>Company</Label>
-          <ul className="space-y-5">
-            <List>About US</List>
-            <List>Contact US</List>
-            <List>Testimonials</List>
+          <ul className="space-y-6">
+            <List>
+              <Link to="/aboutus">About US</Link>
+            </List>
+            <List>
+              <a href="/#contactus">Contact US</a>
+            </List>
+            <List>
+              <a href="/#testimonial">Testimonials</a>
+            </List>
             <List>FAQ</List>
           </ul>
         </div>
@@ -46,9 +55,30 @@ const Footer = () => {
         <div className="pt-4">
           <Label>Follow US</Label>
           <ul className="space-y-5">
-            <List>Instagram</List>
-            <List>Facebook</List>
-            <List>Twitter</List>
+            <List>
+              <a
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Instagram
+              </a>
+            </List>
+            <List>
+              <a
+                href="https://www.facebook.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Facebook
+              </a>
+            </List>
+
+            <List>
+              <a href="https://twitter.com/" target="_blank" rel="noreferrer">
+                Twitter
+              </a>
+            </List>
           </ul>
         </div>
       </div>

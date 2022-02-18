@@ -7,4 +7,7 @@ export { default as LearnAnytimeAnywhere } from "./LearnAnytimeAnywhere";
 export { default as MoreAboutUs } from "./MoreAboutUs";
 export { default as WhatOurEmployerSay } from "./WhatOurEmployerSay";
 export { default as ContactUs } from "./ContactUs";
+export { default as AboutUsimg } from "./AboutUsimg";
+export { default as ServiceWeProvide } from "./ServiceWeProvide";
+export { default as ClassDetails } from "./ClassDetails";
 export { default as Footer } from "./Footer";
