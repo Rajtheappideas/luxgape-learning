@@ -1,6 +1,6 @@
 import React from "react";
-import classdetail from "../assets/classdetails.jpg";
-import logo from "../assets/LXG_RVB.png";
+import classdetail from "../../assets/classdetails.jpg";
+import logo from "../../assets/LXG_RVB.png";
 
 const ClassDetails = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
-import img2 from "../assets/studyimg3.jpg";
-import serviceprovideimg from "../assets/serviceprovideimg.jpg";
+import img2 from "../../assets/studyimg3.jpg";
+import serviceprovideimg from "../../assets/serviceprovideimg.jpg";
 
 const ServiceWeProvide = () => {
   return (

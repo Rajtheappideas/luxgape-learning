@@ -1,9 +1,10 @@
 import React from "react";
 import tw from "tailwind-styled-components/dist/tailwind";
-import mpcimg1 from "../assets/mpcimg1.jpg";
-import mpcimg2 from "../assets/mpcimg2.jpg";
-import mpcimg3 from "../assets/mpcimg3.jpg";
+import mpcimg1 from "../../assets/mpcimg1.jpg";
+import mpcimg2 from "../../assets/mpcimg2.jpg";
+import mpcimg3 from "../../assets/mpcimg3.jpg";
 import { ArrowRightIcon, StarIcon } from "@heroicons/react/solid";
+import { Link } from "react-router-dom";
 
 const MostPopularCourse = () => {
   return (
@@ -12,9 +13,11 @@ const MostPopularCourse = () => {
         <p className="text-left font-semibold text-5xl mb-7">
           More Popular Course
         </p>
-        <p className="text-primary text-center text-2xl tracking-wide cursor-pointer underline font-semibold">
-          View More
-        </p>
+        <Link to="/courses">
+          <button className="text-primary text-center text-2xl tracking-wide cursor-pointer underline font-semibold">
+            View More
+          </button>
+        </Link>
       </div>
       {/* ---------------3 main divs rounded---------- */}
       <div className="flex items-center justify-around space-x-3">

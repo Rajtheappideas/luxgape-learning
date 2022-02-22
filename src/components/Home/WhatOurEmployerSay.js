@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/outline";
-import img from '../assets/studyimg3.jpg'
+import img from '../../assets/studyimg3.jpg'
 
 const WhatOurEmployerSay = () => {
   return (

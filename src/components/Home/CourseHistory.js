@@ -1,8 +1,8 @@
 import React from "react";
 import tw from "tailwind-styled-components/dist/tailwind";
-import cimg1 from "../assets/cimg1.jpg";
-import cimg2 from "../assets/cimg2.jpg";
-import cimg3 from "../assets/cimg3.jpg";
+import cimg1 from "../../assets/cimg1.jpg";
+import cimg2 from "../../assets/cimg2.jpg";
+import cimg3 from "../../assets/cimg3.jpg";
 import { DocumentTextIcon } from "@heroicons/react/outline";
 
 const CourseHistory = () => {
@@ -32,13 +32,13 @@ const CourseHistory = () => {
             <p className="font-bold text-red-500">1:30:49 / time</p>
             <span className="text-green-600 font-bold">3:22:10</span>
           </div>
-          <div className="flex text-green-600">
-            <p className="rounded-full w-14 px-2 py-3 text-center h-14 border-2 bg-gray-200 border-green-600">
-              100%
+          <div className="flex text-red-600">
+            <p className="rounded-full  w-14 px-2 py-3 text-center h-14  border-b-2 bg-gray-200 border-red-600">
+              50%
             </p>
-            <div className="flex-col mx-2 font-bold">
-              <span className="block text-xl">100%</span>
-              <span className="block text-sm">Done</span>
+            <div className="flex-col mx-2 text-red-600 font-bold">
+              <span className="block text-xl">50%</span>
+              <span className="block text-sm">Pending</span>
             </div>
           </div>
         </BorderDiv>
@@ -57,13 +57,13 @@ const CourseHistory = () => {
             </p>
             <span className="text-green-600 font-bold">4:10:10</span>
           </div>
-          <div className="flex text-red-600">
-            <p className="rounded-full  w-14 px-2 py-3 text-center h-14  border-b-2 bg-gray-200 border-red-600">
-              50%
+          <div className="flex text-green-600">
+            <p className="rounded-full w-14 px-2 py-3 text-center h-14 border-2 bg-gray-200 border-green-600">
+              100%
             </p>
-            <div className="flex-col mx-2 text-red-600 font-bold">
-              <span className="block text-xl">50%</span>
-              <span className="block text-sm">Pending</span>
+            <div className="flex-col mx-2 font-bold">
+              <span className="block text-xl">100%</span>
+              <span className="block text-sm">Done</span>
             </div>
           </div>
         </BorderDiv>

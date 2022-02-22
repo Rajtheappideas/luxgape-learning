@@ -33,7 +33,9 @@ const Navbar = ({ activeText }) => {
             "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
           }`}
         >
+          <Link to="/courses">
           Course
+          </Link>
         </span>
         <span
           className={`${

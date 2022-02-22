@@ -5,6 +5,12 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const ScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <footer className="bg-footer w-full">
       <div className="pb-14 pt-28 px-16 grid grid-cols-5 items-start justify-items-center">
@@ -38,7 +44,7 @@ const Footer = () => {
         <div className="pt-4">
           <Label>Company</Label>
           <ul className="space-y-6">
-            <List>
+            <List onClick={ScrollToTop}>
               <Link to="/aboutus">About US</Link>
             </List>
             <List>

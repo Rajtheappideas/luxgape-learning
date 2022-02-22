@@ -1,5 +1,5 @@
 import React from "react";
-import studyboy from "../assets/study_boy.jpg";
+import studyboy from "../../assets/study_boy.jpg";
 import { CheckIcon } from "@heroicons/react/outline";
 
 const LearnAnytimeAnywhere = () => {

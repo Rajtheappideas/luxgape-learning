@@ -96,7 +96,7 @@ const Signup = () => {
               />
               <button
                 className="w-5 h-5 absolute top-4 right-8 cursor-pointer"
-                onClick={() => setShowConfirmpassword(!showPassword)}
+                onClick={() => setShowConfirmpassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? (
                   <EyeIcon className="h-5 w-5 " color="gray" />
@@ -109,7 +109,12 @@ const Signup = () => {
             {/* -----------terms of service----------- */}
 
             <div className="flex items-center w-full">
-              <span className="border border-primary mr-1 w-6 h-6 rounded-tl-[12px] rounded-br-[12px] rounded-tr-none rounded-bl-none " />
+              <div className="border border-primary mr-1 w-6 h-6 rounded-tl-[12px] rounded-br-[12px] rounded-tr-none rounded-bl-none">
+                <input
+                  type="checkbox"
+                  className="border opacity-0 cursor-pointer border-primary mr-1 w-6 h-6 rounded-tl-[12px] rounded-br-[12px] rounded-tr-none rounded-bl-none"
+                />
+              </div>
               <p className="text-xl text-secondary">
                 I have read and agree to the
                 <span className="text-primary ml-1">Terms of Service</span>

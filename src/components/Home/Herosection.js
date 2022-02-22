@@ -1,17 +1,17 @@
 import React from "react";
 import { SearchIcon } from "@heroicons/react/outline";
-import simg1 from "../assets/studyimg1.jpg";
-import simg2 from "../assets/studyimg2.jpg";
-import simg3 from "../assets/studyimg3.jpg";
-import main from "../assets/main.jpg";
-import rocket from "../assets/rocket.png";
+import simg1 from "../../assets/studyimg1.jpg";
+import simg2 from "../../assets/studyimg2.jpg";
+import simg3 from "../../assets/studyimg3.jpg";
+import main from "../../assets/main.jpg";
+import rocket from "../../assets/rocket.png";
 import tw from "tailwind-styled-components";
 
 const Herosection = () => {
   return (
     <div className="p-10 grid grid-cols-2 gap-2 mt-5 mb-16 h-full w-full">
       {/* ------------text and search is here------------------------------ */}
-      <div className="text-title  mt-20 mb-5">
+      <div className="text-title  mt-20 mb-5 space-y-16">
         {/* -------------------------------------text--------------------------------     */}
 
         <div className="text-6xl tracking-normal font-bold text-black">
@@ -28,16 +28,17 @@ const Herosection = () => {
 
         {/* --------------------------search=-------------------------------- */}
 
-        <div className="mt-10 mb-8 relative">
+        <div className="relative">
           <input
             type="text"
             placeholder="Search Course"
-            className="w-11/12 p-7 h-[5.4rem] outline-none border"
+            name="search"
+            className=" px-3 outline-none h-[72px] w-[593px] border bg-white rounded-lg"
           />
-          <SearchIcon
-            color="white"
-            className="w-16 absolute bottom-0 right-3 h-[5.4rem] bg-primary rounded-tl-[36px] rounded-tr-none rounded-bl-none rounded-br-[36px] p-3"
-          />
+          {/* --------search button----------- */}
+          <button className="absolute top-0 right-1 h-[72px] w-[72px] bg-primary rounded-tl-[36px] rounded-br-[36px] rounded-tr-none rounded-bl-none ">
+            <SearchIcon className="h-8 w-8 mx-auto " color="white" />
+          </button>
         </div>
 
         {/* --------------------------------photos--------------------------------------- */}
