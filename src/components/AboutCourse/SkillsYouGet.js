@@ -33,7 +33,7 @@ const SkillsYouGet = () => {
             key={item.id}
             className="relative hover:scale-90 transform transition ease-in-out duration-150 h-[247px] w-[276px] rounded-tl-[123px] rounded-br-[123px] rounded-tr-none rounded-bl-none border-primary border"
           >
-            <div className="absolute top-[40%] left-1/2 -translate-x-1/2 text-center ">
+            <div className="absolute top-[30%] left-1/2 -translate-x-1/2 text-center ">
               <span className="bg-clip-text text-transparent whitespace-nowrap bg-gradient-to-r from-to to-from text-3xl font-bold">
                 {item.heading}
               </span>

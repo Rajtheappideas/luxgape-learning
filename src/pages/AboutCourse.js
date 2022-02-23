@@ -8,6 +8,7 @@ import {
   CourseDescription,
   Reviews,
   SkillsYouGet,
+  MostPopularCourse,
 } from "../components";
 
 const AboutCourse = () => {
@@ -33,6 +34,9 @@ const AboutCourse = () => {
 
       {/* -------------Reviews----------------- */}
       <Reviews />
+
+      {/* -------------Reviews----------------- */}
+      <MostPopularCourse showButton={false} />
 
       {/* ------------------------Contact US--------------------------- */}
       <ContactUs />

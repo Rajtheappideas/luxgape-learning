@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/LXG_RVB.png";
+import logo from "../assets/logo.png";
 import tw from "tailwind-styled-components";
 import { Link } from "react-router-dom";
 

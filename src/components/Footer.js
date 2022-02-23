@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/LXG_RVB.png";
+import logo from "../assets/logo.png";
 import tw from "tailwind-styled-components";
 import { Link } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const Footer = () => {
             <img
               src={logo}
               alt="companylogo"
-              className="w-40 h-20 cursor-pointer object-center object-contain"
+              className="w-48 h-20 cursor-pointer object-center object-contain inline-block"
             />
           </Link>
           <p className="text-2xl leading-loose tracking-wide text-left font-semibold w-full">
@@ -53,7 +53,9 @@ const Footer = () => {
             <List>
               <a href="/#testimonial">Testimonials</a>
             </List>
-            <List>FAQ</List>
+            <List>
+              <a href="/privacypolicy">Privacy Policy</a>
+            </List>
           </ul>
         </div>
 

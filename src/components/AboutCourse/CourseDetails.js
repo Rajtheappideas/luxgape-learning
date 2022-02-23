@@ -2,6 +2,7 @@ import React from "react";
 import img from "../../assets/aboutcourseimg.jpg";
 import { CheckCircleIcon, ShareIcon } from "@heroicons/react/solid";
 import { BsStarFill, BsStarHalf, BsFillPlayCircleFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const CourseDetails = () => {
   return (
@@ -29,7 +30,9 @@ const CourseDetails = () => {
           </p>
 
           {/* -------------time----------- */}
-          <span className="bg-gray-600 text-white px-2 py-1 w-16 text-center rounded-lg absolute bottom-3 left-3">1:57</span>
+          <span className="bg-gray-600 text-white px-2 py-1 w-16 text-center rounded-lg absolute bottom-3 left-3">
+            1:57
+          </span>
 
           {/* -----------smalll div date-------------- */}
           <p className="bg-primary absolute text-center py-2 top-[50px] left-[29.5px] w-[70px] h-[70px] rounded-tl-[35px] rounded-br-[35px] rounded-bl-none rounded-tr-none ">
@@ -108,9 +111,11 @@ const CourseDetails = () => {
 
           {/* ----------------enroill now & share----------------- */}
           <div className="flex items-center space-x-4">
-            <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase w-72 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none ">
-              enroll now
-            </button>
+            <Link to="/courses/aboutcourse/payment">
+              <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase w-72 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
+                enroll now
+              </button>
+            </Link>
             <p className="border w-14 h-14 cursor-pointer rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
               <ShareIcon className="h-6 w-6 mx-auto my-4" color="gray" />
             </p>

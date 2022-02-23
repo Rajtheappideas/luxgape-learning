@@ -8,6 +8,11 @@ import {
   About,
   Courses,
   AboutCourse,
+  Payment,
+  PrivacyPolicy,
+  AttendCourseHistory,
+  Class,
+  Exam,
 } from "./pages/index";
 
 const App = () => {
@@ -18,8 +23,13 @@ const App = () => {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/aboutus" element={<About />} />
+        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/aboutcourse" element={<AboutCourse />} />
+        <Route path="/courses/aboutcourse/payment" element={<Payment />} />
+        <Route path="/attendcoursehistory" element={<AttendCourseHistory />} />
+        <Route path="/exam" element={<Exam />} />
+        <Route path="/class" element={<Class />} />
       </Routes>
     </BrowserRouter>
   );

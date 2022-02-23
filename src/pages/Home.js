@@ -31,7 +31,7 @@ const Home = () => {
       <WhyChooseUs />
 
       {/* -------------most popular cousrse----------------- */}
-      <MostPopularCourse />
+      <MostPopularCourse showButton={true} />
 
       {/* --------------------------LearnAnytimeAnywhere------------------------- */}
       <LearnAnytimeAnywhere />

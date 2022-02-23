@@ -25,4 +25,13 @@ export { default as SkillsYouGet } from "./AboutCourse/SkillsYouGet";
 export { default as CourseDescription } from "./AboutCourse/CourseDescription";
 export { default as Reviews } from "./AboutCourse/Reviews";
 
+// ----------------------------About course--------------------------------
+export { default as PaymentMethod } from "./Payment/PaymentMethod";
+export { default as ProductYouBuy } from "./Payment/ProductYouBuy";
+export { default as Successful } from "./Payment/Successful";
+
+// -----------------privacy policy----------------------
+export { default as Faq } from "./privacypolicy/Faq";
+export { default as TermsAndConditions } from "./privacypolicy/TermsAndConditions";
+
 export { default as Footer } from "./Footer";
