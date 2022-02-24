@@ -13,8 +13,6 @@ const Footer = ({ classFooter, normalFooter }) => {
   };
   return (
     <>
-      {/* ----------footer for exam page----------- */}
-
       <footer className="bg-footer w-full">
         <div className="pb-10 pt-16 px-16 grid grid-cols-5 items-start justify-items-center">
           {/* --------------logo & description-------------- */}
@@ -57,7 +55,7 @@ const Footer = ({ classFooter, normalFooter }) => {
                 <a href="/#testimonial">Testimonials</a>
               </List>
               <List>
-                <a href="/privacypolicy">Privacy Policy</a>
+                <a href="/faq">Faq</a>
               </List>
             </ul>
           </div>

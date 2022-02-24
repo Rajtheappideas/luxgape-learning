@@ -18,8 +18,8 @@ const CourseDetails = () => {
       {/* ----------------Deatails of course---------------- */}
       <div className="flex justify-around items-start my-10 px-20">
         {/* -------------------left side div----------------- */}
-        <Link to="/class">
-          <div className="h-full w-full relative mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none ">
+        <div className="h-full w-full relative mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none ">
+          <Link to="/class">
             <img
               src={img}
               alt="img"
@@ -41,8 +41,8 @@ const CourseDetails = () => {
               <span className="text-white block ">23</span>
               <span className="text-white block">Aug</span>
             </p>
-          </div>
-        </Link>
+          </Link>
+        </div>
 
         {/* -------------------second div course deatrils--------------- */}
         <div className="w-full h-full space-y-9">
