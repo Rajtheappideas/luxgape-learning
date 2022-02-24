@@ -30,8 +30,11 @@ export { default as PaymentMethod } from "./Payment/PaymentMethod";
 export { default as ProductYouBuy } from "./Payment/ProductYouBuy";
 export { default as Successful } from "./Payment/Successful";
 
-// -----------------privacy policy----------------------
-export { default as Faq } from "./privacypolicy/Faq";
-export { default as TermsAndConditions } from "./privacypolicy/TermsAndConditions";
+// ------------------------class---------------------------
+export { default as AboutClass } from "./class/AboutClass";
+
+// ---------------------faqs------------------------------
+export { default as Faq1 } from "./Faq1";
+export { default as Faq2 } from "./Faq2";
 
 export { default as Footer } from "./Footer";

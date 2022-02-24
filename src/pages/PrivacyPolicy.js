@@ -2,61 +2,7 @@ import React from "react";
 import { MetaTags } from "react-meta-tags";
 import { Faq, Footer, Navbar, TermsAndConditions } from "../components";
 
-const Faqs = [
-  {
-    num: "01",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "02",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "03",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "04",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "05",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "06",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "07",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "08",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "09",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-  {
-    num: "10",
-    que: "Is OPEN just for married couples?",
-    ans: " No. In fact, the majority of open relationships are between committed",
-  },
-];
 const PrivacyPolicy = () => {
-  const firstFiveFaqs = Faqs.slice(0, 5);
-  const secondFiveFaqs = Faqs.slice(5, 10);
   return (
     <div>
       <MetaTags>
@@ -64,9 +10,8 @@ const PrivacyPolicy = () => {
       </MetaTags>
       {/* ------------------navbar--------------- */}
       <Navbar />
-
       {/* ------------------privacy policy --------------- */}
-      <div className="p-10">
+      <div className="p-10 mb-10">
         <h1 className="text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-l from-from to-to">
           Privacy Policy
         </h1>
@@ -183,22 +128,8 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </div>
-      {/* ------------------terms & conditiopns--------------- */}
-      <TermsAndConditions />
 
       {/* ------------------FAQ--------------- */}
-      <h1 className="text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-l from-from to-to">
-        FAQ
-      </h1>
-      <p className="text-center text-xl font-normal mx-auto w-2/4 my-6">
-        When you’re ready to go beyond prototyping in Figma, Webflow’s ready to
-        help you bring your
-      </p>
-      {firstFiveFaqs.map((firstFaq) => (
-        <Faq {...firstFaq} {...secondFiveFaqs} key={firstFaq.num} />
-      ))}
-
-      {/* ------------------footer--------------- */}
       <Footer />
     </div>
   );

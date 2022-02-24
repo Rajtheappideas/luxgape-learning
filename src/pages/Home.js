@@ -14,7 +14,7 @@ import {
 import { MetaTags } from "react-meta-tags";
 const Home = () => {
   return (
-    <div className="bg-bgblank">
+    <div className="bg-white">
       <MetaTags>
         <title>Home</title>
       </MetaTags>
@@ -25,7 +25,7 @@ const Home = () => {
       <Herosection />
 
       {/* -----------------course history--------------------------- */}
-      <CourseHistory />
+      <CourseHistory showButton={true} />
 
       {/* -------------------whychooseus=------------------------- */}
       <WhyChooseUs />

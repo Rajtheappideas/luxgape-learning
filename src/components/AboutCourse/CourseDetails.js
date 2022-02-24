@@ -17,29 +17,33 @@ const CourseDetails = () => {
 
       {/* ----------------Deatails of course---------------- */}
       <div className="flex justify-around items-start my-10 px-20">
-        <div className="h-full w-full relative mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none ">
-          <img
-            src={img}
-            alt="img"
-            className="object-cover object-center opacity-70 w-[536px] h-[487px] rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none "
-          />
-          {/* -------------play button---------- */}
-          <p className="absolute top-[40%] left-1/2 -translate-x-1/2 cursor-pointer">
-            <BsFillPlayCircleFill className="w-16 h-16 mx-auto" />
-            <span className="text-white font-bold text-2xl">View Demo</span>
-          </p>
+        {/* -------------------left side div----------------- */}
+        <Link to="/class">
+          <div className="h-full w-full relative mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none ">
+            <img
+              src={img}
+              alt="img"
+              className="object-cover object-center opacity-70 w-[536px] h-[487px] rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none "
+            />
+            {/* -------------play button---------- */}
+            <p className="absolute top-[40%] left-1/2 -translate-x-1/2 cursor-pointer">
+              <BsFillPlayCircleFill className="w-16 h-16 mx-auto" />
+              <span className="text-white font-bold text-2xl">View Demo</span>
+            </p>
 
-          {/* -------------time----------- */}
-          <span className="bg-gray-600 text-white px-2 py-1 w-16 text-center rounded-lg absolute bottom-3 left-3">
-            1:57
-          </span>
+            {/* -------------time----------- */}
+            <span className="bg-gray-600 text-white px-2 py-1 w-16 text-center rounded-lg absolute bottom-3 left-3">
+              1:57
+            </span>
 
-          {/* -----------smalll div date-------------- */}
-          <p className="bg-primary absolute text-center py-2 top-[50px] left-[29.5px] w-[70px] h-[70px] rounded-tl-[35px] rounded-br-[35px] rounded-bl-none rounded-tr-none ">
-            <span className="text-white block ">23</span>
-            <span className="text-white block">Aug</span>
-          </p>
-        </div>
+            {/* -----------smalll div date-------------- */}
+            <p className="bg-primary absolute text-center py-2 top-[50px] left-[29.5px] w-[70px] h-[70px] rounded-tl-[35px] rounded-br-[35px] rounded-bl-none rounded-tr-none ">
+              <span className="text-white block ">23</span>
+              <span className="text-white block">Aug</span>
+            </p>
+          </div>
+        </Link>
+
         {/* -------------------second div course deatrils--------------- */}
         <div className="w-full h-full space-y-9">
           {/* --------------course name------------- */}
