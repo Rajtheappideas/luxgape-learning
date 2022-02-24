@@ -55,7 +55,7 @@ const Footer = ({ classFooter, normalFooter }) => {
                 <a href="/#testimonial">Testimonials</a>
               </List>
               <List>
-                <a href="/faq">Faq</a>
+                <Link to="/privacypolicy">Privacy Policy</Link>
               </List>
             </ul>
           </div>
