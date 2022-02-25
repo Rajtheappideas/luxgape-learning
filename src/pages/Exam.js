@@ -38,6 +38,7 @@ const Exam = () => {
           </div>
         </div>
       </nav>
+      
       {/* --------------------main div----------- */}
       <div className="p-14 mb-10">
         {/* ---------------exam name and timer------------------ */}

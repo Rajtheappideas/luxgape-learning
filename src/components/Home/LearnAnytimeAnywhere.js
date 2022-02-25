@@ -4,7 +4,12 @@ import { CheckIcon } from "@heroicons/react/outline";
 
 const LearnAnytimeAnywhere = () => {
   return (
-    <div className="p-10 grid grid-cols-2 grid-rows-1 justify-items-center items-center">
+    <div className="p-10 grid grid-cols-2 grid-rows-1 justify-items-center items-center relative">
+      {/* ----------------eclipse 1---------------- */}
+      <div className="absolute -top-10 right-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
+      {/* ----------------eclipse 2---------------- */}
+      <div className="absolute -bottom-40 left-1/2 blur-[300px]  w-[300px] h-[300px] rounded-full bg-pink-300 " />
+
       {/* -------------image is here------------- */}
       <div>
         <img
@@ -49,7 +54,9 @@ const LearnAnytimeAnywhere = () => {
           </div>
         </div>
 
-        <button className="w-[222px] h-[58px] bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center">Explore Course</button>
+        <button className="w-[222px] h-[58px] bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center">
+          Explore Course
+        </button>
       </div>
     </div>
   );

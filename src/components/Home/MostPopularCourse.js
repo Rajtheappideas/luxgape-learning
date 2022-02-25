@@ -33,9 +33,18 @@ const data = [
   },
 ];
 
-const MostPopularCourse = ({ showButton }) => {
+const MostPopularCourse = ({ showButton, showEclipse }) => {
   return (
-    <div className="p-10 mb-10">
+    <div className="p-10 mb-10 relative">
+      {/* ----------------eclipse 1--------------------- */}
+      {showEclipse && (
+        <div className="absolute -top-32 left-56 w-[300px] h-[300px] blur-[200px] rounded-full bg-pink-300 " />
+      )}
+      {/* ----------------eclipse 2--------------------- */}
+      {showEclipse && (
+        <div className="absolute bottom-10 -left-40 blur-[200px] w-[300px] h-[300px]  rounded-full bg-pink-300 " />
+      )}
+
       <div className="mb-10 flex justify-between items-center">
         <p className="text-left font-semibold text-5xl mb-7">
           More Popular Course

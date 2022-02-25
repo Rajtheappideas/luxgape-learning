@@ -43,23 +43,31 @@ const data = [
 ];
 const CourseHistory = ({ showButton }) => {
   return (
-    <div className="mb-10 p-10">
+    <div className="mb-10 p-10 relative">
+      {/* ----------------eclipse---------------- */}
+      <div className="absolute -bottom-28 left-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " />
       {/* --------------heading-------------- */}
       <div className="mb-20 flex justify-between items-center">
         <p className="text-5xl font-bold tracking-wide">
           Attended Course History
         </p>
-        <Link to="/attendcoursehistory">
-          {showButton && (
-            <p className="text-primary text-2xl cursor-pointer underline font-semibold">
+        {showButton ? (
+          <Link to="/attendcoursehistory">
+            <button className="text-primary text-2xl cursor-pointer underline font-semibold">
               View More
-            </p>
-          )}
-        </Link>
+            </button>
+          </Link>
+        ) : (
+          <Link to="/employees">
+            <button className="text-green-500 bg-green-100 border border-green-400 text-xl cursor-pointer h-10 w-auto px-5 text-center rounded-xl font-semibold">
+              Employee History
+            </button>
+          </Link>
+        )}
       </div>
 
       {/* -------------------course history----------------------- */}
-      <div className="flex justify-around items-center space-x-3">
+      <div className="flex justify-around items-center space-x-3 ">
         {data.map((item) => (
           <BorderDiv
             key={item.id}
@@ -129,18 +137,17 @@ const CourseHistory = ({ showButton }) => {
               >
                 <g
                   fill="none"
-                  fill-rule="nonzero"
+                  fillRule="nonzero"
                   stroke="none"
-                  stroke-width="1"
-                  stroke-linecap="butt"
-                  stroke-linejoin="miter"
-                  stroke-miterlimit="10"
-                  stroke-dasharray=""
-                  stroke-dashoffset="0"
-                  font-family="none"
-                  font-weight="none"
-                  font-size="none"
-                  text-anchor="none"
+                  strokeWidth="1"
+                  strokeLinecap="butt"
+                  strokeLinejoin="miter"
+                  strokeMiterlimit="10"
+                  strokeDashoffset="0"
+                  fontFamily="none"
+                  fontWeight="none"
+                  fontSize="none"
+                  textAnchor="none"
                   className="mix-blend-mode: normal"
                 >
                   <path d="M0,172v-172h172v172z" fill="none"></path>

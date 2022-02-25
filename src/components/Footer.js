@@ -54,7 +54,7 @@ const Footer = ({ classFooter, normalFooter }) => {
               <List>
                 <a href="/#testimonial">Testimonials</a>
               </List>
-              <List>
+              <List onClick={ScrollToTop}>
                 <Link to="/privacypolicy">Privacy Policy</Link>
               </List>
             </ul>

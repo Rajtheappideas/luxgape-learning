@@ -4,7 +4,12 @@ import serviceprovideimg from "../../assets/serviceprovideimg.jpg";
 
 const ServiceWeProvide = () => {
   return (
-    <div className="p-10">
+    <div className="p-10 relative">
+      {/* ----------------------eclipse 1----------------- */}
+      <div className="absolute -top-20 -left-40 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
+      {/* ----------------------eclipse 2----------------- */}
+      <div className="absolute -bottom-20 right-0 blur-[200px]  w-[300px] h-[300px] rounded-full bg-pink-300 " />
+
       {/* --------------heading-------------- */}
       <p className="text-6xl font-bold text-center my-6">Service We Provide</p>
 

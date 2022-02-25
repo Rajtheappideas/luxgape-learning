@@ -11,7 +11,7 @@ const Herosection = () => {
   return (
     <div className="p-10 grid grid-cols-2 gap-2 mt-5 mb-16 h-full w-full">
       {/* ------------text and search is here------------------------------ */}
-      <div className="text-title  mt-20 mb-5 space-y-16">
+      <div className="w-full h-full mt-20 mb-5 space-y-16">
         {/* -------------------------------------text--------------------------------     */}
 
         <div className="text-6xl tracking-normal font-bold text-black">
@@ -30,13 +30,13 @@ const Herosection = () => {
 
         <div className="relative">
           <input
-            type="text"
+            type="search"
             placeholder="Search Course"
             name="search"
-            className=" px-3 outline-none h-[72px] w-[593px] border bg-white rounded-lg"
+            className=" px-3 outline-none h-[72px] w-3/4 border bg-white "
           />
           {/* --------search button----------- */}
-          <button className="absolute top-0 right-1 h-[72px] w-[72px] bg-primary rounded-tl-[36px] rounded-br-[36px] rounded-tr-none rounded-bl-none ">
+          <button className="absolute top-0 right-[8rem] h-[72px] w-[72px] bg-primary rounded-tl-[36px] rounded-br-[36px] rounded-tr-none rounded-bl-none ">
             <SearchIcon className="h-8 w-8 mx-auto " color="white" />
           </button>
         </div>
@@ -52,12 +52,15 @@ const Herosection = () => {
 
       {/* -----------main image of herosection--------------- */}
       <div className="relative w-full h-full">
-        {/* main image */}
+        {/* -----------eclipse 1------------------ */}
+        <div className="absolute top-40 -right-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
+        {/* -----------eclipse 2------------------ */}
+        <div className="absolute -bottom-28 blur-[200px] -left-32 w-[300px] h-[300px] rounded-full bg-blue-300 " />
+        {/* ---------------------main image------------- */}
         <Imagebackgorund />
         <MainImage src={main} alt="ladyimg" />
-        {/* main image */}
 
-        {/* rocket */}
+        {/* ----------------------rocket--------------- */}
         <RocketDivbg />
         <RocketDiv />
         <img
@@ -65,9 +68,8 @@ const Herosection = () => {
           alt="rocket"
           className="absolute top-[6.4rem] left-[3.7rem] border-white w-8 h-8"
         />
-        {/* rocket */}
 
-        {/* activestudent */}
+        {/* ------------------activestudent----------------- */}
         <ActiveStudentDivbg />
         <ActiveStudentSmallDiv />
         <svg
@@ -88,9 +90,8 @@ const Herosection = () => {
         <p className="text-lg font-bold absolute top-[24.5rem] left-[27rem] ml-3">
           50k+ Active Student
         </p>
-        {/* activestudent */}
 
-        {/* professinal mentor */}
+        {/* ----------------------professinal mentor----------------- */}
         <ProfesionalDivbg />
         <ProfesionalSmallDiv />
         <svg
@@ -112,7 +113,6 @@ const Herosection = () => {
           Profesional
           <span className="block">Mentor</span>
         </p>
-        {/* professinal mentor */}
       </div>
     </div>
   );
@@ -122,21 +122,21 @@ export default Herosection;
 
 // ----------------------tailwind compoentns=---------------------------
 const Image = tw.img`
-object-contain object-center w-36 h-24
+object-contain object-center h-24
 `;
 
 // main
 const MainImage = tw.img`
 rounded-tl-[18px] rounded-tr-[18px] rounded-br-[260px] rounded-bl-[18px] 
-w-[520px]
 h-[632px]
+w-[480px]
 absolute top-10 left-16 object-right-top object-cover
 `;
 
 const Imagebackgorund = tw.div`
 rounded-tl-[282.5px] rounded-tr-[0px] rounded-br-[82px] rounded-bl-none 
 h-[684px]
-w-[565px]
+w-[540px]
 absolute top-5 left-10
  bg-gradient-to-l from-[#33bac6] to-[#162765]`;
 //  main

@@ -16,6 +16,7 @@ import {
   Class,
   Exam,
   Erro404,
+  Employee,
 } from "./pages/index";
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
         <Route path="/courses/aboutcourse" element={<AboutCourse />} />
         <Route path="/courses/aboutcourse/payment" element={<Payment />} />
         <Route path="/attendcoursehistory" element={<AttendCourseHistory />} />
+        <Route path="/employees" element={<Employee />} />
         <Route path="/exam" element={<Exam />} />
         <Route path="/class" element={<Class />} />
         <Route path="*" element={<Erro404 />} />

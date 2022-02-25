@@ -12,9 +12,10 @@ import {
   ContactUs,
 } from "../components/index";
 import { MetaTags } from "react-meta-tags";
+import Eclipse from "../components/Eclipse";
 const Home = () => {
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       <MetaTags>
         <title>Home</title>
       </MetaTags>
@@ -31,7 +32,7 @@ const Home = () => {
       <WhyChooseUs />
 
       {/* -------------most popular cousrse----------------- */}
-      <MostPopularCourse showButton={true} />
+      <MostPopularCourse showButton={true} showEclipse={true} />
 
       {/* --------------------------LearnAnytimeAnywhere------------------------- */}
       <LearnAnytimeAnywhere />

@@ -38,7 +38,7 @@ const About = () => {
         <WhatOurEmployerSay />
 
         {/* -------------most popular cousrse----------------- */}
-        <MostPopularCourse />
+        <MostPopularCourse showEclipse={true}/>
 
         {/* --------------------ContactUs------------------ */}
         <ContactUs />
