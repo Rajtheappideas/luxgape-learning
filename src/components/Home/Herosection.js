@@ -9,15 +9,18 @@ import tw from "tailwind-styled-components";
 
 const Herosection = () => {
   return (
-    <div className="p-10 grid grid-cols-2 gap-2 mt-5 mb-16 h-full w-full">
+    <Wrapper>
       {/* ------------text and search is here------------------------------ */}
-      <div className="w-full h-full mt-20 mb-5 space-y-16">
+      <div className="w-full h-auto mt-20 mb-5 space-y-16">
         {/* -------------------------------------text--------------------------------     */}
 
         <div className="text-6xl tracking-normal font-bold text-black">
           <div className="mb-10">
             <p className="mb-10 block">Learning And</p>
-            Level up Your <span className="text-from inline-block">Skills</span>
+            <p className="whitespace-nowrap">
+              Level up Your
+              <span className="text-from inline-block ml-4">Skills</span>
+            </p>
           </div>
         </div>
         {/* ----------------------------------------paragraph--------------------------------- */}
@@ -87,7 +90,7 @@ const Herosection = () => {
             d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
           />
         </svg>
-        <p className="text-lg font-bold absolute top-[24.5rem] left-[27rem] ml-3">
+        <p className="text-lg whitespace-nowrap font-bold absolute top-[24.5rem] left-[27rem] ml-3">
           50k+ Active Student
         </p>
 
@@ -114,13 +117,19 @@ const Herosection = () => {
           <span className="block">Mentor</span>
         </p>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
 export default Herosection;
 
 // ----------------------tailwind compoentns=---------------------------
+
+const Wrapper = tw.div`
+p-10 
+grid gap-2 grid-cols-2
+mt-5 mb-16 h-full w-full
+`;
 const Image = tw.img`
 object-contain object-center h-24
 `;
@@ -129,7 +138,7 @@ object-contain object-center h-24
 const MainImage = tw.img`
 rounded-tl-[18px] rounded-tr-[18px] rounded-br-[260px] rounded-bl-[18px] 
 h-[632px]
-w-[480px]
+w-auto
 absolute top-10 left-16 object-right-top object-cover
 `;
 
@@ -157,7 +166,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]`;
 
 // activestudent
 const ActiveStudentDivbg = tw.div`
-absolute top-[23rem] left-[23rem] w-[300px] h-[74px] 
+absolute top-[23rem] left-[23rem] w-[280px] h-[74px] 
 rounded-tl-[37px] rounded-tr-[1.16056px] rounded-br-[17.9887px] 
 bg-white
 shadow-2xl
@@ -171,7 +180,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]
 // activestudent
 
 const ProfesionalDivbg = tw.div`
-absolute top-[34rem] -left-6 w-[245px;] h-[100px] 
+absolute top-[34rem] -left-6 w-[245px] h-[100px] 
 rounded-tl-[36.8479px] rounded-tr-[1.16056px] rounded-br-[17.9887px] 
 bg-white
 shadow-2xl

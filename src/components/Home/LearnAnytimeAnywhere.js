@@ -54,9 +54,10 @@ const LearnAnytimeAnywhere = () => {
           </div>
         </div>
 
-        <button className="w-[222px] h-[58px] bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center">
+<button className="p-3 bg-black text-white">Explore Course</button>
+        {/* <button type="button" className="w-60 h-16 cursor-pointer bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center">
           Explore Course
-        </button>
+        </button> */}
       </div>
     </div>
   );

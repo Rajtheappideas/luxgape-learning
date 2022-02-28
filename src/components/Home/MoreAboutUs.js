@@ -5,7 +5,7 @@ const MoreAboutUs = () => {
   return (
     <div className="relative p-10 w-full h-[570px] bg-black rounded-tl-[285px] rounded-br-[285px] rounded-tr-none rounded-bl-none">
       {/* ---------------------eclipse------------ */}
-      <div className="absolute -bottom-20 -right-0 blur-[250px]   w-[300px] h-[300px] rounded-full bg-blue-300 " />
+      {/* <div className="absolute -bottom-20 -right-0 blur-[250px]   w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
 
       <div className="text-white p-16 flex justify-around  items-center">
         {/* ------------------text is here---------------- */}

@@ -37,4 +37,7 @@ export { default as AboutClass } from "./class/AboutClass";
 export { default as Faq1 } from "./Faq1";
 export { default as Faq2 } from "./Faq2";
 
+// ---------------------faqs------------------------------
+export { default as ForgotPassword } from "./ForgotPassword";
+
 export { default as Footer } from "./Footer";

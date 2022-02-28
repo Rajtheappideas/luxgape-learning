@@ -12,7 +12,6 @@ import {
   ContactUs,
 } from "../components/index";
 import { MetaTags } from "react-meta-tags";
-import Eclipse from "../components/Eclipse";
 const Home = () => {
   return (
     <div className="bg-white ">
