@@ -11,12 +11,12 @@ const Navbar = ({ activeText }) => {
   const { userData } = useUserContext();
   const { handleLogout } = useUserData();
 
-  const userName = userData?.Ju?.tf;
+  const userName = userData?.Du?.tf;
   const userImage = userData?.profileObj?.imageUrl;
 
   return (
     <Wrapper>
-      {/* ----------------logo------------------------- */}
+      {/* ----------------logo------------------- ------ */}
       <div className="cursor-pointer">
         <Link to="/">
           <img
