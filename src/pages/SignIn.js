@@ -7,6 +7,7 @@ import { EyeOffIcon, EyeIcon, XIcon } from "@heroicons/react/outline";
 import { useFormik, Form, FormikProvider, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login";
 import useUserData from "../hooks/useUserData";
 import { useUserContext } from "../context/usercontext";
 import tw from "tailwind-styled-components/dist/tailwind";
@@ -60,6 +61,11 @@ const SignIn = () => {
 
   // ------------------error text color tailwind-------------
   const handleModal = () => setOpenModal(false);
+
+  // --------facebook login------------
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
   return (
     <>
       <MetaTags>
@@ -258,13 +264,23 @@ const SignIn = () => {
                     />
                     
                   </button> */}
-                  <button className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none">
+                  {/* <button className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none">
                     <img
                       src="https://img.icons8.com/color/48/000000/facebook-new.png"
                       alt="facebooklogo"
                       className="w-8 h-8 mx-auto"
                     />
-                  </button>
+                  </button> */}
+                  <FacebookLogin
+                    appId="1088597931155576"
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    textButton="login with facebook"
+                    // onClick={componentClicked}
+                    callback={responseFacebook}
+                    className="h-14 w-auto"
+
+                  />
                 </div>
 
                 {/* ---------sign up here---------- */}
