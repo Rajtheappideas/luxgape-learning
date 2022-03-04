@@ -4,10 +4,23 @@ import logo from "../../assets/LXG_RVB.png";
 
 const ClassDetails = () => {
   return (
-    <div className="p-10 grid grid-cols-2 grid-rows-1 gap-5 justify-items-center items-center">
+    <div className="p-10 grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-1 gap-10 justify-items-center items-center">
       <div className="space-y-7">
         {/* ---------------title text-------------- */}
         <span className="text-6xl font-bold block">Lorem Ipsum</span>
+        {/* -----------image on large screen-------------- */}
+        <div className="lg:hidden relative block">
+          <img
+            src={classdetail}
+            alt="classdetailimg"
+            className=" object-center object-cover w-[607px] h-[214px] rounded-tl-[107px] rounded-br-[107px] rounded-tr-none rounded-bl-none "
+          />
+          <img
+            src={logo}
+            alt="logo"
+            className="sm:h-20 h-16 absolute top-20 sm:left-52 left-36 object-center object-cover"
+          />
+        </div>
         {/* ----------------------deatils------------------ */}
         <p className="text-secondary text-lg leading-relaxed tracking-tighter">
           Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -26,7 +39,8 @@ const ClassDetails = () => {
           remaining essentially unchanged.
         </p>
       </div>
-      <div className="relative">
+      {/* -----------image on large screen-------------- */}
+      <div className="relative hidden lg:block">
         <img
           src={classdetail}
           alt="classdetailimg"
@@ -35,7 +49,7 @@ const ClassDetails = () => {
         <img
           src={logo}
           alt="logo"
-          className=" h-20 absolute top-1/3 left-1/3 object-center object-cover"
+          className=" h-20 absolute top-[30%] left-[53%] -translate-x-1/2 object-center object-cover"
         />
       </div>
     </div>

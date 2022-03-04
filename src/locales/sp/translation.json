@@ -1,0 +1,22 @@
+{
+  "Home": "hogar",
+  "Log_In": "iniciar sesión",
+  "Sign_In": "iniciar sesión",
+  "Sign_Up": "Inscribirse",
+  "Log_out": "cerrar sesión",
+  "Course": "Curso",
+  "About_Us": "Sobre Nosotros",
+  "employee": "empleado",
+  "employer": "empleador",
+  "Forgot_password": "olvidó contraseña",
+  "Don't_have_account": "No tiene cuenta",
+  "email": "correo electrónico",
+  "password": "contraseña",
+  "Or_sign_in_with": "O bien, inicie sesión con",
+  "type_your_password": "tipo tu contraseña",
+  "type_your_name": "tipo tu name",
+  "type_your_email": "tipo tu email",
+  "confirm_password": "confirmar contraseña",
+  "login_with_google": "inicio de sesión con google",
+  "here": "aquí"
+}

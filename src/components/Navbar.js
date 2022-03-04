@@ -1,41 +1,60 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import tw from "tailwind-styled-components";
 import { Link } from "react-router-dom";
-import { MenuIcon, XIcon } from "@heroicons/react/outline";
+import {
+  MenuIcon,
+  XIcon,
+  TranslateIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/outline";
 import { useUserContext } from "../context/usercontext";
 import useUserData from "../hooks/useUserData";
+import { useTranslation } from "react-i18next";
 
 const Navbar = ({ activeText }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
-  const { userData } = useUserContext();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const { userData, ChangeLanguage, userLanguage } = useUserContext();
   const { handleLogout } = useUserData();
 
   const userName = userData?.Du?.tf;
   const userImage = userData?.profileObj?.imageUrl;
 
+  const { t } = useTranslation();
+  useEffect(() => {
+    console.log(userLanguage);
+  }, [t, userLanguage]);
+
   return (
-    <Wrapper>
+    <nav className="lg:flex lg:justify-between lg:items-center p-10">
       {/* ----------------logo------------------- ------ */}
-      <div className="cursor-pointer">
+      <div className="flex justify-between items-center lg:mb-0 mb-5">
         <Link to="/">
           <img
             src={logo}
-            className="w-full h-20 object-contain cursor-pointer"
+            className="h-20 cursor-pointer inline object-contain"
             alt="logo"
           />
         </Link>
+        <button onClick={() => setOpenSidebar(!openSidebar)}>
+          {openSidebar ? (
+            <XIcon className="h-10 inline-block lg:hidden " />
+          ) : (
+            <MenuIcon className="h-10 inline-block lg:hidden " />
+          )}
+        </button>
       </div>
 
-      {/* ------------------links------------------------ */}
-      <div className="space-x-14 cursor-pointer text-lg text-secondary font-semibold hidden lg:flex lg:items-center">
+      {/* ------------desktop--------------- */}
+      <div className="space-x-10 text-lg text-secondary font-semibold lg:flex lg:flex-wrap hidden items-center">
         <span
           className={`${
             activeText === "Home" &&
             "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
           }`}
         >
-          <Link to="/">Home</Link>
+          <Link to="/">{t("Home")}</Link>
         </span>
         <span
           className={`${
@@ -43,7 +62,7 @@ const Navbar = ({ activeText }) => {
             "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
           }`}
         >
-          <Link to="/courses">Course</Link>
+          <Link to="/courses">{t("Course")}</Link>
         </span>
         <span
           className={`${
@@ -51,12 +70,12 @@ const Navbar = ({ activeText }) => {
             "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
           }`}
         >
-          <Link to="/aboutus">About Us</Link>
+          <Link to="/aboutus">{t("About_Us")}</Link>
         </span>
         {userData ? (
           <>
             <span className="text-xl font-semibold ml-2" onClick={handleLogout}>
-              Logout
+              {t("Log out")}
             </span>
             <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
               <img
@@ -70,47 +89,147 @@ const Navbar = ({ activeText }) => {
         ) : (
           <>
             <span>
-              <Link to="/signin">Log In</Link>
+              <Link to="/signin">{t("Log_In")}</Link>
             </span>
             <Link to="/signup">
               <span className="rounded-br-full rounded-tl-full text-white text-center font-semibold bg-primary px-9 py-3">
-                Sign up
+                {t("Sign_Up")}
               </span>
             </Link>
           </>
         )}
+        <div className="flex flex-col relative items-center justify-center w-24 h-10 bg-gray-100 rounded-xl">
+          <button
+            className="inline-flex items-center"
+            onClick={() => setShowDropdown(!showDropdown)}
+          >
+            <TranslateIcon className="h-5" />
+            <ChevronDownIcon className="h-5" />
+          </button>
+
+          {showDropdown && (
+            <div className="absolute -bottom-12 font-semibold h-auto rounded-br-xl rounded-bl-xl left-0 bg-gray-100 text-center text-black">
+              <button
+                onClick={() => {
+                  ChangeLanguage("en");
+                  setShowDropdown(false);
+                  localStorage.setItem("userLang", "en");
+                }}
+                className="hover:bg-gray-400 w-full hover:text-white"
+              >
+                English
+              </button>
+              <button
+                onClick={() => {
+                  ChangeLanguage("sp");
+                  setShowDropdown(false);
+                  localStorage.setItem("userLang", "sp");
+                }}
+                className="hover:bg-gray-400 w-full hover:text-white"
+              >
+                Spanish
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-      {/* --------------------mobile menu----------------- */}
-      <div className="space-x-14 w-full cursor-pointer text-lg text-secondary font-semibold lg:hidden flex justify-end ">
-        <button onClick={() => setOpenSidebar(true)} className="fixed">
-          <MenuIcon className="h-10" />
-        </button>
-        {/* {openSidebar ? (
-          <button onClick={() => setOpenSidebar(false)}>
-            <XIcon className="h-10" />
-          </button>
-        ) : (
-          <button onClick={() => setOpenSidebar(true)}>
-            <MenuIcon className="h-10" />
-          </button>
-        )} */}
-        {openSidebar && (
-          <div className="h-screen p-10 w-full text-blue-400 text-xl transition transform  bg-gray-100 ">
+
+      {/* ------------mobile / tablet--------------- */}
+      {openSidebar && (
+        <div
+          className={`space-y-10 py-4 shadow-xl text-xl rounded text-secondary font-semibold w-full lg:hidden bg-gray-200 flex flex-col flex-wrap items-center`}
+        >
+          <span
+            className={`${
+              activeText === "Home" &&
+              "text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+            }`}
+          >
+            <Link to="/">{t("Home")}</Link>
+          </span>
+          <span
+            className={`${
+              activeText === "Course" &&
+              "text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+            }`}
+          >
+            <Link to="/courses">{t("Course")}</Link>
+          </span>
+          <span
+            className={`${
+              activeText === "About Us" &&
+              "text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+            }`}
+          >
+            <Link to="/aboutus">{t("About_Us")}</Link>
+          </span>
+          {userData ? (
+            <>
+              <span
+                className="text-xl font-semibold ml-2"
+                onClick={handleLogout}
+              >
+                {t("Log out")}
+              </span>
+              <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
+                <img
+                  src={userImage}
+                  alt="studentimg"
+                  className="object-center object-cover rounded-tl-lg rounded-br-lg rounded-bl-none rounded-tr-none w-10 h-10"
+                />
+                <span className="text-xl font-semibold ml-2">{userName}</span>
+              </div>
+            </>
+          ) : (
+            <>
+              <span>
+                <Link to="/signin">{t("Log_In")}</Link>
+              </span>
+              <Link to="/signup">
+                <span className="">
+                  {t("Sign_Up")}
+                </span>
+              </Link>
+            </>
+          )}
+          <div className="flex flex-col relative items-center justify-center w-24 h-10 bg-gray-100 rounded-xl">
             <button
-              className="absolute top-4 right-5"
-              onClick={() => setOpenSidebar(false)}
+              className="inline-flex items-center"
+              onClick={() => setShowDropdown(!showDropdown)}
             >
-              <XIcon className="h-10" color="black" />
+              <TranslateIcon className="h-5" />
+              <ChevronDownIcon className="h-5" />
             </button>
+
+            {showDropdown && (
+              <div className="absolute -bottom-12 font-semibold h-auto rounded-br-xl rounded-bl-xl left-0 bg-gray-100 text-center text-black">
+                <button
+                  onClick={() => {
+                    ChangeLanguage("en");
+                    setShowDropdown(false);
+                    localStorage.setItem("userLang", "en");
+                  }}
+                  className="hover:bg-gray-400 w-full hover:text-white"
+                >
+                  English
+                </button>
+                <button
+                  onClick={() => {
+                    ChangeLanguage("sp");
+                    setShowDropdown(false);
+                    localStorage.setItem("userLang", "sp");
+                  }}
+                  className="hover:bg-gray-400 w-full hover:text-white"
+                >
+                  Spanish
+                </button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </Wrapper>
+        </div>
+      )}
+    </nav>
   );
 };
 
 export default Navbar;
-
-const Wrapper = tw.div`
-flex justify-between lg:items-center md:items-start p-10
-`;

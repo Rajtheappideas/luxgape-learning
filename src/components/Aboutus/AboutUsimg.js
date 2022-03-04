@@ -15,7 +15,7 @@ import img13 from "../../assets/aboutusimg (13).jpg";
 
 const AboutUsimg = () => {
   return (
-    <div className="p-10 my-10 w-full grid grid-cols-5 grid-rows-auto gap-3">
+    <div className="p-10 my-10 w-full grid lg:grid-cols-5 grid-rows-auto md:grid-cols-4 sm:grid-cols-3 grid-cols-2 place-items-center gap-5">
       <img
         src={img1}
         alt="img1"
@@ -29,7 +29,7 @@ const AboutUsimg = () => {
       <img
         src={img10}
         alt="img1"
-        className="object-center object-cover w-56 h-56 rounded-tl-none rounded-br-none rounded-tr-[110px] rounded-bl-[110px] "
+        className="hidden sm:block object-center object-cover w-56 h-56 rounded-tl-none rounded-br-none rounded-tr-[110px] rounded-bl-[110px] "
       />
       <img
         src={img3}
@@ -65,33 +65,33 @@ const AboutUsimg = () => {
       <img
         src={img4}
         alt="img1"
-        className="object-center -ml-4 object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
+        className="hidden md:block object-center -ml-4 object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
       />
 
       <img
         src={img11}
         alt="img1"
-        className="object-center object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
+        className="hidden md:block object-center object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
       />
       <img
         src={img12}
         alt="img1"
-        className="object-center object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
+        className="hidden md:block object-center object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
       />
       <img
         src={img13}
         alt="img1"
-        className="object-left mt-7 object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
+        className="hidden lg:block object-left mt-7  object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
       />
       <img
         src={img2}
         alt="img1"
-        className="object-center object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
+        className="hidden lg:block object-center  object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
       />
       <img
         src={img6}
         alt="img1"
-        className="object-center object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
+        className="hidden lg:block object-center object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
       />
     </div>
   );

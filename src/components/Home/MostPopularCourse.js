@@ -58,7 +58,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
         )}
       </div>
       {/* --------------- main div---------- */}
-      <div className="flex items-center justify-around space-x-3">
+      <div className="flex flex-wrap items-center justify-around space-x-3 space-y-3">
         {/* --------------Courses div=-------------- */}
         {data.map((course) => (
           <RoundedDiv key={course.id}>

@@ -1,6 +1,11 @@
 import React from "react";
 import tw from "tailwind-styled-components/dist/tailwind";
-import { ArrowRightIcon, ClockIcon,CalculatorIcon ,CheckCircleIcon} from "@heroicons/react/outline";
+import {
+  ArrowRightIcon,
+  ClockIcon,
+  CalculatorIcon,
+  CheckCircleIcon,
+} from "@heroicons/react/outline";
 
 const WhyChooseUs = () => {
   return (
@@ -12,7 +17,7 @@ const WhyChooseUs = () => {
         </p>
       </div>
       {/* ------------3 main divs-------------- */}
-      <div className="flex items-center justify-around space-x-3">
+      <div className="grid gap-10 lg:grid-cols-3 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 place-items-center items-center space-x-3">
         {/* --------------1 big rounde div=-------------- */}
         <RoundedDiv>
           {/* ----------small round div---------- */}

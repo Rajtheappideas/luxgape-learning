@@ -133,7 +133,7 @@ const Signup = () => {
                     `}
                   />
                 </div>
-                <ErrorMessage name="email" component={TextError}  />
+                <ErrorMessage name="email" component={TextError} />
 
                 {/* --------------password------------------ */}
 
@@ -152,6 +152,7 @@ const Signup = () => {
                     `}
                   />
                   <button
+                    type="button"
                     className="w-5 h-5 absolute top-4 right-8 cursor-pointer"
                     onClick={() => setShowpassword(!showPassword)}
                   >
@@ -181,6 +182,7 @@ const Signup = () => {
                     `}
                   />
                   <button
+                    type="button"
                     className="w-5 h-5 absolute top-4 right-8 cursor-pointer"
                     onClick={() => setShowConfirmpassword(!showConfirmPassword)}
                   >

@@ -2,9 +2,12 @@ import React from "react";
 
 const ContactUs = () => {
   return (
-    <div id="contactus" className="p-10 grid grid-cols-2 grid-rows-1 items-center justify-items-center">
-            {/* --------------first div with text---------- */}
-      <div className="mx-auto px-10">
+    <div
+      id="contactus"
+      className="p-10 grid gap-10 lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-2 items-center justify-items-center"
+    >
+      {/* --------------first div with text---------- */}
+      <div className="mx-auto w-full">
         <p className="text-5xl font-bold tracking-wide my-5 leading-snug block">
           Stay get in touch
           <span className="block">with us</span>
@@ -17,13 +20,13 @@ const ContactUs = () => {
         </p>
       </div>
       {/* -----------second div with form ---------------- */}
-      <div className="space-y-10">
+      <div className="space-y-10 w-full">
         <div>
           <p className="text-xl font-normal mb-3">Your name</p>
           <input
             type="text"
             placeholder="Full name here"
-            className="w-[488px] bg-[#FFF8F0] p-5 rounded-2xl outline-none"
+            className="w-full bg-[#FFF8F0] p-5 rounded-2xl outline-none"
           />
         </div>
         <div>
@@ -34,9 +37,11 @@ const ContactUs = () => {
             className="w-full bg-[#FFF8F0] p-5 rounded-2xl outline-none"
           />
         </div>
-        <button className=" text-center rounded-tl-[30px] rounded-tr-none rounded-br-[30px] rounded-bl-none w-[183px] h-[60px] bg-black text-white font-semibold ">
-          Subscribe
-        </button>
+        <div className="lg:text-left text-center">
+          <button className=" text-center rounded-tl-[30px] rounded-tr-none rounded-br-[30px] rounded-bl-none w-[183px] h-[60px] bg-black text-white font-semibold ">
+            Subscribe
+          </button>
+        </div>
       </div>
     </div>
   );

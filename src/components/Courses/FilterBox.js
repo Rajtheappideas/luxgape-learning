@@ -34,7 +34,7 @@ const FilterBox = () => {
       {/* --------------filters box--------------- */}
       <div className="bg-white my-8 p-10 w-full h-auto border shadow-2xl rounded-tl-[184px] rounded-br-[184px] rounded-bl-none rounded-tr-none ">
         {/* -----------grid first div--------------- */}
-        <div className="grid grid-cols-3 p-10 grid-rows-1 items-start gap-5 justify-items-center">
+        <div className="grid lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 lg:items-start gap-5 justify-items-center items-center">
           {/* ------------------firrst column-------------- */}
           <div>
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">Topics</p>
@@ -68,7 +68,7 @@ const FilterBox = () => {
           </div>
 
           {/* ------------------third column-------------- */}
-          <div>
+          <div className="lg:col-span-1 md:col-span-2">
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
               Course Language
             </p>
@@ -88,7 +88,7 @@ const FilterBox = () => {
         <div className="border-dashed border-2 border-[#C4C4C4] w-full " />
 
         {/* ------------------second grid div------------- */}
-        <div className="grid grid-cols-3 p-10 grid-rows-1 items-start gap-5 justify-items-center">
+        <div className="grid lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 lg:items-start gap-5 justify-items-center items-center">
           {/* ------------------firrst column-------------- */}
           <div>
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
@@ -179,7 +179,7 @@ const FilterBox = () => {
           </div>
 
           {/* ------------------third column-------------- */}
-          <div>
+          <div className="lg:col-span-1 md:col-span-2">
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">Price</p>
             <div className="flex items-center mb-3 ">
               <div className="flex-col flex items-start relative">
@@ -209,8 +209,8 @@ const FilterBox = () => {
         </div>
 
         {/* -----------------buttons-------------------- */}
-        <div className="text-center">
-          <button className=" w-[209px] mr-5 h-[48px] font-bold bg-[#E0E0E0] rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none ">
+        <div className="text-center flex flex-wrap items-center justify-center md:space-y-0 space-y-2">
+          <button className=" w-[209px] md:mr-5 h-[48px] font-bold bg-[#E0E0E0] rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none ">
             Clear All Filters
           </button>
           <button className=" w-[209px] h-[48px] bg-primary text-white font-bold rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none ">

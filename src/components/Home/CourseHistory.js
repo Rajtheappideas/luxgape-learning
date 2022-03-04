@@ -67,7 +67,7 @@ const CourseHistory = ({ showButton }) => {
       </div>
 
       {/* -------------------course history----------------------- */}
-      <div className="flex justify-around items-center space-x-3 ">
+      <div className="grid lg:grid-cols-3 lg:grid-rows-1 md:grid-cols-2 gap-10 md:grid-rows-2 grid-cols-1 grid-rows-3 justify-items-center items-center space-x-3 ">
         {data.map((item) => (
           <BorderDiv
             key={item.id}

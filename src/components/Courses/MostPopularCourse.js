@@ -97,7 +97,7 @@ const MostPopularCourse = () => {
           More Popular Course
         </p>
       </div>
-      <div className="grid grid-cols-3 grid-rows-3 items-center justify-items-center gap-x-5 gap-y-10">
+      <div className="flex flex-wrap items-center justify-center space-x-5 space-y-5">
         {/* -------------- rounde div=-------------- */}
         {data.map((course) => (
           <RoundedDiv key={course.id}>

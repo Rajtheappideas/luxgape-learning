@@ -1,0 +1,22 @@
+{
+  "Home": "Home",
+  "Log_In": "Log In",
+  "Sign_In": "Sign In",
+  "Sign_Up": "Sign Up",
+  "Log_out": "Log out",
+  "Course": "Course",
+  "About_Us": "About Us",
+  "employee": "employee",
+  "employer": "employer",
+  "Forgot_password": "Forgot password",
+  "Don't_have_account": "Don't have account",
+  "email": "email",
+  "password": "password",
+  "Or_sign_in_with": "Or sign in with",
+  "type_your_password": "type your password",
+  "type_your_name": "type your name",
+  "type_your_email": "type your email",
+  "confirm_password": "confirm password",
+  "login_with_google": "Login with google",
+  "here": "here"
+}

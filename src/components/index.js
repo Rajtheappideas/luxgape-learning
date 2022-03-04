@@ -32,6 +32,9 @@ export { default as Successful } from "./Payment/Successful";
 
 // ------------------------class---------------------------
 export { default as AboutClass } from "./class/AboutClass";
+export { default as AboutCourse } from "./class/AboutCourse";
+export { default as History } from "./class/History";
+export { default as Review } from "./class/Review";
 
 // ---------------------faqs------------------------------
 export { default as Faq1 } from "./Faq1";

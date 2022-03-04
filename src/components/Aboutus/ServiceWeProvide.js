@@ -20,7 +20,7 @@ const ServiceWeProvide = () => {
       </p>
 
       {/* ----------------------grid div---------------- */}
-      <div className="grid grid-cols-2 grid-rows-1 gap-5 items-center justify-items-center">
+      <div className="grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 gap-5 items-center justify-items-center">
         {/* ------------------services div-------------- */}
         <div className="space-y-16 ">
           {/* ------------1 service---------- */}
@@ -82,7 +82,7 @@ const ServiceWeProvide = () => {
         </div>
 
         {/* ------------------img serviceprovideimg--------------- */}
-        <div>
+        <div className="lg:block hidden">
           <img
             src={serviceprovideimg}
             alt="serviceprovideimg"

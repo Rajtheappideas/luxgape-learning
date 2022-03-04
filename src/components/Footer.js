@@ -14,17 +14,19 @@ const Footer = ({ classFooter, normalFooter }) => {
   return (
     <>
       <footer className="bg-footer w-full">
-        <div className="pb-10 pt-16 px-16 grid grid-cols-5 items-start justify-items-center">
+        <div className="pb-10 pt-16 px-16 grid lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start justify-items-center">
           {/* --------------logo & description-------------- */}
-          <div className="w-full col-span-2">
-            <Link to="/">
-              <img
-                src={logo}
-                alt="companylogo"
-                className="w-48 h-20 cursor-pointer object-center object-contain inline-block"
-              />
-            </Link>
-            <p className="text-2xl leading-loose tracking-wide text-left font-semibold w-full">
+          <div className="w-full lg:col-span-2 sm:col-span-3">
+            <div className="lg:text-left text-center">
+              <Link to="/">
+                <img
+                  src={logo}
+                  alt="companylogo"
+                  className="h-20 cursor-pointer object-center object-contain inline-block"
+                />
+              </Link>
+            </div>
+            <p className="text-2xl leading-loose tracking-wide lg:text-left text-center font-semibold w-full">
               learn with us anytime and anywhere, let's hone your skills and be
               professional, with certified mentors and competitive prices
             </p>
@@ -105,8 +107,8 @@ const Footer = ({ classFooter, normalFooter }) => {
 export default Footer;
 
 const Label = tw.p`
-mb-8 text-2xl font-semibold text-black tracking-wide`;
+mb-8 text-4xl sm:text-2xl font-semibold text-black text-center tracking-wide`;
 
 const List = tw.li`
-text-2xl font-normal text-black tracking-normal cursor-pointer
+text-2xl font-normal text-black text-center tracking-normal cursor-pointer
 `;

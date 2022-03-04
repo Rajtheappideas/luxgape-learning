@@ -4,7 +4,7 @@ import { CheckIcon } from "@heroicons/react/outline";
 
 const LearnAnytimeAnywhere = () => {
   return (
-    <div className="p-10 grid grid-cols-2 grid-rows-1 justify-items-center items-center relative">
+    <div className="p-10 grid lg:grid-cols-2 lg:grid-rows-1  grid-cols-1 grid-rows-2 gap-10 place-items-center items-center relative">
       {/* ----------------eclipse 1---------------- */}
       <div className="absolute -top-10 right-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
       {/* ----------------eclipse 2---------------- */}
@@ -33,31 +33,37 @@ const LearnAnytimeAnywhere = () => {
           when an unknown printer took a galley of type and scrambled it to make
           a type specimen book.
         </p>
-        <div className="flex items-center ">
-          <div className="flex relative space-x-3 mr-7">
-            <p className="w-[32px] h-[32px] rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
+        <div className="sm:flex flex-wrap space-y-2 items-center">
+          <div className="flex relative mr-3">
+            <p className="w-[32px] h-[32px] mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
               <CheckIcon
                 className="w-5 h-5 absolute top-[0.4rem] left-[0.4rem]"
                 color="white"
               />
             </p>
-            <p className="font-semibold text-xl ">More Flexible Study Time</p>
+            <p className="font-semibold text-xl whitespace-nowrap">
+              More Flexible Study Time
+            </p>
           </div>
-          <div className="flex relative space-x-3">
-            <p className="w-[32px] h-[32px] rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-primary">
+          <div className="flex relative">
+            <p className="w-[32px] h-[32px] mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-primary">
               <CheckIcon
                 className="w-5 h-5 absolute top-[0.4rem] left-[0.4rem]"
                 color="white"
               />
             </p>
-            <p className="font-semibold text-xl ">More Affordable Course</p>
+            <p className="font-semibold text-xl whitespace-nowrap">
+              More Affordable Course
+            </p>
           </div>
         </div>
 
-<button className="p-3 bg-black text-white">Explore Course</button>
-        {/* <button type="button" className="w-60 h-16 cursor-pointer bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center">
+        <button
+          type="button"
+          className="w-60 h-16 cursor-pointer bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center"
+        >
           Explore Course
-        </button> */}
+        </button>
       </div>
     </div>
   );

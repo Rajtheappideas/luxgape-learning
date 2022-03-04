@@ -1,23 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MetaTags } from "react-meta-tags";
 import { Link } from "react-router-dom";
 import logo from "../assets/LXG_RVB.png";
 import signin from "../assets/signin.jpg";
 import { EyeOffIcon, EyeIcon, XIcon } from "@heroicons/react/outline";
-import { useFormik, Form, FormikProvider, ErrorMessage, Field } from "formik";
+import { useFormik, Form, FormikProvider, ErrorMessage } from "formik";
 import * as yup from "yup";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
+// import FacebookLogin from "react-facebook-login";
 import useUserData from "../hooks/useUserData";
 import { useUserContext } from "../context/usercontext";
 import tw from "tailwind-styled-components/dist/tailwind";
 import ForgotPassword from "../components/ForgotPassword";
+import { useTranslation } from "react-i18next";
 
 const SignIn = () => {
   const [showPassword, setShowpassword] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
+  // ----------------language tranlate-----------
+  const { t } = useTranslation();
+
+  // ------------------userhook-----------------------
   const { handleFailure, handleLogout, handleSuccess } = useUserData();
+
+  // ------------------usercontext-----------------------
   const { userData } = useUserContext();
 
   // --------------------yup-------------
@@ -63,13 +70,18 @@ const SignIn = () => {
   const handleModal = () => setOpenModal(false);
 
   // --------facebook login------------
-  const responseFacebook = (response) => {
-    console.log(response);
-  };
+  // useEffect(() => {
+  //   responseFacebook();
+  // }, []);
+  // const responseFacebook = (response) => {
+  //   console.log(response);
+  // };
+  useEffect(() => {}, [t]);
+
   return (
     <>
       <MetaTags>
-        <title>Sign In</title>
+        <title>{t("Sign In")}</title>
       </MetaTags>
       {/* -------------main div---------------- */}
       <div className="p-10">
@@ -97,7 +109,9 @@ const SignIn = () => {
               <div className="space-y-7">
                 {/* ----------form start from here */}
                 <div className="flex justify-between items-center">
-                  <h1 className="font-bold text-4xl block my-5">Sign In</h1>
+                  <h1 className="font-bold text-4xl block my-5">
+                    {t("Log_In")}
+                  </h1>
                   <Link to="/">
                     <XIcon className="w-8 h-8 cursor-pointer" color="gray" />
                   </Link>
@@ -122,7 +136,7 @@ const SignIn = () => {
                       checked={formik.values.userType === "employee"}
                     />
                     <span className="absolute top-4 left-10 text-lg font-normal text-black">
-                      employee
+                      {t("employee")}
                     </span>
                   </div>
                   {/* ----------------butoon 2----------------- */}
@@ -143,7 +157,7 @@ const SignIn = () => {
                       checked={formik.values.userType === "employer"}
                     />
                     <span className="absolute top-4 left-10 text-lg font-normal text-secondary">
-                      employer
+                      {t("employer")}
                     </span>
                   </div>
                 </div>
@@ -152,7 +166,7 @@ const SignIn = () => {
                 <div>
                   <input
                     type="email"
-                    placeholder="email"
+                    placeholder={t("email")}
                     name="email"
                     {...getFieldProps("email")}
                     className={`border px-6 w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
@@ -168,7 +182,7 @@ const SignIn = () => {
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
-                    placeholder="type your password"
+                    placeholder={t("type_your_password")}
                     name="password"
                     {...getFieldProps("password")}
                     className={`border px-6 w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
@@ -199,7 +213,7 @@ const SignIn = () => {
                     className="text-secondary font-bold text-xl "
                     onClick={() => setOpenModal(true)}
                   >
-                    Forgot password?
+                    {t("Forgot_password")}?
                   </button>
                   {openModal && (
                     <ForgotPassword
@@ -217,7 +231,7 @@ const SignIn = () => {
                     className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
                   >
                     {isSubmitting ? "Loading" : null}
-                    Sign in
+                    {t("Sign_In")}
                   </button>
                 </div>
 
@@ -225,14 +239,17 @@ const SignIn = () => {
                 <div className="flex items-center justify-center w-full">
                   <hr className="border w-[40%]" />
                   <p className="mx-5 whitespace-nowrap text-lg text-secondary">
-                    Or sign in with
+                    {t("Or_sign_in_with")}
                   </p>
                   <hr className="border w-[40%]" />
                 </div>
 
                 {/* --------------social sign in button-------------- */}
                 <div className="flex items-center justify-center space-x-6">
-                  <button className="border  text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none">
+                  <button
+                    type="button"
+                    className="border  text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
+                  >
                     <img
                       src="https://img.icons8.com/ios-glyphs/30/000000/mac-os.png"
                       alt="applelogo"
@@ -244,16 +261,16 @@ const SignIn = () => {
                       onClick={handleLogout}
                       className="w-auto p-2 bg-black text-white mb-2"
                     >
-                      logout
+                      {t("log_out")}
                     </button>
                   ) : (
                     <GoogleLogin
                       clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                      buttonText="Login with Google"
+                      buttonText={t("login_with_google")}
                       onSuccess={handleSuccess}
                       onFailure={handleFailure}
                       cookiePolicy={"single_host_origin"}
-                      className="h-14 w-auto"
+                      className="h-12 w-auto"
                     ></GoogleLogin>
                   )}
                   {/* <button className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none">
@@ -262,32 +279,31 @@ const SignIn = () => {
                       alt="googlelogo"
                       className="w-8 h-8 mx-auto"
                     />
-                    
                   </button> */}
-                  {/* <button className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none">
+                  <button className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none">
                     <img
                       src="https://img.icons8.com/color/48/000000/facebook-new.png"
                       alt="facebooklogo"
                       className="w-8 h-8 mx-auto"
                     />
-                  </button> */}
-                  <FacebookLogin
-                    appId="1088597931155576"
+                  </button>
+                  {/* <FacebookLogin
+                    appId="351223826901579"
                     autoLoad={true}
                     fields="name,email,picture"
-                    textButton="login with facebook"
-                    // onClick={componentClicked}
+                    textButton="login"
                     callback={responseFacebook}
-                    className="h-14 w-auto"
-
-                  />
+                    className="h-10 w-auto"
+                  /> */}
                 </div>
 
                 {/* ---------sign up here---------- */}
                 <p className="text-xl text-center font-bold">
-                  Don't have account?
+                  {t("Don't_have_account")}?
                   <Link to="/signup">
-                    <span className="text-primary mx-2">Sign up here</span>
+                    <span className="text-primary mx-2">
+                      {t("Sign_In", "here")}
+                    </span>
                   </Link>
                 </p>
               </div>
