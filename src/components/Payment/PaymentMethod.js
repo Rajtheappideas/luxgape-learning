@@ -12,7 +12,7 @@ const PaymentMethod = () => {
         closeModal={() => setModalOpen(false)}
       />
 
-      <div className="col-span-2 w-auto">
+      <div className=" w-full">
         <h1 className="text-3xl my-3 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
           Payment Method
         </h1>
@@ -22,7 +22,7 @@ const PaymentMethod = () => {
           with end-to-end encryption.
         </p>
         {/* -----------------card payment------------------- */}
-        <div className="space-y-5 my-10 w-[66%]">
+        <div className="space-y-5 my-10 w-full px-5">
           <div className="flex items-center rounded-lg bg-[#F2F7FE] w-44 h-9 mt-4">
             <input type="checkbox" className="w-5 h-5  rounded-lg ml-3" />
             <span className="font-medium text-lg mx-2">Card Payment</span>
@@ -63,7 +63,7 @@ const PaymentMethod = () => {
         </div>
 
         {/* -----------------stipe payment------------------- */}
-        <div className="space-y-5 mt-20 ">
+        <div className="space-y-5 mt-20 px-5">
           <div className="flex items-center rounded-lg bg-[#F2F7FE] w-44 h-9 mt-4">
             <input type="checkbox" className="w-5 h-5 rounded-lg ml-3" />
             <span className="font-medium text-lg mx-2">Stripe Payment</span>
@@ -85,21 +85,21 @@ const PaymentMethod = () => {
             <input
               type="text"
               placeholder="Email address or phone number"
-              className="w-2/3 h-12 px-3 border border-gray-300 outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
+              className="w-full h-12 px-3 border border-gray-300 outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
             />
           </div>
           <div>
             <input
               type="password"
               placeholder="password"
-              className="w-2/3 h-12 px-3 border border-gray-300 outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
+              className="w-full h-12 px-3 border border-gray-300 outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
             />
           </div>
           {/* ---------------horizontal line--------------------- */}
           <div className="flex items-center ">
-            <hr className="border w-1/4" />
+            <hr className="border w-2/4" />
             <p className="mx-5 whitespace-nowrap text-lg text-secondary">Or</p>
-            <hr className="border w-1/4" />
+            <hr className="border w-2/4" />
           </div>
           {/* --------------social sign in button-------------- */}
           <div className="flex items-center  space-x-6">
@@ -132,7 +132,7 @@ const PaymentMethod = () => {
           <p className="text-2xl mb-5 text-secondary font-semibold block">
             Cancellation Policy
           </p>
-          <p className="text-[#c4c4c4] text-xl font-normal w-2/3">
+          <p className="text-[#c4c4c4] text-xl font-normal w-full">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type

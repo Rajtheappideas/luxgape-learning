@@ -61,7 +61,7 @@ const courseHistorys = [
 const History = () => {
   return (
     <div>
-      <div className="grid gap-x-16 gap-y-5 grid-cols-3 place-items-center grid-rows-3 p-10">
+      <div className="grid sm:gap-x-16 gap-y-5 lg:grid-cols-3 md:grid-cols-2 place-items-center grid-flow-row sm:p-10 p-5">
         {courseHistorys.map((courseHistory) => (
           <div key={courseHistory.No}>
             <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden">

@@ -11,11 +11,11 @@ const PrivacyPolicy = () => {
       {/* ------------------navbar--------------- */}
       <Navbar />
       {/* ------------------privacy policy --------------- */}
-      <div className="p-10 mb-10">
+      <div className="sm:p-10 p-5 mb-10">
         <h1 className="text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-l from-from to-to">
           Privacy Policy
         </h1>
-        <p className="text-center text-xl font-normal mx-auto w-2/4 my-6">
+        <p className="text-center text-xl font-normal mx-auto md:w-2/4 w-full my-6">
           When you’re ready to go beyond prototyping in Figma, Webflow’s ready
           to help you bring your
         </p>

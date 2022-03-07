@@ -5,9 +5,9 @@ import { GiCircle } from "react-icons/gi";
 
 const CourseDescription = () => {
   return (
-    <div className="py-10 px-20 my-6">
+    <div className="sm:px-10 px-5">
       {/* ------------------course program details-------------- */}
-      <div className="flex justify-around items-start w-full border-b py-10 border-[#c4c4c4]">
+      <div className="flex md:flex-row flex-col justify-center items-start w-full border-b py-10 border-[#c4c4c4]">
         {/* ---------------heading-------------- */}
         <div className="w-2/4">
           <h1 className="text-4xl tracking-normal font-bold mb-4">
@@ -30,7 +30,7 @@ const CourseDescription = () => {
       </div>
 
       {/* ----------------first div course details--------- */}
-      <div className="flex justify-around items-start w-full border-b py-10 border-[#c4c4c4]">
+      <div className="flex md:flex-row flex-col justify-center items-start w-full border-b py-10 border-[#c4c4c4]">
         {/* ---------------left side heading-------------- */}
         <div className="w-2/4">
           <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
@@ -70,7 +70,7 @@ const CourseDescription = () => {
       </div>
 
       {/* ----------------second div course details--------- */}
-      <div className="flex justify-around items-start w-full border-b py-10 border-[#c4c4c4]">
+      <div className="flex md:flex-row flex-col justify-center items-start w-full border-b py-10 border-[#c4c4c4]">
         {/* ---------------left sides heading-------------- */}
         <div className="w-2/4">
           <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
@@ -141,7 +141,7 @@ const CourseDescription = () => {
       </div>
 
       {/* ----------------third div course details--------- */}
-      <div className="flex justify-around items-start w-full py-10">
+      <div className="flex md:flex-row flex-col justify-center items-start w-full py-10">
         {/* ---------------left sides heading-------------- */}
         <div className="w-2/4">
           <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">

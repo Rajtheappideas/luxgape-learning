@@ -11,11 +11,15 @@ const Payment = () => {
       {/* -------------------navbar=------------------ */}
       <Navbar activeText="" />
 
-      <div className="p-10 grid grid-cols-3 place-items-center items-start ">
-        {/* --------------------payment method----------------- */}
+      <div className="sm:p-10 p-5 md:grid md:grid-cols-2 grid-flow-row place-items-center items-start ">
+        {/* --------------------payment method and product for large screen----------------- */}
+        <div className="md:hidden block">
+          <ProductYouBuy />
+        </div>
         <PaymentMethod />
-        {/* --------------product you buy-=------------------------ */}
-        <ProductYouBuy />
+        <div className="md:block hidden">
+          <ProductYouBuy />
+        </div>
       </div>
 
       {/* ----------------------------------foooter---------------------------- */}

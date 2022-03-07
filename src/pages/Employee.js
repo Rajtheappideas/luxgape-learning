@@ -28,19 +28,19 @@ const Employee = () => {
           <div className="grid grid-cols-6 grid-rows-4 gap-y-1 my-6">
             {/* -----------first row------------- */}
             <>
-              <div className="col-span-2 border-b">
+              <div className="col-span-2 border-b ">
                 <span className="font-semibold text-lg">Name</span>
               </div>
-              <div className="border-b ">
+              <div className="border-b">
                 <span className="font-semibold text-lg">Total Time</span>
               </div>
-              <div className="border-b ">
+              <div className="border-b">
                 <span className="font-semibold text-lg">Courses</span>
               </div>
-              <div className="border-b ">
+              <div className="border-b">
                 <span className="font-semibold text-lg">Join Date</span>
               </div>
-              <div className="border-b ">
+              <div className="border-b">
                 <span className="font-semibold text-lg">Status</span>
               </div>
             </>

@@ -15,8 +15,8 @@ const Exam = () => {
         <title>Exam</title>
       </MetaTags>
       {/* ---------------navbar----------- */}
-      <nav className="p-10">
-        <div className="flex justify-between items-center">
+      <nav className="sm:p-10 p-5">
+        <div className="sm:flex sm:flex-row  sm:justify-between flex-col items-center space-y-3 sm:space-y-0">
           {/* ----------------logo------------------------- */}
           <div className="cursor-pointer">
             <Link to="/">
@@ -38,9 +38,8 @@ const Exam = () => {
           </div>
         </div>
       </nav>
-      
       {/* --------------------main div----------- */}
-      <div className="p-14 mb-10">
+      <div className="sm:p-14 p-5 mb-10">
         {/* ---------------exam name and timer------------------ */}
         <div className="flex justify-between items-center ">
           {/* --------------ecxam name------------- */}
@@ -57,9 +56,9 @@ const Exam = () => {
         </div>
 
         {/* ---------------------exam form-=------------------ */}
-        <div className="w-full h-auto rounded-xl shadow-2xl bg-white my-7 p-8">
+        <div className="w-full h-auto rounded-xl shadow-2xl bg-white my-7 sm:p-8 p-4">
           {/* ----------------ques and forwardand backwrd---------- */}
-          <div className="flex justify-between items-center mx-5">
+          <div className="flex justify-between items-center sm:mx-5">
             <div>
               <p className="font-bold text-primary text-xl">
                 questions 1 of 20
@@ -76,7 +75,7 @@ const Exam = () => {
           </div>
 
           {/* ------------------------mcqss---------------- */}
-          <div className="my-4 px-10">
+          <div className="my-4 sm:px-10 px-4">
             {/* ---------------que------------- */}
             <p className="text-xl font-semibold">
               <span className="text-primary text-3xl font-semibold mr-3">
@@ -87,8 +86,8 @@ const Exam = () => {
             </p>
 
             {/* -------------------options / ans-------------- */}
-            <div className=" my-3 space-y-6 p-5">
-              <div className="flex items-center hover:bg-gray-100 w-1/2 rounded-lg">
+            <div className=" my-3 space-y-6 sm:p-5 p-2">
+              <div className="flex items-center hover:bg-gray-100 w-full rounded-lg">
                 <span className="rounded-full border border-gray-400 pt-2 text-center w-12 h-12 mr-2 text-xl text-primary hover:text-white  hover:bg-primary ">
                   A
                 </span>
@@ -96,7 +95,7 @@ const Exam = () => {
                   Lorem Ipsum is simply a dummy text.
                 </button>
               </div>
-              <div className="flex items-center hover:bg-gray-100 w-1/2 rounded-lg">
+              <div className="flex items-center hover:bg-gray-100 w-full rounded-lg">
                 <span className="rounded-full border border-gray-400 pt-2 text-center w-12 h-12 mr-2 text-xl text-primary hover:text-white  hover:bg-primary ">
                   B
                 </span>
@@ -104,7 +103,7 @@ const Exam = () => {
                   Lorem Ipsum is simply a dummy text.
                 </button>
               </div>
-              <div className="flex items-center hover:bg-gray-100 w-1/2 rounded-lg">
+              <div className="flex items-center hover:bg-gray-100 w-full rounded-lg">
                 <span className="rounded-full border border-gray-400 pt-2 text-center w-12 h-12 mr-2 text-xl text-primary hover:text-white  hover:bg-primary ">
                   C
                 </span>
@@ -112,7 +111,7 @@ const Exam = () => {
                   Lorem Ipsum is simply a dummy text.
                 </button>
               </div>
-              <div className="flex items-center hover:bg-gray-100 w-1/2 rounded-lg">
+              <div className="flex items-center hover:bg-gray-100 w-full rounded-lg">
                 <span className="rounded-full border border-gray-400 pt-2 text-center w-12 h-12 mr-2 text-xl text-primary hover:text-white  hover:bg-primary ">
                   D
                 </span>

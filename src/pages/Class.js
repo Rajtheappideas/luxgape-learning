@@ -37,7 +37,7 @@ const Class = () => {
       <AboutClass openAbout={openAbout} setOpenAbout={setOpenAbout} />
 
       {/* --------------buttons for toggle the componetns--------------- */}
-      <div className="px-10">
+      <div className="sm:px-10 px-5">
         <p className="text-5xl block font-bold my-5 ">Course Name in Details</p>
         {/* -------------------buttons-------------- */}
         <div className="flex items-center relative my-7 text-secondary text-2xl ">

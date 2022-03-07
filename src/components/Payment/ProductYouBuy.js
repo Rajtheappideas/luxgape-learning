@@ -5,7 +5,7 @@ import tw from "tailwind-styled-components/dist/tailwind";
 
 const ProductYouBuy = () => {
   return (
-    <div className="border-l-2 border-dashed border-[#c4c4c4] h-full px-10">
+    <div className="md:border-l-2 md:border-b-0 md:pb-0 pb-5 border-b-2 border-dashed border-[#c4c4c4] h-full w-full lg:px-10 md:px-3">
       <div className="mb-8">
         <p className="text-3xl my-3 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
           Product you buy

@@ -5,11 +5,11 @@ import { FiSend } from "react-icons/fi";
 
 const Reviews = () => {
   return (
-    <div className="py-10 px-20 relative">
+    <div className="sm:p-10 p-5 relative">
       <span className="font-bold block text-4xl text-left mb-4">Reviews</span>
       {/* -----------------review div-------------- */}
       <div className="w-full border border-primary overflow-y-auto scrollbar-hide bg-[#F9F9F9] opacity-90 h-80 rounded-tl-[80px] rounded-br-[80px] rounded-bl-none rounded-tr-none ">
-        <div className="p-10 space-y-9">
+        <div className="p-10 space-y-3">
           {/* -----------profile----------- */}
           <div className="space-y-2">
             {/* -----------photo & stars----------------- */}
@@ -30,19 +30,21 @@ const Reviews = () => {
                 <span className="font-semibold text-red-500 text-xl">4.5</span>
               </div>
             </div>
-
-            {/* ------------------reviewr name------------- */}
-            <p className="text-3xl font-bold block">Reviewer Name</p>
-
-            {/* ---------------------review------------------ */}
-            <p className="font-light text-lg">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </p>
           </div>
-          <div className="space-y-2 ">
+          {/* ------------------reviewr name------------- */}
+          <p className="text-3xl font-bold block">Reviewer Name</p>
+
+          {/* ---------------------review------------------ */}
+          <p className="font-light text-lg">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
+          </p>
+        </div>
+        <div className="px-10 space-y-3">
+          {/* -----------profile----------- */}
+          <div className="space-y-2">
             {/* -----------photo & stars----------------- */}
             <div className="flex items-start">
               <img
@@ -61,25 +63,24 @@ const Reviews = () => {
                 <span className="font-semibold text-red-500 text-xl">4.5</span>
               </div>
             </div>
-
-            {/* ------------------reviewr name------------- */}
-            <p className="text-3xl font-bold block">Reviewer Name</p>
-
-            {/* ---------------------review------------------ */}
-            <p className="font-light text-lg">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </p>
           </div>
+          {/* ------------------reviewr name------------- */}
+          <p className="text-3xl font-bold block">Reviewer Name</p>
+
+          {/* ---------------------review------------------ */}
+          <p className="font-light text-lg">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of type
+            and scrambled it to make a type specimen book.
+          </p>
         </div>
       </div>
-      <div className="absolute flex items-center bottom-16 right-40">
+      <div className="absolute flex items-center sm:bottom-16 bottom-10 lg:right-28 right-16">
         <input
           type="text"
           placeholder="type here..."
-          className="w-[522px] h-12 mr-3 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "
+          className="sm:w-[522px] h-12 mr-3 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "
         />
         <button className="w-12 h-12 rounded-tl-[24px] rounded-br-[24px] rounded-tr-none rounded-bl-none bg-primary">
           <FiSend size={25} color="white" className="mx-auto" />

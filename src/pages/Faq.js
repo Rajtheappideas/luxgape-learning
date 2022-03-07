@@ -70,18 +70,18 @@ const Faq = () => {
       <h1 className="text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-l from-from to-to">
         Faq
       </h1>
-      <p className="text-center text-xl font-normal mx-auto w-2/4 my-6">
+      <p className="text-center text-xl font-normal mx-auto md:w-2/4 w-full my-6">
         When you’re ready to go beyond prototyping in Figma, Webflow’s ready to
         help you bring your
       </p>
-      <div className="flex items-center">
+      <div className="place-items-center items-center w-full grid gap-10 lg:grid-cols-2 grid-cols-1 grid-flow-row">
         {/* ---------------------left side div----------------- */}
-        <div className="mx-10 w-1/2 h-auto">
+        <div className="mx-10 w-full h-screen">
           {firstFiveFaq.map((faq) => (
             <Faq1 {...faq} key={faq.num} />
           ))}
         </div>
-        <div className="mx-10 w-1/2 h-auto">
+        <div className="mx-10 w-full h-screen">
           {secondFiveFaq.map((faq) => (
             <Faq2 {...faq} key={faq.num} />
           ))}

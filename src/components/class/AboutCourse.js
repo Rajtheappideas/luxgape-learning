@@ -4,7 +4,7 @@ import { CourseDescription } from "..";
 const AboutCourse = () => {
   return (
     <>
-      <div className="text-xl p-10">
+      <div className="text-xl sm:p-10 p-5">
         <div className="w-full space-y-6">
           <span className="font-bold text-2xl">About course</span>
           <p>

@@ -4,7 +4,7 @@ import { Footer, Navbar } from "../components";
 
 const TermsAndConditions = () => {
   return (
-    <div className="p-10 my-10">
+    <div className="">
       <MetaTags>
         <title>Terms & Conditions</title>
       </MetaTags>
@@ -13,12 +13,12 @@ const TermsAndConditions = () => {
       <h1 className="text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-l from-from to-to">
         Terms & Conditions
       </h1>
-      <p className="text-center text-xl font-normal mx-auto w-2/4 my-6">
+      <p className="text-center text-xl font-normal mx-auto md:w-2/4 w-full px-2 my-6">
         When you’re ready to go beyond prototyping in Figma, Webflow’s ready to
         help you bring your
       </p>
       {/* ----------------------privacy policy points--------------- */}
-      <div className="space-y-6">
+      <div className="space-y-6 sm:p-10 p-5">
         {/* -------------------1 policy--------------- */}
         <div className="space-y-5">
           <p className="text-3xl font-bold block">Lorem ipsum dolor.</p>

@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 
 const CourseDetails = () => {
   return (
-    <div className="p-10  w-full">
+    <div className="sm:p-10 p-5 w-full">
       {/* ---------------course details paragraph-------------- */}
-      <p className="text-lg font-light w-full px-36 text-center">
+      <p className="text-lg font-light w-full sm:px-16 text-center">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
@@ -16,14 +16,14 @@ const CourseDetails = () => {
       </p>
 
       {/* ----------------Deatails of course---------------- */}
-      <div className="flex justify-around items-start my-10 px-20">
+      <div className="flex lg:flex-row flex-col justify-center items-center mt-10">
         {/* -------------------left side div----------------- */}
-        <div className="h-full w-full relative mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none ">
+        <div className="h-full w-full relative lg:mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none ">
           <Link to="/class">
             <img
               src={img}
               alt="img"
-              className="object-cover object-center opacity-70 w-[536px] h-[487px] rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none "
+              className="object-cover object-center opacity-70 w-full h-screen rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none "
             />
             {/* -------------play button---------- */}
             <p className="absolute top-[40%] left-1/2 -translate-x-1/2 cursor-pointer">
@@ -45,16 +45,16 @@ const CourseDetails = () => {
         </div>
 
         {/* -------------------second div course deatrils--------------- */}
-        <div className="w-full h-full space-y-9">
+        <div className="w-full h-full space-y-9 lg:mt-0 mt-5 lg:text-left text-center">
           {/* --------------course name------------- */}
-          <p className="text-5xl whitespace-nowrap font-bold">
+          <p className="text-5xl font-bold">
             Course Name in Details
           </p>
 
           {/* ------------what you learn------------ */}
           <p className="font-semibold text-xl">What will you learn:</p>
           {/* ----------------course key points------------------ */}
-          <div className="flex flex-row items-center">
+          <div className="flex flex-row lg:justify-start justify-center items-center">
             <ul className="space-y-3 mr-10">
               <li className="flex ">
                 <CheckCircleIcon className="h-6 w-6 mr-3" color="lightblue" />
@@ -92,7 +92,7 @@ const CourseDetails = () => {
               204,559 Students done this course
             </p>
             {/* ------------------review--------------- */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center lg:justify-start justify-center space-x-2">
               <BsStarFill className="h-5 w-5" color="gold" />
               <BsStarFill className="h-5 w-5" color="gold" />
               <BsStarFill className="h-5 w-5" color="gold" />
@@ -103,20 +103,20 @@ const CourseDetails = () => {
           </div>
 
           {/* -------------------price---------------------- */}
-          <div className="flex items-center ">
-            <p className="space-x-5">
+          <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full">
+            <p className="sm:space-x-5 space-x-2">
               <span className="font-bold text-4xl">$ 49.00</span>
               <del className="text-[#c4c4c4] text-xl">$ 99.00</del>
-              <span className="border text-primary text-xl w-40 h-20 p-3 border-primary rounded-2xl">
+              <span className="border text-primary text-xl w-full h-20 p-3 border-primary rounded-2xl">
                 Save 50%
               </span>
             </p>
           </div>
 
           {/* ----------------enroill now & share----------------- */}
-          <div className="flex items-center space-x-4">
+          <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full space-x-4">
             <Link to="/courses/aboutcourse/payment">
-              <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase w-72 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
+              <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase sm:w-72 w-60 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
                 enroll now
               </button>
             </Link>

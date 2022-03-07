@@ -14,20 +14,20 @@ const data = [
 ];
 const SkillsYouGet = () => {
   return (
-    <div className="py-10 px-20 space-y-10">
+    <div className="sm:p-10 p-5 space-y-10">
       {/* --------------heading----------- */}
       <p className="font-bold text-5xl text-center block">
         Skills you will get
       </p>
       {/* -----------jsut paragraph----------- */}
-      <p className="text-lg font-light px-36 text-center">
+      <p className="text-lg font-light sm:px-16 text-center">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
         scrambled it to make a type specimen book.
       </p>
       {/* -----------rounded all divs grid alyout------------- */}
-      <div className="grid grid-cols-4 grid-rows-2 gap-3 place-items-center ">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-flow-row gap-5 place-items-center items-center">
         {data.map((item) => (
           <div
             key={item.id}

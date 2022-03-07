@@ -59,7 +59,7 @@ const CourseHistory = ({ showButton }) => {
           </Link>
         ) : (
           <Link to="/employees">
-            <button className="text-green-500 bg-green-100 border border-green-400 text-xl cursor-pointer h-10 w-auto px-5 text-center rounded-xl font-semibold">
+            <button className="text-green-500 bg-green-100 border border-green-400 text-xl cursor-pointer h-auto w-auto px-5 text-center rounded-xl font-semibold">
               Employee History
             </button>
           </Link>

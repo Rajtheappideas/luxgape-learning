@@ -52,7 +52,7 @@ const Reviews = [
 ];
 const Review = () => {
   return (
-    <div className="py-10 px-20 relative">
+    <div className="sm:p-10 p-5 relative">
       {/* -----------------review div-------------- */}
       <div className="w-full h-screen overflow-y-auto rounded-xl scrollbar-hide bg-gray-100 opacity-90 ">
         <div className="p-10 space-y-9">
@@ -94,11 +94,11 @@ const Review = () => {
       </div>
 
       {/* -----------------input field----------------- */}
-      <div className="absolute flex items-center bottom-16 left-28">
+      <div className="absolute flex items-center bottom-16 md:right-20 right-10">
         <input
           type="text"
           placeholder="leave your review"
-          className="w-[522px] h-12 mr-3 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none bg-white "
+          className="md:w-[522px] h-12 mr-3 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none bg-white "
         />
         <button className="w-12 h-12 rounded-tl-[24px] rounded-br-[24px] rounded-tr-none rounded-bl-none bg-primary">
           <FiSend size={25} color="white" className="mx-auto" />
