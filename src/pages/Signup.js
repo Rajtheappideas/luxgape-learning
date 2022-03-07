@@ -71,20 +71,20 @@ const Signup = () => {
         <title>Sign Up</title>
       </MetaTags>
       {/* -------------main div---------------- */}
-      <div className="p-10">
+      <div className="sm:p-10">
         {/* --------------logo------------------- */}
         <Link to="/">
           <img
             src={logo}
             alt="logo"
-            className="object-cover object-center h-16 cursor-pointer inline-block"
+            className="object-cover object-center h-16 sm:m-0 m-5 cursor-pointer inline-block"
           />
         </Link>
 
         {/* --------------------grid div---------------- */}
-        <div className="m-10 grid grid-cols-2 gap-5 grid-rows-1 justify-items-center">
+        <div className="m-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
-          <div>
+          <div className="lg:block hidden">
             <img
               src={signup}
               alt="signin"
@@ -95,7 +95,7 @@ const Signup = () => {
             <Form autoComplete="off" onSubmit={handleSubmit}>
               <div className="space-y-7">
                 {/* ----------form start from here */}
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center w-full">
                   <h1 className="font-bold text-4xl block my-5">
                     Create your account
                   </h1>
@@ -106,13 +106,13 @@ const Signup = () => {
                 {/* <Form> */}
 
                 {/* --------------name------------------ */}
-                <div>
+                <div className="w-full">
                   <input
                     type="text"
                     placeholder="type your name"
                     name="name"
                     {...getFieldProps("name")}
-                    className={`border px-6 w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${touched.name && errors.name && "border-2 border-red-400"}
                     `}
                   />
@@ -120,13 +120,13 @@ const Signup = () => {
                 <ErrorMessage name="name" component={TextError} />
 
                 {/* --------------email------------------ */}
-                <div>
+                <div className="w-full">
                   <input
                     type="email"
                     placeholder="type your email"
                     name="email"
                     {...getFieldProps("email")}
-                    className={`border px-6 w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.email && errors.email && "border-2 border-red-400"
                     }
@@ -137,13 +137,13 @@ const Signup = () => {
 
                 {/* --------------password------------------ */}
 
-                <div className="relative">
+                <div className="relative w-full">
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="type your password"
                     name="password"
                     {...getFieldProps("password")}
-                    className={`border px-6 w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.password &&
                       errors.password &&
@@ -167,13 +167,13 @@ const Signup = () => {
 
                 {/* --------------confirm password------------------ */}
 
-                <div className="relative">
+                <div className="relative w-full">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="confirm password"
                     name="confirmpassword"
                     {...getFieldProps("confirmpassword")}
-                    className={`border px-6 w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.confirmpassword &&
                       errors.confirmpassword &&
@@ -223,10 +223,10 @@ const Signup = () => {
                   </p>
                 </div>
                 {/* ---------------sign in button-------------- */}
-                <div>
+                <div className="w-full">
                   <button
                     type="submit"
-                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
+                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
                   >
                     {isSubmitting ? "Loading" : null}
                     Sign up

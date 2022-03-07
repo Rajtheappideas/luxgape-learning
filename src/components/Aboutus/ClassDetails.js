@@ -9,17 +9,19 @@ const ClassDetails = () => {
         {/* ---------------title text-------------- */}
         <span className="text-6xl font-bold block">Lorem Ipsum</span>
         {/* -----------image on large screen-------------- */}
-        <div className="lg:hidden relative block">
-          <img
-            src={classdetail}
-            alt="classdetailimg"
-            className=" object-center object-cover w-[607px] h-[214px] rounded-tl-[107px] rounded-br-[107px] rounded-tr-none rounded-bl-none "
-          />
-          <img
-            src={logo}
-            alt="logo"
-            className="sm:h-20 h-16 absolute top-20 sm:left-52 left-36 object-center object-cover"
-          />
+        <div className="lg:hidden block">
+          <div className="relative w-full">
+            <img
+              src={classdetail}
+              alt="classdetailimg"
+              className=" object-center object-cover w-full h-[214px] rounded-tl-[107px] rounded-br-[107px] rounded-tr-none rounded-bl-none "
+            />
+            <img
+              src={logo}
+              alt="logo"
+              className="sm:h-20 h-12 absolute top-[40%] left-[55%] -translate-x-1/2 object-center object-cover"
+            />
+          </div>
         </div>
         {/* ----------------------deatils------------------ */}
         <p className="text-secondary text-lg leading-relaxed tracking-tighter">

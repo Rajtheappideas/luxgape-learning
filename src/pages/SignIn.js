@@ -84,20 +84,20 @@ const SignIn = () => {
         <title>{t("Sign In")}</title>
       </MetaTags>
       {/* -------------main div---------------- */}
-      <div className="p-10">
+      <div className="sm:p-10 ">
         {/* --------------logo------------------- */}
         <Link to="/">
           <img
             src={logo}
             alt="logo"
-            className="object-cover object-center h-16 cursor-pointer inline-block"
+            className="object-cover object-center sm:m-0 m-5 h-16 cursor-pointer inline-block"
           />
         </Link>
 
         {/* --------------------grid div---------------- */}
-        <div className="m-10 grid grid-cols-2 gap-5 grid-rows-1 justify-items-center">
+        <div className="m-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
-          <div>
+          <div className="lg:block hidden">
             <img
               src={signin}
               alt="signin"
@@ -118,12 +118,12 @@ const SignIn = () => {
                 </div>
                 {/* ------------------radio box-------------- */}
 
-                <div className="flex items-center justify-around space-x-10">
+                <div className="flex sm:flex-row flex-col items-center justify-around sm:space-x-10 sm:space-y-0 space-y-4 w-full">
                   {/* ----------------butoon 1----------------- */}
                   <div
                     className={`border ${
                       formik.values.userType === "employee" && "border-primary"
-                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none w-[182px] h-[61px] relative`}
+                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none lg:w-[182px] w-full h-[61px] relative`}
                   >
                     <input
                       className="cursor-pointer w-4 h-4 absolute top-6 left-5"
@@ -144,7 +144,7 @@ const SignIn = () => {
                   <div
                     className={`border ${
                       formik.values.userType === "employer" && "border-primary"
-                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none w-[182px] h-[61px] relative`}
+                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none lg:w-[182px] w-full h-[61px] relative`}
                   >
                     <input
                       className="cursor-pointer absolute w-4 h-4 top-6 left-5"
@@ -163,13 +163,13 @@ const SignIn = () => {
                 </div>
 
                 {/* --------------email------------------ */}
-                <div>
+                <div className="w-full">
                   <input
                     type="email"
                     placeholder={t("email")}
                     name="email"
                     {...getFieldProps("email")}
-                    className={`border px-6 w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.email && errors.email && "border-2 border-red-600"
                     }
@@ -179,13 +179,13 @@ const SignIn = () => {
                 <ErrorMessage name="email" component={TextError} />
 
                 {/* --------------password------------------ */}
-                <div className="relative">
+                <div className="relative w-full">
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder={t("type_your_password")}
                     name="password"
                     {...getFieldProps("password")}
-                    className={`border px-6 w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.password &&
                       errors.password &&
@@ -194,7 +194,7 @@ const SignIn = () => {
                     `}
                   />
                   <button
-                    className="w-5 h-5 absolute top-4 right-10 cursor-pointer"
+                    className="w-5 h-5 absolute top-4 lg:right-10 right-4 cursor-pointer"
                     onClick={() => setShowpassword(!showPassword)}
                   >
                     {showPassword ? (
@@ -207,7 +207,7 @@ const SignIn = () => {
                 <ErrorMessage name="password" component={TextError} />
 
                 {/* --------------forgot password------------------ */}
-                <div className=" cursor-pointer text-right">
+                <div className=" cursor-pointer text-right w-full">
                   <button
                     type="button"
                     className="text-secondary font-bold text-xl "
@@ -225,10 +225,10 @@ const SignIn = () => {
                 </div>
 
                 {/* ---------------sign in button-------------- */}
-                <div>
+                <div className="w-full">
                   <button
                     type="submit"
-                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from w-[400px] h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
+                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
                   >
                     {isSubmitting ? "Loading" : null}
                     {t("Sign_In")}
@@ -245,7 +245,7 @@ const SignIn = () => {
                 </div>
 
                 {/* --------------social sign in button-------------- */}
-                <div className="flex items-center justify-center space-x-6">
+                <div className="flex sm:flex-row flex-col items-center justify-center sm:space-x-6 sm:space-y-0 space-y-4 w-full">
                   <button
                     type="button"
                     className="border  text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"

@@ -8,7 +8,7 @@ const SearchBoxAndFilter = () => {
   const [filtersOpen, setFiltersOpen] = useState(false);
   return (
     <div className="p-10">
-      <div className=" flex lg:justify-end justify-center lg:space-y-0 space-y-3 flex-wrap items-center md:space-x-5">
+      <div className=" flex lg:justify-end justify-center lg:space-x-5 lg:space-y-0 space-y-3 flex-wrap items-center ">
         {/* -------------search box------------------ */}
         <div className="relative">
           <input
@@ -32,9 +32,9 @@ const SearchBoxAndFilter = () => {
             <ChevronDownIcon className="h-5 w-5" />
           </button>
         </div>
+        {/* ----------------------fitler box--------------------- */}
+        {filtersOpen && <FilterBox />}
       </div>
-      {/* ----------------------fitler box--------------------- */}
-      {filtersOpen && <FilterBox />}
     </div>
   );
 };

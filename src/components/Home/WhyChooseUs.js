@@ -9,7 +9,7 @@ import {
 
 const WhyChooseUs = () => {
   return (
-    <div className="p-10 mb-10">
+    <div className="sm:p-10 p-5 sm:mb-10 mb-5">
       <div className="mb-10">
         <p className="text-center font-semibold text-5xl mb-7">Why Choose Us</p>
         <p className="text-gray-400  text-center text-lg font-normal tracking-widest">
@@ -17,7 +17,7 @@ const WhyChooseUs = () => {
         </p>
       </div>
       {/* ------------3 main divs-------------- */}
-      <div className="grid gap-10 lg:grid-cols-3 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 place-items-center items-center space-x-3">
+      <div className="grid lg:gap-10 gap-5 xl:grid-cols-3 grid-flow-row lg:grid-cols-2 grid-cols-1 place-items-center items-center ">
         {/* --------------1 big rounde div=-------------- */}
         <RoundedDiv>
           {/* ----------small round div---------- */}

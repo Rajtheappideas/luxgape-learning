@@ -4,7 +4,7 @@ import img from "../../assets/studyimg3.jpg";
 
 const WhatOurEmployerSay = () => {
   return (
-    <div className="my-20 overflow-x-hidden" id="testimonial">
+    <div className="my-5 overflow-x-hidden" id="testimonial">
       <p className="text-center text-5xl font-semibold my-20 tracking-wide">
         What Our employer Say
       </p>

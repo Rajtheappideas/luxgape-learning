@@ -4,26 +4,35 @@ import { CheckIcon } from "@heroicons/react/outline";
 
 const LearnAnytimeAnywhere = () => {
   return (
-    <div className="p-10 grid lg:grid-cols-2 lg:grid-rows-1  grid-cols-1 grid-rows-2 gap-10 place-items-center items-center relative">
+    <div className="sm:p-10 p-5 grid lg:grid-cols-2 grid-flow-row  grid-cols-1 gap-10 place-items-center items-center relative">
       {/* ----------------eclipse 1---------------- */}
       <div className="absolute -top-10 right-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
       {/* ----------------eclipse 2---------------- */}
       <div className="absolute -bottom-40 left-1/2 blur-[300px]  w-[300px] h-[300px] rounded-full bg-pink-300 " />
 
       {/* -------------image is here------------- */}
-      <div>
+      <div className="hidden lg:block">
         <img
           src={studyboy}
           alt="studyboy"
-          className="object-contain object-center w-[483px]"
+          className="object-contain object-center w-screen"
         />
       </div>
 
       {/* ------------text is here------------------ */}
       <div className="space-y-12 h-full w-full p-7">
-        <p className="text-5xl font-semibold tracking-wide">
+        <p className="text-5xl font-semibold tracking-wide text-center">
           Learn Anytime Anywhere
         </p>
+
+        {/* -------------image is here------------- */}
+        <div className="lg:hidden block">
+          <img
+            src={studyboy}
+            alt="studyboy"
+            className="object-contain object-center sm:h-screen h-auto mx-auto"
+          />
+        </div>
         <p className="text-secondary text-xl tracking-wider leading-normal">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever

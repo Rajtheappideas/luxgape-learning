@@ -43,11 +43,11 @@ const data = [
 ];
 const CourseHistory = ({ showButton }) => {
   return (
-    <div className="mb-10 p-10 relative">
+    <div className="mb-10 sm:p-10 p-5 relative">
       {/* ----------------eclipse---------------- */}
       <div className="absolute -bottom-28 left-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " />
       {/* --------------heading-------------- */}
-      <div className="mb-20 flex justify-between items-center">
+      <div className="mb-16 flex justify-between items-center">
         <p className="text-5xl font-bold tracking-wide">
           Attended Course History
         </p>
@@ -67,7 +67,7 @@ const CourseHistory = ({ showButton }) => {
       </div>
 
       {/* -------------------course history----------------------- */}
-      <div className="grid lg:grid-cols-3 lg:grid-rows-1 md:grid-cols-2 gap-10 md:grid-rows-2 grid-cols-1 grid-rows-3 justify-items-center items-center space-x-3 ">
+      <div className="grid lg:grid-cols-3 grid-flow-row md:grid-cols-2 gap-10 grid-cols-1 justify-items-center items-center">
         {data.map((item) => (
           <BorderDiv
             key={item.id}

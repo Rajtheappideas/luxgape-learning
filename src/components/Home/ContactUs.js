@@ -4,11 +4,11 @@ const ContactUs = () => {
   return (
     <div
       id="contactus"
-      className="p-10 grid gap-10 lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-2 items-center justify-items-center"
+      className="sm:p-10 p-5 grid sm:gap-10 lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-2 items-center justify-items-center"
     >
       {/* --------------first div with text---------- */}
       <div className="mx-auto w-full">
-        <p className="text-5xl font-bold tracking-wide my-5 leading-snug block">
+        <p className="text-5xl font-bold tracking-wide leading-snug block">
           Stay get in touch
           <span className="block">with us</span>
         </p>

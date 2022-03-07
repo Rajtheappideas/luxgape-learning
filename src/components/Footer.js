@@ -14,7 +14,7 @@ const Footer = ({ classFooter, normalFooter }) => {
   return (
     <>
       <footer className="bg-footer w-full">
-        <div className="pb-10 pt-16 px-16 grid lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start justify-items-center">
+        <div className="pb-10 pt-16 sm:px-16 px-3 grid lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start justify-items-center">
           {/* --------------logo & description-------------- */}
           <div className="w-full lg:col-span-2 sm:col-span-3">
             <div className="lg:text-left text-center">

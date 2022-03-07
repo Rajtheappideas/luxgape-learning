@@ -22,12 +22,12 @@ const Navbar = ({ activeText }) => {
   const userImage = userData?.profileObj?.imageUrl;
 
   const { t } = useTranslation();
-  useEffect(() => {
-    console.log(userLanguage);
-  }, [t, userLanguage]);
+  // useEffect(() => {
+  //   console.log(userLanguage);
+  // }, [t, userLanguage]);
 
   return (
-    <nav className="lg:flex lg:justify-between lg:items-center p-10">
+    <nav className="xl:flex xl:justify-between xl:items-center sm:p-10 p-5">
       {/* ----------------logo------------------- ------ */}
       <div className="flex justify-between items-center lg:mb-0 mb-5">
         <Link to="/">
@@ -39,15 +39,15 @@ const Navbar = ({ activeText }) => {
         </Link>
         <button onClick={() => setOpenSidebar(!openSidebar)}>
           {openSidebar ? (
-            <XIcon className="h-10 inline-block lg:hidden " />
+            <XIcon className="h-10 inline-block xl:hidden " />
           ) : (
-            <MenuIcon className="h-10 inline-block lg:hidden " />
+            <MenuIcon className="h-10 inline-block xl:hidden " />
           )}
         </button>
       </div>
 
       {/* ------------desktop--------------- */}
-      <div className="space-x-10 text-lg text-secondary font-semibold lg:flex lg:flex-wrap hidden items-center">
+      <div className="space-x-10 text-lg text-secondary font-semibold xl:flex xl:flex-wrap hidden items-center">
         <span
           className={`${
             activeText === "Home" &&
@@ -137,7 +137,7 @@ const Navbar = ({ activeText }) => {
       {/* ------------mobile / tablet--------------- */}
       {openSidebar && (
         <div
-          className={`space-y-10 py-4 shadow-xl text-xl rounded text-secondary font-semibold w-full lg:hidden bg-gray-200 flex flex-col flex-wrap items-center`}
+          className={`space-y-10 py-4 shadow-xl text-xl rounded text-secondary font-semibold w-full xl:hidden bg-gray-200 flex flex-col flex-wrap items-center`}
         >
           <span
             className={`${

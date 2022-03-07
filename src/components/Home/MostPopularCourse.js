@@ -35,7 +35,7 @@ const data = [
 
 const MostPopularCourse = ({ showButton, showEclipse }) => {
   return (
-    <div className="p-10 mb-10 relative">
+    <div className="sm:p-10 p-5 relative">
       {/* ----------------eclipse 1--------------------- */}
       {showEclipse && (
         <div className="absolute -top-32 left-56 w-[300px] h-[300px] blur-[200px] rounded-full bg-pink-300 " />
@@ -46,7 +46,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
       )}
 
       <div className="mb-10 flex justify-between items-center">
-        <p className="text-left font-semibold text-5xl mb-7">
+        <p className="font-semibold text-5xl ">
           More Popular Course
         </p>
         {showButton && (
@@ -58,7 +58,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
         )}
       </div>
       {/* --------------- main div---------- */}
-      <div className="flex flex-wrap items-center justify-around space-x-3 space-y-3">
+      <div className="grid xl:grid-cols-3 grid-flow-row lg:grid-cols-2 grid-cols-1 place-items-center items-center lg:gap-2 gap-5">
         {/* --------------Courses div=-------------- */}
         {data.map((course) => (
           <RoundedDiv key={course.id}>
