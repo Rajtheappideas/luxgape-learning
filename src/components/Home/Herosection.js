@@ -8,7 +8,7 @@ import rocket from "../../assets/rocket.png";
 
 const Herosection = () => {
   return (
-    <div className="sm:p-10 p-5 mb-20 grid gap-10 lg:grid-cols-2 grid-flow-row  place-items-center items-center h-full w-full">
+    <div className="sm:p-10 p-5 mb-20 grid gap-10 lg:grid-cols-2 grid-flow-row  place-items-center items-center h-full w-full scrollbar-hide">
       {/* ------------text and search is here------------------------------ */}
       <div className="w-full relative h-full lg:text-left text-center space-y-14">
         {/* -------------------------------------text--------------------------------     */}
@@ -61,7 +61,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
             {/* ------------------activestudent----------------- */}
             {/*-------active student bg div-------------  */}
             <div
-              className="absolute top-[23rem] lg:right-60 md:right-28 w-[280px] h-[74px] 
+              className="absolute top-[23rem] lg:right-80 md:right-28 w-[280px] h-[74px] 
 rounded-tl-[37px] rounded-tr-[1.16056px] rounded-br-[17.9887px] bg-white shadow-2xl"
             />
             {/*-------active student div-------------  */}
@@ -203,12 +203,12 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
         {/* ------------------activestudent----------------- */}
         {/*-------active student bg div-------------  */}
         <div
-          className="absolute top-[23rem] left-[22rem] w-[280px] h-[74px] 
+          className="absolute top-[23rem] left-[16rem] w-[280px] h-[74px] 
 rounded-tl-[37px] rounded-tr-[1.16056px] rounded-br-[17.9887px] bg-white shadow-2xl"
         />
         {/*-------active student div-------------  */}
         <div
-          className="absolute top-[23.7rem] left-[23rem] w-[54px] h-[54px]
+          className="absolute top-[23.7rem] left-[17rem] w-[54px] h-[54px]
 rounded-tl-[26.9831px] rounded-tr-[0px] rounded-br-[12.7662px] rounded-bl-[0px]
 bg-gradient-to-l from-[#33bac6] to-[#162765]"
         />
@@ -218,7 +218,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
           color="white"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          className="absolute top-[24.5rem] left-[24rem] w-7 h-7"
+          className="absolute top-[24.5rem] left-[18rem] w-7 h-7"
         >
           <path
             strokeLinecap="round"
@@ -227,7 +227,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
             d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
           />
         </svg>
-        <p className="text-lg whitespace-nowrap font-bold absolute top-[24.5rem] left-[26rem] ml-3">
+        <p className="text-lg font-bold absolute top-[23.5rem] h-full left-[21rem]">
           50k+ Active Student
         </p>
 

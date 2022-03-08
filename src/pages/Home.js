@@ -14,7 +14,7 @@ import {
 import { MetaTags } from "react-meta-tags";
 const Home = () => {
   return (
-    <div className="bg-white lg:overflow-auto overflow-hidden">
+    <div className="bg-white overflow-hidden">
       <MetaTags>
         <title>Home</title>
       </MetaTags>
