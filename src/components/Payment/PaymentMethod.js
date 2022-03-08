@@ -12,7 +12,7 @@ const PaymentMethod = () => {
         closeModal={() => setModalOpen(false)}
       />
 
-      <div className=" w-full">
+      <div className=" w-full md:border-r-2 border-gray-400 border-dashed">
         <h1 className="text-3xl my-3 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
           Payment Method
         </h1>

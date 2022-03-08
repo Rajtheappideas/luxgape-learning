@@ -302,7 +302,7 @@ const SignIn = () => {
                   {t("Don't_have_account")}?
                   <Link to="/signup">
                     <span className="text-primary mx-2">
-                      {t("Sign_In", "here")}
+                      {t("Sign_Up", "here")}
                     </span>
                   </Link>
                 </p>

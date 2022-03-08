@@ -1,5 +1,5 @@
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MetaTags } from "react-meta-tags";
 import { Link } from "react-router-dom";
 import logo from "../assets/LXG_RVB.png";
@@ -13,6 +13,7 @@ import { FormikProvider, ErrorMessage, Form, useFormik } from "formik";
 const Signup = () => {
   const [showPassword, setShowpassword] = useState(false);
   const [showConfirmPassword, setShowConfirmpassword] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
 
   // -------------------------------yup---------------------------
 
@@ -23,6 +24,17 @@ const Signup = () => {
       .required("name is required!")
       .min(3, "Too short!")
       .max(30, "Too long!"),
+    // middlename: yup
+    //   .string()
+    //   .required("middle name is required!")
+    //   .min(3, "Too short!")
+    //   .max(30, "Too long!"),
+    // firstname: yup
+    //   .string()
+    //   .required("first name is required!")
+    //   .min(3, "Too short!")
+    //   .max(30, "Too long!"),
+    // age: yup.number().required("age is required!"),
     password: yup
       .string()
       .required("password is required!")
@@ -33,6 +45,7 @@ const Signup = () => {
       .oneOf([yup.ref("password"), null], "Passwords must match")
       .required("confirm password is required!"),
     checkbox: yup.boolean().oneOf([true], "checkbox must be filled"),
+    // profileimage: yup.required("you have to choose image!!"),
   });
   // ------------------------formik----------------------------
   const formik = useFormik({
@@ -42,6 +55,10 @@ const Signup = () => {
       password: "",
       confirmpassword: "",
       checkbox: false,
+      // firstname: "",
+      // middlename: "",
+      // age: "",
+      // profileimage: "",
     },
     validationSchema: SigninSchema,
     onSubmit: async (values) => {
@@ -49,6 +66,10 @@ const Signup = () => {
         email: values.email,
         name: values.name,
         password: values.password,
+        // firstname: values.firstname,
+        // middlename: values.middlename,
+        // age: values.age,
+        // profileimage: values.profileimage,
       };
       console.log("user -> ", user);
       resetForm();
@@ -62,6 +83,7 @@ const Signup = () => {
     isSubmitting,
     getFieldProps,
   } = formik;
+
   const TextError = tw.span`
   text-red-500
   `;
@@ -82,7 +104,7 @@ const Signup = () => {
         </Link>
 
         {/* --------------------grid div---------------- */}
-        <div className="m-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
+        <div className="sm:p-10 p-5 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
             <img
@@ -93,6 +115,7 @@ const Signup = () => {
           </div>
           <FormikProvider value={formik}>
             <Form autoComplete="off" onSubmit={handleSubmit}>
+              {/* --------------main form ------------------ */}
               <div className="space-y-7">
                 {/* ----------form start from here */}
                 <div className="flex justify-between items-center w-full">
@@ -153,7 +176,7 @@ const Signup = () => {
                   />
                   <button
                     type="button"
-                    className="w-5 h-5 absolute top-4 right-8 cursor-pointer"
+                    className="w-5 h-5 absolute top-4 xl:right-1/3 lg:right-14 md:right-8 right-4 cursor-pointer"
                     onClick={() => setShowpassword(!showPassword)}
                   >
                     {showPassword ? (
@@ -183,7 +206,7 @@ const Signup = () => {
                   />
                   <button
                     type="button"
-                    className="w-5 h-5 absolute top-4 right-8 cursor-pointer"
+                    className="w-5 h-5 absolute top-4 xl:right-1/3 lg:right-14 md:right-8 right-4 cursor-pointer"
                     onClick={() => setShowConfirmpassword(!showConfirmPassword)}
                   >
                     {showConfirmPassword ? (
@@ -219,7 +242,11 @@ const Signup = () => {
                   </div>
                   <p className="text-xl text-secondary">
                     I have read and agree to the
-                    <span className="text-primary ml-1">Terms of Service</span>
+                    <Link to="/terms&conditions">
+                      <span className="text-primary ml-1">
+                        Terms of Service
+                      </span>
+                    </Link>
                   </p>
                 </div>
                 {/* ---------------sign in button-------------- */}
