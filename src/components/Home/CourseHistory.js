@@ -5,6 +5,7 @@ import cimg2 from "../../assets/cimg2.jpg";
 import cimg3 from "../../assets/cimg3.jpg";
 import { DocumentTextIcon, DownloadIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const data = [
   {
@@ -42,6 +43,7 @@ const data = [
   },
 ];
 const CourseHistory = ({ showButton }) => {
+  const { t } = useTranslation();
   return (
     <div className="mb-10 sm:p-10 p-5 relative">
       {/* ----------------eclipse---------------- */}
@@ -49,18 +51,18 @@ const CourseHistory = ({ showButton }) => {
       {/* --------------heading-------------- */}
       <div className="mb-16 flex justify-between items-center">
         <p className="text-5xl font-bold tracking-wide">
-          Attended Course History
+          {t("attend_course_history")}
         </p>
         {showButton ? (
           <Link to="/attendcoursehistory">
             <button className="text-primary text-2xl cursor-pointer underline font-semibold">
-              View More
+              {t("view_more")}
             </button>
           </Link>
         ) : (
           <Link to="/employees">
             <button className="text-green-500 bg-green-100 border border-green-400 text-xl cursor-pointer h-auto w-auto px-5 text-center rounded-xl font-semibold">
-              Employee History
+              {t("employee_history")}
             </button>
           </Link>
         )}

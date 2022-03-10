@@ -1,8 +1,10 @@
 import React from "react";
 import img2 from "../../assets/studyimg3.jpg";
 import serviceprovideimg from "../../assets/serviceprovideimg.jpg";
+import { useTranslation } from "react-i18next";
 
 const ServiceWeProvide = () => {
+  const { t } = useTranslation();
   return (
     <div className="p-10 relative">
       {/* ----------------------eclipse 1----------------- */}
@@ -12,7 +14,7 @@ const ServiceWeProvide = () => {
 
       {/* --------------heading-------------- */}
       <div className="text-center mb-5">
-        <p className="text-6xl font-bold my-6">Service We Provide</p>
+        <p className="text-6xl font-bold my-6">{t("service_we_provide")}</p>
 
         {/* -----------------------text---------------- */}
         <p className=" text-secondary text-xl  mb-16">

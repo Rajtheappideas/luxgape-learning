@@ -1,4 +1,5 @@
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
+import { UserIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import { MetaTags } from "react-meta-tags";
 import { Link } from "react-router-dom";
@@ -9,43 +10,31 @@ import GoogleLogin from "react-google-login";
 import * as yup from "yup";
 import tw from "tailwind-styled-components/dist/tailwind";
 import { FormikProvider, ErrorMessage, Form, useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 
 const Signup = () => {
   const [showPassword, setShowpassword] = useState(false);
   const [showConfirmPassword, setShowConfirmpassword] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
-
+  const { t } = useTranslation();
   // -------------------------------yup---------------------------
 
   const SigninSchema = yup.object().shape({
-    email: yup.string().required("email is required!").email(),
+    email: yup.string().required(t("email_is_required")).email(),
     name: yup
       .string()
-      .required("name is required!")
-      .min(3, "Too short!")
-      .max(30, "Too long!"),
-    // middlename: yup
-    //   .string()
-    //   .required("middle name is required!")
-    //   .min(3, "Too short!")
-    //   .max(30, "Too long!"),
-    // firstname: yup
-    //   .string()
-    //   .required("first name is required!")
-    //   .min(3, "Too short!")
-    //   .max(30, "Too long!"),
-    // age: yup.number().required("age is required!"),
+      .required(t("name_is_required"))
+      .min(3, t("too_short"))
+      .max(30, t("too_long")),
     password: yup
       .string()
-      .required("password is required!")
-      .min(8, "Password should be 8 chars minimum.")
-      .matches(/[a-zA-Z0-9]/, "Password can only contain Latin letters."),
+      .required(t("password_is_required"))
+      .min(8, t("password_validation_1"))
+      .matches(/[a-zA-Z0-9]/, t("password_validation")),
     confirmpassword: yup
       .string()
-      .oneOf([yup.ref("password"), null], "Passwords must match")
-      .required("confirm password is required!"),
-    checkbox: yup.boolean().oneOf([true], "checkbox must be filled"),
-    // profileimage: yup.required("you have to choose image!!"),
+      .oneOf([yup.ref("password"), null], t("password_must_match"))
+      .required(t("confirm_password_is_required")),
+    checkbox: yup.boolean().oneOf([true], t("checkbox_must_be_filled")),
   });
   // ------------------------formik----------------------------
   const formik = useFormik({
@@ -55,10 +44,6 @@ const Signup = () => {
       password: "",
       confirmpassword: "",
       checkbox: false,
-      // firstname: "",
-      // middlename: "",
-      // age: "",
-      // profileimage: "",
     },
     validationSchema: SigninSchema,
     onSubmit: async (values) => {
@@ -66,13 +51,9 @@ const Signup = () => {
         email: values.email,
         name: values.name,
         password: values.password,
-        // firstname: values.firstname,
-        // middlename: values.middlename,
-        // age: values.age,
-        // profileimage: values.profileimage,
       };
       console.log("user -> ", user);
-      resetForm();
+      // resetForm();
     },
   });
   const {
@@ -84,16 +65,18 @@ const Signup = () => {
     getFieldProps,
   } = formik;
 
+  // -------------------input errror text color--------------
   const TextError = tw.span`
   text-red-500
   `;
+
   return (
     <>
       <MetaTags>
-        <title>Sign Up</title>
+        <title>{t("Sign_Up")}</title>
       </MetaTags>
       {/* -------------main div---------------- */}
-      <div className="sm:p-10">
+      <div className="sm:p-10 p-5">
         {/* --------------logo------------------- */}
         <Link to="/">
           <img
@@ -120,7 +103,7 @@ const Signup = () => {
                 {/* ----------form start from here */}
                 <div className="flex justify-between items-center w-full">
                   <h1 className="font-bold text-4xl block my-5">
-                    Create your account
+                    {t("create_your_account")}
                   </h1>
                   <Link to="/">
                     <XIcon className="w-8 h-8 cursor-pointer" color="gray" />
@@ -132,7 +115,7 @@ const Signup = () => {
                 <div className="w-full">
                   <input
                     type="text"
-                    placeholder="type your name"
+                    placeholder={t("type_your_name")}
                     name="name"
                     {...getFieldProps("name")}
                     className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
@@ -146,7 +129,7 @@ const Signup = () => {
                 <div className="w-full">
                   <input
                     type="email"
-                    placeholder="type your email"
+                    placeholder={t("type_your_email")}
                     name="email"
                     {...getFieldProps("email")}
                     className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
@@ -163,7 +146,7 @@ const Signup = () => {
                 <div className="relative w-full">
                   <input
                     type={showPassword ? "text" : "password"}
-                    placeholder="type your password"
+                    placeholder={t("type_your_password")}
                     name="password"
                     {...getFieldProps("password")}
                     className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
@@ -193,7 +176,7 @@ const Signup = () => {
                 <div className="relative w-full">
                   <input
                     type={showConfirmPassword ? "text" : "password"}
-                    placeholder="confirm password"
+                    placeholder={t("confirm_password")}
                     name="confirmpassword"
                     {...getFieldProps("confirmpassword")}
                     className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
@@ -244,7 +227,7 @@ const Signup = () => {
                     I have read and agree to the
                     <Link to="/terms&conditions">
                       <span className="text-primary ml-1">
-                        Terms of Service
+                        {t("terms_of_service")}
                       </span>
                     </Link>
                   </p>
@@ -256,14 +239,16 @@ const Signup = () => {
                     className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
                   >
                     {isSubmitting ? "Loading" : null}
-                    Sign up
+                    {t("Sign_Up")}
                   </button>
                 </div>
                 {/* ---------sign up here---------- */}
                 <p className="text-xl text-center font-bold">
-                  Already have an account?
+                  {t("Already have an account")}?
                   <Link to="/signin">
-                    <span className="text-primary mx-2">Sign in here</span>
+                    <span className="text-primary mx-2">
+                      {t("Sign_In")} {t("here")}
+                    </span>
                   </Link>
                 </p>
               </div>

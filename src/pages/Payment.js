@@ -1,12 +1,14 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
 import { Footer, Navbar, PaymentMethod, ProductYouBuy } from "../components";
 
 const Payment = () => {
+  const { t } = useTranslation();
   return (
     <div className="bg-bgblank">
       <MetaTags>
-        <title>Payment</title>
+        <title>{t("payment")}</title>
       </MetaTags>
       {/* -------------------navbar=------------------ */}
       <Navbar activeText="" />

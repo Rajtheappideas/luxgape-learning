@@ -3,8 +3,14 @@ import tw from "tailwind-styled-components/dist/tailwind";
 import mpcimg1 from "../../assets/mpcimg1.jpg";
 import mpcimg2 from "../../assets/mpcimg2.jpg";
 import mpcimg3 from "../../assets/mpcimg3.jpg";
-import { ArrowRightIcon, StarIcon } from "@heroicons/react/solid";
+import {
+  ArrowRightIcon,
+  StarIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const data = [
   {
@@ -90,14 +96,15 @@ const data = [
   },
 ];
 const MostPopularCourse = () => {
+  const { t } = useTranslation();
   return (
     <div className="p-10 mb-10">
       <div className="mb-10 flex justify-between items-center">
         <p className="text-left font-semibold text-5xl mb-7 ml-6">
-          More Popular Course
+          {t("most_popular_course")}
         </p>
       </div>
-      <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 grid-cols-1 items-center place-items-center xl:gap-10 lg:gap-10 md:gap-16">
+      <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 items-center place-items-center lg:gap-10 md:gap-16 gap-y-4">
         {/* -------------- rounde div=-------------- */}
         {data.map((course) => (
           <RoundedDiv key={course.id}>
@@ -132,6 +139,30 @@ const MostPopularCourse = () => {
             </Link>
           </RoundedDiv>
         ))}
+      </div>
+      {/* ---------------pagination=------------------- */}
+      <div className="flex items-center justify-center space-x-5 mt-7">
+        <button>
+          <ChevronLeftIcon className="h-10" />
+        </button>
+        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+          1
+        </button>
+        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+          2
+        </button>
+        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+          3
+        </button>
+        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+          4
+        </button>
+        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+          5
+        </button>
+        <button>
+          <ChevronRightIcon className="h-10" />
+        </button>
       </div>
     </div>
   );

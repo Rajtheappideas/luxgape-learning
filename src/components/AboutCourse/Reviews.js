@@ -2,11 +2,15 @@ import React from "react";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import img from "../../assets/studyimg3.jpg";
 import { FiSend } from "react-icons/fi";
+import { useTranslation } from "react-i18next";
 
 const Reviews = () => {
+  const { t } = useTranslation();
   return (
     <div className="sm:p-10 p-5 relative">
-      <span className="font-bold block text-4xl text-left mb-4">Reviews</span>
+      <span className="font-bold block text-4xl text-left mb-4">
+        {t("reviews")}
+      </span>
       {/* -----------------review div-------------- */}
       <div className="w-full border border-primary overflow-y-auto scrollbar-hide bg-[#F9F9F9] opacity-90 h-80 rounded-tl-[80px] rounded-br-[80px] rounded-bl-none rounded-tr-none ">
         <div className="p-10 space-y-3">

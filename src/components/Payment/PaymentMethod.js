@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { InformationCircleIcon } from "@heroicons/react/outline";
 import { Successful } from "..";
+import { useTranslation } from "react-i18next";
 const PaymentMethod = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <>
@@ -14,26 +16,27 @@ const PaymentMethod = () => {
 
       <div className=" w-full md:border-r-2 border-gray-400 border-dashed">
         <h1 className="text-3xl my-3 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
-          Payment Method
+          {t("payment_method")}
         </h1>
         {/* -----------------payment description paragraph---------------- */}
         <p className="text-xl text-secondary tracking-wide font-semibold mb-10">
-          Select a payment method below. LUX GAP processes your payment securely
-          with end-to-end encryption.
+          {t("payment_method_paragraph")}
         </p>
         {/* -----------------card payment------------------- */}
         <div className="space-y-5 my-10 w-full px-5">
           <div className="flex items-center rounded-lg bg-[#F2F7FE] w-44 h-9 mt-4">
             <input type="checkbox" className="w-5 h-5  rounded-lg ml-3" />
-            <span className="font-medium text-lg mx-2">Card Payment</span>
+            <span className="font-medium text-lg mx-2">
+              {t("card_payment")}
+            </span>
           </div>
           {/* -----------------credit card details---------------- */}
-          <p className="font-bold text-2xl">Credit Card Details</p>
+          <p className="font-bold text-2xl">{t("credit_card_details")}</p>
           {/* -----------name------------------ */}
           <div>
             <input
               type="text"
-              placeholder="Name on card"
+              placeholder={t("name_on_card")}
               className="w-full h-12 px-3 border border-gray-300  outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
             />
           </div>
@@ -41,7 +44,7 @@ const PaymentMethod = () => {
           <div>
             <input
               type="text"
-              placeholder="Card number"
+              placeholder={t("card_number")}
               className="w-full h-12 px-3 border border-gray-300 outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
             />
           </div>
@@ -49,7 +52,6 @@ const PaymentMethod = () => {
             {/* ----------------exp date------------ */}
             <input
               type="date"
-              placeholder="Name on card"
               className="w-1/2 h-12 px-3 mr-6 border-gray-300 border outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
             />
             {/* ----------------CCV------------ */}
@@ -66,7 +68,9 @@ const PaymentMethod = () => {
         <div className="space-y-5 mt-20 px-5">
           <div className="flex items-center rounded-lg bg-[#F2F7FE] w-44 h-9 mt-4">
             <input type="checkbox" className="w-5 h-5 rounded-lg ml-3" />
-            <span className="font-medium text-lg mx-2">Stripe Payment</span>
+            <span className="font-medium text-lg mx-2">
+              {t("stripe_payment")}
+            </span>
           </div>
           {/* --------------stripe img-------------- */}
           <div>
@@ -78,20 +82,20 @@ const PaymentMethod = () => {
           </div>
           {/* -----------------stripe details---------------- */}
           <p className="font-bold text-2xl text-[#6E7491] mb-7">
-            Create an account
+            {t("create_your_account")}
           </p>
           {/* -----------name------------------ */}
           <div>
             <input
               type="text"
-              placeholder="Email address or phone number"
+              placeholder={t("email_address_or_phone_number")}
               className="w-full h-12 px-3 border border-gray-300 outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
             />
           </div>
           <div>
             <input
               type="password"
-              placeholder="password"
+              placeholder={t("password")}
               className="w-full h-12 px-3 border border-gray-300 outline-none rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none "
             />
           </div>
@@ -130,14 +134,14 @@ const PaymentMethod = () => {
         {/* -----------------cancellation policy ---------------- */}
         <div className="my-10">
           <p className="text-2xl mb-5 text-secondary font-semibold block">
-            Cancellation Policy
+            {t("cancellation_policy")}
           </p>
           <p className="text-[#c4c4c4] text-xl font-normal w-full">
             Lorem Ipsum is simply dummy text of the printing and typesetting
             industry. Lorem Ipsum has been the industry's standard dummy text
             ever since the 1500s, when an unknown printer took a galley of type
             and scrambled it to make a type specimen book.
-            <span className="text-primary">full cancellation policy</span>
+            <span className="text-primary mx-1">full cancellation policy</span>
             for this flight.
           </p>
           <div className="flex mt-10">
@@ -146,11 +150,11 @@ const PaymentMethod = () => {
               className="font-bold text-center mr-5 text-xl bg-primary text-white border  w-48 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
               onClick={() => setModalOpen(true)}
             >
-              Confirm and pay
+              {t("confirm_and_pay")}
             </button>
             <Link to="/courses/aboutcourse">
               <button className="font-bold text-center text-xl border border-secondary w-28 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none">
-                Cancel
+                {t("cancel")}
               </button>
             </Link>
           </div>

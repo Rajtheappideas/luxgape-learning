@@ -45,7 +45,7 @@ const CourseDetails = () => {
         </div>
 
         {/* -------------------second div course deatrils--------------- */}
-        <div className="w-full h-full space-y-9 lg:mt-0 mt-5 lg:text-left text-center">
+        <div className="w-full h-full space-y-10 lg:mt-0 mt-5 lg:text-left text-center">
           {/* --------------course name------------- */}
           <p className="text-5xl font-bold">
             Course Name in Details

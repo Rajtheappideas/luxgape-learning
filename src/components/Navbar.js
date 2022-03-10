@@ -169,7 +169,7 @@ const Navbar = ({ activeText }) => {
                 className="text-xl font-semibold ml-2"
                 onClick={handleLogout}
               >
-                {t("Log out")}
+                {t("Log_out")}
               </span>
               <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
                 <img
@@ -186,18 +186,18 @@ const Navbar = ({ activeText }) => {
                 <Link to="/signin">{t("Log_In")}</Link>
               </span>
               <Link to="/signup">
-                <span className="">
-                  {t("Sign_Up")}
-                </span>
+                <span className="">{t("Sign_Up")}</span>
               </Link>
             </>
           )}
+
           <div className="flex flex-col relative items-center justify-center w-24 h-10 bg-gray-100 rounded-xl">
             <button
               className="inline-flex items-center"
               onClick={() => setShowDropdown(!showDropdown)}
             >
-              <TranslateIcon className="h-5" />
+              {/* <TranslateIcon className="h-5" /> */}
+              {localStorage.getItem("userLang")}
               <ChevronDownIcon className="h-5" />
             </button>
 
@@ -211,7 +211,7 @@ const Navbar = ({ activeText }) => {
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >
-                  English
+                  {t("english")}
                 </button>
                 <button
                   onClick={() => {
@@ -221,7 +221,7 @@ const Navbar = ({ activeText }) => {
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >
-                  Spanish
+                  {t("spanish")}
                 </button>
               </div>
             )}

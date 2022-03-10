@@ -1,4 +1,6 @@
+import { t } from "i18next";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
 import {
   AboutUsimg,
@@ -12,6 +14,7 @@ import {
 } from "../components";
 
 const About = () => {
+  const { t } = useTranslation();
   return (
     <>
       <MetaTags>
@@ -22,7 +25,7 @@ const About = () => {
         {/* --------------navbar------------ */}
         <Navbar activeText="About Us" />
         <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-l text-center from-to to-from">
-          About Us
+          {t("About_Us")}
         </h1>
 
         {/* --------------images------------ */}
@@ -38,7 +41,7 @@ const About = () => {
         <WhatOurEmployerSay />
 
         {/* -------------most popular cousrse----------------- */}
-        <MostPopularCourse/>
+        <MostPopularCourse />
 
         {/* --------------------ContactUs------------------ */}
         <ContactUs />

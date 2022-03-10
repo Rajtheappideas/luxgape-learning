@@ -2,13 +2,15 @@ import { ArrowRightIcon, StarIcon } from "@heroicons/react/outline";
 import React from "react";
 import mpcimg1 from "../../assets/mpcimg1.jpg";
 import tw from "tailwind-styled-components/dist/tailwind";
+import { useTranslation } from "react-i18next";
 
 const ProductYouBuy = () => {
+  const { t } = useTranslation();
   return (
     <div className="md:border-b-0 md:pb-0 pb-5 border-b-2 border-dashed border-[#c4c4c4] h-full w-full lg:px-10 md:px-3">
       <div className="mb-8">
         <p className="text-3xl my-3 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
-          Product you buy
+          {t("product_you_buy")}
         </p>
         <p className="text-secondary text-xl font-normal leading-relaxed mt-5">
           Lorem Ipsum is simply dummy text of the printing and typetesting

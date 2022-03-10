@@ -5,6 +5,7 @@ import mpcimg2 from "../../assets/mpcimg2.jpg";
 import mpcimg3 from "../../assets/mpcimg3.jpg";
 import { ArrowRightIcon, StarIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const data = [
   {
@@ -34,6 +35,7 @@ const data = [
 ];
 
 const MostPopularCourse = ({ showButton, showEclipse }) => {
+  const { t } = useTranslation();
   return (
     <div className="sm:p-10 p-5 relative">
       {/* ----------------eclipse 1--------------------- */}
@@ -46,19 +48,17 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
       )}
 
       <div className="mb-10 flex justify-between items-center">
-        <p className="font-semibold text-5xl ">
-          More Popular Course
-        </p>
+        <p className="font-semibold text-5xl ">{t("most_popular_course")}</p>
         {showButton && (
           <Link to="/courses">
             <button className="text-primary text-center text-2xl tracking-wide cursor-pointer underline font-semibold">
-              View More
+              {t("view_more")}
             </button>
           </Link>
         )}
       </div>
       {/* --------------- main div---------- */}
-      <div className="grid xl:grid-cols-3 grid-flow-row lg:grid-cols-2 grid-cols-1 place-items-center items-center lg:gap-2 gap-5">
+      <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
         {/* --------------Courses div=-------------- */}
         {data.map((course) => (
           <RoundedDiv key={course.id}>

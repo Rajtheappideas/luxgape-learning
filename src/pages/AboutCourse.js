@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
 import {
   Footer,
@@ -13,6 +14,7 @@ import {
 import Eclipse from "../components/Eclipse";
 
 const AboutCourse = () => {
+  const { t } = useTranslation();
   return (
     <div className="">
       <MetaTags>
@@ -22,7 +24,7 @@ const AboutCourse = () => {
       {/* -------------------navbar=------------------ */}
       <Navbar activeText="Course" />
       <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r text-center from-to to-from">
-        About Course
+        {t("About_course")}
       </h1>
 
       {/* -------------cousrse details----------------- */}

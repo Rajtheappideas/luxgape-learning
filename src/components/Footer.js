@@ -2,8 +2,10 @@ import React from "react";
 import logo from "../assets/logo.png";
 import tw from "tailwind-styled-components";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Footer = ({ classFooter, normalFooter }) => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   const ScrollToTop = () => {
     window.scrollTo({
@@ -27,14 +29,13 @@ const Footer = ({ classFooter, normalFooter }) => {
               </Link>
             </div>
             <p className="text-2xl leading-loose tracking-wide lg:text-left text-center font-semibold w-full">
-              learn with us anytime and anywhere, let's hone your skills and be
-              professional, with certified mentors and competitive prices
+              {t("footer_paragraph")}
             </p>
           </div>
 
           {/* ---------------------------course----------------------------- */}
           <div className="pt-4">
-            <Label>Course</Label>
+            <Label>{t("Course")}</Label>
             <ul className="space-y-5">
               <List>Lorem ipsum</List>
               <List>Lorem ipsum</List>
@@ -45,26 +46,26 @@ const Footer = ({ classFooter, normalFooter }) => {
 
           {/* ------------------company-------------------------- */}
           <div className="pt-4">
-            <Label>Company</Label>
+            <Label>{t("company")}</Label>
             <ul className="space-y-6">
               <List onClick={ScrollToTop}>
-                <Link to="/aboutus">About US</Link>
+                <Link to="/aboutus">{t("About_Us")}</Link>
               </List>
               <List>
-                <a href="/#contactus">Contact US</a>
+                <a href="/#contactus">{t("contact_Us")}</a>
               </List>
               <List>
-                <a href="/#testimonial">Testimonials</a>
+                <a href="/#testimonial">{t("testimonials")}</a>
               </List>
               <List onClick={ScrollToTop}>
-                <Link to="/privacypolicy">Privacy Policy</Link>
+                <Link to="/privacypolicy">{t("privacy_policy")}</Link>
               </List>
             </ul>
           </div>
 
           {/* ----------------------------follow links----------------- */}
           <div className="pt-4">
-            <Label>Follow US</Label>
+            <Label>{t("follow_us")}</Label>
             <ul className="space-y-5">
               <List>
                 <a
@@ -72,7 +73,7 @@ const Footer = ({ classFooter, normalFooter }) => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Instagram
+                  {t("instagram")}
                 </a>
               </List>
               <List>
@@ -81,13 +82,13 @@ const Footer = ({ classFooter, normalFooter }) => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Facebook
+                  {t("facebook")}
                 </a>
               </List>
 
               <List>
                 <a href="https://twitter.com/" target="_blank" rel="noreferrer">
-                  Twitter
+                  {t("twitter")}
                 </a>
               </List>
             </ul>
@@ -97,7 +98,7 @@ const Footer = ({ classFooter, normalFooter }) => {
         <div className="border w-full my-5 border-black" />
         <p className="text-xl text-center font-semibold pb-5">
           ©{currentYear} <span className="text-from font-bold">Lux Gap</span>.
-          All Rights Reserved
+          {t("all_Rights_Reserved")}
         </p>
       </footer>
     </>

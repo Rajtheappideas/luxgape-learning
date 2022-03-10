@@ -1,5 +1,6 @@
 import { PlayIcon } from "@heroicons/react/solid";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import img from "../../assets/cimg3.jpg";
 
 const courseHistorys = [
@@ -59,6 +60,7 @@ const courseHistorys = [
   },
 ];
 const History = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <div className="grid sm:gap-x-16 gap-y-5 lg:grid-cols-3 md:grid-cols-2 place-items-center grid-flow-row sm:p-10 p-5">
@@ -88,11 +90,10 @@ const History = () => {
           className="h-10 cursor-not-allowed w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
           disabled={true}
         >
-          Start Exam
+          {t("start_exam")}
         </button>
         <p className="text-center mt-3 w-2/5 font-normal text-base tracking-wide text-gray-500 mx-auto">
-          Once you complete this whole course this exam button is automatically
-          enabled.
+          {t("history_exam_paragraph")}
         </p>
       </div>
     </div>

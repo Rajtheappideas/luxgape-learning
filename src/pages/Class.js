@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -17,10 +18,11 @@ const Class = () => {
   const [openAbout, setOpenAbout] = useState(true);
   const [openReview, setOpenReview] = useState(false);
   const [openHistory, setOpenHistory] = useState(false);
+  const { t } = useTranslation();
   return (
     <div className="relative">
       <MetaTags>
-        <title>Class</title>
+        <title>{t("class")}</title>
       </MetaTags>
       {/* -----------------------eclipse 1-------------- */}
       <div className="absolute top-1/2 left-0 -z-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " />
@@ -51,7 +53,7 @@ const Class = () => {
               setOpenHistory(false);
             }}
           >
-            About
+            {t("about")}
             {openAbout && (
               <hr className=" absolute -bottom-4 left-0 h-1 z-10 bg-green-400 w-20" />
             )}
@@ -66,7 +68,8 @@ const Class = () => {
               setOpenHistory(false);
             }}
           >
-            Reviews
+            {t("reviews")}
+
             {openReview && (
               <hr className=" absolute -bottom-4 left-0 h-1 z-10 bg-green-400 w-20" />
             )}
@@ -81,7 +84,7 @@ const Class = () => {
               setOpenHistory(true);
             }}
           >
-            History
+            {t("history")}
             {openHistory && (
               <hr className=" absolute -bottom-4 left-0 h-1 z-10 bg-green-400 w-20" />
             )}
