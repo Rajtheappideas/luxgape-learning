@@ -12,8 +12,8 @@ const Reviews = () => {
         {t("reviews")}
       </span>
       {/* -----------------review div-------------- */}
-      <div className="w-full border border-primary overflow-y-auto scrollbar-hide bg-[#F9F9F9] opacity-90 h-80 rounded-tl-[80px] rounded-br-[80px] rounded-bl-none rounded-tr-none ">
-        <div className="p-10 space-y-3">
+      <div className="w-full h-80 border border-primary overflow-y-auto scrollbar-hide bg-[#F9F9F9] opacity-90 rounded-tl-[80px] rounded-br-[80px] rounded-bl-none rounded-tr-none ">
+        <div className="p-10 h-full space-y-3">
           {/* -----------profile----------- */}
           <div className="space-y-2">
             {/* -----------photo & stars----------------- */}
@@ -46,7 +46,7 @@ const Reviews = () => {
             and scrambled it to make a type specimen book.
           </p>
         </div>
-        <div className="px-10 space-y-3">
+        <div className="px-10 h-full space-y-3">
           {/* -----------profile----------- */}
           <div className="space-y-2">
             {/* -----------photo & stars----------------- */}

@@ -145,19 +145,19 @@ const MostPopularCourse = () => {
         <button>
           <ChevronLeftIcon className="h-10" />
         </button>
-        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+        <button className=" bg-gradient-to-r to-from from-to rounded-tl-xl rounded-br-xl rounded-tr-none rounded-bl-none h-full px-4 py-2 text-white text-xl font-semibold">
           1
         </button>
-        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+        <button className="rounded-xl h-full px-4 py-2 text-xl font-semibold">
           2
         </button>
-        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+        <button className="rounded-xl h-full px-4 py-2 text-xl font-semibold">
           3
         </button>
-        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+        <button className="rounded-xl h-full px-4 py-2 text-xl font-semibold">
           4
         </button>
-        <button className=" bg-blue-400 rounded-xl h-full px-4 py-2 text-white text-xl font-semibold">
+        <button className="rounded-xl h-full px-4 py-2 text-xl font-semibold">
           5
         </button>
         <button>

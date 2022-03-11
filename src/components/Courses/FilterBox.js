@@ -30,11 +30,11 @@ const features = [
 
 const FilterBox = () => {
   return (
-    <div>
+    <>
       {/* --------------filters box--------------- */}
       <div className="bg-white my-8 p-10 w-full h-auto border shadow-2xl rounded-tl-[184px] rounded-br-[184px] rounded-bl-none rounded-tr-none ">
         {/* -----------grid first div--------------- */}
-        <div className="grid lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start gap-5 justify-items-center items-center">
+        <div className="grid w-full lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start gap-5 justify-items-center items-center">
           {/* ------------------firrst column-------------- */}
           <div>
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">Topics</p>
@@ -218,7 +218,7 @@ const FilterBox = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

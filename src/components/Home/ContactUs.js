@@ -9,7 +9,7 @@ const ContactUs = () => {
       className="sm:p-10 p-5 grid sm:gap-10 lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-2 items-center justify-items-center"
     >
       {/* --------------first div with text---------- */}
-      <div className="mx-auto w-full">
+      <div className="mx-auto h-full w-full">
         <p className="text-5xl font-bold tracking-wide leading-snug block">
           {t("stay_get_in_touch")}
           <span className="block">{t("with_us")}</span>
@@ -19,7 +19,7 @@ const ContactUs = () => {
         </p>
       </div>
       {/* -----------second div with form ---------------- */}
-      <div className="space-y-10 w-full">
+      <div className="space-y-10 h-full w-full">
         <div>
           <p className="text-xl font-normal mb-3">{t("your_name")}</p>
           <input

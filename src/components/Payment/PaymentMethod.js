@@ -15,11 +15,11 @@ const PaymentMethod = () => {
       />
 
       <div className=" w-full md:border-r-2 border-gray-400 border-dashed">
-        <h1 className="text-3xl my-3 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
+        <h1 className="text-3xl my-3 px-5 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
           {t("payment_method")}
         </h1>
         {/* -----------------payment description paragraph---------------- */}
-        <p className="text-xl text-secondary tracking-wide font-semibold mb-10">
+        <p className="text-xl text-secondary px-5 tracking-wide font-semibold mb-10">
           {t("payment_method_paragraph")}
         </p>
         {/* -----------------card payment------------------- */}
@@ -132,7 +132,7 @@ const PaymentMethod = () => {
         </div>
 
         {/* -----------------cancellation policy ---------------- */}
-        <div className="my-10">
+        <div className="my-10 px-5">
           <p className="text-2xl mb-5 text-secondary font-semibold block">
             {t("cancellation_policy")}
           </p>

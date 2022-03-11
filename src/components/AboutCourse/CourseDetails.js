@@ -8,12 +8,14 @@ const CourseDetails = () => {
   return (
     <div className="sm:p-10 p-5 w-full">
       {/* ---------------course details paragraph-------------- */}
-      <p className="text-lg font-light w-full sm:px-16 text-center">
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s, when an unknown printer took a galley of type and
-        scrambled it to make a type specimen book.
-      </p>
+      <div className="text-center mx-auto xl:w-3/5 sm:w-5/6">
+        <p className="text-lg font-light">
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard dummy text ever
+          since the 1500s, when an unknown printer took a galley of type and
+          scrambled it to make a type specimen book.
+        </p>
+      </div>
 
       {/* ----------------Deatails of course---------------- */}
       <div className="flex lg:flex-row flex-col justify-center items-center mt-10">
@@ -45,11 +47,9 @@ const CourseDetails = () => {
         </div>
 
         {/* -------------------second div course deatrils--------------- */}
-        <div className="w-full h-full space-y-10 lg:mt-0 mt-5 lg:text-left text-center">
+        <div className="w-full h-screen xl:space-y-10 space-y-5 lg:mt-0 mt-5 lg:text-left text-center">
           {/* --------------course name------------- */}
-          <p className="text-5xl font-bold">
-            Course Name in Details
-          </p>
+          <p className="text-5xl font-bold">Course Name in Details</p>
 
           {/* ------------what you learn------------ */}
           <p className="font-semibold text-xl">What will you learn:</p>

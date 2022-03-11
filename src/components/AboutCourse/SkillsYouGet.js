@@ -56,24 +56,24 @@ const SkillsYouGet = () => {
     },
   ];
   return (
-    <div className="sm:p-10 p-5 space-y-10">
+    <div className="sm:p-3 p-5 space-y-10">
       {/* --------------heading----------- */}
       <p className="font-bold text-5xl text-center block">
         {t("skills_you_will_get")}
       </p>
       {/* -----------jsut paragraph----------- */}
-      <p className="text-lg font-light sm:px-16 text-center">
+      <p className="text-lg font-light text-center  xl:w-3/5 sm:w-5/6 mx-auto">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and
         scrambled it to make a type specimen book.
       </p>
       {/* -----------rounded all divs grid alyout------------- */}
-      <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-flow-row gap-5 place-items-center items-center">
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 grid-flow-row gap-y-5 place-items-center items-center">
         {data.map((item) => (
           // -------------main div--------------
           <div
-            className="h-[247px] w-[276px] cursor-pointer group perspective"
+            className="h-[267px] w-[296px] cursor-pointer group perspective"
             key="{item.id}"
           >
             {/* ------------------main content div-------------- */}

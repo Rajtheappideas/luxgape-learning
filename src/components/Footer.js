@@ -16,7 +16,7 @@ const Footer = ({ classFooter, normalFooter }) => {
   return (
     <>
       <footer className="bg-footer w-full">
-        <div className="pb-10 pt-16 sm:px-16 px-3 grid lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start justify-items-center">
+        <div className="pb-10 pt-16 sm:px-12 px-3 grid lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start place-items-center">
           {/* --------------logo & description-------------- */}
           <div className="w-full lg:col-span-2 sm:col-span-3">
             <div className="lg:text-left text-center">
@@ -28,13 +28,13 @@ const Footer = ({ classFooter, normalFooter }) => {
                 />
               </Link>
             </div>
-            <p className="text-2xl leading-loose tracking-wide lg:text-left text-center font-semibold w-full">
+            <p className="text-2xl leading-relaxed tracking-wide lg:text-left text-center font-semibold w-full">
               {t("footer_paragraph")}
             </p>
           </div>
 
           {/* ---------------------------course----------------------------- */}
-          <div className="pt-4">
+          <div className="">
             <Label>{t("Course")}</Label>
             <ul className="space-y-5">
               <List>Lorem ipsum</List>
@@ -45,7 +45,7 @@ const Footer = ({ classFooter, normalFooter }) => {
           </div>
 
           {/* ------------------company-------------------------- */}
-          <div className="pt-4">
+          <div className="">
             <Label>{t("company")}</Label>
             <ul className="space-y-6">
               <List onClick={ScrollToTop}>
@@ -64,7 +64,7 @@ const Footer = ({ classFooter, normalFooter }) => {
           </div>
 
           {/* ----------------------------follow links----------------- */}
-          <div className="pt-4">
+          <div className="">
             <Label>{t("follow_us")}</Label>
             <ul className="space-y-5">
               <List>

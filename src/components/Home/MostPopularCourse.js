@@ -58,7 +58,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
         )}
       </div>
       {/* --------------- main div---------- */}
-      <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
+      <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
         {/* --------------Courses div=-------------- */}
         {data.map((course) => (
           <RoundedDiv key={course.id}>

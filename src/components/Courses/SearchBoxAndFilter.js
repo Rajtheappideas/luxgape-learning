@@ -10,9 +10,9 @@ const SearchBoxAndFilter = () => {
   const {t} =useTranslation()
   return (
     <div className="p-10">
-      <div className=" flex lg:justify-end justify-center lg:space-x-5 lg:space-y-0 space-y-3 flex-wrap items-center ">
+      <div className="flex lg:justify-end justify-center lg:space-x-5 mb-5 flex-wrap items-start ">
         {/* -------------search box------------------ */}
-        <div className="relative">
+        <div className="relative lg:mb-0 mb-5">
           <input
             type="text"
             placeholder={t("search_course")}
@@ -35,6 +35,7 @@ const SearchBoxAndFilter = () => {
           </button>
         </div>
         {/* ----------------------fitler box--------------------- */}
+       
         {filtersOpen && <FilterBox />}
       </div>
     </div>

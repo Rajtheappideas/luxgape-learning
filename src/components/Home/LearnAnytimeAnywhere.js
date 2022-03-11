@@ -23,7 +23,7 @@ const LearnAnytimeAnywhere = () => {
 
       {/* ------------text is here------------------ */}
       <div className="space-y-12 h-full w-full p-7">
-        <p className="text-5xl font-semibold tracking-wide text-center">
+        <p className="text-5xl font-semibold tracking-wide lg:text-left text-center">
           {t("learn_anywhere_anytime")}
         </p>
 
@@ -35,12 +35,16 @@ const LearnAnytimeAnywhere = () => {
             className="object-contain object-center sm:h-screen h-auto mx-auto"
           />
         </div>
-        <p className="text-secondary text-xl tracking-wider leading-normal">
-          {t("learn_anywhere_anytime_paragraph_1")}
-        </p>
-        <p className="text-secondary text-xl tracking-wider leading-normal">
-          {t("learn_anywhere_anytime_paragraph_2")}
-        </p>
+        <div className="w-full space-y-12">
+          <p className="text-secondary w-full text-xl tracking-widest leading-normal">
+            {t("learn_anywhere_anytime_paragraph_1")}
+          </p>
+          <p className="text-secondary w-full text-xl tracking-widest leading-normal">
+            {t("learn_anywhere_anytime_paragraph_2")}
+          </p>
+        </div>
+
+        {/* --------------check mark and details------------ */}
         <div className="sm:flex flex-wrap space-y-2 items-center">
           <div className="flex relative mr-3">
             <p className="w-[32px] h-[32px] mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
@@ -65,13 +69,16 @@ const LearnAnytimeAnywhere = () => {
             </p>
           </div>
         </div>
+        {/* --------------explote button------------ */}
 
-        <button
-          type="button"
-          className="w-60 h-16 cursor-pointer bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center"
-        >
-          {t("explore_course")}
-        </button>
+        <div>
+          <button
+            type="button"
+            className="w-60 h-16 cursor-pointer bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center"
+          >
+            {t("explore_course")}
+          </button>
+        </div>
       </div>
     </div>
   );

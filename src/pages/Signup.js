@@ -1,6 +1,6 @@
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/outline";
-import { UserIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
+import { EyeIcon, EyeOffIcon, CheckIcon } from "@heroicons/react/outline";
+import { UserIcon } from "@heroicons/react/solid";
 import { MetaTags } from "react-meta-tags";
 import { Link } from "react-router-dom";
 import logo from "../assets/LXG_RVB.png";
@@ -63,8 +63,8 @@ const Signup = () => {
     handleSubmit,
     isSubmitting,
     getFieldProps,
+    values,
   } = formik;
-
   // -------------------input errror text color--------------
   const TextError = tw.span`
   text-red-500
@@ -118,7 +118,7 @@ const Signup = () => {
                     placeholder={t("type_your_name")}
                     name="name"
                     {...getFieldProps("name")}
-                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${touched.name && errors.name && "border-2 border-red-400"}
                     `}
                   />
@@ -132,7 +132,7 @@ const Signup = () => {
                     placeholder={t("type_your_email")}
                     name="email"
                     {...getFieldProps("email")}
-                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.email && errors.email && "border-2 border-red-400"
                     }
@@ -149,7 +149,7 @@ const Signup = () => {
                     placeholder={t("type_your_password")}
                     name="password"
                     {...getFieldProps("password")}
-                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.password &&
                       errors.password &&
@@ -157,17 +157,19 @@ const Signup = () => {
                     }
                     `}
                   />
-                  <button
-                    type="button"
-                    className="w-5 h-5 absolute top-4 xl:right-1/3 lg:right-14 md:right-8 right-4 cursor-pointer"
-                    onClick={() => setShowpassword(!showPassword)}
-                  >
-                    {showPassword ? (
-                      <EyeIcon className="h-5 w-5 " color="gray" />
-                    ) : (
-                      <EyeOffIcon className="w-5 h-5 " color="gray" />
-                    )}
-                  </button>
+                  <div className="absolute top-4 right-10">
+                    <button
+                      type="button"
+                      className="w-5 h-5 cursor-pointer"
+                      onClick={() => setShowpassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <EyeIcon className="h-5 w-5 " color="gray" />
+                      ) : (
+                        <EyeOffIcon className="w-5 h-5 " color="gray" />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <ErrorMessage name="password" component={TextError} />
 
@@ -179,7 +181,7 @@ const Signup = () => {
                     placeholder={t("confirm_password")}
                     name="confirmpassword"
                     {...getFieldProps("confirmpassword")}
-                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.confirmpassword &&
                       errors.confirmpassword &&
@@ -187,17 +189,21 @@ const Signup = () => {
                     }
                     `}
                   />
-                  <button
-                    type="button"
-                    className="w-5 h-5 absolute top-4 xl:right-1/3 lg:right-14 md:right-8 right-4 cursor-pointer"
-                    onClick={() => setShowConfirmpassword(!showConfirmPassword)}
-                  >
-                    {showConfirmPassword ? (
-                      <EyeIcon className="h-5 w-5 " color="gray" />
-                    ) : (
-                      <EyeOffIcon className="w-5 h-5 " color="gray" />
-                    )}
-                  </button>
+                  <div className="absolute top-4 right-10">
+                    <button
+                      type="button"
+                      className="w-5 h-5  cursor-pointer"
+                      onClick={() =>
+                        setShowConfirmpassword(!showConfirmPassword)
+                      }
+                    >
+                      {showConfirmPassword ? (
+                        <EyeIcon className="h-5 w-5 " color="gray" />
+                      ) : (
+                        <EyeOffIcon className="w-5 h-5 " color="gray" />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <ErrorMessage name="confirmpassword" component={TextError} />
 
@@ -209,14 +215,17 @@ const Signup = () => {
                       type="checkbox"
                       name="checkbox"
                       {...getFieldProps("checkbox")}
-                      className={`border opacity-70 cursor-pointer border-primary mr-1 w-6 h-6 rounded-xl
+                      className={`cursor-pointer opacity-0 mr-1 w-6 h-6 rounded-xl
                         ${
                           touched.checkbox &&
                           errors.checkbox &&
                           "border-4 border-red-700"
                         }`}
                     />
-                    <span className="after:" />
+                    <span className="absolute top-1 cursor-pointer left-0 -z-10 rounded-tl-xl rounded-br-xl rounded-bl-none rounded-tr-none border-primary border-2 h-6 w-6" />
+                    {values.checkbox && (
+                      <CheckIcon className="h-6 cursor-pointer absolute top-1 left-0 -z-10" />
+                    )}
                     {errors.checkbox && touched.checkbox && (
                       <span className="bg-gray-100 absolute -top-12 -left-20 animate-bounce w-auto h-12 p-3 font-semibold px-2 whitespace-nowrap text-black rounded-xl">
                         <ErrorMessage name="checkbox" />
@@ -236,14 +245,14 @@ const Signup = () => {
                 <div className="w-full">
                   <button
                     type="submit"
-                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
+                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
                   >
                     {isSubmitting ? "Loading" : null}
                     {t("Sign_Up")}
                   </button>
                 </div>
                 {/* ---------sign up here---------- */}
-                <p className="text-xl text-center font-bold">
+                <p className="text-xl w-full text-center font-bold">
                   {t("Already have an account")}?
                   <Link to="/signin">
                     <span className="text-primary mx-2">

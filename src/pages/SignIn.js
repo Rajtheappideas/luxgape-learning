@@ -95,7 +95,7 @@ const SignIn = () => {
         </Link>
 
         {/* --------------------grid div---------------- */}
-        <div className="m-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
+        <div className="p-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
             <img
@@ -169,7 +169,7 @@ const SignIn = () => {
                     placeholder={t("email")}
                     name="email"
                     {...getFieldProps("email")}
-                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.email && errors.email && "border-2 border-red-600"
                     }
@@ -185,7 +185,7 @@ const SignIn = () => {
                     placeholder={t("type_your_password")}
                     name="password"
                     {...getFieldProps("password")}
-                    className={`border px-6 lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.password &&
                       errors.password &&
@@ -228,7 +228,7 @@ const SignIn = () => {
                 <div className="w-full">
                   <button
                     type="submit"
-                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from lg:w-[400px] w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
+                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
                   >
                     {isSubmitting ? "Loading" : null}
                     {t("Sign_In")}
@@ -264,23 +264,34 @@ const SignIn = () => {
                       {t("log_out")}
                     </button>
                   ) : (
-                    <GoogleLogin
-                      clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                      buttonText={t("login_with_google")}
-                      onSuccess={handleSuccess}
-                      onFailure={handleFailure}
-                      cookiePolicy={"single_host_origin"}
-                      className="h-12 w-auto"
-                    ></GoogleLogin>
+                    <div className="relative">
+                      <button
+                        type="button"
+                        className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
+                      >
+                        <img
+                          src="https://img.icons8.com/color/48/000000/google-logo.png"
+                          alt="googlelogo"
+                          className="w-8 h-8 mx-auto z-50"
+                        />
+                      </button>
+                      <div className="absolute inset-0 opacity-0">
+                        <GoogleLogin
+                          clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                          buttonText=""
+                          onSuccess={handleSuccess}
+                          onFailure={handleFailure}
+                          cookiePolicy={"single_host_origin"}
+                          className="h-full w-full"
+                        ></GoogleLogin>
+                      </div>
+                    </div>
                   )}
-                  {/* <button className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none">
-                    <img
-                      src="https://img.icons8.com/color/48/000000/google-logo.png"
-                      alt="googlelogo"
-                      className="w-8 h-8 mx-auto"
-                    />
-                  </button> */}
-                  <button className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none">
+
+                  <button
+                    type="button"
+                    className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
+                  >
                     <img
                       src="https://img.icons8.com/color/48/000000/facebook-new.png"
                       alt="facebooklogo"

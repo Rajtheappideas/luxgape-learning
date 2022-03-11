@@ -45,7 +45,7 @@ const WhyChooseUs = () => {
         </RoundedDiv>
         {/* --------------2 big rounde div=-------------- */}
 
-        <RoundedDiv className="shadow-2xl">
+        <RoundedDiv>
           <RoundedSmallDiv className="bg-primary">
             <CalculatorIcon
               color="white"
@@ -97,7 +97,7 @@ border relative
 rounded-tl-[190px] rounded-tr-0 rounded-br-[190px] rounded-bl-0
  h-[410px] w-[380px]
  flex items-center
- px-12 pt-16 `;
+ px-12 pt-16 hover:shadow-2xl `;
 
 const RoundedSmallDiv = tw.div`
 absolute w-[68px] h-[68px] top-[30px] left-[20px]
