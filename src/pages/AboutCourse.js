@@ -20,7 +20,7 @@ const AboutCourse = () => {
       <MetaTags>
         <title>About Course</title>
       </MetaTags>
-      <Eclipse />
+      {/* <Eclipse /> */}
       {/* -------------------navbar=------------------ */}
       <Navbar activeText="Course" />
       <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r text-center from-to to-from">

@@ -8,9 +8,9 @@ const LearnAnytimeAnywhere = () => {
   return (
     <div className="sm:p-10 p-5 grid lg:grid-cols-2 grid-flow-row  grid-cols-1 gap-10 place-items-center items-center relative">
       {/* ----------------eclipse 1---------------- */}
-      <div className="absolute -top-10 right-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
+      {/* <div className="absolute -top-10 right-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
       {/* ----------------eclipse 2---------------- */}
-      <div className="absolute -bottom-40 left-1/2 blur-[300px]  w-[300px] h-[300px] rounded-full bg-pink-300 " />
+      {/* <div className="absolute -bottom-40 left-1/2 blur-[300px]  w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
 
       {/* -------------image is here------------- */}
       <div className="hidden lg:block">

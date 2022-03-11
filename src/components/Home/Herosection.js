@@ -36,9 +36,9 @@ const Herosection = () => {
           {/* -------------------image for small and large screen------------------- */}
           <div className="w-full relative mt-5 lg:hidden md:block hidden">
             {/* -----------eclipse 1------------------ */}
-            <div className="absolute top-40 -right-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
+            {/* <div className="absolute top-40 -right-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
             {/* -----------eclipse 2------------------ */}
-            <div className="absolute -bottom-28 blur-[200px] -left-32 w-[300px] h-[300px] rounded-full bg-blue-300 " />
+            {/* <div className="absolute -bottom-28 blur-[200px] -left-32 w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
             {/* ----------------------image bg----------------- */}
             <div className="mx-auto rounded-tl-[282.5px] rounded-tr-[0px] rounded-br-[82px] rounded-bl-none h-[684px] w-[540px]  bg-gradient-to-l from-[#33bac6] to-[#162765]" />
             <img
@@ -175,9 +175,9 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
       {/* -----------main image of herosection for xl screen--------------- */}
       <div className="relative w-full h-full hidden lg:block">
         {/* -----------eclipse 1------------------ */}
-        <div className="absolute top-40 -right-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
+        {/* <div className="absolute top-40 -right-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
         {/* -----------eclipse 2------------------ */}
-        <div className="absolute -bottom-28 blur-[200px] -left-32 w-[300px] h-[300px] rounded-full bg-blue-400 " />
+        {/* <div className="absolute -bottom-28 blur-[200px] -left-32 w-[300px] h-[300px] rounded-full bg-blue-400 " /> */}
         {/* ---------------------main image------------- */}
         <div className="rounded-tl-[282.5px] rounded-tr-[0px] rounded-br-[82px] rounded-bl-none h-[684px] w-[540px] absolute top-5 left-10 bg-gradient-to-l from-[#33bac6] to-[#162765]" />
         <img

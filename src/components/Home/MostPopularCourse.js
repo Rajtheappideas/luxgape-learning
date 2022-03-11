@@ -39,13 +39,13 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
   return (
     <div className="sm:p-10 p-5 relative">
       {/* ----------------eclipse 1--------------------- */}
-      {showEclipse && (
+      {/* {showEclipse && (
         <div className="absolute -top-32 left-56 w-[300px] h-[300px] blur-[200px] rounded-full bg-pink-300 " />
-      )}
+      )} */}
       {/* ----------------eclipse 2--------------------- */}
-      {showEclipse && (
+      {/* {showEclipse && (
         <div className="absolute bottom-10 -left-40 blur-[200px] w-[300px] h-[300px]  rounded-full bg-pink-300 " />
-      )}
+      )} */}
 
       <div className="mb-10 flex justify-between items-center">
         <p className="font-semibold text-5xl ">{t("most_popular_course")}</p>

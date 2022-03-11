@@ -47,7 +47,7 @@ const CourseHistory = ({ showButton }) => {
   return (
     <div className="mb-10 sm:p-10 p-5 relative">
       {/* ----------------eclipse---------------- */}
-      <div className="absolute -bottom-28 left-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " />
+      {/* <div className="absolute -bottom-28 left-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
       {/* --------------heading-------------- */}
       <div className="mb-16 flex justify-between items-center">
         <p className="text-5xl font-bold tracking-wide">

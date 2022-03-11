@@ -8,9 +8,9 @@ const ServiceWeProvide = () => {
   return (
     <div className="p-10 relative">
       {/* ----------------------eclipse 1----------------- */}
-      <div className="absolute -top-20 -left-40 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " />
+      {/* <div className="absolute -top-20 -left-40 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
       {/* ----------------------eclipse 2----------------- */}
-      <div className="absolute -bottom-20 right-0 blur-[200px]  w-[300px] h-[300px] rounded-full bg-pink-300 " />
+      {/* <div className="absolute -bottom-20 right-0 blur-[200px]  w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
 
       {/* --------------heading-------------- */}
       <div className="text-center mb-5">
