@@ -6,7 +6,6 @@ import cimg3 from "../../assets/cimg3.jpg";
 import { DocumentTextIcon, DownloadIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const data = [
   {
@@ -78,7 +77,7 @@ const CourseHistory = ({ showButton }) => {
               item.percetange === 100 ? "border-from" : "border-red-500"
             }`}
           >
-            <LazyLoadImage
+            <img
               src={item.img}
               alt="courseimg"
               className="w-[286px] h-[163px] rounded-tl-[81.5px] rounded-tr-none rounded-br-[81.5px] rounded-bl-none object-center object-cover"

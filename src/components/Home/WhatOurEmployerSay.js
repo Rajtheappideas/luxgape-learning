@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useTranslation } from "react-i18next";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const employerData = [
   {
@@ -80,7 +80,7 @@ const WhatOurEmployerSay = () => {
               {/* ----------------------profile and name div----------------------- */}
 
               <div className="flex items-center mb-10 snap-center">
-                <LazyLoadImage
+                <img
                   src={item.image}
                   alt="img"
                   className="rounded-full object-center object-cover w-16 h-16 bg-gray-400"

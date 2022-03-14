@@ -6,7 +6,7 @@ import simg3 from "../../assets/studyimg3.jpg";
 import main from "../../assets/main.jpg";
 import rocket from "../../assets/rocket.png";
 import { useTranslation } from "react-i18next";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const Herosection = () => {
   const { t } = useTranslation();
@@ -37,9 +37,10 @@ const Herosection = () => {
           <div className="rounded-tl-[282.5px] rounded-tr-[0px] rounded-br-[82px] rounded-bl-none h-[600px] w-[540px] bg-gradient-to-l from-from to-to" />
           {/* --------------image------------- */}
           <div className="absolute top-5 lg:left-56 md:left-24">
-            <LazyLoadImage
+            <img
+            
               className="rounded-tl-[18px] rounded-tr-[18px] rounded-br-[260px] rounded-bl-[18px] 
-             h-[570px] w-[490px] object-right-top object-cover"
+            h-[570px] w-[490px] object-right-top object-cover"
               src={main}
               alt="ladyimg"
             />
@@ -55,7 +56,7 @@ rounded-tl-[26.9831px] rounded-tr-[0px] rounded-br-[12.7662px] rounded-bl-[0px]
 bg-gradient-to-l from-[#33bac6] to-[#162765]"
             />
             {/*-------rocket-------------  */}
-            <LazyLoadImage
+            <img
               src={rocket}
               alt="rocket"
               className="absolute top-[5.5rem] left-0 border-white w-8 h-8"
@@ -145,17 +146,17 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
         {/* --------------------------------photos--------------------------------------- */}
 
         <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 items-center xl:justify-start justify-center sm:space-x-12 w-full">
-          <LazyLoadImage
+          <img
             className="object-contain object-center h-28"
             src={simg3}
             alt="studyimg"
           />
-          <LazyLoadImage
+          <img
             className="object-contain object-center h-28"
             src={simg1}
             alt="studyimg"
           />
-          <LazyLoadImage
+          <img
             className="object-contain object-center h-28"
             src={simg2}
             alt="studyimg"
@@ -168,7 +169,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
         {/* ------------bg blue of image------------ */}
         <div className="rounded-tl-[282.5px] rounded-tr-[0px] rounded-br-[82px] rounded-bl-none h-full w-[540px] bg-gradient-to-l from-[#33bac6] to-[#162765]" />
         {/* --------------image------------- */}
-        <LazyLoadImage
+        <img
           className="rounded-tl-[18px] rounded-tr-[18px] rounded-br-[260px] rounded-bl-[18px] 
       h-[90%] w-[490px] absolute top-5 left-8 object-right-top object-cover"
           src={main}
@@ -186,7 +187,7 @@ rounded-tl-[26.9831px] rounded-tr-[0px] rounded-br-[12.7662px] rounded-bl-[0px]
 bg-gradient-to-l from-[#33bac6] to-[#162765]"
         />
         {/*-------rocket-------------  */}
-        <LazyLoadImage
+        <img
           src={rocket}
           alt="rocket"
           className="absolute top-[5.5rem] left-5 border-white w-8 h-8"

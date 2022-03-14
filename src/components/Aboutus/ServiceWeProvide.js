@@ -2,7 +2,6 @@ import React from "react";
 import img2 from "../../assets/studyimg3.jpg";
 import serviceprovideimg from "../../assets/serviceprovideimg.jpg";
 import { useTranslation } from "react-i18next";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ServiceWeProvide = () => {
   const { t } = useTranslation();
@@ -24,7 +23,7 @@ const ServiceWeProvide = () => {
         </p>
         {/* ------------------img serviceprovideimg--------------- */}
         <div className="lg:hidden block ">
-          <LazyLoadImage
+          <img
             src={serviceprovideimg}
             alt="serviceprovideimg"
             className="object-center object-cover mx-auto sm:w-[607px] w-full sm:h-[624px] h-auto sm:rounded-tl-[303px] rounded-tl-[203px] sm:rounded-br-[305px] rounded-br-[205px] rounded-tr-none rounded-bl-none "
