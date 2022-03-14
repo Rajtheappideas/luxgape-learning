@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import img from "../../assets/moreaboutusimg.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const MoreAboutUs = () => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ const MoreAboutUs = () => {
           </p>
           {/* --------------image for small screen------------------- */}
           <div className="lg:hidden block">
-            <img
+            <LazyLoadImage
               src={img}
               alt="studyimage"
               className="sm:w-[474px] sm:h-[374px] h-auto w-auto mx-auto object-center object-cover rounded-tl-[180px] rounded-br-[180px] rounded-tr-none rounded-bl-none"

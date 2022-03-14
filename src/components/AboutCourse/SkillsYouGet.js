@@ -73,8 +73,8 @@ const SkillsYouGet = () => {
         {data.map((item) => (
           // -------------main div--------------
           <div
-            className="h-[267px] w-[296px] cursor-pointer group perspective"
-            key="{item.id}"
+            className="h-[227px] w-[256px] cursor-pointer group perspective"
+            key={item.id}
           >
             {/* ------------------main content div-------------- */}
             <div className="relative preserve-3d group-hover:my-rotate-y-180 w-full h-full duration-500">

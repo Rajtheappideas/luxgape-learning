@@ -2,6 +2,7 @@ import React from "react";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import img from "../../assets/studyimg3.jpg";
 import { FiSend } from "react-icons/fi";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Reviews = [
   {
@@ -61,7 +62,7 @@ const Review = () => {
             <div className="space-y-2" key={review.id}>
               {/* -----------photo & stars----------------- */}
               <div className="flex items-start">
-                <img
+                <LazyLoadImage
                   src={review.img}
                   alt="img"
                   className="h-16 w-16 object-cover object-center rounded-xl"

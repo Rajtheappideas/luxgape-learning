@@ -13,6 +13,7 @@ import { useUserContext } from "../context/usercontext";
 import tw from "tailwind-styled-components/dist/tailwind";
 import ForgotPassword from "../components/ForgotPassword";
 import { useTranslation } from "react-i18next";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const SignIn = () => {
   const [showPassword, setShowpassword] = useState(false);
@@ -98,7 +99,7 @@ const SignIn = () => {
         <div className="p-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
-            <img
+            <LazyLoadImage
               src={signin}
               alt="signin"
               className="object-center object-cover w-[624px] h-[748px] rounded-tl-[312px] rounded-br-[312px] rounded-tr-none rounded-bl-none "
@@ -250,7 +251,7 @@ const SignIn = () => {
                     type="button"
                     className="border  text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
                   >
-                    <img
+                    <LazyLoadImage
                       src="https://img.icons8.com/ios-glyphs/30/000000/mac-os.png"
                       alt="applelogo"
                       className="h-8 w-8 mx-auto"
@@ -269,7 +270,7 @@ const SignIn = () => {
                         type="button"
                         className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
                       >
-                        <img
+                        <LazyLoadImage
                           src="https://img.icons8.com/color/48/000000/google-logo.png"
                           alt="googlelogo"
                           className="w-8 h-8 mx-auto z-50"
@@ -292,7 +293,7 @@ const SignIn = () => {
                     type="button"
                     className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
                   >
-                    <img
+                    <LazyLoadImage
                       src="https://img.icons8.com/color/48/000000/facebook-new.png"
                       alt="facebooklogo"
                       className="w-8 h-8 mx-auto"

@@ -2,6 +2,7 @@ import { PlayIcon } from "@heroicons/react/solid";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import img from "../../assets/cimg3.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const courseHistorys = [
   {
@@ -67,7 +68,7 @@ const History = () => {
         {courseHistorys.map((courseHistory) => (
           <div key={courseHistory.No}>
             <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden">
-              <img
+              <LazyLoadImage
                 src={courseHistory.img}
                 alt="courseimage"
                 className="h-48 object-center w-full object-cover opacity-70 "

@@ -1,30 +1,45 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import {
-  Home,
-  SignIn,
-  SignUp,
-  About,
-  Courses,
-  AboutCourse,
-  Payment,
-  PrivacyPolicy,
-  TermsAndConditions,
-  Faq,
-  AttendCourseHistory,
-  Class,
-  Exam,
-  Erro404,
-  Employee,
-} from "./pages/index";
 import { UserProvider } from "./context/usercontext";
-import { UserLanguageProvider } from "./context/userLanguage";
+import Loading from "./assets/animations/loading.json";
+import Lottie from "react-lottie";
+
+// pages import
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const SignIn = lazy(() => import("./pages/SignIn"));
+const SignUp = lazy(() => import("./pages/Signup"));
+const AboutCourse = lazy(() => import("./pages/AboutCourse"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
+const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
+const Faq = lazy(() => import("./pages/Faq"));
+const Courses = lazy(() => import("./pages/Courses"));
+const Employee = lazy(() => import("./pages/Employee"));
+const Exam = lazy(() => import("./pages/Exam"));
+const AttendCourseHistory = lazy(() => import("./pages/AttendCourseHistory"));
+const Payment = lazy(() => import("./pages/Payment"));
+const Erro404 = lazy(() => import("./pages/Error404"));
+const Class = lazy(() => import("./pages/Class"));
 
 const App = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Loading,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <BrowserRouter>
-      {/* <UserLanguageProvider> */}
+      <Suspense
+        fallback={
+          <div className="absolute top-[30%] left-1/2 -translate-x-1/2">
+            <Lottie options={defaultOptions} height={300} width={300} />
+          </div>
+        }
+      >
         <UserProvider>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -47,7 +62,7 @@ const App = () => {
             <Route path="*" element={<Erro404 />} />
           </Routes>
         </UserProvider>
-      {/* </UserLanguageProvider> */}
+      </Suspense>
     </BrowserRouter>
   );
 };

@@ -11,6 +11,7 @@ import * as yup from "yup";
 import tw from "tailwind-styled-components/dist/tailwind";
 import { FormikProvider, ErrorMessage, Form, useFormik } from "formik";
 import { useTranslation } from "react-i18next";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Signup = () => {
   const [showPassword, setShowpassword] = useState(false);
@@ -79,7 +80,7 @@ const Signup = () => {
       <div className="sm:p-10 p-5">
         {/* --------------logo------------------- */}
         <Link to="/">
-          <img
+          <LazyLoadImage
             src={logo}
             alt="logo"
             className="object-cover object-center h-16 sm:m-0 m-5 cursor-pointer inline-block"
@@ -90,7 +91,7 @@ const Signup = () => {
         <div className="sm:p-10 p-5 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
-            <img
+            <LazyLoadImage
               src={signup}
               alt="signin"
               className="object-center object-cover w-[624px] h-[748px] rounded-tl-[312px] rounded-br-[312px] rounded-tr-none rounded-bl-none "

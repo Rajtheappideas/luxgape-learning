@@ -2,6 +2,7 @@ import React from "react";
 import studyboy from "../../assets/study_boy.jpg";
 import { CheckIcon } from "@heroicons/react/outline";
 import { useTranslation } from "react-i18next";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const LearnAnytimeAnywhere = () => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ const LearnAnytimeAnywhere = () => {
 
       {/* -------------image is here------------- */}
       <div className="hidden lg:block">
-        <img
+        <LazyLoadImage
           src={studyboy}
           alt="studyboy"
           className="object-contain object-center w-screen"

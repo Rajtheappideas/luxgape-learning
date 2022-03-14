@@ -11,6 +11,7 @@ import {
 } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const data = [
   {
@@ -109,7 +110,7 @@ const MostPopularCourse = () => {
         {data.map((course) => (
           <RoundedDiv key={course.id}>
             <Link to="/courses/aboutcourse">
-              <img
+              <LazyLoadImage
                 src={course.img}
                 alt="mpcimg1"
                 className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"

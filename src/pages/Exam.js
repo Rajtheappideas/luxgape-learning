@@ -5,6 +5,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import studentimg from "../assets/studyimg3.jpg";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
 
 const Exam = () => {
   const currentYear = new Date().getFullYear();
@@ -20,7 +22,7 @@ const Exam = () => {
           {/* ----------------logo------------------------- */}
           <div className="cursor-pointer">
             <Link to="/">
-              <img
+              <LazyLoadImage
                 src={logo}
                 className="w-full h-20 object-contain cursor-pointer"
                 alt="logo"
@@ -29,7 +31,7 @@ const Exam = () => {
           </div>
 
           <div className="flex items-center bg-gray-100 p-2 rounded-lg">
-            <img
+            <LazyLoadImage
               src={studentimg}
               alt="studentimg"
               className="object-center object-cover rounded-tl-lg rounded-br-lg rounded-bl-none rounded-tr-none w-10 h-10"
@@ -138,7 +140,7 @@ const Exam = () => {
         <div className="flex-col flex items-center justify-center my-5 space-y-4">
           <div>
             <Link to="/">
-              <img
+              <LazyLoadImage
                 src={logo}
                 alt="companylogo"
                 className="w-48 h-20 cursor-pointer object-contain"

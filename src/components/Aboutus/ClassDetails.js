@@ -1,6 +1,7 @@
 import React from "react";
 import classdetail from "../../assets/classdetails.jpg";
 import logo from "../../assets/LXG_RVB.png";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const ClassDetails = () => {
   return (
@@ -11,12 +12,12 @@ const ClassDetails = () => {
         {/* -----------image on large screen-------------- */}
         <div className="lg:hidden block">
           <div className="relative w-full">
-            <img
+            <LazyLoadImage
               src={classdetail}
               alt="classdetailimg"
               className=" object-center object-cover w-full h-[214px] rounded-tl-[107px] rounded-br-[107px] rounded-tr-none rounded-bl-none "
             />
-            <img
+            <LazyLoadImage
               src={logo}
               alt="logo"
               className="sm:h-20 h-12 absolute top-[40%] left-[55%] -translate-x-1/2 object-center object-cover"
@@ -43,12 +44,12 @@ const ClassDetails = () => {
       </div>
       {/* -----------image on large screen-------------- */}
       <div className="relative hidden lg:block">
-        <img
+        <LazyLoadImage
           src={classdetail}
           alt="classdetailimg"
           className=" object-center object-cover w-[607px] h-[214px] rounded-tl-[107px] rounded-br-[107px] rounded-tr-none rounded-bl-none "
         />
-        <img
+        <LazyLoadImage
           src={logo}
           alt="logo"
           className=" h-20 absolute top-[30%] left-[53%] -translate-x-1/2 object-center object-cover"

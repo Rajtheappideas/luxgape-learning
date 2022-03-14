@@ -5,6 +5,7 @@ import { BsFillPlayCircleFill } from "react-icons/bs";
 import ReactPlayer from "react-player";
 import { Link } from "react-router-dom";
 
+
 const AboutClass = () => {
   return (
     <div className="sm:p-10 p-5">
