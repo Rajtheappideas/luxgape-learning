@@ -7,12 +7,14 @@ import {
   MostPopularCourseCourses,
   SearchBoxAndFilter,
 } from "../components";
+import { useTranslation } from "react-i18next";
 
 const Courses = () => {
+  const { t } = useTranslation();
   return (
     <div className="bg-bgblank relative">
       <MetaTags>
-        <title>Courses</title>
+        <title>{t("Course")}</title>
       </MetaTags>
       {/* -----------------------eclipse 1-------------- */}
       {/* <div className="absolute top-1/2 left-0 -z-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}

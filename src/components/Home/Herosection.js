@@ -7,11 +7,10 @@ import main from "../../assets/main.jpg";
 import rocket from "../../assets/rocket.png";
 import { useTranslation } from "react-i18next";
 
-
 const Herosection = () => {
   const { t } = useTranslation();
   return (
-    <div className="sm:p-10 p-5 xl:grid xl:grid-cols-2 xl:grid-flow-row xl:justify-items-end xl:items-start">
+    <div className="sm:p-10 p-3 xl:grid xl:grid-cols-2 xl:grid-flow-row xl:justify-items-end xl:items-start">
       {/* ------------text and search is here------------------------------ */}
       <div className="relative xl:text-left text-center space-y-20">
         {/* -------------------------------------text--------------------------------     */}
@@ -20,10 +19,8 @@ const Herosection = () => {
           <div className="space-y-6 w-full">
             <span className="block tracking-normal">{t("learning_and")}</span>
             <p className=" tracking-wider">
-              {t("level_up_your")}
-              <span className="text-from inline-block ml-4 ">
-                {t("skills")}
-              </span>
+              <span className="mr-3">{t("level_up_your")}</span>
+              <span className="text-from inline-block">{t("skills")}</span>
             </p>
             {/* ----------------------------------------paragraph--------------------------------- */}
             <p className="text-xl text-secondary font-semibold capitalize tracking-wide w-full leading-relaxed">
@@ -38,7 +35,6 @@ const Herosection = () => {
           {/* --------------image------------- */}
           <div className="absolute top-5 lg:left-56 md:left-24">
             <img
-            
               className="rounded-tl-[18px] rounded-tr-[18px] rounded-br-[260px] rounded-bl-[18px] 
             h-[570px] w-[490px] object-right-top object-cover"
               src={main}
@@ -194,12 +190,12 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
         />
         {/*-------active student bg div-------------  */}
         <div
-          className="absolute top-80 left-[20rem] w-[280px] h-[74px] 
+          className="absolute top-80 left-[19rem] w-[280px] h-[74px] 
 rounded-tl-[37px] rounded-tr-[1.16056px] rounded-br-[17.9887px] bg-white shadow-2xl"
         />
         {/*-------active student div-------------  */}
         <div
-          className="absolute top-[20.8rem] left-[20.7rem] w-[54px] h-[54px]
+          className="absolute top-[20.8rem] left-[19.7rem] w-[54px] h-[54px]
 rounded-tl-[26.9831px] rounded-tr-[0px] rounded-br-[12.7662px] rounded-bl-[0px]
 bg-gradient-to-l from-[#33bac6] to-[#162765]"
         />
@@ -209,7 +205,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
           color="white"
           viewBox="0 0 24 24"
           stroke="currentColor"
-          className="absolute top-[21.5rem] left-[21.5rem] w-7 h-7"
+          className="absolute top-[21.5rem] left-[20.5rem] w-7 h-7"
         >
           <path
             strokeLinecap="round"
@@ -218,7 +214,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
             d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
           />
         </svg>
-        <p className="text-lg whitespace-nowrap font-bold absolute top-[21.5rem] h-full left-[25rem]">
+        <p className="text-lg font-bold whitespace-nowrap absolute top-[21.5rem] h-full left-[24rem]">
           50k+ {t("hero_section_picture_1")}
         </p>
         {/*-------profsseinal bg div-------------  */}

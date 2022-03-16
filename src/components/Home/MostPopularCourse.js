@@ -39,7 +39,7 @@ const data = [
 const MostPopularCourse = ({ showButton, showEclipse }) => {
   const { t } = useTranslation();
   return (
-    <div className="sm:p-10 p-5 relative">
+    <div className="sm:p-10 p-1 relative">
       {/* ----------------eclipse 1--------------------- */}
       {/* {showEclipse && (
         <div className="absolute -top-32 left-56 w-[300px] h-[300px] blur-[200px] rounded-full bg-pink-300 " />
@@ -60,7 +60,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
         )}
       </div>
       {/* --------------- main div---------- */}
-      <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
+      <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-4">
         {/* --------------Courses div=-------------- */}
         {data.map((course) => (
           <RoundedDiv key={course.id}>
@@ -105,6 +105,6 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- h-[673px] w-[364px]
+ h-[673px] sm:w-[364px] w-full
  cursor-pointer
  `;

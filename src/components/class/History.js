@@ -64,7 +64,7 @@ const History = () => {
   const { t } = useTranslation();
   return (
     <div>
-      <div className="grid sm:gap-x-16 gap-y-5 lg:grid-cols-3 md:grid-cols-2 place-items-center grid-flow-row sm:p-10 p-5">
+      <div className="grid sm:gap-x-16 gap-y-5 lg:grid-cols-3 md:grid-cols-2 place-items-center grid-flow-row sm:p-10 p-3">
         {courseHistorys.map((courseHistory) => (
           <div key={courseHistory.No}>
             <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden">

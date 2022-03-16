@@ -2,17 +2,19 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
 import React from "react";
 import { MetaTags } from "react-meta-tags";
 import { Footer, Navbar } from "../components";
+import { useTranslation } from "react-i18next";
 
 const Employee = () => {
+  const { t } = useTranslation();
   return (
     <div>
       <MetaTags>
-        <title>Employee</title>
+        <title>{t("employee")}</title>
       </MetaTags>
       {/* ---------------navbar--------------- */}
       <Navbar />
       {/* -----------------main div table-------------- */}
-      <div className="p-10 mb-10">
+      <div className="sm: p-3p-10 mb-10">
         <div className="shadow-2xl p-10 bg-white w-full h-auto rounded-xl">
           {/* -----------------heading & serach box---------------- */}
           <div className="flex items-center justify-between">
@@ -125,7 +127,7 @@ const Employee = () => {
           </div>
 
           <div className="flex justify-between items-center mt-10">
-            <div >
+            <div>
               <p className="text-lg font-normal">showing 1-5 data from 200</p>
             </div>
             {/* ------------buttons pagiantoin-------------- */}

@@ -56,6 +56,6 @@ export default ProductYouBuy;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- h-[673px] w-[364px]
+ h-[673px] sm:w-[364px] w-full
  cursor-pointer
  `;

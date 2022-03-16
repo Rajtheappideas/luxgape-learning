@@ -53,13 +53,13 @@ const Reviews = [
 ];
 const Review = () => {
   return (
-    <div className="sm:p-10 p-5 relative">
+    <div className="sm:p-10 p-3 relative">
       {/* -----------------review div-------------- */}
       <div className="w-full h-screen overflow-y-auto rounded-xl scrollbar-hide bg-gray-100 opacity-90 ">
         <div className="p-10 space-y-9">
           {/* -----------profile----------- */}
           {Reviews.map((review) => (
-            <div className="space-y-2" key={review.id}>
+            <div className="space-y-2 sm:last:pb-10 last:pb-20" key={review.id}>
               {/* -----------photo & stars----------------- */}
               <div className="flex items-start">
                 <LazyLoadImage

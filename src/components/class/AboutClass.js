@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const AboutClass = () => {
   return (
-    <div className="sm:p-10 p-5">
+    <div className="sm:p-10 p-3">
       <Link to="/exam">
         {/* -------------------img-------------------------- */}
         <div className="relative bg-black mix-blend-darken overflow-hidden rounded-3xl">
@@ -24,10 +24,10 @@ const AboutClass = () => {
           <img
             src={img}
             alt="classimg"
-            className="w-full mx-auto h-screen object-cover opacity-50 object-center shadow-lg"
+            className="w-full h-full object-cover opacity-50 object-center shadow-lg"
           />
           {/* -----------palyer buttons-------------- */}
-          <div className="absolute space-x-7 flex items-center top-[40%] left-1/2 -translate-x-1/2 z-50">
+          <div className="absolute space-x-7 flex items-center sm:top-[35%] top-[20%] left-1/2 -translate-x-1/2 z-50">
             <button>
               <FiSkipBack color="white" className="sm:h-20 sm:w-10 h-20 w-10" />
             </button>

@@ -6,18 +6,18 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
 import studentimg from "../assets/studyimg3.jpg";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
+import { useTranslation } from "react-i18next";
 
 const Exam = () => {
   const currentYear = new Date().getFullYear();
-
+  const { t } = useTranslation();
   return (
     <div>
       <MetaTags>
-        <title>Exam</title>
+        <title>{t("exam")}</title>
       </MetaTags>
       {/* ---------------navbar----------- */}
-      <nav className="sm:p-10 p-5">
+      <nav className="sm:p-10 p-3">
         <div className="sm:flex sm:flex-row  sm:justify-between flex-col items-center space-y-3 sm:space-y-0">
           {/* ----------------logo------------------------- */}
           <div className="cursor-pointer">

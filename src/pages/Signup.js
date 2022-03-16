@@ -77,18 +77,18 @@ const Signup = () => {
         <title>{t("Sign_Up")}</title>
       </MetaTags>
       {/* -------------main div---------------- */}
-      <div className="sm:p-10 p-5">
+      <div className="sm:p-10 p-3">
         {/* --------------logo------------------- */}
         <Link to="/">
           <LazyLoadImage
             src={logo}
             alt="logo"
-            className="object-cover object-center h-16 sm:m-0 m-5 cursor-pointer inline-block"
+            className="object-cover object-center h-16 sm:m-0 m-2 cursor-pointer inline-block"
           />
         </Link>
 
         {/* --------------------grid div---------------- */}
-        <div className="sm:p-10 p-5 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
+        <div className="sm:p-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
             <LazyLoadImage

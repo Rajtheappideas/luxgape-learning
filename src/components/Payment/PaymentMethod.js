@@ -15,18 +15,18 @@ const PaymentMethod = () => {
       />
 
       <div className=" w-full md:border-r-2 border-gray-400 border-dashed">
-        <h1 className="text-3xl my-3 px-5 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
+        <h1 className="text-3xl my-3 sm:px-5 font-bold text-transparent bg-clip-text bg-gradient-to-r text-left from-to to-from">
           {t("payment_method")}
         </h1>
         {/* -----------------payment description paragraph---------------- */}
-        <p className="text-xl text-secondary px-5 tracking-wide font-semibold mb-10">
+        <p className="text-xl text-secondary sm:px-5 tracking-wide font-semibold mb-10">
           {t("payment_method_paragraph")}
         </p>
         {/* -----------------card payment------------------- */}
-        <div className="space-y-5 my-10 w-full px-5">
-          <div className="flex items-center rounded-lg bg-[#F2F7FE] w-44 h-9 mt-4">
+        <div className="space-y-5 my-10 w-full sm:px-5">
+          <div className="flex items-center rounded-lg bg-[#F2F7FE] w-48 h-auto p-1 mt-4">
             <input type="checkbox" className="w-5 h-5  rounded-lg ml-3" />
-            <span className="font-medium text-lg mx-2">
+            <span className="font-medium whitespace-nowrap text-lg mx-2">
               {t("card_payment")}
             </span>
           </div>
@@ -65,10 +65,10 @@ const PaymentMethod = () => {
         </div>
 
         {/* -----------------stipe payment------------------- */}
-        <div className="space-y-5 mt-20 px-5">
-          <div className="flex items-center rounded-lg bg-[#F2F7FE] w-44 h-9 mt-4">
+        <div className="space-y-5 mt-20 sm:px-5">
+          <div className="flex items-center rounded-lg bg-[#F2F7FE] w-48 h-auto p-1 mt-4">
             <input type="checkbox" className="w-5 h-5 rounded-lg ml-3" />
-            <span className="font-medium text-lg mx-2">
+            <span className="font-medium whitespace-nowrap text-lg mx-2">
               {t("stripe_payment")}
             </span>
           </div>
@@ -132,7 +132,7 @@ const PaymentMethod = () => {
         </div>
 
         {/* -----------------cancellation policy ---------------- */}
-        <div className="my-10 px-5">
+        <div className="my-10 sm:px-5">
           <p className="text-2xl mb-5 text-secondary font-semibold block">
             {t("cancellation_policy")}
           </p>

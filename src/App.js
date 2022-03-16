@@ -4,8 +4,10 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./context/usercontext";
 import Loading from "./assets/animations/loading.json";
 import Lottie from "react-lottie";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./components/ErrorBoundary";
 
-// pages import
+// pages import using lazy component of react
 const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const SignIn = lazy(() => import("./pages/SignIn"));
@@ -23,6 +25,7 @@ const Erro404 = lazy(() => import("./pages/Error404"));
 const Class = lazy(() => import("./pages/Class"));
 
 const App = () => {
+  // default options for lottie files
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -33,36 +36,49 @@ const App = () => {
   };
   return (
     <BrowserRouter>
-      <Suspense
-        fallback={
-          <div className="absolute top-[30%] left-1/2 -translate-x-1/2">
-            <Lottie options={defaultOptions} height={300} width={300} />
-          </div>
-        }
+      <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+        onReset={() => {
+          window.location.reload();
+        }}
       >
-        <UserProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/aboutus" element={<About />} />
-            <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-            <Route path="/terms&conditions" element={<TermsAndConditions />} />
-            <Route path="/faq" element={<Faq />} />
-            <Route path="/courses" element={<Courses />} />
-            <Route path="/courses/aboutcourse" element={<AboutCourse />} />
-            <Route path="/courses/aboutcourse/payment" element={<Payment />} />
-            <Route
-              path="/attendcoursehistory"
-              element={<AttendCourseHistory />}
-            />
-            <Route path="/employees" element={<Employee />} />
-            <Route path="/exam" element={<Exam />} />
-            <Route path="/class" element={<Class />} />
-            <Route path="*" element={<Erro404 />} />
-          </Routes>
-        </UserProvider>
-      </Suspense>
+        <Suspense
+          fallback={
+            <div className="absolute top-[30%] left-1/2 -translate-x-1/2">
+              <Lottie options={defaultOptions} height={300} width={300} />
+            </div>
+          }
+        >
+          <UserProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/signin" element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/aboutus" element={<About />} />
+              <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+              <Route
+                path="/terms&conditions"
+                element={<TermsAndConditions />}
+              />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/courses" element={<Courses />} />
+              <Route path="/courses/aboutcourse" element={<AboutCourse />} />
+              <Route
+                path="/courses/aboutcourse/payment"
+                element={<Payment />}
+              />
+              <Route
+                path="/attendcoursehistory"
+                element={<AttendCourseHistory />}
+              />
+              <Route path="/employees" element={<Employee />} />
+              <Route path="/exam" element={<Exam />} />
+              <Route path="/class" element={<Class />} />
+              <Route path="*" element={<Erro404 />} />
+            </Routes>
+          </UserProvider>
+        </Suspense>
+      </ErrorBoundary>
     </BrowserRouter>
   );
 };

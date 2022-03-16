@@ -37,6 +37,7 @@
   "create_your_account": "Cree su cuenta",
   "i_have_read_and_agree_to_the": "He leído y acepto las",
   "terms_of_service": "Condiciones de servicio",
+  "terms_and_conditions": "Términos & condiciones",
   "name_is_required": "el nombre es obligatorio!",
   "email_is_required": "el correo electrónico es necesario!",
   "password_is_required": "la contraseña es necesaria!",
@@ -103,11 +104,12 @@
   "sitemap_paragraph": "Un mapa del sitio es un archivo en el que se proporciona información sobre las páginas, vídeos y otros archivos de su sitio, y las relaciones entre ellos.",
   "laptop_code_paragraph": "En el diseño adaptativo, el desarrollador crea un diseño de sitio web distinto, con un código HTML diferente, para cada uno de los tamaños de pantalla en los que se ve el sitio. ",
   "window_restore_paragraph": "WordPress es una plataforma de creación de sitios web gratuita y de código abierto. A nivel más técnico, WordPress es un sistema de gestión de contenidos (CMS) escrito en PHP que utiliza una base de datos MySQL.",
-  "edit_content_paragraph": "Un editor de contenidos se encargará de redactar contenidos (normalmente en línea) como entradas de blog y textos de marketing, editar y corregir, reestructurar y reelaborar los contenidos en diferentes formatos, y actualizar el sitio web y las páginas de las redes sociales.",
+  "edit_content_paragraph": "Un editor de contenidos se encargará de redactar contenidos como entradas de blog y textos de marketing, editar y corregir, reestructurar y reelaborar los contenidos en diferentes formatos, y actualizar el sitio web y las páginas de las redes sociales.",
   "reviews": "Comentarios",
   "class": "Clase",
   "history": "Historia",
   "start_exam": "Inicio del examen",
+  "exam": "examen",
   "history_exam_paragraph": "Una vez que haya completado todo el curso, este botón de examen se activará automáticamente.",
   "payment": "Pago",
   "product_you_buy": "Producto que compra",
@@ -122,5 +124,9 @@
   "cancellation_policy": "Política de cancelación",
   "confirm_and_pay": "Confirmar y pagar",
   "cancel": "Cancelar",
-  "service_we_provide": "Servicio que prestamos"
+  "service_we_provide": "Servicio que prestamos",
+  "view_demo": "Ver demostración",
+  "enroll_now": "inscribirse ahora",
+  "share": "compartir",
+  "what_will_you_learn": "Que aprenderás"
 }

@@ -16,7 +16,7 @@ const Footer = ({ classFooter, normalFooter }) => {
   return (
     <>
       <footer className="bg-footer w-full">
-        <div className="pb-10 pt-16 sm:px-12 px-3 grid lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start place-items-center">
+        <div className="pb-10 pt-16 sm:px-12 px-3 grid sm:gap-0 gap-5 lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start place-items-center">
           {/* --------------logo & description-------------- */}
           <div className="w-full lg:col-span-2 sm:col-span-3">
             <div className="lg:text-left text-center">
@@ -28,15 +28,15 @@ const Footer = ({ classFooter, normalFooter }) => {
                 />
               </Link>
             </div>
-            <p className="text-2xl leading-relaxed tracking-wide lg:text-left text-center font-semibold w-full">
+            <p className="text-2xl leading-relaxed tracking-normal lg:text-left text-center font-semibold w-full">
               {t("footer_paragraph")}
             </p>
           </div>
 
           {/* ---------------------------course----------------------------- */}
-          <div className="">
+          <div>
             <Label>{t("Course")}</Label>
-            <ul className="space-y-5">
+            <ul className="sm:space-y-5 space-y-3">
               <List>Lorem ipsum</List>
               <List>Lorem ipsum</List>
               <List>Lorem ipsum</List>
@@ -45,9 +45,9 @@ const Footer = ({ classFooter, normalFooter }) => {
           </div>
 
           {/* ------------------company-------------------------- */}
-          <div className="">
+          <div>
             <Label>{t("company")}</Label>
-            <ul className="space-y-6">
+            <ul className="sm:space-y-5 space-y-3">
               <List onClick={ScrollToTop}>
                 <Link to="/aboutus">{t("About_Us")}</Link>
               </List>
@@ -64,9 +64,9 @@ const Footer = ({ classFooter, normalFooter }) => {
           </div>
 
           {/* ----------------------------follow links----------------- */}
-          <div className="">
+          <div>
             <Label>{t("follow_us")}</Label>
-            <ul className="space-y-5">
+            <ul className="sm:space-y-5 space-y-3">
               <List>
                 <a
                   href="https://www.instagram.com/"
@@ -96,6 +96,7 @@ const Footer = ({ classFooter, normalFooter }) => {
         </div>
         {/* ------------horizntal line-------------------- */}
         <div className="border w-full my-5 border-black" />
+        {/* --------------bottom line-------------- */}
         <p className="text-xl text-center font-semibold pb-5">
           ©{currentYear} <span className="text-from font-bold">Lux Gap</span>.
           {t("all_Rights_Reserved")}
@@ -108,7 +109,7 @@ const Footer = ({ classFooter, normalFooter }) => {
 export default Footer;
 
 const Label = tw.p`
-mb-8 text-4xl sm:text-2xl font-semibold text-black text-center tracking-wide`;
+sm:mb-5 text-3xl font-semibold text-black text-center tracking-wide`;
 
 const List = tw.li`
 text-2xl font-normal text-black text-center tracking-normal cursor-pointer

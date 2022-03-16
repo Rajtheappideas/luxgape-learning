@@ -3,10 +3,12 @@ import img from "../../assets/aboutcourseimg.jpg";
 import { CheckCircleIcon, ShareIcon } from "@heroicons/react/solid";
 import { BsStarFill, BsStarHalf, BsFillPlayCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CourseDetails = () => {
+  const { t } = useTranslation();
   return (
-    <div className="sm:p-10 p-5 w-full">
+    <div className="sm:p-10 p-3 w-full">
       {/* ---------------course details paragraph-------------- */}
       <div className="text-center mx-auto xl:w-3/5 sm:w-5/6">
         <p className="text-lg font-light">
@@ -30,7 +32,9 @@ const CourseDetails = () => {
             {/* -------------play button---------- */}
             <p className="absolute top-[40%] left-1/2 -translate-x-1/2 cursor-pointer">
               <BsFillPlayCircleFill className="w-16 h-16 mx-auto" />
-              <span className="text-white font-bold text-2xl">View Demo</span>
+              <span className="text-white font-bold text-2xl">
+                {t("view_demo")}
+              </span>
             </p>
 
             {/* -------------time----------- */}
@@ -52,34 +56,34 @@ const CourseDetails = () => {
           <p className="text-5xl font-bold">Course Name in Details</p>
 
           {/* ------------what you learn------------ */}
-          <p className="font-semibold text-xl">What will you learn:</p>
+          <p className="font-semibold text-xl">{t("what_will_you_learn")}:</p>
           {/* ----------------course key points------------------ */}
           <div className="flex flex-row lg:justify-start justify-center items-center">
             <ul className="space-y-3 mr-10">
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 mr-3" color="lightblue" />
+                <CheckCircleIcon className="h-6 w-6 sm:sm:mr-3" color="lightblue" />
                 Lorem Ipsum
               </li>
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 mr-3" color="lightblue" />
+                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
                 Lorem Ipsum
               </li>
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 mr-3" color="lightblue" />
+                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
                 Lorem Ipsum
               </li>
             </ul>
             <ul className="space-y-3">
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 mr-3" color="lightblue" />
+                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
                 Lorem Ipsum
               </li>
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 mr-3" color="lightblue" />
+                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
                 Lorem Ipsum
               </li>
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 mr-3" color="lightblue" />
+                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
                 Lorem Ipsum
               </li>
             </ul>
@@ -105,26 +109,26 @@ const CourseDetails = () => {
           {/* -------------------price---------------------- */}
           <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full">
             <p className="sm:space-x-5 space-x-2">
-              <span className="font-bold text-4xl">$ 49.00</span>
+              <span className="font-bold sm:text-4xl text-xl">$ 49.00</span>
               <del className="text-[#c4c4c4] text-xl">$ 99.00</del>
-              <span className="border text-primary text-xl w-full h-20 p-3 border-primary rounded-2xl">
+              <span className="border text-primary text-xl w-full sm:p-3 p-1 border-primary rounded-2xl">
                 Save 50%
               </span>
             </p>
           </div>
 
           {/* ----------------enroill now & share----------------- */}
-          <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full space-x-4">
+          <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full sm:space-x-4 space-y-2 sm:space-y-0">
             <Link to="/courses/aboutcourse/payment">
               <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase sm:w-72 w-60 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
-                enroll now
+                {t("enroll_now")}
               </button>
             </Link>
             <p className="border w-14 h-14 cursor-pointer rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
               <ShareIcon className="h-6 w-6 mx-auto my-4" color="gray" />
             </p>
             <p className="text-secondary text-xl font-semibold cursor-pointer">
-              Share
+              {t("share")}
             </p>
           </div>
         </div>

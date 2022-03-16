@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 const ServiceWeProvide = () => {
   const { t } = useTranslation();
   return (
-    <div className="p-10 relative">
+    <div className="sm:p-10 p-3 relative">
       {/* ----------------------eclipse 1----------------- */}
       {/* <div className="absolute -top-20 -left-40 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
       {/* ----------------------eclipse 2----------------- */}

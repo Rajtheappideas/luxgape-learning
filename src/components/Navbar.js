@@ -27,13 +27,13 @@ const Navbar = ({ activeText }) => {
   // }, [t, userLanguage]);
 
   return (
-    <nav className="xl:flex xl:justify-between xl:items-center sm:p-10 p-5">
+    <nav className="xl:flex xl:justify-between xl:items-center sm:p-10 p-3">
       {/* ----------------logo------------------- ------ */}
       <div className="flex justify-between items-center lg:mb-0 mb-5">
         <Link to="/">
           <img
             src={logo}
-            className="h-20 cursor-pointer inline object-contain"
+            className="sm:h-20 h-12 cursor-pointer inline object-contain"
             alt="logo"
           />
         </Link>
@@ -103,7 +103,8 @@ const Navbar = ({ activeText }) => {
             className="inline-flex items-center"
             onClick={() => setShowDropdown(!showDropdown)}
           >
-            <TranslateIcon className="h-5" />
+            {/* <TranslateIcon className="h-5" /> */}
+            {localStorage.getItem("userLang")}
             <ChevronDownIcon className="h-5" />
           </button>
 

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 const LearnAnytimeAnywhere = () => {
   const { t } = useTranslation();
   return (
-    <div className="sm:p-10 p-5 grid lg:grid-cols-2 grid-flow-row  grid-cols-1 gap-10 place-items-center items-center relative">
+    <div className="sm:p-10 p-3 grid lg:grid-cols-2 grid-flow-row  grid-cols-1 gap-10 place-items-center items-center relative">
       {/* ----------------eclipse 1---------------- */}
       {/* <div className="absolute -top-10 right-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
       {/* ----------------eclipse 2---------------- */}
@@ -15,10 +15,10 @@ const LearnAnytimeAnywhere = () => {
 
       {/* -------------image is here------------- */}
       <div className="hidden lg:block">
-        <lazyload
+        <img
           src={studyboy}
           alt="studyboy"
-          className="object-contain object-center w-screen"
+          className="object-contain object-center h-screen"
         />
       </div>
 
@@ -46,7 +46,7 @@ const LearnAnytimeAnywhere = () => {
         </div>
 
         {/* --------------check mark and details------------ */}
-        <div className="sm:flex flex-wrap space-y-2 items-center">
+        <div className="sm:flex flex-wrap lg:space-y-2 items-center">
           <div className="flex relative mr-3">
             <p className="w-[32px] h-[32px] mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
               <CheckIcon

@@ -56,7 +56,7 @@ const SkillsYouGet = () => {
     },
   ];
   return (
-    <div className="sm:p-3 p-5 space-y-10">
+    <div className="px-3 space-y-10">
       {/* --------------heading----------- */}
       <p className="font-bold text-5xl text-center block">
         {t("skills_you_will_get")}
@@ -73,7 +73,7 @@ const SkillsYouGet = () => {
         {data.map((item) => (
           // -------------main div--------------
           <div
-            className="h-[227px] w-[256px] cursor-pointer group perspective"
+            className="h-[227px] w-[256px]  cursor-pointer group perspective"
             key={item.id}
           >
             {/* ------------------main content div-------------- */}

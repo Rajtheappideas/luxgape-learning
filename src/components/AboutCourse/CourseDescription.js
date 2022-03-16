@@ -5,7 +5,7 @@ import { GiCircle } from "react-icons/gi";
 
 const CourseDescription = () => {
   return (
-    <div className="sm:px-10 px-5">
+    <div className="sm:px-10 px-3">
       {/* ------------------course program details-------------- */}
       <div className="flex md:flex-row flex-col justify-center items-start w-full border-b py-10 border-[#c4c4c4]">
         {/* ---------------heading-------------- */}

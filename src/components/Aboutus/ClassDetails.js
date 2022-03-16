@@ -4,7 +4,7 @@ import logo from "../../assets/LXG_RVB.png";
 
 const ClassDetails = () => {
   return (
-    <div className="p-10 grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-1 gap-10 justify-items-center items-center">
+    <div className="sm:p-10 p-3 grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-1 gap-10 justify-items-center items-center">
       <div className="space-y-7">
         {/* ---------------title text-------------- */}
         <span className="text-6xl font-bold block">Lorem Ipsum</span>

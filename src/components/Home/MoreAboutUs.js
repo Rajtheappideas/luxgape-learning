@@ -5,7 +5,7 @@ import img from "../../assets/moreaboutusimg.jpg";
 const MoreAboutUs = () => {
   const { t } = useTranslation();
   return (
-    <div className="relative sm:p-10 p-7 w-full h-full bg-black rounded-tl-[285px] rounded-br-[285px] rounded-tr-none rounded-bl-none">
+    <div className="relative lg:p-10 p-3 w-full h-full bg-black rounded-tl-[285px] rounded-br-[285px] rounded-tr-none rounded-bl-none">
       <div className="text-white sm:p-14 py-14 grid lg:grid-cols-2 grid-flow-row sm:grid-cols-1 place-items-center gap-10 items-center">
         {/* ------------------text is here---------------- */}
         <div className="w-full space-y-6 lg:text-left text-center">
@@ -13,7 +13,7 @@ const MoreAboutUs = () => {
             {t("more_about_us")}
           </p>
           {/* --------------image for small screen------------------- */}
-          <div className="lg:hidden block">
+          <div className="lg:hidden md:block hidden">
             <img
               src={img}
               alt="studyimage"

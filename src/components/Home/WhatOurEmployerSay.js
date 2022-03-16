@@ -42,7 +42,7 @@ const employerData = [
 const WhatOurEmployerSay = () => {
   const { t } = useTranslation();
   return (
-    <div className="my-5 px-5" id="testimonial">
+    <div className="my-5 px-3" id="testimonial">
       <p className="text-center text-5xl font-semibold my-20 tracking-wide">
         {t("what_our_employer_say")}
       </p>
@@ -65,6 +65,10 @@ const WhatOurEmployerSay = () => {
             spaceBetween: 40,
           },
           1024: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          1440: {
             slidesPerView: 2,
             spaceBetween: 60,
           },
@@ -74,9 +78,9 @@ const WhatOurEmployerSay = () => {
           <SwiperSlide
             color="red"
             key={item.id}
-            className="flex w-full items-center snap-x"
+            className="flex w-full items-center "
           >
-            <div className="relative snap-x p-10 hover:shadow-xl border w-auto h-auto rounded-tl-[85px] rounded-br-[85px] rounded-tr-none rounded-bl-none bg-white ">
+            <div className="relative sm:p-10 p-6 hover:shadow-xl border w-auto h-auto rounded-tl-[85px] rounded-br-[85px] rounded-tr-none rounded-bl-none bg-white ">
               {/* ----------------------profile and name div----------------------- */}
 
               <div className="flex items-center mb-10 snap-center">

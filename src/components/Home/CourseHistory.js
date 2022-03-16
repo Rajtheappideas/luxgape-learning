@@ -45,7 +45,7 @@ const data = [
 const CourseHistory = ({ showButton }) => {
   const { t } = useTranslation();
   return (
-    <div className=" sm:p-10 p-5 relative">
+    <div className=" sm:p-10 p-3 relative">
       {/* ----------------eclipse---------------- */}
       {/* <div className="absolute -bottom-28 left-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
       {/* --------------heading-------------- */}

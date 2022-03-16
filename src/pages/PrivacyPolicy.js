@@ -1,19 +1,22 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
 import { Faq, Footer, Navbar, TermsAndConditions } from "../components";
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation();
+
   return (
     <div>
       <MetaTags>
-        <title>Privacy Policy</title>
+        <title>{t("privacy_policy")}</title>
       </MetaTags>
       {/* ------------------navbar--------------- */}
       <Navbar />
       {/* ------------------privacy policy --------------- */}
-      <div className="sm:p-10 p-5 mb-10">
+      <div className="sm:p-10 p-3 mb-10">
         <h1 className="text-3xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-l from-from to-to">
-          Privacy Policy
+          {t("privacy_policy")}
         </h1>
         <p className="text-center text-xl font-normal mx-auto md:w-2/4 w-full my-6">
           When you’re ready to go beyond prototyping in Figma, Webflow’s ready

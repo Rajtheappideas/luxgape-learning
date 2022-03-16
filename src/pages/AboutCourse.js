@@ -18,7 +18,7 @@ const AboutCourse = () => {
   return (
     <div className="">
       <MetaTags>
-        <title>About Course</title>
+        <title>{t("About_course")}</title>
       </MetaTags>
       {/* <Eclipse /> */}
       {/* -------------------navbar=------------------ */}

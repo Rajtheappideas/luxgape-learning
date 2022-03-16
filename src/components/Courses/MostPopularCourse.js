@@ -99,13 +99,13 @@ const data = [
 const MostPopularCourse = () => {
   const { t } = useTranslation();
   return (
-    <div className="p-10 mb-10">
-      <div className="mb-10 flex justify-between items-center">
-        <p className="text-left font-semibold text-5xl mb-7 ml-6">
+    <div className="sm:p-10 mb-10">
+      <div className="mb-10 px-3 flex justify-between items-center">
+        <p className="text-left font-semibold text-5xl mb-7">
           {t("most_popular_course")}
         </p>
       </div>
-      <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 items-center place-items-center lg:gap-10 md:gap-16 gap-y-4">
+      <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 items-center place-items-center lg:gap-10 md:gap-16 gap-4">
         {/* -------------- rounde div=-------------- */}
         {data.map((course) => (
           <RoundedDiv key={course.id}>
@@ -142,7 +142,7 @@ const MostPopularCourse = () => {
         ))}
       </div>
       {/* ---------------pagination=------------------- */}
-      <div className="flex items-center justify-center space-x-5 mt-7">
+      <div className="flex items-center justify-center sm:space-x-5 space-x-2 mt-7">
         <button>
           <ChevronLeftIcon className="h-10" />
         </button>
@@ -174,6 +174,6 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- h-[673px] w-[364px]
+ h-[673px] sm:w-[364px] w-full
  cursor-pointer
  `;

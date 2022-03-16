@@ -30,8 +30,8 @@ const SignIn = () => {
 
   // --------------------yup-------------
   const SigninSchema = yup.object().shape({
-    email: yup.string().required("email is required!").email(),
-    password: yup.string().required("password is required!"),
+    email: yup.string().required(t("email_is_required")).email(),
+    password: yup.string().required(t("password_is_required")),
   });
 
   // --------------------------formik-------------
@@ -82,10 +82,10 @@ const SignIn = () => {
   return (
     <>
       <MetaTags>
-        <title>{t("Sign In")}</title>
+        <title>{t("Sign_In")}</title>
       </MetaTags>
       {/* -------------main div---------------- */}
-      <div className="sm:p-10 ">
+      <div className="sm:p-10">
         {/* --------------logo------------------- */}
         <Link to="/">
           <img
@@ -96,7 +96,7 @@ const SignIn = () => {
         </Link>
 
         {/* --------------------grid div---------------- */}
-        <div className="p-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
+        <div className="sm:py-5 p-3 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
             <LazyLoadImage
@@ -119,12 +119,12 @@ const SignIn = () => {
                 </div>
                 {/* ------------------radio box-------------- */}
 
-                <div className="flex sm:flex-row flex-col items-center justify-around sm:space-x-10 sm:space-y-0 space-y-4 w-full">
+                <div className="flex flex-row items-center justify-around sm:space-x-10 space-x-2 w-full">
                   {/* ----------------butoon 1----------------- */}
                   <div
                     className={`border ${
                       formik.values.userType === "employee" && "border-primary"
-                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none lg:w-[182px] w-full h-[61px] relative`}
+                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
                   >
                     <input
                       className="cursor-pointer w-4 h-4 absolute top-6 left-5"
@@ -145,7 +145,7 @@ const SignIn = () => {
                   <div
                     className={`border ${
                       formik.values.userType === "employer" && "border-primary"
-                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none lg:w-[182px] w-full h-[61px] relative`}
+                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
                   >
                     <input
                       className="cursor-pointer absolute w-4 h-4 top-6 left-5"
@@ -195,6 +195,7 @@ const SignIn = () => {
                     `}
                   />
                   <button
+                    type="button"
                     className="w-5 h-5 absolute top-4 lg:right-10 right-4 cursor-pointer"
                     onClick={() => setShowpassword(!showPassword)}
                   >
@@ -246,7 +247,7 @@ const SignIn = () => {
                 </div>
 
                 {/* --------------social sign in button-------------- */}
-                <div className="flex sm:flex-row flex-col items-center justify-center sm:space-x-6 sm:space-y-0 space-y-4 w-full">
+                <div className="flex flex-wrap items-center justify-center sm:space-x-6 space-x-2 w-full">
                   <button
                     type="button"
                     className="border  text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"

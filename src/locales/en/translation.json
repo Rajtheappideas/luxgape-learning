@@ -37,6 +37,7 @@
   "create_your_account": "Create your account",
   "i_have_read_and_agree_to_the": "I have read and agree to the",
   "terms_of_service": "Terms of Service",
+  "terms_and_conditions": "Terms & Conditions",
   "name_is_required": "name is required!",
   "email_is_required": "email is required!",
   "password_is_required": "password is required!",
@@ -103,11 +104,12 @@
   "sitemap_paragraph": "A sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them.",
   "laptop_code_paragraph": "In adaptive design, the developer creates a separate website layout, with a different HTML code, for each of the screen sizes that the site is viewed on. ",
   "window_restore_paragraph": "WordPress is a free, open-source website creation platform. On a more technical level, WordPress is a content management system (CMS) written in PHP that uses a MySQL database.",
-  "edit_content_paragraph": "A content editor will be tasked with writing content (usually online content) such as blog posts and marketing copy, editing and proofreading, restructuring and reworking content into different formats, and updating website and social media pages.",
+  "edit_content_paragraph": "A content editor will be tasked with writing content such as blog posts and marketing copy, editing and proofreading, restructuring and reworking content into different formats, and updating website and social media pages.",
   "reviews": "Reviews",
   "class": "Class",
   "history": "History",
   "start_exam": "Start Exam",
+  "exam": "Exam",
   "history_exam_paragraph": "Once you complete this whole course this exam button is automatically enabled.",
   "payment": "Payment",
   "product_you_buy": "Product you buy",
@@ -122,5 +124,9 @@
   "cancellation_policy": "Cancellation Policy",
   "confirm_and_pay": "Confirm and pay",
   "cancel": "Cancel",
-  "service_we_provide": "Service we Provide"
+  "service_we_provide": "Service we Provide",
+  "view_demo": "View Demo",
+  "enroll_now": "Enroll Now",
+  "share": "Share",
+  "what_will_you_learn": "What will you learn"
 }

@@ -18,7 +18,7 @@ const About = () => {
   return (
     <>
       <MetaTags>
-        <title>About Us</title>
+        <title>{t("About_Us")}</title>
       </MetaTags>
       {/* ------------------main div-------------- */}
       <div className="">

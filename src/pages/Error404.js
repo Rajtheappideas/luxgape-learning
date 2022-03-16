@@ -1,24 +1,31 @@
 import React from "react";
 import { MetaTags } from "react-meta-tags";
 import { Link } from "react-router-dom";
-import logo from '../assets/logo.png'
+import Lottie from "react-lottie";
+import pagenotfound from "../assets/animations/pagenotfound.json";
 
 const Error404 = () => {
+  // default options for lottie files
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: pagenotfound,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
-    <div className="p-10">
+    <div className="p-10 text-center">
       <MetaTags>
         <title>page not found</title>
       </MetaTags>
+      {/* Page Not Found 404!!!! Oops */}
+      <Lottie options={defaultOptions} height={500} width={800} />
       <Link to="/">
-        <img
-          src={logo}
-          className="h-20 cursor-pointer inline object-contain"
-          alt="logo"
-        />
+        <button className="p-5 inline-block mx-auto hover:bg-blue-800 focus:scale-95 transition-all transform duration-100 ease-in-out text-2xl rounded-xl bg-blue-500 text-white">
+          Go back to Home
+        </button>
       </Link>
-      <p className="absolute top-1/3 left-1/2 -translate-x-1/2 text-8xl font-bold ">
-        Page Not Found 404!!!! Oops
-      </p>
     </div>
   );
 };

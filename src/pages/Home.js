@@ -12,11 +12,14 @@ import {
   ContactUs,
 } from "../components/index";
 import { MetaTags } from "react-meta-tags";
+import { useTranslation } from "react-i18next";
 const Home = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white overflow-hidden">
       <MetaTags>
-        <title>Home</title>
+        <title>{t("Home")}</title>
       </MetaTags>
       {/* -------------------navbar=------------------ */}
       <Navbar activeText="Home" />
