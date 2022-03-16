@@ -7,6 +7,12 @@ import { useTranslation } from "react-i18next";
 
 const CourseDetails = () => {
   const { t } = useTranslation();
+  const ScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="sm:p-10 p-3 w-full">
       {/* ---------------course details paragraph-------------- */}
@@ -23,7 +29,7 @@ const CourseDetails = () => {
       <div className="flex lg:flex-row flex-col justify-center items-center mt-10">
         {/* -------------------left side div----------------- */}
         <div className="h-full w-full relative lg:mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none ">
-          <Link to="/class">
+          <Link to="/class" onClick={ScrollToTop}>
             <img
               src={img}
               alt="img"
@@ -61,29 +67,47 @@ const CourseDetails = () => {
           <div className="flex flex-row lg:justify-start justify-center items-center">
             <ul className="space-y-3 mr-10">
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 sm:sm:mr-3" color="lightblue" />
+                <CheckCircleIcon
+                  className="h-6 w-6 sm:sm:mr-3"
+                  color="lightblue"
+                />
                 Lorem Ipsum
               </li>
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
+                <CheckCircleIcon
+                  className="h-6 w-6 sm:mr-3"
+                  color="lightblue"
+                />
                 Lorem Ipsum
               </li>
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
+                <CheckCircleIcon
+                  className="h-6 w-6 sm:mr-3"
+                  color="lightblue"
+                />
                 Lorem Ipsum
               </li>
             </ul>
             <ul className="space-y-3">
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
+                <CheckCircleIcon
+                  className="h-6 w-6 sm:mr-3"
+                  color="lightblue"
+                />
                 Lorem Ipsum
               </li>
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
+                <CheckCircleIcon
+                  className="h-6 w-6 sm:mr-3"
+                  color="lightblue"
+                />
                 Lorem Ipsum
               </li>
               <li className="flex ">
-                <CheckCircleIcon className="h-6 w-6 sm:mr-3" color="lightblue" />
+                <CheckCircleIcon
+                  className="h-6 w-6 sm:mr-3"
+                  color="lightblue"
+                />
                 Lorem Ipsum
               </li>
             </ul>
@@ -119,7 +143,7 @@ const CourseDetails = () => {
 
           {/* ----------------enroill now & share----------------- */}
           <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full sm:space-x-4 space-y-2 sm:space-y-0">
-            <Link to="/courses/aboutcourse/payment">
+            <Link to="/courses/aboutcourse/payment" onClick={ScrollToTop}>
               <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase sm:w-72 w-60 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
                 {t("enroll_now")}
               </button>

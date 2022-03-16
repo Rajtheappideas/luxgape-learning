@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-
 const data = [
   {
     id: 1,
@@ -38,6 +37,12 @@ const data = [
 
 const MostPopularCourse = ({ showButton, showEclipse }) => {
   const { t } = useTranslation();
+  const ScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="sm:p-10 p-1 relative">
       {/* ----------------eclipse 1--------------------- */}
@@ -53,17 +58,20 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
         <p className="font-semibold text-5xl ">{t("most_popular_course")}</p>
         {showButton && (
           <Link to="/courses">
-            <button className="text-primary text-center text-2xl tracking-wide cursor-pointer underline font-semibold">
+            <button
+              onClick={ScrollToTop}
+              className="text-primary text-center text-2xl tracking-wide cursor-pointer underline font-semibold"
+            >
               {t("view_more")}
             </button>
           </Link>
         )}
       </div>
       {/* --------------- main div---------- */}
-      <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-4">
+      <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
         {/* --------------Courses div=-------------- */}
         {data.map((course) => (
-          <RoundedDiv key={course.id}>
+          <RoundedDiv key={course.id} onClick={ScrollToTop}>
             <Link to="/Courses">
               <LazyLoadImage
                 src={course.img}
@@ -105,6 +113,6 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- h-[673px] sm:w-[364px] w-full
+ sm:h-[673px] sm:w-[364px] w-11/12
  cursor-pointer
  `;

@@ -32,9 +32,9 @@ const FilterBox = () => {
   return (
     <>
       {/* --------------filters box--------------- */}
-      <div className="bg-white my-8 p-10 w-full h-auto border shadow-2xl rounded-tl-[184px] rounded-br-[184px] rounded-bl-none rounded-tr-none ">
+      <div className="bg-white my-8 sm:p-10 p-3 w-full h-auto border shadow-2xl rounded-tl-[184px] rounded-br-[184px] rounded-bl-none rounded-tr-none ">
         {/* -----------grid first div--------------- */}
-        <div className="grid w-full lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start gap-5 justify-items-center items-center">
+        <div className="grid w-full lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start sm:gap-5 justify-items-center items-center">
           {/* ------------------firrst column-------------- */}
           <div>
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">Topics</p>
@@ -88,7 +88,7 @@ const FilterBox = () => {
         <div className="border-dashed border-2 border-[#C4C4C4] w-full " />
 
         {/* ------------------second grid div------------- */}
-        <div className="grid lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start gap-5 justify-items-center items-center">
+        <div className="grid lg:grid-cols-3 sm:p-10 p-3 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start sm:gap-5 justify-items-center items-center">
           {/* ------------------firrst column-------------- */}
           <div>
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
@@ -209,11 +209,11 @@ const FilterBox = () => {
         </div>
 
         {/* -----------------buttons-------------------- */}
-        <div className="text-center flex flex-wrap items-center justify-center md:space-y-0 space-y-2">
-          <button className=" w-[209px] md:mr-5 h-12 font-bold bg-[#E0E0E0] rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none ">
+        <div className="text-center flex sm:flex-row flex-col items-center sm:justify-center md:space-y-0 space-y-2">
+          <button className=" sm:w-[209px] w-36 md:mr-5 h-12 font-bold bg-[#E0E0E0] rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none ">
             Clear All Filters
           </button>
-          <button className=" w-[209px] h-12 bg-primary text-white font-bold rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none ">
+          <button className=" sm:w-[209px] w-36 h-12 bg-primary text-white font-bold rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none ">
             Apply Filters
           </button>
         </div>

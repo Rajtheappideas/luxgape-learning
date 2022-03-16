@@ -56,10 +56,10 @@ const Review = () => {
     <div className="sm:p-10 p-3 relative">
       {/* -----------------review div-------------- */}
       <div className="w-full h-screen overflow-y-auto rounded-xl scrollbar-hide bg-gray-100 opacity-90 ">
-        <div className="p-10 space-y-9">
+        <div className="sm:p-10 p-3 space-y-9">
           {/* -----------profile----------- */}
           {Reviews.map((review) => (
-            <div className="space-y-2 sm:last:pb-10 last:pb-20" key={review.id}>
+            <div className="space-y-2 sm:last:pb-10 last:pb-24" key={review.id}>
               {/* -----------photo & stars----------------- */}
               <div className="flex items-start">
                 <LazyLoadImage
@@ -95,11 +95,11 @@ const Review = () => {
       </div>
 
       {/* -----------------input field----------------- */}
-      <div className="absolute flex items-center bottom-16 md:right-20 right-10">
+      <div className="absolute flex items-center bottom-16 md:right-20 right-6">
         <input
           type="text"
           placeholder="leave your review"
-          className="md:w-[522px] h-12 mr-3 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none bg-white "
+          className="sm:w-[522px] w-auto h-12 mr-3 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none bg-white "
         />
         <button className="w-12 h-12 rounded-tl-[24px] rounded-br-[24px] rounded-tr-none rounded-bl-none bg-primary">
           <FiSend size={25} color="white" className="mx-auto" />

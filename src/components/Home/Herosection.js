@@ -12,7 +12,7 @@ const Herosection = () => {
   return (
     <div className="sm:p-10 p-3 xl:grid xl:grid-cols-2 xl:grid-flow-row xl:justify-items-end xl:items-start">
       {/* ------------text and search is here------------------------------ */}
-      <div className="relative xl:text-left text-center space-y-20">
+      <div className="relative xl:text-left text-center sm:space-y-20 space-y-7">
         {/* -------------------------------------text--------------------------------     */}
         <div v className="text-6xl space-y-6 font-bold text-black">
           {/* ---------------heading of herosection------------ */}
@@ -141,19 +141,19 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
 
         {/* --------------------------------photos--------------------------------------- */}
 
-        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 items-center xl:justify-start justify-center sm:space-x-12 w-full">
+        <div className="flex flex-row items-center xl:justify-start justify-center sm:space-x-12 space-x-2 w-full">
           <img
-            className="object-contain object-center h-28"
+            className="object-contain object-center sm:h-28 h-16"
             src={simg3}
             alt="studyimg"
           />
           <img
-            className="object-contain object-center h-28"
+            className="object-contain object-center sm:h-28 h-16"
             src={simg1}
             alt="studyimg"
           />
           <img
-            className="object-contain object-center h-28"
+            className="object-contain object-center sm:h-28 h-16"
             src={simg2}
             alt="studyimg"
           />

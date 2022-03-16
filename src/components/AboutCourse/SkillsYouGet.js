@@ -73,7 +73,7 @@ const SkillsYouGet = () => {
         {data.map((item) => (
           // -------------main div--------------
           <div
-            className="h-[227px] w-[256px]  cursor-pointer group perspective"
+            className="h-64 w-64  cursor-pointer group perspective"
             key={item.id}
           >
             {/* ------------------main content div-------------- */}

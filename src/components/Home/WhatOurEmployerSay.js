@@ -8,7 +8,6 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { useTranslation } from "react-i18next";
 
-
 const employerData = [
   {
     id: 1,
@@ -42,7 +41,7 @@ const employerData = [
 const WhatOurEmployerSay = () => {
   const { t } = useTranslation();
   return (
-    <div className="my-5 px-3" id="testimonial">
+    <div className="my-5 px-3 sm:px-9" id="testimonial">
       <p className="text-center text-5xl font-semibold my-20 tracking-wide">
         {t("what_our_employer_say")}
       </p>
@@ -65,12 +64,8 @@ const WhatOurEmployerSay = () => {
             spaceBetween: 40,
           },
           1024: {
-            slidesPerView: 1,
-            spaceBetween: 0,
-          },
-          1440: {
             slidesPerView: 2,
-            spaceBetween: 60,
+            spaceBetween: 20,
           },
         }}
       >

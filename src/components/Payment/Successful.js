@@ -22,7 +22,7 @@ const Successful = ({ modalOpen, closeModal }) => {
       <button onClick={() => closeModal()} className="">
         <XIcon className="h-9 absolute top-3 right-4" />
       </button>
-      <div className="sm:h-[400px] h-full sm:w-[400px] absolute top-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center  rounded-tl-[130px] rounded-br-[130px] rounded-tr-none rounded-bl-none shadow-2xl bg-white">
+      <div className="sm:h-[400px] sm:w-[400px] absolute top-10 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center  rounded-tl-[130px] rounded-br-[130px] rounded-tr-none rounded-bl-none sm:shadow-2xl bg-white">
         {/* <CheckCircleIcon className="h-60" color="green" /> */}
         <Lottie options={defaultOptions} height={300} width={300} />
 

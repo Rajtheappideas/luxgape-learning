@@ -2,10 +2,16 @@ import React from "react";
 import studyboy from "../../assets/study_boy.jpg";
 import { CheckIcon } from "@heroicons/react/outline";
 import { useTranslation } from "react-i18next";
-
+import { Link } from "react-router-dom";
 
 const LearnAnytimeAnywhere = () => {
   const { t } = useTranslation();
+  const ScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="sm:p-10 p-3 grid lg:grid-cols-2 grid-flow-row  grid-cols-1 gap-10 place-items-center items-center relative">
       {/* ----------------eclipse 1---------------- */}
@@ -23,7 +29,7 @@ const LearnAnytimeAnywhere = () => {
       </div>
 
       {/* ------------text is here------------------ */}
-      <div className="space-y-12 h-full w-full p-7">
+      <div className="space-y-12 h-full w-full p-3">
         <p className="text-5xl font-semibold tracking-wide lg:text-left text-center">
           {t("learn_anywhere_anytime")}
         </p>
@@ -46,9 +52,9 @@ const LearnAnytimeAnywhere = () => {
         </div>
 
         {/* --------------check mark and details------------ */}
-        <div className="sm:flex flex-wrap lg:space-y-2 items-center">
+        <div className="sm:flex flex-wrap lg:space-y-2 sm:space-y-0 space-y-3 items-center">
           <div className="flex relative mr-3">
-            <p className="w-[32px] h-[32px] mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
+            <p className="w-[32px] h-[32px] sm:mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
               <CheckIcon
                 className="w-5 h-5 absolute top-[0.4rem] left-[0.4rem]"
                 color="white"
@@ -73,12 +79,15 @@ const LearnAnytimeAnywhere = () => {
         {/* --------------explote button------------ */}
 
         <div>
-          <button
-            type="button"
-            className="w-60 h-16 cursor-pointer bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center"
-          >
-            {t("explore_course")}
-          </button>
+          <Link to="/courses">
+            <button
+              type="button"
+              className="w-60 h-16 cursor-pointer bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none text-xl text-white text-center"
+              onClick={ScrollToTop}
+            >
+              {t("explore_course")}
+            </button>
+          </Link>
         </div>
       </div>
     </div>

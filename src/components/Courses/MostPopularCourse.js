@@ -98,6 +98,12 @@ const data = [
 ];
 const MostPopularCourse = () => {
   const { t } = useTranslation();
+  const ScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="sm:p-10 mb-10">
       <div className="mb-10 px-3 flex justify-between items-center">
@@ -108,7 +114,7 @@ const MostPopularCourse = () => {
       <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 items-center place-items-center lg:gap-10 md:gap-16 gap-4">
         {/* -------------- rounde div=-------------- */}
         {data.map((course) => (
-          <RoundedDiv key={course.id}>
+          <RoundedDiv key={course.id} onClick={ScrollToTop}>
             <Link to="/courses/aboutcourse">
               <LazyLoadImage
                 src={course.img}
@@ -174,6 +180,6 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- h-[673px] sm:w-[364px] w-full
+ sm:h-[673px] sm:w-[364px] w-11/12
  cursor-pointer
  `;

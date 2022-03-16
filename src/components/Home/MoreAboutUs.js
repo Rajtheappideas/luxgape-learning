@@ -5,10 +5,10 @@ import img from "../../assets/moreaboutusimg.jpg";
 const MoreAboutUs = () => {
   const { t } = useTranslation();
   return (
-    <div className="relative lg:p-10 p-3 w-full h-full bg-black rounded-tl-[285px] rounded-br-[285px] rounded-tr-none rounded-bl-none">
-      <div className="text-white sm:p-14 py-14 grid lg:grid-cols-2 grid-flow-row sm:grid-cols-1 place-items-center gap-10 items-center">
+    <div className="relative lg:p-10 p-3 w-full h-full bg-black sm:rounded-tl-[285px] sm:rounded-br-[285px] rounded-tr-none rounded-bl-none">
+      <div className="text-white sm:p-14 grid lg:grid-cols-2 grid-flow-row sm:grid-cols-1 place-items-center gap-10 items-center">
         {/* ------------------text is here---------------- */}
-        <div className="w-full space-y-6 lg:text-left text-center">
+        <div className="w-full space-y-6 py-5 lg:text-left text-center">
           <p className="text-5xl font-medium sm:tracking-widest block sm:mt-0 mt-5">
             {t("more_about_us")}
           </p>
@@ -20,7 +20,7 @@ const MoreAboutUs = () => {
               className="sm:w-[474px] sm:h-[374px] h-auto w-auto mx-auto object-center object-cover rounded-tl-[180px] rounded-br-[180px] rounded-tr-none rounded-bl-none"
             />
           </div>
-          <p className="text-2xl w-[90%] leading-normal tracking-normal sm:mb-7 mb-">
+          <p className="text-2xl w-full leading-normal tracking-normal sm:mb-7">
             {t("more_about_us_paragraph")}
           </p>
           <button className="bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none w-[185px] h-[58px] text-xl text-center font-bold ">

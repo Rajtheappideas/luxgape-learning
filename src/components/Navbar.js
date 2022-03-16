@@ -74,8 +74,8 @@ const Navbar = ({ activeText }) => {
         </span>
         {userData ? (
           <>
-            <span className="text-xl font-semibold ml-2" onClick={handleLogout}>
-              {t("Log out")}
+            <span className="text-xl font-semibold ml-2 cursor-pointer" onClick={handleLogout}>
+              {t("Log_out")}
             </span>
             <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
               <img
