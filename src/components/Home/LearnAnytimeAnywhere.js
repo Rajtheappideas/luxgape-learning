@@ -19,12 +19,12 @@ const LearnAnytimeAnywhere = () => {
       {/* ----------------eclipse 2---------------- */}
       {/* <div className="absolute -bottom-40 left-1/2 blur-[300px]  w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
 
-      {/* -------------image is here------------- */}
+      {/* -------------image is here for large screen------------- */}
       <div className="hidden lg:block">
         <img
           src={studyboy}
           alt="studyboy"
-          className="object-contain object-center h-screen"
+          className="object-contain object-center h-auto"
         />
       </div>
 
@@ -34,12 +34,12 @@ const LearnAnytimeAnywhere = () => {
           {t("learn_anywhere_anytime")}
         </p>
 
-        {/* -------------image is here------------- */}
+        {/* -------------image is here for small screen------------- */}
         <div className="lg:hidden block">
           <img
             src={studyboy}
             alt="studyboy"
-            className="object-contain object-center sm:h-screen h-auto mx-auto"
+            className="object-contain object-center h-96 mx-auto"
           />
         </div>
         <div className="w-full space-y-12">
@@ -53,8 +53,8 @@ const LearnAnytimeAnywhere = () => {
 
         {/* --------------check mark and details------------ */}
         <div className="sm:flex flex-wrap lg:space-y-2 sm:space-y-0 space-y-3 items-center">
-          <div className="flex relative mr-3">
-            <p className="w-[32px] h-[32px] sm:mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
+          <div className="flex relative md:mr-3">
+            <p className="w-8 h-8 sm:mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
               <CheckIcon
                 className="w-5 h-5 absolute top-[0.4rem] left-[0.4rem]"
                 color="white"
@@ -65,7 +65,7 @@ const LearnAnytimeAnywhere = () => {
             </p>
           </div>
           <div className="flex relative">
-            <p className="w-[32px] h-[32px] mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-primary">
+            <p className="w-8 h-8 mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-primary">
               <CheckIcon
                 className="w-5 h-5 absolute top-[0.4rem] left-[0.4rem]"
                 color="white"
