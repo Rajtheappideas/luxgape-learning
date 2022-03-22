@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SearchIcon } from "@heroicons/react/outline";
 import simg1 from "../../assets/studyimg1.jpg";
 import simg2 from "../../assets/studyimg2.jpg";
@@ -6,9 +6,13 @@ import simg3 from "../../assets/studyimg3.jpg";
 import main from "../../assets/main.jpg";
 import rocket from "../../assets/rocket.png";
 import { useTranslation } from "react-i18next";
+// import axios from "axios";
 
 const Herosection = () => {
   const { t } = useTranslation();
+
+  // useEffect(() => {}, []);
+
   return (
     <div className="sm:p-10 p-3 xl:grid xl:grid-cols-2 xl:grid-flow-row xl:justify-items-end xl:items-start">
       {/* ------------text and search is here------------------------------ */}
@@ -167,14 +171,14 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
         {/* --------------image------------- */}
         <img
           className="rounded-tl-[18px] rounded-tr-[18px] rounded-br-[260px] rounded-bl-[18px] 
-      h-[90%] w-[490px] absolute top-5 left-8 object-right-top object-cover"
+h-[90%] w-[490px] absolute top-5 left-8 object-right-top object-cover"
           src={main}
           alt="ladyimg"
         />
         {/*-------rocket bg div-------------  */}
         <div
           className="absolute w-[76px] h-[74px] top-16 left-0 bg-white rounded-tl-[36.8479px]
-   rounded-tr-[1.16056px] rounded-br-[17.9887px] rounded-bl-[1.16056px] shadow-2xl"
+rounded-tr-[1.16056px] rounded-br-[17.9887px] rounded-bl-[1.16056px] shadow-2xl"
         />
         {/*-------rocket div-------------  */}
         <div

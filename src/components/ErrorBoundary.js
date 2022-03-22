@@ -3,7 +3,12 @@ function ErrorFallback({ error, resetErrorBoundary }) {
     <div role="alert">
       <p>Something went wrong:</p>
       <pre>{error.message}</pre>
-      <button onClick={resetErrorBoundary}>Reload</button>
+      <button
+        onClick={resetErrorBoundary}
+        className="p-2 rounded-xl border border-emerald-300 active:scale-95 duration-100 transition-all ease-in text-blue-700 bg-white w-40 h-10"
+      >
+        Reload
+      </button>
     </div>
   );
 }

@@ -5,14 +5,14 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [userData, setUserdata] = useState(
-    localStorage.getItem("logindata")
-      ? JSON.parse(localStorage.getItem("logindata"))
-      : null
+    localStorage.getItem("googlelogin")
+      ? JSON.parse(localStorage.getItem("googlelogin"))
+      : JSON.parse(localStorage.getItem("user"))
   );
   const [userLanguage, setUserLanguage] = useState(
-    localStorage.getItem("userLang")
-      ? localStorage.getItem("userLang")
-      : localStorage.setItem("userLang", "en")
+    localStorage.getItem("lang_code")
+      ? localStorage.getItem("lang_code")
+      : localStorage.setItem("lang_code", "en")
   );
 
   const ChangeLanguage = (lang) => {

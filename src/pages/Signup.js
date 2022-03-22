@@ -1,25 +1,52 @@
 import React, { useEffect, useState } from "react";
-import { EyeIcon, EyeOffIcon, CheckIcon } from "@heroicons/react/outline";
+import {
+  EyeIcon,
+  EyeOffIcon,
+  CheckIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/outline";
 import { UserIcon } from "@heroicons/react/solid";
 import { MetaTags } from "react-meta-tags";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/LXG_RVB.png";
 import signup from "../assets/signup.jpg";
 import { XIcon } from "@heroicons/react/outline";
-import GoogleLogin from "react-google-login";
 import * as yup from "yup";
 import tw from "tailwind-styled-components/dist/tailwind";
 import { FormikProvider, ErrorMessage, Form, useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import { useUserContext } from "../context/usercontext";
+import { toast, ToastContainer } from "react-toastify";
+import Lottie from "react-lottie";
+import loading from "../assets/animations/loading1.json";
 
 const Signup = () => {
   const [showPassword, setShowpassword] = useState(false);
   const [showConfirmPassword, setShowConfirmpassword] = useState(false);
-  const { t } = useTranslation();
-  // -------------------------------yup---------------------------
+  const [showDropdown, setShowDropdown] = useState(false);
+  const { userData, ChangeLanguage, setUserdata } = useUserContext();
 
-  const SigninSchema = yup.object().shape({
+  // ----------deafult options for lotiie files animation--------
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: loading,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
+  const lang_code = localStorage.getItem("lang_code");
+
+  const { t } = useTranslation();
+
+  const navigate = useNavigate();
+  // useEffect(() => {
+  //   handleSubmit();
+  // }, []);
+  // -------------------------------yup---------------------------
+  const SignUpSchema = yup.object().shape({
     email: yup.string().required(t("email_is_required")).email(),
     name: yup
       .string()
@@ -36,6 +63,7 @@ const Signup = () => {
       .oneOf([yup.ref("password"), null], t("password_must_match"))
       .required(t("confirm_password_is_required")),
     checkbox: yup.boolean().oneOf([true], t("checkbox_must_be_filled")),
+    // role:
   });
   // ------------------------formik----------------------------
   const formik = useFormik({
@@ -44,17 +72,45 @@ const Signup = () => {
       name: "",
       password: "",
       confirmpassword: "",
+      role: "Employee",
       checkbox: false,
     },
-    validationSchema: SigninSchema,
+    validationSchema: SignUpSchema,
     onSubmit: async (values) => {
       const user = {
-        email: values.email,
+        google_id: "",
+        app_id: "",
+        facebook_id: "",
         name: values.name,
+        email: values.email,
         password: values.password,
+        role: values.role,
+        lang_code: lang_code,
       };
-      console.log("user -> ", user);
-      // resetForm();
+
+      await fetch("https://chessmafia.com/php/luxgap/App/api/register", {
+        method: "post",
+        body: JSON.stringify(user),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((response) => {
+          if (response.message === "Email is already exist") {
+            toast("Email is Already exist", { type: "warning" });
+          } else {
+            localStorage.setItem("user", JSON.stringify(response?.data));
+            setUserdata(response?.data);
+            navigate("/");
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }
+        })
+        .catch((err) => err.toString());
     },
   });
   const {
@@ -76,16 +132,66 @@ const Signup = () => {
       <MetaTags>
         <title>{t("Sign_Up")}</title>
       </MetaTags>
+      {/* -----------react toasatify toast container--------------- */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {/* -------------main div---------------- */}
       <div className="sm:p-10 p-3">
-        {/* --------------logo------------------- */}
-        <Link to="/">
-          <LazyLoadImage
-            src={logo}
-            alt="logo"
-            className="object-cover object-center h-16 sm:m-0 m-2 cursor-pointer inline-block"
-          />
-        </Link>
+        {/* --------------logo & lang box------------------- */}
+        <div className="flex justify-between items-center">
+          <Link to="/">
+            <LazyLoadImage
+              src={logo}
+              alt="logo"
+              className="object-cover object-center h-16 sm:m-0 m-2 cursor-pointer inline-block"
+            />
+          </Link>
+          {/* ---------------language dropdown-------------- */}
+          <div className="flex flex-col relative items-center justify-center w-24 h-10 bg-gray-100 rounded-xl">
+            <button
+              className="inline-flex items-center text-lg"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              {/* <TranslateIcon className="h-5" /> */}
+              {localStorage.getItem("lang_code")}
+              <ChevronDownIcon className="h-5 ml-3" />
+            </button>
+
+            {showDropdown && (
+              <div className="absolute -bottom-10 font-semibold h-auto rounded-br-xl rounded-bl-xl left-0 bg-gray-100 text-center text-black">
+                <button
+                  onClick={() => {
+                    ChangeLanguage("en");
+                    setShowDropdown(false);
+                    localStorage.setItem("lang_code", "en");
+                  }}
+                  className="hover:bg-gray-400 w-full hover:text-white"
+                >
+                  {t("english")}
+                </button>
+                <button
+                  onClick={() => {
+                    ChangeLanguage("sp");
+                    setShowDropdown(false);
+                    localStorage.setItem("lang_code", "sp");
+                  }}
+                  className="hover:bg-gray-400 w-full hover:text-white"
+                >
+                  {t("spanish")}
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
 
         {/* --------------------grid div---------------- */}
         <div className="sm:p-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
@@ -97,6 +203,7 @@ const Signup = () => {
               className="object-center object-cover w-[624px] h-[748px] rounded-tl-[312px] rounded-br-[312px] rounded-tr-none rounded-bl-none "
             />
           </div>
+
           <FormikProvider value={formik}>
             <Form autoComplete="off" onSubmit={handleSubmit}>
               {/* --------------main form ------------------ */}
@@ -110,8 +217,51 @@ const Signup = () => {
                     <XIcon className="w-8 h-8 cursor-pointer" color="gray" />
                   </Link>
                 </div>
-                {/* <Form> */}
+                {/* ------------------radio box of role-------------- */}
 
+                <div className="flex flex-row items-center justify-around sm:space-x-10 space-x-2 w-full">
+                  {/* ----------------butoon 1----------------- */}
+                  <div
+                    className={`border ${
+                      formik.values.role === "Employee" && "border-primary"
+                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
+                  >
+                    <input
+                      className="cursor-pointer w-4 h-4 absolute top-6 left-5"
+                      type="radio"
+                      name="role"
+                      id="Employee"
+                      value="Employee"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      checked={formik.values.role === "Employee"}
+                    />
+                    <span className="absolute top-4 left-10 text-lg font-normal text-black">
+                      {t("employee")}
+                    </span>
+                  </div>
+                  {/* ----------------butoon 2----------------- */}
+
+                  <div
+                    className={`border ${
+                      formik.values.role === "Employer" && "border-primary"
+                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
+                  >
+                    <input
+                      className="cursor-pointer absolute w-4 h-4 top-6 left-5"
+                      type="radio"
+                      name="role"
+                      id="Employer"
+                      value="Employer"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      checked={formik.values.role === "Employer"}
+                    />
+                    <span className="absolute top-4 left-10 text-lg font-normal text-secondary">
+                      {t("employer")}
+                    </span>
+                  </div>
+                </div>
                 {/* --------------name------------------ */}
                 <div className="w-full">
                   <input
@@ -119,7 +269,7 @@ const Signup = () => {
                     placeholder={t("type_your_name")}
                     name="name"
                     {...getFieldProps("name")}
-                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${touched.name && errors.name && "border-2 border-red-400"}
                     `}
                   />
@@ -133,7 +283,7 @@ const Signup = () => {
                     placeholder={t("type_your_email")}
                     name="email"
                     {...getFieldProps("email")}
-                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.email && errors.email && "border-2 border-red-400"
                     }
@@ -150,7 +300,7 @@ const Signup = () => {
                     placeholder={t("type_your_password")}
                     name="password"
                     {...getFieldProps("password")}
-                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.password &&
                       errors.password &&
@@ -182,7 +332,7 @@ const Signup = () => {
                     placeholder={t("confirm_password")}
                     name="confirmpassword"
                     {...getFieldProps("confirmpassword")}
-                    className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.confirmpassword &&
                       errors.confirmpassword &&
@@ -246,10 +396,18 @@ const Signup = () => {
                 <div className="w-full">
                   <button
                     type="submit"
-                    className="border bg-gradient-to-tr text-white text-xl font-semibold from-to to-from w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
+                    className="border active:scale-95 transition-all duration-100 ease-in-out bg-gradient-to-tr text-white text-xl font-semibold from-to to-from w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
                   >
-                    {isSubmitting ? "Loading" : null}
-                    {t("Sign_Up")}
+                    {isSubmitting ? (
+                      <Lottie
+                        options={defaultOptions}
+                        height={40}
+                        width={40}
+                        className="z-10"
+                      />
+                    ) : (
+                      t("Sign_Up")
+                    )}
                   </button>
                 </div>
                 {/* ---------sign up here---------- */}

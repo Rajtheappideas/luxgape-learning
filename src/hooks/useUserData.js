@@ -10,17 +10,16 @@ const useUserData = () => {
     console.log(result);
   };
   const handleSuccess = (googledata) => {
-    console.log(googledata);
-    localStorage.setItem("logindata", JSON.stringify(googledata));
+    localStorage.setItem("googlelogin", JSON.stringify(googledata));
+    // ||  localStorage.setItem("user", userData);
     setUserdata(googledata);
     navigate("/");
-    window.location.reload();
   };
   const handleLogout = () => {
-    localStorage.removeItem("logindata");
+    localStorage.removeItem("googlelogin");
+    localStorage.removeItem("user");
     setUserdata(null);
     navigate("/");
-    window.location.reload();
   };
   return { handleLogout, handleFailure, handleSuccess };
 };

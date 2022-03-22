@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 const Navbar = ({ activeText }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const { userData, ChangeLanguage, userLanguage } = useUserContext();
+  const { userData, ChangeLanguage } = useUserContext();
   const { handleLogout } = useUserData();
 
   const userName = userData?.Du?.tf;
@@ -50,45 +50,51 @@ const Navbar = ({ activeText }) => {
       <div className="space-x-10 text-lg text-secondary font-semibold xl:flex xl:flex-wrap hidden items-center">
         <span
           className={`${
-            activeText === "Home" &&
-            "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+            activeText === "Home"
+              ? "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+              : "hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
           }`}
         >
           <Link to="/">{t("Home")}</Link>
         </span>
         <span
           className={`${
-            activeText === "Course" &&
-            "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+            activeText === "Course"
+              ? "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+              : "hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
           }`}
         >
           <Link to="/courses">{t("Course")}</Link>
         </span>
         <span
           className={`${
-            activeText === "About Us" &&
-            "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+            activeText === "About Us"
+              ? "text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-l from-from to-to"
+              : "hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
           }`}
         >
           <Link to="/aboutus">{t("About_Us")}</Link>
         </span>
         {userData ? (
           <>
-            <span className="text-xl font-semibold ml-2 cursor-pointer" onClick={handleLogout}>
+            <span
+              className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+              onClick={handleLogout}
+            >
               {t("Log_out")}
             </span>
-            <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
+            {/* <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
               <img
                 src={userImage}
                 alt="studentimg"
                 className="object-center object-cover rounded-tl-lg rounded-br-lg rounded-bl-none rounded-tr-none w-10 h-10"
               />
               <span className="text-xl font-semibold ml-2">{userName}</span>
-            </div>
+            </div> */}
           </>
         ) : (
           <>
-            <span>
+            <span className="hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out">
               <Link to="/signin">{t("Log_In")}</Link>
             </span>
             <Link to="/signup">
@@ -98,13 +104,14 @@ const Navbar = ({ activeText }) => {
             </Link>
           </>
         )}
+        {/* ---------------language dropdown-------------- */}
         <div className="flex flex-col relative items-center justify-center w-24 h-10 bg-gray-100 rounded-xl">
           <button
             className="inline-flex items-center"
             onClick={() => setShowDropdown(!showDropdown)}
           >
             {/* <TranslateIcon className="h-5" /> */}
-            {localStorage.getItem("userLang")}
+            {localStorage.getItem("lang_code")}
             <ChevronDownIcon className="h-5" />
           </button>
 
@@ -114,21 +121,21 @@ const Navbar = ({ activeText }) => {
                 onClick={() => {
                   ChangeLanguage("en");
                   setShowDropdown(false);
-                  localStorage.setItem("userLang", "en");
+                  localStorage.setItem("lang_code", "en");
                 }}
                 className="hover:bg-gray-400 w-full hover:text-white"
               >
-                English
+                {t("english")}
               </button>
               <button
                 onClick={() => {
                   ChangeLanguage("sp");
                   setShowDropdown(false);
-                  localStorage.setItem("userLang", "sp");
+                  localStorage.setItem("lang_code", "sp");
                 }}
                 className="hover:bg-gray-400 w-full hover:text-white"
               >
-                Spanish
+                {t("spanish")}
               </button>
             </div>
           )}
