@@ -56,9 +56,9 @@ const SkillsYouGet = () => {
     },
   ];
   return (
-    <div className="px-3 space-y-10">
+    <div className="px-3 sm:space-y-10 space-y-3">
       {/* --------------heading----------- */}
-      <p className="font-bold text-5xl text-center block">
+      <p className="font-bold sm:text-5xl text-3xl text-center block">
         {t("skills_you_will_get")}
       </p>
       {/* -----------jsut paragraph----------- */}
@@ -81,10 +81,10 @@ const SkillsYouGet = () => {
               {/* -----------------front side div=----------------- */}
               <div className="absolute backface-hidden rounded-tl-[123px] rounded-br-[123px] rounded-tr-none rounded-bl-none border-primary border w-full h-full">
                 <div className="text-center flex flex-col items-center justify-center h-full text-gray-800 px-2">
-                  <p className="whitespace-nowrap text-transparent bg-clip-text text-to text-3xl font-bold">
+                  <p className="whitespace-nowrap text-transparent bg-clip-text text-to sm:text-3xl text-xl font-bold">
                     {item.heading}
                   </p>
-                  <p className="text-transparent text-center mx-auto whitespace-normal bg-clip-text bg-gradient-to-r from-to to-from text-xl font-bold">
+                  <p className="text-transparent text-center mx-auto whitespace-normal bg-clip-text bg-gradient-to-r from-to to-from sm:text-xl text-lg font-bold">
                     {item.name}
                   </p>
                 </div>

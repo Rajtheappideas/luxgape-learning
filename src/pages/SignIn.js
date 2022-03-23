@@ -12,7 +12,6 @@ import {
 import { useFormik, Form, FormikProvider, ErrorMessage } from "formik";
 import * as yup from "yup";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login";
 import useUserData from "../hooks/useUserData";
 import { useUserContext } from "../context/usercontext";
 import tw from "tailwind-styled-components/dist/tailwind";
@@ -117,14 +116,6 @@ const SignIn = () => {
 
   // ------------------error text color tailwind-------------
   const handleModal = () => setOpenModal(false);
-
-  // --------facebook login------------
-  const responseFacebook = (response) => {
-    console.log(response);
-  };
-  const componentClicked = () => {
-    console.log("clicked");
-  };
 
   return (
     <>
@@ -356,7 +347,7 @@ const SignIn = () => {
                 <div className="flex flex-wrap items-center justify-center sm:space-x-6 space-x-2 w-full">
                   <button
                     type="button"
-                    className="border  text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
+                    className="border active:scale-95 duration-75 transition-all ease-in-out text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
                   >
                     <LazyLoadImage
                       src="https://img.icons8.com/ios-glyphs/30/000000/mac-os.png"
@@ -372,7 +363,7 @@ const SignIn = () => {
                       {t("Log_out")}
                     </button>
                   ) : (
-                    <div className="relative">
+                    <div className="relative active:scale-95 duration-75 transition-all ease-in-out">
                       <button
                         type="button"
                         className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
@@ -380,13 +371,12 @@ const SignIn = () => {
                         <LazyLoadImage
                           src="https://img.icons8.com/color/48/000000/google-logo.png"
                           alt="googlelogo"
-                          className="w-8 h-8 mx-auto z-50"
+                          className="w-8 h-8 mx-auto z-10"
                         />
                       </button>
                       <div className="absolute inset-0 opacity-0">
                         <GoogleLogin
                           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                          buttonText=""
                           onSuccess={handleSuccess}
                           onFailure={handleFailure}
                           cookiePolicy={"single_host_origin"}
@@ -396,23 +386,16 @@ const SignIn = () => {
                     </div>
                   )}
 
-                  {/* <button
+                  <button
                     type="button"
-                    className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
+                    className="border active:scale-95 duration-75 transition-all ease-in-out text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
                   >
                     <LazyLoadImage
                       src="https://img.icons8.com/color/48/000000/facebook-new.png"
                       alt="facebooklogo"
                       className="w-8 h-8 mx-auto"
                     />
-                  </button> */}
-                  <FacebookLogin
-                    appId="313889557398260"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    onClick={componentClicked}
-                    callback={responseFacebook}
-                  />
+                  </button>
                 </div>
 
                 {/* ---------sign up here---------- */}

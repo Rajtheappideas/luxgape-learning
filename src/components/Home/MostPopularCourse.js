@@ -55,7 +55,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
       )} */}
 
       <div className="mb-10 flex justify-between items-center">
-        <p className="font-semibold text-5xl ">{t("most_popular_course")}</p>
+        <p className="font-bold sm:text-5xl text-3xl ">{t("most_popular_course")}</p>
         {showButton && (
           <Link to="/courses">
             <button

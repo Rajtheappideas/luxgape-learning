@@ -9,8 +9,8 @@ const ContactUs = () => {
       className="sm:p-10 p-3 grid sm:gap-10 lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-flow-row items-start justify-items-center"
     >
       {/* --------------first div with text---------- */}
-      <div className="">
-        <p className="text-5xl font-bold tracking-wide leading-snug block">
+      <div>
+        <p className="sm:text-5xl text-3xl font-bold tracking-wide leading-snug block">
           {t("stay_get_in_touch")}
           <span className="block">{t("with_us")}</span>
         </p>

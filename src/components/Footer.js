@@ -16,7 +16,7 @@ const Footer = ({ classFooter, normalFooter }) => {
   return (
     <>
       <footer className="bg-footer w-full">
-        <div className="pb-10 pt-16 sm:px-12 px-3 grid sm:gap-0 gap-5 lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start place-items-center">
+        <div className="sm:pb-10 sm:pt-16 sm:py-0 py-5 sm:px-12 px-3 grid sm:gap-0 gap-5 lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start place-items-center">
           {/* --------------logo & description-------------- */}
           <div className="w-full lg:col-span-2 sm:col-span-3">
             <div className="lg:text-left text-center">
@@ -24,11 +24,11 @@ const Footer = ({ classFooter, normalFooter }) => {
                 <img
                   src={logo}
                   alt="companylogo"
-                  className="h-20 cursor-pointer object-center object-contain inline-block"
+                  className="sm:h-20 h-16 cursor-pointer object-center object-contain inline-block"
                 />
               </Link>
             </div>
-            <p className="text-2xl leading-relaxed tracking-normal lg:text-left text-center font-semibold w-full">
+            <p className="sm:text-2xl text-lg leading-relaxed tracking-normal lg:text-left text-center font-semibold w-full">
               {t("footer_paragraph")}
             </p>
           </div>
@@ -109,8 +109,8 @@ const Footer = ({ classFooter, normalFooter }) => {
 export default Footer;
 
 const Label = tw.p`
-sm:mb-5 text-3xl font-semibold text-black text-center tracking-wide`;
+sm:mb-5 sm:text-3xl text-xl font-bold text-center tracking-wide`;
 
 const List = tw.li`
-text-2xl font-normal text-black text-center tracking-normal cursor-pointer
+sm:text-2xl text-lg font-normal text-center tracking-normal cursor-pointer
 `;

@@ -26,14 +26,14 @@ const CourseDetails = () => {
       </div>
 
       {/* ----------------Deatails of course---------------- */}
-      <div className="flex lg:flex-row flex-col justify-center items-center mt-10">
+      <div className="flex lg:flex-row flex-col justify-center items-start mt-10">
         {/* -------------------left side div----------------- */}
         <div className="h-full w-full relative lg:mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none ">
           <Link to="/class" onClick={ScrollToTop}>
             <img
               src={img}
               alt="img"
-              className="object-cover object-center opacity-70 w-full h-screen rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none "
+              className="object-cover object-center opacity-70 w-full sm:h-screen h-96 rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none "
             />
             {/* -------------play button---------- */}
             <p className="absolute top-[40%] left-1/2 -translate-x-1/2 cursor-pointer">
@@ -57,9 +57,9 @@ const CourseDetails = () => {
         </div>
 
         {/* -------------------second div course deatrils--------------- */}
-        <div className="w-full xl:space-y-12 space-y-5 lg:mt-0 mt-5 lg:text-left text-center">
+        <div className="w-full xl:space-y-10 space-y-8 lg:mt-0 mt-5 lg:text-left text-center">
           {/* --------------course name------------- */}
-          <p className="text-5xl font-bold">Course Name in Details</p>
+          <p className="sm:text-5xl text-3xl font-bold">Course Name in Details</p>
 
           {/* ------------what you learn------------ */}
           <p className="font-semibold text-xl">{t("what_will_you_learn")}:</p>
