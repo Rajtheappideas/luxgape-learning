@@ -378,7 +378,7 @@ const Signup = () => {
                       <CheckIcon className="h-6 cursor-pointer absolute top-1 left-0 -z-10" />
                     )}
                     {errors.checkbox && touched.checkbox && (
-                      <span className="bg-gray-100 absolute -top-12 -left-20 animate-bounce w-auto h-12 p-3 font-semibold px-2 whitespace-nowrap text-black rounded-xl">
+                      <span className="bg-gray-100 absolute -top-12 sm:-left-20 -left-2 animate-bounce w-auto h-12 p-3 font-semibold px-2 whitespace-nowrap text-black rounded-xl">
                         <ErrorMessage name="checkbox" />
                       </span>
                     )}

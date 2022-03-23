@@ -12,7 +12,7 @@ import {
 import { useFormik, Form, FormikProvider, ErrorMessage } from "formik";
 import * as yup from "yup";
 import GoogleLogin from "react-google-login";
-// import FacebookLogin from "react-facebook-login";
+import FacebookLogin from "react-facebook-login";
 import useUserData from "../hooks/useUserData";
 import { useUserContext } from "../context/usercontext";
 import tw from "tailwind-styled-components/dist/tailwind";
@@ -58,7 +58,6 @@ const SignIn = () => {
   });
 
   // --------------------------formik-------------
-  useEffect(() => {}, []);
 
   const formik = useFormik({
     initialValues: {
@@ -120,12 +119,12 @@ const SignIn = () => {
   const handleModal = () => setOpenModal(false);
 
   // --------facebook login------------
-  // useEffect(() => {
-  //   responseFacebook();
-  // }, []);
-  // const responseFacebook = (response) => {
-  //   console.log(response);
-  // };
+  const responseFacebook = (response) => {
+    console.log(response);
+  };
+  const componentClicked = () => {
+    console.log("clicked");
+  };
 
   return (
     <>
@@ -397,7 +396,7 @@ const SignIn = () => {
                     </div>
                   )}
 
-                  <button
+                  {/* <button
                     type="button"
                     className="border text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
                   >
@@ -406,15 +405,14 @@ const SignIn = () => {
                       alt="facebooklogo"
                       className="w-8 h-8 mx-auto"
                     />
-                  </button>
-                  {/* <FacebookLogin
-                    appId="351223826901579"
+                  </button> */}
+                  <FacebookLogin
+                    appId="313889557398260"
                     autoLoad={true}
                     fields="name,email,picture"
-                    textButton="login"
+                    onClick={componentClicked}
                     callback={responseFacebook}
-                    className="h-10 w-auto"
-                  /> */}
+                  />
                 </div>
 
                 {/* ---------sign up here---------- */}

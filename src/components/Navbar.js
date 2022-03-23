@@ -22,9 +22,6 @@ const Navbar = ({ activeText }) => {
   const userImage = userData?.profileObj?.imageUrl;
 
   const { t } = useTranslation();
-  // useEffect(() => {
-  //   console.log(userLanguage);
-  // }, [t, userLanguage]);
 
   return (
     <nav className="xl:flex xl:justify-between xl:items-center sm:p-10 p-3">
@@ -174,19 +171,19 @@ const Navbar = ({ activeText }) => {
           {userData ? (
             <>
               <span
-                className="text-xl font-semibold ml-2"
+                className="text-xl font-semibold ml-2 cursor-pointer"
                 onClick={handleLogout}
               >
                 {t("Log_out")}
               </span>
-              <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
+              {/* <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
                 <img
                   src={userImage}
                   alt="studentimg"
                   className="object-center object-cover rounded-tl-lg rounded-br-lg rounded-bl-none rounded-tr-none w-10 h-10"
                 />
                 <span className="text-xl font-semibold ml-2">{userName}</span>
-              </div>
+              </div> */}
             </>
           ) : (
             <>
@@ -205,7 +202,7 @@ const Navbar = ({ activeText }) => {
               onClick={() => setShowDropdown(!showDropdown)}
             >
               {/* <TranslateIcon className="h-5" /> */}
-              {localStorage.getItem("userLang")}
+              {localStorage.getItem("lang_code")}
               <ChevronDownIcon className="h-5" />
             </button>
 
@@ -215,7 +212,7 @@ const Navbar = ({ activeText }) => {
                   onClick={() => {
                     ChangeLanguage("en");
                     setShowDropdown(false);
-                    localStorage.setItem("userLang", "en");
+                    localStorage.setItem("lang_code", "en");
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >
@@ -225,7 +222,7 @@ const Navbar = ({ activeText }) => {
                   onClick={() => {
                     ChangeLanguage("sp");
                     setShowDropdown(false);
-                    localStorage.setItem("userLang", "sp");
+                    localStorage.setItem("lang_code", "sp");
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >
