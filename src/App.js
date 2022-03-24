@@ -23,6 +23,8 @@ const AttendCourseHistory = lazy(() => import("./pages/AttendCourseHistory"));
 const Payment = lazy(() => import("./pages/Payment"));
 const Erro404 = lazy(() => import("./pages/Error404"));
 const Class = lazy(() => import("./pages/Class"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 
 const App = () => {
   // default options for lottie files
@@ -74,6 +76,8 @@ const App = () => {
               <Route path="/employees" element={<Employee />} />
               <Route path="/exam" element={<Exam />} />
               <Route path="/class" element={<Class />} />
+              <Route path="/forgotpassword" element={<ForgotPassword />} />
+              <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="*" element={<Erro404 />} />
             </Routes>
           </UserProvider>

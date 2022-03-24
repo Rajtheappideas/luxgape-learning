@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import { CheckCircleIcon, XIcon } from "@heroicons/react/outline";
 import Lottie from "react-lottie";
@@ -13,8 +13,12 @@ const Successful = ({ modalOpen, closeModal }) => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+  useEffect(() => {
+    Modal.setAppElement("body");
+  }, []);
   return (
     <Modal
+      appElement={document.getElementById("root")}
       isOpen={modalOpen}
       onRequestClose={() => closeModal()}
       preventScroll={false}

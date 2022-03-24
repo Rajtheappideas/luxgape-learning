@@ -15,16 +15,15 @@ import GoogleLogin from "react-google-login";
 import useUserData from "../hooks/useUserData";
 import { useUserContext } from "../context/usercontext";
 import tw from "tailwind-styled-components/dist/tailwind";
-import ForgotPassword from "../components/ForgotPassword";
 import { useTranslation } from "react-i18next";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { ToastContainer, toast } from "react-toastify";
 import Lottie from "react-lottie";
 import loading from "../assets/animations/loading1.json";
+import axios from "axios";
 
 const SignIn = () => {
   const [showPassword, setShowpassword] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const { ChangeLanguage, setUserdata } = useUserContext();
 
@@ -72,32 +71,36 @@ const SignIn = () => {
         role: values.role,
         lang_code: lang_code,
       };
-      await fetch("https://chessmafia.com/php/luxgap/App/api/login", {
-        method: "post",
-        body: JSON.stringify(user),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((response) => {
-          if (response.message === "Credentials mismatch") {
-            toast("Email and Password are wrong!", { type: "error" });
-          } else {
-            localStorage.setItem(
-              "user",
-              JSON.stringify(response?.data?.result)
-            );
-            setUserdata(response?.data?.result);
+      await axios
+        .post("https://chessmafia.com/php/luxgap/App/api/login", user, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          const data = res?.data?.data;
+          if (res.status === 200) {
+            localStorage.setItem("user", JSON.stringify(data?.result));
+            setUserdata(data?.result);
             navigate("/");
             window.scrollTo({
               top: 0,
               behavior: "smooth",
             });
+          } else {
+            return false;
           }
         })
-        .catch((err) => console.log(err.toString()));
+
+        .catch((err) => {
+          const { message } = err?.response?.data;
+          if (message === "Credentials mismatch") {
+            toast("Email and password are wrong!", { type: "error" });
+          } else {
+            return true;
+          }
+        });
     },
   });
   const {
@@ -113,9 +116,6 @@ const SignIn = () => {
   const TextError = tw.span`
   text-red-500
   `;
-
-  // ------------------error text color tailwind-------------
-  const handleModal = () => setOpenModal(false);
 
   return (
     <>
@@ -298,21 +298,15 @@ const SignIn = () => {
                 <ErrorMessage name="password" component={TextError} />
 
                 {/* --------------forgot password------------------ */}
-                <div className=" cursor-pointer text-right w-full">
-                  <button
-                    type="button"
-                    className="text-secondary font-bold text-xl "
-                    onClick={() => setOpenModal(true)}
-                  >
-                    {t("Forgot_password")}?
-                  </button>
-                  {openModal && (
-                    <ForgotPassword
-                      openModal={openModal}
-                      setOpenModal={setOpenModal}
-                      handleModal={handleModal}
-                    />
-                  )}
+                <div className=" cursor-pointer text-right w-full inline-block">
+                  <Link to="/forgotpassword">
+                    <button
+                      type="button"
+                      className="text-secondary font-bold text-xl "
+                    >
+                      {t("Forgot_password")}?
+                    </button>
+                  </Link>
                 </div>
 
                 {/* ---------------sign in button-------------- */}

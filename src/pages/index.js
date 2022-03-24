@@ -12,4 +12,6 @@ export { default as AttendCourseHistory } from "./AttendCourseHistory";
 export { default as Employee } from "./Employee";
 export { default as Exam } from "./Exam";
 export { default as Class } from "./Class";
+export { default as ForgotPassword } from "./ForgotPassword";
+export { default as ResetPassword } from "./ResetPassword";
 export { default as Erro404 } from "./Error404";

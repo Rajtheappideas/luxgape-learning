@@ -40,7 +40,7 @@ export { default as Review } from "./class/Review";
 export { default as Faq1 } from "./Faq1";
 export { default as Faq2 } from "./Faq2";
 
-// ---------------------faqs------------------------------
-export { default as ForgotPassword } from "./ForgotPassword";
+// ---------------------otp verify of forgot password------------------------------
+export { default as OtpVerify } from "./OtpVerify";
 
 export { default as Footer } from "./Footer";

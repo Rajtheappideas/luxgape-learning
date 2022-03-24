@@ -20,6 +20,7 @@ import { useUserContext } from "../context/usercontext";
 import { toast, ToastContainer } from "react-toastify";
 import Lottie from "react-lottie";
 import loading from "../assets/animations/loading1.json";
+import axios from "axios";
 
 const Signup = () => {
   const [showPassword, setShowpassword] = useState(false);
@@ -87,22 +88,18 @@ const Signup = () => {
         role: values.role,
         lang_code: lang_code,
       };
-
-      await fetch("https://chessmafia.com/php/luxgap/App/api/register", {
-        method: "post",
-        body: JSON.stringify(user),
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((response) => {
-          if (response.message === "Email is already exist") {
-            toast("Email is Already exist", { type: "warning" });
-          } else {
-            localStorage.setItem("user", JSON.stringify(response?.data));
-            setUserdata(response?.data);
+      await axios
+        .post("https://chessmafia.com/php/luxgap/App/api/register", user, {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        })
+        .then((res) => {
+          const data = res?.data?.data;
+          if (res.status === 200) {
+            localStorage.setItem("user", JSON.stringify(data));
+            setUserdata(data);
             navigate("/");
             window.scrollTo({
               top: 0,
@@ -110,7 +107,37 @@ const Signup = () => {
             });
           }
         })
-        .catch((err) => err.toString());
+        .catch((err) => {
+          const error = err?.response?.data?.message;
+          if (error === "Email is already exist") {
+            toast("Email is already exist!!", { type: "error" });
+          } else {
+            return true;
+          }
+        });
+      // await fetch("https://chessmafia.com/php/luxgap/App/api/register", {
+      //   method: "post",
+      //   body: JSON.stringify(user),
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //   },
+      // })
+      //   .then((res) => res.json())
+      //   .then((response) => {
+      //     if (response.message === "Email is already exist") {
+      //       toast("Email is Already exist", { type: "warning" });
+      //     } else {
+      //       localStorage.setItem("user", JSON.stringify(response?.data));
+      //       setUserdata(response?.data);
+      //       navigate("/");
+      //       window.scrollTo({
+      //         top: 0,
+      //         behavior: "smooth",
+      //       });
+      //     }
+      //   })
+      //   .catch((err) => err.toString());
     },
   });
   const {
