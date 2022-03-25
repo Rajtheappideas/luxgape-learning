@@ -44,7 +44,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
     });
   };
   return (
-    <div className="sm:p-10 p-1 relative">
+    <div className="sm:p-10 p-3 relative">
       {/* ----------------eclipse 1--------------------- */}
       {/* {showEclipse && (
         <div className="absolute -top-32 left-56 w-[300px] h-[300px] blur-[200px] rounded-full bg-pink-300 " />
@@ -54,8 +54,8 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
         <div className="absolute bottom-10 -left-40 blur-[200px] w-[300px] h-[300px]  rounded-full bg-pink-300 " />
       )} */}
 
-      <div className="sm:mb-10 mb-5 mx-2 flex justify-between items-start">
-        <p className="font-semibold sm:text-5xl text-3xl ">{t("most_popular_course")}</p>
+      <div className="sm:mb-10 mb-5 flex justify-between items-start">
+        <p className="font-semibold sm:text-5xl text-3xl">{t("most_popular_course")}</p>
         {showButton && (
           <Link to="/courses">
             <button
@@ -113,6 +113,6 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- sm:h-[673px] sm:w-[364px] w-11/12
+ sm:h-[673px] sm:w-[364px] w-auto
  cursor-pointer
  `;

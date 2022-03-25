@@ -144,20 +144,18 @@ const CourseDetails = () => {
           </div>
 
           {/* ----------------enroill now & share----------------- */}
-          <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full sm:space-x-4 space-y-2 sm:space-y-0">
+          <div className="flex flex-row items-center lg:justify-start justify-center w-full sm:space-x-4 space-x-2">
             <Link to="/courses/aboutcourse/payment" onClick={ScrollToTop}>
-              <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase sm:w-72 w-60 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
+              <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase sm:w-72 w-52 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
                 {t("enroll_now")}
               </button>
             </Link>
-            <div className="flex items-center justify-start">
-              <p className="border mr-2 w-14 h-14 cursor-pointer rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
-                <ShareIcon className="h-6 w-6 mx-auto my-4" color="gray" />
-              </p>
-              <p className="text-secondary text-xl font-semibold cursor-pointer">
-                {t("share")}
-              </p>
-            </div>
+            <p className="border mr-2 w-14 h-14 cursor-pointer rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
+              <ShareIcon className="h-6 w-6 mx-auto my-4" color="gray" />
+            </p>
+            <p className="text-secondary sm:inline-block hidden text-xl font-semibold cursor-pointer">
+              {t("share")}
+            </p>
           </div>
         </div>
       </div>

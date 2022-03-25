@@ -126,7 +126,7 @@ const CourseHistory = ({ showButton }) => {
                 </div>
               </div>
             )}
-            <div className="absolute -top-10 -right-7 transform -rotate-45">
+            <div className="absolute -top-10 sm:-right-7 -right-5 transform -rotate-45">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -172,7 +172,7 @@ export default CourseHistory;
 const BorderDiv = tw.div`
 border-2
 rounded-tl-[103px] rounded-tr-0 rounded-br-[119px] rounded-bl-0
- h-[434px] w-[322px]
+ h-[434px] sm:w-[322px] w-auto
  p-5
  space-y-4
  relative

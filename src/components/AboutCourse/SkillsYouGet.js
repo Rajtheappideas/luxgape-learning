@@ -56,7 +56,7 @@ const SkillsYouGet = () => {
     },
   ];
   return (
-    <div className="px-3 sm:space-y-10 space-y-3">
+    <div className="px-3 sm:space-y-10 space-y-3 my-3">
       {/* --------------heading----------- */}
       <p className="font-bold sm:text-5xl text-3xl text-center block">
         {t("skills_you_will_get")}
