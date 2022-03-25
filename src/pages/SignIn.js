@@ -208,12 +208,12 @@ const SignIn = () => {
                 </div>
                 {/* ------------------radio box of role-------------- */}
 
-                <div className="flex flex-row items-center justify-around sm:space-x-10 space-x-2 w-full">
+                <div className="flex flex-row items-center justify-around sm:space-x-5 space-x-2">
                   {/* ----------------butoon 1----------------- */}
                   <div
                     className={`border ${
                       formik.values.role === "Employee" && "border-primary"
-                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
+                    } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none lg:w-96 sm:w-full w-1/2 h-[61px] relative`}
                   >
                     <input
                       className="cursor-pointer w-4 h-4 absolute top-6 left-5"
@@ -338,7 +338,7 @@ const SignIn = () => {
                 </div>
 
                 {/* --------------social sign in button-------------- */}
-                <div className="flex flex-wrap items-center justify-center sm:space-x-6 space-x-2 w-full">
+                {/* <div className="flex items-center justify-center sm:space-x-6 space-x-2 w-full">
                   <button
                     type="button"
                     className="border active:scale-95 duration-75 transition-all ease-in-out text-xl font-semibold w-[105px] h-[58px] rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none outline-none"
@@ -369,14 +369,14 @@ const SignIn = () => {
                         />
                       </button>
                       <div className="absolute inset-0 opacity-0">
-                        <GoogleLogin
+                        {/* <GoogleLogin
                           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
                           onSuccess={handleSuccess}
                           onFailure={handleFailure}
                           cookiePolicy={"single_host_origin"}
                           className="h-full w-full"
-                        ></GoogleLogin>
-                      </div>
+                        ></GoogleLogin> */}
+                {/* </div>
                     </div>
                   )}
 
@@ -389,8 +389,8 @@ const SignIn = () => {
                       alt="facebooklogo"
                       className="w-8 h-8 mx-auto"
                     />
-                  </button>
-                </div>
+                  </button> */}
+                {/* </div>  */}
 
                 {/* ---------sign up here---------- */}
                 <p className="text-xl text-center font-bold">

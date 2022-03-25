@@ -24,6 +24,7 @@
     "react-lottie": "^1.2.3",
     "react-meta-tags": "^1.0.1",
     "react-modal": "^3.14.4",
+    "react-paginate": "^8.1.2",
     "react-player": "^2.9.0",
     "react-query": "^3.34.16",
     "react-router-dom": "^6.2.1",

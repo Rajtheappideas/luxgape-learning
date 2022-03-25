@@ -115,29 +115,6 @@ const Signup = () => {
             return true;
           }
         });
-      // await fetch("https://chessmafia.com/php/luxgap/App/api/register", {
-      //   method: "post",
-      //   body: JSON.stringify(user),
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //   },
-      // })
-      //   .then((res) => res.json())
-      //   .then((response) => {
-      //     if (response.message === "Email is already exist") {
-      //       toast("Email is Already exist", { type: "warning" });
-      //     } else {
-      //       localStorage.setItem("user", JSON.stringify(response?.data));
-      //       setUserdata(response?.data);
-      //       navigate("/");
-      //       window.scrollTo({
-      //         top: 0,
-      //         behavior: "smooth",
-      //       });
-      //     }
-      //   })
-      //   .catch((err) => err.toString());
     },
   });
   const {

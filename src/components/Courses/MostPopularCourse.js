@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import tw from "tailwind-styled-components/dist/tailwind";
 import mpcimg1 from "../../assets/mpcimg1.jpg";
 import mpcimg2 from "../../assets/mpcimg2.jpg";
@@ -15,7 +15,6 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const data = [
   {
-    id: 1,
     img: mpcimg1,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -24,7 +23,6 @@ const data = [
     price: "22",
   },
   {
-    id: 2,
     img: mpcimg2,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -33,7 +31,6 @@ const data = [
     price: "20",
   },
   {
-    id: 3,
     img: mpcimg3,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -42,7 +39,6 @@ const data = [
     price: "32",
   },
   {
-    id: 4,
     img: mpcimg3,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -51,7 +47,6 @@ const data = [
     price: "29",
   },
   {
-    id: 5,
     img: mpcimg1,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -60,7 +55,6 @@ const data = [
     price: "21",
   },
   {
-    id: 6,
     img: mpcimg2,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -69,7 +63,6 @@ const data = [
     price: "25",
   },
   {
-    id: 7,
     img: mpcimg1,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -78,7 +71,6 @@ const data = [
     price: "25",
   },
   {
-    id: 8,
     img: mpcimg3,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -87,7 +79,222 @@ const data = [
     price: "25",
   },
   {
-    id: 9,
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "22",
+  },
+  {
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "20",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "32",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "29",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "21",
+  },
+  {
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "22",
+  },
+  {
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "20",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "32",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "29",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "21",
+  },
+  {
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "22",
+  },
+  {
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "20",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "32",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "29",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "21",
+  },
+  {
+    img: mpcimg2,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg1,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
+    img: mpcimg3,
+    courseName: "Lorem Ipsum is simply dummy text.",
+    courseDeatils:
+      "Lorem Ipsum has been the industry 's standard dummy text ever sincethe 1500s,",
+    reviews: StarIcon,
+    price: "25",
+  },
+  {
     img: mpcimg2,
     courseName: "Lorem Ipsum is simply dummy text.",
     courseDeatils:
@@ -97,6 +304,7 @@ const data = [
   },
 ];
 const MostPopularCourse = () => {
+  const [index, setIndex] = useState(1);
   const { t } = useTranslation();
   const ScrollToTop = () => {
     window.scrollTo({
@@ -113,8 +321,8 @@ const MostPopularCourse = () => {
       </div>
       <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 items-center place-items-center lg:gap-10 md:gap-16 gap-4">
         {/* -------------- rounde div=-------------- */}
-        {data.map((course) => (
-          <RoundedDiv key={course.id} onClick={ScrollToTop}>
+        {data.map((course, index) => (
+          <RoundedDiv key={index} onClick={ScrollToTop}>
             <Link to="/courses/aboutcourse">
               <LazyLoadImage
                 src={course.img}

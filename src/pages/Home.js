@@ -13,6 +13,8 @@ import {
 } from "../components/index";
 import { MetaTags } from "react-meta-tags";
 import { useTranslation } from "react-i18next";
+import { ToastContainer } from "react-toastify";
+
 const Home = () => {
   const { t } = useTranslation();
 
@@ -21,6 +23,19 @@ const Home = () => {
       <MetaTags>
         <title>{t("Home")}</title>
       </MetaTags>
+      {/* -----------react toasatify toast container--------------- */}
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {/* -------------------navbar=------------------ */}
       <Navbar activeText="Home" />
 
