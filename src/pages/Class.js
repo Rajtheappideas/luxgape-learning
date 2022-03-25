@@ -41,9 +41,9 @@ const Class = () => {
 
       {/* --------------buttons for toggle the componetns--------------- */}
       <div className="sm:px-10 px-5">
-        <p className="text-5xl block font-bold my-5 ">Course Name in Details</p>
+        <p className="sm:text-5xl text-3xl block font-semibold sm:my-5 ">Course Name in Details</p>
         {/* -------------------buttons-------------- */}
-        <div className="flex items-center relative my-7 text-secondary text-2xl ">
+        <div className="flex items-center relative sm:my-7 my-3 text-secondary sm:text-2xl text-xl ">
           <button
             className={`font-semibold relative ${
               openAbout && "text-green-400"

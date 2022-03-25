@@ -16,10 +16,10 @@ const Footer = ({ classFooter, normalFooter }) => {
   return (
     <>
       <footer className="bg-footer w-full">
-        <div className="sm:pb-10 sm:pt-16 sm:py-0 py-5 sm:px-12 px-3 grid sm:gap-0 gap-5 lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 items-start place-items-center">
+        <div className="sm:pb-10 sm:pt-16 sm:py-0 py-5 sm:px-12 px-3 grid sm:gap-0 gap-5 lg:grid-cols-5 lg:grid-rows-1 sm:grid-cols-3 sm:grid-rows-2 grid-cols-2 items-start md:place-items-center place-items-start">
           {/* --------------logo & description-------------- */}
-          <div className="w-full lg:col-span-2 sm:col-span-3">
-            <div className="lg:text-left text-center">
+          <div className="w-full lg:col-span-2 sm:col-span-3 col-span-2">
+            <div className="lg:text-left">
               <Link to="/">
                 <img
                   src={logo}
@@ -28,7 +28,7 @@ const Footer = ({ classFooter, normalFooter }) => {
                 />
               </Link>
             </div>
-            <p className="sm:text-2xl text-lg leading-relaxed tracking-normal lg:text-left text-center font-semibold w-full">
+            <p className="sm:text-2xl text-lg leading-relaxed tracking-normal lg:text-left text-left font-semibold w-full">
               {t("footer_paragraph")}
             </p>
           </div>
@@ -46,7 +46,7 @@ const Footer = ({ classFooter, normalFooter }) => {
 
           {/* ------------------company-------------------------- */}
           <div>
-            <Label>{t("company")}</Label>
+            <Label className="mb-0">{t("company")}</Label>
             <ul className="sm:space-y-5 space-y-3">
               <List onClick={ScrollToTop}>
                 <Link to="/aboutus">{t("About_Us")}</Link>
@@ -64,7 +64,7 @@ const Footer = ({ classFooter, normalFooter }) => {
           </div>
 
           {/* ----------------------------follow links----------------- */}
-          <div>
+          <div className=" sm:col-span-1 col-span-2">
             <Label>{t("follow_us")}</Label>
             <ul className="sm:space-y-5 space-y-3">
               <List>
@@ -109,8 +109,8 @@ const Footer = ({ classFooter, normalFooter }) => {
 export default Footer;
 
 const Label = tw.p`
-sm:mb-5 sm:text-3xl text-xl font-bold text-center tracking-wide`;
+sm:mb-5 sm:text-3xl mb-1 text-xl font-bold text-left tracking-wide`;
 
 const List = tw.li`
-sm:text-2xl text-lg font-normal text-center tracking-normal cursor-pointer
+sm:text-2xl text-lg font-normal text-left tracking-normal cursor-pointer
 `;

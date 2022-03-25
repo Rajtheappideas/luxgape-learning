@@ -34,7 +34,7 @@ const FilterBox = () => {
       {/* --------------filters box--------------- */}
       <div className="bg-white my-8 sm:p-10 p-3 w-full h-auto border shadow-2xl rounded-tl-[184px] rounded-br-[184px] rounded-bl-none rounded-tr-none ">
         {/* -----------grid first div--------------- */}
-        <div className="grid w-full lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start sm:gap-5 justify-items-center items-center">
+        <div className="grid w-full lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start sm:gap-5 xl:justify-items-center justify-items-start items-center">
           {/* ------------------firrst column-------------- */}
           <div>
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">Topics</p>
@@ -88,7 +88,7 @@ const FilterBox = () => {
         <div className="border-dashed border-2 border-[#C4C4C4] w-full " />
 
         {/* ------------------second grid div------------- */}
-        <div className="grid lg:grid-cols-3 sm:p-10 p-3 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start sm:gap-5 justify-items-center items-center">
+        <div className="grid w-full lg:grid-cols-3 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start sm:gap-5 xl:justify-items-center justify-items-start items-center">
           {/* ------------------firrst column-------------- */}
           <div>
             <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">

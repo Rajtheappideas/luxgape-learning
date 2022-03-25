@@ -56,12 +56,12 @@ const Review = () => {
     <div className="sm:p-10 p-3 relative">
       {/* -----------------review div-------------- */}
       <div className="w-full h-screen overflow-y-auto rounded-xl scrollbar-hide bg-gray-100 opacity-90 ">
-        <div className="sm:p-10 p-3 space-y-9">
+        <div className="sm:p-10 p-3 sm:space-y-9 space-y-5">
           {/* -----------profile----------- */}
           {Reviews.map((review) => (
             <div className="space-y-2 sm:last:pb-10 last:pb-24" key={review.id}>
               {/* -----------photo & stars----------------- */}
-              <div className="flex items-start">
+              <div className="flex">
                 <LazyLoadImage
                   src={review.img}
                   alt="img"
@@ -71,7 +71,7 @@ const Review = () => {
                   <span className="font-bold text-black text-xl">
                     {review.name}
                   </span>
-                  <div className="flex items-center space-x-3 mt-2">
+                  <div className="flex items-center sm:space-x-3 space-x-1 sm:mt-2">
                     <span className="font-semibold text-black text-xl">
                       {review.reviewStar}
                     </span>
@@ -80,7 +80,7 @@ const Review = () => {
                     <BsStarFill size={20} color="gold" />
                     <BsStarFill size={20} color="gold" />
                     <BsStarHalf size={20} color="gold" />
-                    <span className=" border-l pl-4 border-gray-400 text-gray-400 font-semibold">
+                    <span className=" border-l h-auto pl-4 border-gray-400 text-gray-400 font-semibold">
                       {review.reviewTime}
                     </span>
                   </div>
@@ -95,7 +95,7 @@ const Review = () => {
       </div>
 
       {/* -----------------input field----------------- */}
-      <div className="absolute flex items-center bottom-16 md:right-20 right-6">
+      <div className="absolute flex items-center sm:bottom-16 bottom-6 md:right-20 right-6">
         <input
           type="text"
           placeholder="leave your review"

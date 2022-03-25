@@ -35,9 +35,9 @@ const CourseDescription = () => {
         <div className="w-2/4">
           <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
             <GiCircle className="h-3 w-3 bg-gradient-to-br from-to to-from rounded-full mr-2" />
-            1st Unit
+            1 Unit
           </p>
-          <p className="font-bold text-secondary text-base ml-3">80 hours</p>
+          <p className="font-bold text-secondary text-base sm:ml-3">80 hours</p>
         </div>
 
         {/* --------------course details---------------- */}
@@ -75,9 +75,9 @@ const CourseDescription = () => {
         <div className="w-2/4">
           <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
             <GiCircle className="h-3 w-3 bg-gradient-to-br from-to to-from rounded-full mr-2" />
-            2st Unit
+            2 Unit
           </p>
-          <p className="font-bold text-secondary text-base ml-3">110 hours</p>
+          <p className="font-bold text-secondary text-base sm:ml-3">110 hours</p>
         </div>
 
         <div className="space-y-7 w-full">
@@ -146,9 +146,9 @@ const CourseDescription = () => {
         <div className="w-2/4">
           <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
             <GiCircle className="h-3 w-3 bg-gradient-to-br from-to to-from rounded-full mr-2" />
-            3st Unit
+            3 Unit
           </p>
-          <p className="font-bold text-secondary text-base ml-3">130 hours</p>
+          <p className="font-bold text-secondary text-base sm:ml-3">130 hours</p>
         </div>
 
         <div className="space-y-7 w-full">

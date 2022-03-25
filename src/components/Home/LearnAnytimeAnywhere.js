@@ -29,8 +29,8 @@ const LearnAnytimeAnywhere = () => {
       </div>
 
       {/* ------------text is here------------------ */}
-      <div className="space-y-12 h-full w-full p-3">
-        <p className="text-5xl font-semibold tracking-wide lg:text-left text-center">
+      <div className="sm:space-y-12 h-full w-full p-3">
+        <p className="sm:text-5xl text-3xl font-semibold tracking-wide lg:text-left text-center">
           {t("learn_anywhere_anytime")}
         </p>
 
@@ -42,7 +42,7 @@ const LearnAnytimeAnywhere = () => {
             className="object-contain object-center h-96 mx-auto"
           />
         </div>
-        <div className="w-full space-y-12">
+        <div className="w-full sm:space-y-12 space-y-5">
           <p className="text-secondary w-full text-xl tracking-widest leading-normal">
             {t("learn_anywhere_anytime_paragraph_1")}
           </p>
@@ -52,9 +52,9 @@ const LearnAnytimeAnywhere = () => {
         </div>
 
         {/* --------------check mark and details------------ */}
-        <div className="sm:flex flex-wrap lg:space-y-2 sm:space-y-0 space-y-3 items-center">
+        <div className="sm:flex flex-wrap lg:space-y-2 sm:space-y-0 space-y-3 items-start my-5">
           <div className="flex relative md:mr-3">
-            <p className="w-8 h-8 sm:mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
+            <p className="w-8 h-8 mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
               <CheckIcon
                 className="w-5 h-5 absolute top-[0.4rem] left-[0.4rem]"
                 color="white"

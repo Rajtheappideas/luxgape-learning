@@ -50,7 +50,7 @@ const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
       <button onClick={() => CloseModal()}>
         <XIcon className="h-9 z-10 absolute top-3 right-4" />
       </button>
-      <div className="md:h-[500px] h-full md:w-[500px] w-full p-5 space-y-5 absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center  rounded-tl-[130px] rounded-br-[130px] rounded-tr-none rounded-bl-none sm:shadow-2xl bg-white">
+      <div className="md:h-[500px] h-full md:w-[500px] w-full p-5 space-y-5 mt-5 absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center  rounded-tl-[130px] rounded-br-[130px] rounded-tr-none rounded-bl-none sm:shadow-2xl bg-white">
         <h1 className="font-bold text-4xl text-center tracking-wide">
           Enter yout OTP
         </h1>

@@ -49,13 +49,13 @@ const CourseHistory = ({ showButton }) => {
       {/* ----------------eclipse---------------- */}
       {/* <div className="absolute -bottom-28 left-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
       {/* --------------heading-------------- */}
-      <div className="mb-16 flex justify-between items-center">
-        <p className="text-5xl font-bold tracking-wide">
+      <div className="sm:mb-16 mb-5 flex justify-between items-start">
+        <p className="sm:text-5xl text-3xl font-semibold tracking-wide">
           {t("attend_course_history")}
         </p>
         {showButton ? (
           <Link to="/attendcoursehistory">
-            <button className="text-primary text-2xl cursor-pointer underline font-semibold">
+            <button className="text-primary sm:text-2xl text-xl cursor-pointer underline font-semibold">
               {t("view_more")}
             </button>
           </Link>
@@ -69,7 +69,7 @@ const CourseHistory = ({ showButton }) => {
       </div>
 
       {/* -------------------course history----------------------- */}
-      <div className="grid lg:grid-cols-3 grid-flow-row md:grid-cols-2 gap-10 grid-cols-1 justify-items-center items-center">
+      <div className="grid lg:grid-cols-3 grid-flow-row md:grid-cols-2 gap-x-10 gap-y-5 grid-cols-1 justify-items-center items-center">
         {data.map((item) => (
           <BorderDiv
             key={item.id}

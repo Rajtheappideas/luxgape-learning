@@ -80,7 +80,7 @@ const Exam = () => {
           <div className="my-4 sm:px-10 px-4">
             {/* ---------------que------------- */}
             <p className="text-xl font-semibold">
-              <span className="text-primary text-3xl font-semibold mr-3">
+              <span className="text-primary sm:text-3xl text-xl font-semibold mr-3">
                 01.
               </span>
               Lorem Ipsum is simply dummy text of the printing and typesetting

@@ -34,7 +34,7 @@ const Reviews = () => {
   const { t } = useTranslation();
   return (
     <div className="sm:p-10 p-3 relative">
-      <span className="font-bold block sm:text-5xl text-3xl text-left mb-4">
+      <span className="font-semibold block sm:text-5xl text-3xl text-left mb-4">
         {t("reviews")}
       </span>
       {/* -----------------review div-------------- */}

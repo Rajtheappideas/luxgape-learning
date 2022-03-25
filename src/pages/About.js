@@ -24,7 +24,7 @@ const About = () => {
       <div className="">
         {/* --------------navbar------------ */}
         <Navbar activeText="About Us" />
-        <h1 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-l text-center from-to to-from">
+        <h1 className="sm:text-5xl text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-l text-center from-to to-from">
           {t("About_Us")}
         </h1>
 

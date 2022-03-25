@@ -16,7 +16,7 @@ const CourseDetails = () => {
   return (
     <div className="sm:p-10 p-3 w-full">
       {/* ---------------course details paragraph-------------- */}
-      <div className="text-center mx-auto xl:w-3/5 sm:w-5/6">
+      <div className="sm:text-center text-left mx-auto xl:w-3/5 sm:w-5/6">
         <p className="text-lg font-light">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry's standard dummy text ever
@@ -57,9 +57,11 @@ const CourseDetails = () => {
         </div>
 
         {/* -------------------second div course deatrils--------------- */}
-        <div className="w-full xl:space-y-10 space-y-8 lg:mt-0 mt-5 lg:text-left text-center">
+        <div className="w-full xl:space-y-10 sm:space-y-8 space-y-5 lg:mt-0 mt-5 lg:text-left text-center">
           {/* --------------course name------------- */}
-          <p className="sm:text-5xl text-3xl font-bold">Course Name in Details</p>
+          <p className="sm:text-5xl text-3xl font-bold">
+            Course Name in Details
+          </p>
 
           {/* ------------what you learn------------ */}
           <p className="font-semibold text-xl">{t("what_will_you_learn")}:</p>
@@ -148,12 +150,14 @@ const CourseDetails = () => {
                 {t("enroll_now")}
               </button>
             </Link>
-            <p className="border w-14 h-14 cursor-pointer rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
-              <ShareIcon className="h-6 w-6 mx-auto my-4" color="gray" />
-            </p>
-            <p className="text-secondary text-xl font-semibold cursor-pointer">
-              {t("share")}
-            </p>
+            <div className="flex items-center justify-start">
+              <p className="border mr-2 w-14 h-14 cursor-pointer rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
+                <ShareIcon className="h-6 w-6 mx-auto my-4" color="gray" />
+              </p>
+              <p className="text-secondary text-xl font-semibold cursor-pointer">
+                {t("share")}
+              </p>
+            </div>
           </div>
         </div>
       </div>

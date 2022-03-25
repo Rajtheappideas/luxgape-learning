@@ -13,11 +13,11 @@ const ServiceWeProvide = () => {
       {/* <div className="absolute -bottom-20 right-0 blur-[200px]  w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
 
       {/* --------------heading-------------- */}
-      <div className="text-center mb-5">
-        <p className="text-6xl font-bold my-6">{t("service_we_provide")}</p>
+      <div className="text-center sm:mb-5 mb-3">
+        <p className="sm:text-5xl text-3xl font-semibold sm:my-6">{t("service_we_provide")}</p>
 
         {/* -----------------------text---------------- */}
-        <p className=" text-secondary text-xl  mb-16">
+        <p className=" text-secondary sm:text-xl text-lg text-center sm:mb-16 mb-5">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suscipit
           tristique volutp
         </p>

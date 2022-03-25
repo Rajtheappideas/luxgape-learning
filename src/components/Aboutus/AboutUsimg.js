@@ -16,7 +16,7 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const AboutUsimg = () => {
   return (
-    <div className="sm:p-10 p-3 my-10 w-full grid lg:grid-cols-5 grid-rows-auto md:grid-cols-4 sm:grid-cols-3 grid-cols-2 place-items-center gap-5">
+    <div className="sm:p-10 p-3 sm:my-10 w-full grid lg:grid-cols-5 grid-rows-auto md:grid-cols-4 sm:grid-cols-3 grid-cols-2 place-items-center gap-5">
       <LazyLoadImage
         src={img1}
         alt="img1"

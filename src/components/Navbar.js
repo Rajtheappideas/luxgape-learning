@@ -26,7 +26,7 @@ const Navbar = ({ activeText }) => {
   return (
     <nav className="xl:flex xl:justify-between xl:items-center sm:p-10 p-3">
       {/* ----------------logo------------------- ------ */}
-      <div className="flex justify-between items-center lg:mb-0 mb-5">
+      <div className="flex justify-between items-start lg:mb-0 mb-5">
         <Link to="/">
           <img
             src={logo}

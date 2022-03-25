@@ -13,7 +13,7 @@ const Payment = () => {
       {/* -------------------navbar=------------------ */}
       <Navbar activeText="" />
 
-      <div className="sm:p-5 p-5 md:grid md:grid-cols-2 grid-flow-row place-items-center items-start ">
+      <div className="sm:p-5 p-5 md:grid md:grid-cols-2 sm:gap-x-4 grid-flow-row place-items-center items-start ">
         {/* --------------------payment method and product for large screen----------------- */}
         <div className="md:hidden block">
           <ProductYouBuy />

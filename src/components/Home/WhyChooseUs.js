@@ -12,8 +12,8 @@ const WhyChooseUs = () => {
   const { t } = useTranslation();
   return (
     <div className="sm:p-10 p-3 sm:mb-10 mb-5">
-      <div className="mb-10">
-        <p className="text-center font-semibold text-5xl mb-7">
+      <div className="sm:mb-10 mb-5">
+        <p className="text-center font-semibold sm:text-5xl text-3xl sm:mb-7">
           {t("why_choose_us")}
         </p>
         <p className="text-gray-400  text-center text-lg font-normal tracking-widest">
@@ -66,7 +66,7 @@ const WhyChooseUs = () => {
         </RoundedDiv>
         {/* --------------3 big rounde div=-------------- */}
 
-        <RoundedDiv>
+        <RoundedDiv className="lg:col-span-2 xl:col-span-1">
           <RoundedSmallDiv className="bg-black">
             <CheckCircleIcon
               color="white"
@@ -95,7 +95,7 @@ export default WhyChooseUs;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[190px] rounded-tr-0 rounded-br-[190px] rounded-bl-0
- h-[410px] w-[380px]
+ h-[410px] sm:w-[380px] w-auto
  flex items-center
  px-12 pt-16 hover:shadow-2xl `;
 

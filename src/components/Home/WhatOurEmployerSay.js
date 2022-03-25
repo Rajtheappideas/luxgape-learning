@@ -42,7 +42,7 @@ const WhatOurEmployerSay = () => {
   const { t } = useTranslation();
   return (
     <div className="my-5 px-3 sm:px-9" id="testimonial">
-      <p className="text-center text-5xl font-semibold my-20 tracking-wide">
+      <p className="text-center sm:text-5xl text-3xl font-semibold sm:my-20 my-5 tracking-wide">
         {t("what_our_employer_say")}
       </p>
       <Swiper

@@ -54,8 +54,8 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
         <div className="absolute bottom-10 -left-40 blur-[200px] w-[300px] h-[300px]  rounded-full bg-pink-300 " />
       )} */}
 
-      <div className="mb-10 flex justify-between items-center">
-        <p className="font-bold sm:text-5xl text-3xl ">{t("most_popular_course")}</p>
+      <div className="sm:mb-10 mb-5 flex justify-between items-start">
+        <p className="font-semibold sm:text-5xl text-3xl ">{t("most_popular_course")}</p>
         {showButton && (
           <Link to="/courses">
             <button
@@ -79,7 +79,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                 className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
               />
               <div className="p-5 space-y-5">
-                <p className="text-3xl font-semibold">{course.title}</p>
+                <p className="sm:text-3xl text-2xl font-semibold">{course.title}</p>
                 <p className="text-secondary text-xl font-semibold">
                   {course.description}
                 </p>

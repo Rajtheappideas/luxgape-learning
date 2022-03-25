@@ -16,11 +16,11 @@ const Herosection = () => {
   return (
     <div className="sm:p-10 p-3 xl:grid xl:grid-cols-2 xl:grid-flow-row xl:justify-items-end xl:items-start">
       {/* ------------text and search is here------------------------------ */}
-      <div className="relative xl:text-left text-center sm:space-y-20 space-y-7">
+      <div className="relative sm:space-y-20 space-y-7">
         {/* -------------------------------------text--------------------------------     */}
-        <div v className="text-6xl space-y-6 font-bold text-black">
+        <div v className="sm:text-6xl text-3xl space-y-6 font-semibold text-black">
           {/* ---------------heading of herosection------------ */}
-          <div className="space-y-6 w-full">
+          <div className="sm:space-y-6 text-left  space-y-3 w-full">
             <span className="block tracking-normal">{t("learning_and")}</span>
             <p className=" tracking-wider">
               <span className="mr-3">{t("level_up_your")}</span>
@@ -145,19 +145,19 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
 
         {/* --------------------------------photos--------------------------------------- */}
 
-        <div className="flex flex-row items-center xl:justify-start justify-center sm:space-x-12 space-x-2 w-full">
+        <div className="flex flex-row items-center xl:justify-start justify-start sm:space-x-12 space-x-2 w-full">
           <img
-            className="object-contain object-center sm:h-28 h-16"
+            className="object-contain object-center sm:h-28 h-16 w-auto"
             src={simg3}
             alt="studyimg"
           />
           <img
-            className="object-contain object-center sm:h-28 h-16"
+            className="object-contain object-center sm:h-28 h-16 w-auto"
             src={simg1}
             alt="studyimg"
           />
           <img
-            className="object-contain object-center sm:h-28 h-16"
+            className="object-contain object-center sm:h-28 h-16 w-auto"
             src={simg2}
             alt="studyimg"
           />

@@ -304,7 +304,10 @@ const data = [
   },
 ];
 const MostPopularCourse = () => {
-  const [index, setIndex] = useState(1);
+  const [pageNumber, setPageNumber] = useState(0);
+
+  const coursesPerPage = 6;
+  const pagesVisited = pageNumber * coursesPerPage;
   const { t } = useTranslation();
   const ScrollToTop = () => {
     window.scrollTo({
@@ -315,7 +318,7 @@ const MostPopularCourse = () => {
   return (
     <div className="sm:p-10 mb-10">
       <div className="mb-10 px-3 flex justify-between items-center">
-        <p className="text-left font-semibold text-5xl mb-7">
+        <p className="text-left font-semibold sm:text-5xl text-3xl sm:mb-7">
           {t("most_popular_course")}
         </p>
       </div>
@@ -329,8 +332,8 @@ const MostPopularCourse = () => {
                 alt="mpcimg1"
                 className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
               />
-              <div className="p-5 space-y-5">
-                <p className="text-3xl font-semibold">{course.courseName}</p>
+              <div className="p-5 sm:space-y-5 space-y-2">
+                <p className="sm:text-3xl text-2xl font-semibold">{course.courseName}</p>
                 <p className="text-secondary text-xl font-semibold">
                   {course.courseDeatils}
                 </p>

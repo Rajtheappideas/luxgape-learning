@@ -364,7 +364,7 @@ const Signup = () => {
 
                 {/* -----------terms of service----------- */}
 
-                <div className="flex items-center w-full">
+                <div className="flex items-start w-full">
                   <div className="relative">
                     <input
                       type="checkbox"
@@ -377,9 +377,9 @@ const Signup = () => {
                           "border-4 border-red-700"
                         }`}
                     />
-                    <span className="absolute top-1 cursor-pointer left-0 -z-10 rounded-tl-xl rounded-br-xl rounded-bl-none rounded-tr-none border-primary border-2 h-6 w-6" />
+                    <span className="absolute top-2 cursor-pointer left-0 -z-10 rounded-tl-xl rounded-br-xl rounded-bl-none rounded-tr-none border-primary border-2 h-6 w-6" />
                     {values.checkbox && (
-                      <CheckIcon className="h-6 cursor-pointer absolute top-1 left-0 -z-10" />
+                      <CheckIcon className="h-6 cursor-pointer absolute top-2 left-0 -z-10" />
                     )}
                     {errors.checkbox && touched.checkbox && (
                       <span className="bg-gray-100 absolute -top-12 sm:-left-20 -left-2 animate-bounce w-auto h-12 p-3 font-semibold px-2 whitespace-nowrap text-black rounded-xl">
