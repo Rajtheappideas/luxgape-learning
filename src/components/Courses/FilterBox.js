@@ -1,6 +1,7 @@
 import { StarIcon } from "@heroicons/react/solid";
-import React from "react";
+import React, { useEffect } from "react";
 import { BiDollar } from "react-icons/bi";
+import axios from 'axios'
 
 const Topics = [
   { name: "RGPD" },
@@ -29,6 +30,10 @@ const features = [
 ];
 
 const FilterBox = () => {
+  // const {user}
+  useEffect(() => {
+axios.post()
+  },[])
   return (
     <>
       {/* --------------filters box--------------- */}

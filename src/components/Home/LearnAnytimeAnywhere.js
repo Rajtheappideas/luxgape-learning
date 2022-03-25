@@ -52,7 +52,7 @@ const LearnAnytimeAnywhere = () => {
         </div>
 
         {/* --------------check mark and details------------ */}
-        <div className="sm:flex flex-wrap lg:space-y-2 sm:space-y-0 space-y-3 items-start my-5">
+        <div className="sm:flex flex-wrap sm:space-y-0 space-y-3 items-start sm:my-0 my-5">
           <div className="flex relative md:mr-3">
             <p className="w-8 h-8 mr-2 rounded-tl-[16px] rounded-br-[16px] rounded-tr-none rounded-bl-none bg-black">
               <CheckIcon
