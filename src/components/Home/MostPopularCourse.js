@@ -80,7 +80,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
               />
               <div className="p-5 space-y-5">
                 <p className="sm:text-3xl text-2xl font-semibold">{course.title}</p>
-                <p className="text-secondary text-xl font-semibold">
+                <p className="text-secondary text-xl font-normal">
                   {course.description}
                 </p>
                 <div className="flex items-start space-x-1">

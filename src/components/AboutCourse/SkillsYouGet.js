@@ -62,7 +62,7 @@ const SkillsYouGet = () => {
         {t("skills_you_will_get")}
       </p>
       {/* -----------jsut paragraph----------- */}
-      <p className="text-lg font-light text-center  xl:w-3/5 sm:w-5/6 mx-auto">
+      <p className="text-lg font-light sm:text-center  xl:w-3/5 sm:w-5/6 mx-auto">
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry. Lorem Ipsum has been the industry's standard dummy text ever
         since the 1500s, when an unknown printer took a galley of type and

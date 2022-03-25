@@ -7,7 +7,7 @@ const CourseDescription = () => {
   return (
     <div className="sm:px-10 px-3">
       {/* ------------------course program details-------------- */}
-      <div className="flex md:flex-row flex-col justify-center items-start w-full border-b py-10 border-[#c4c4c4]">
+      <div className="flex md:flex-row flex-col justify-center items-start w-full border-b sm:py-10 py-5 border-[#c4c4c4]">
         {/* ---------------heading-------------- */}
         <div className="w-2/4">
           <h1 className="sm:text-5xl text-3xl tracking-normal font-bold mb-4">

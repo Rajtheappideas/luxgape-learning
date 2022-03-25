@@ -334,7 +334,7 @@ const MostPopularCourse = () => {
               />
               <div className="p-5 sm:space-y-5 space-y-2">
                 <p className="sm:text-3xl text-2xl font-semibold">{course.courseName}</p>
-                <p className="text-secondary text-xl font-semibold">
+                <p className="text-secondary text-xl font-normal">
                   {course.courseDeatils}
                 </p>
                 <div className="flex items-start space-x-1">

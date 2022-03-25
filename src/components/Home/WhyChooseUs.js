@@ -35,7 +35,7 @@ const WhyChooseUs = () => {
             <p className="text-3xl font-bold tracking-widest">
               {t("why_choose_us_div_1_heading")}
             </p>
-            <p className="my-7 text-secondary tracking-wider text-xl leading-relaxed">
+            <p className="sm:my-7 my-4 text-secondary tracking-wider text-xl leading-relaxed">
               {t("why_choose_us_div_1_paragraph")}
             </p>
             <p className="w-10 h-10 bg-black">
@@ -56,7 +56,7 @@ const WhyChooseUs = () => {
             <p className="text-3xl pt-2 font-bold tracking-wide">
               {t("why_choose_us_div_2_heading")}
             </p>
-            <p className="my-7 text-secondary tracking-wider text-xl leading-relaxed">
+            <p className="sm:my-7 my-4 text-secondary tracking-wider text-xl leading-relaxed">
               {t("why_choose_us_div_2_paragraph")}
             </p>
             <p className="w-10 h-10 bg-black">
@@ -77,7 +77,7 @@ const WhyChooseUs = () => {
             <p className="text-3xl font-bold tracking-widest">
               {t("why_choose_us_div_3_heading")}
             </p>
-            <p className="my-7 text-secondary tracking-wider text-xl leading-relaxed">
+            <p className="sm:my-7 my-4 text-secondary tracking-wider text-xl leading-relaxed">
               {t("why_choose_us_div_3_paragraph")}
             </p>
             <p className="w-10 h-10 bg-black">

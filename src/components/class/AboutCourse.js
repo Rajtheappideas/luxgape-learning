@@ -21,7 +21,7 @@ const AboutCourse = () => {
           </p>
         </div>
       </div>
-      <hr className="border-collapse border-black mx-10 mt-10" />
+      <hr className="border-collapse border-black sm:mx-10 mx-3 sm:mt-10" />
       {/* -------------cousrse description----------------- */}
       <CourseDescription />
     </>
