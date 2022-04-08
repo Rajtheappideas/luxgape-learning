@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
-import tw from "tailwind-styled-components";
 import { Link } from "react-router-dom";
-import {
-  MenuIcon,
-  XIcon,
-  TranslateIcon,
-  ChevronDownIcon,
-} from "@heroicons/react/outline";
+import { MenuIcon, XIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../context/usercontext";
 import useUserData from "../hooks/useUserData";
 import { useTranslation } from "react-i18next";
+import { UserIcon } from "@heroicons/react/solid";
 
 const Navbar = ({ activeText }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -72,25 +67,9 @@ const Navbar = ({ activeText }) => {
         >
           <Link to="/aboutus">{t("About_Us")}</Link>
         </span>
-        {userData ? (
+        {!userData && (
           <>
-            <span
-              className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
-              onClick={handleLogout}
-            >
-              {t("Log_out")}
-            </span>
-            {/* <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
-              <img
-                src={userImage}
-                alt="studentimg"
-                className="object-center object-cover rounded-tl-lg rounded-br-lg rounded-bl-none rounded-tr-none w-10 h-10"
-              />
-              <span className="text-xl font-semibold ml-2">{userName}</span>
-            </div> */}
-          </>
-        ) : (
-          <>
+            {/* ------------------sign in---------------- */}
             <span className="hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out">
               <Link to="/signin">{t("Log_In")}</Link>
             </span>
@@ -102,41 +81,65 @@ const Navbar = ({ activeText }) => {
           </>
         )}
         {/* ---------------language dropdown-------------- */}
-        <div className="flex flex-col relative items-center justify-center w-24 h-10 bg-gray-100 rounded-xl">
-          <button
-            className="inline-flex items-center"
-            onClick={() => setShowDropdown(!showDropdown)}
-          >
-            {/* <TranslateIcon className="h-5" /> */}
+        <div className="group  relative cursor-pointer rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none bg-gray-200 w-16 h-10">
+          <p className="text-center text-2xl font-semibold">
             {localStorage.getItem("lang_code")}
-            <ChevronDownIcon className="h-5" />
-          </button>
-
-          {showDropdown && (
-            <div className="absolute -bottom-12 font-semibold h-auto rounded-br-xl rounded-bl-xl left-0 bg-gray-100 text-center text-black">
-              <button
-                onClick={() => {
-                  ChangeLanguage("en");
-                  setShowDropdown(false);
-                  localStorage.setItem("lang_code", "en");
-                }}
-                className="hover:bg-gray-400 w-full hover:text-white"
-              >
-                {t("english")}
-              </button>
-              <button
-                onClick={() => {
-                  ChangeLanguage("sp");
-                  setShowDropdown(false);
-                  localStorage.setItem("lang_code", "sp");
-                }}
-                className="hover:bg-gray-400 w-full hover:text-white"
-              >
-                {t("spanish")}
-              </button>
-            </div>
-          )}
+          </p>
+          <div className="group-hover:block text-center absolute top-10 -left-5 hidden h-auto z-10">
+            <ul className="top-0 w-28 bg-white shadow-2xl px-3 py-4 rounded-xl">
+              <li className="py-1">
+                <button
+                  onClick={() => {
+                    ChangeLanguage("en");
+                    localStorage.setItem("lang_code", "en");
+                  }}
+                  className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                >
+                  {t("english")}
+                </button>
+              </li>
+              <li className="py-1">
+                <button
+                  onClick={() => {
+                    ChangeLanguage("sp");
+                    localStorage.setItem("lang_code", "sp");
+                  }}
+                  className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                >
+                  {t("spanish")}
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
+        {/* ----------------user profile--------------- */}
+        {userData && (
+          <>
+            <div className="group  relative cursor-pointer rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none bg-gray-200 w-16 h-10">
+              <UserIcon className="h-10 mx-auto" color="gray" />
+              <div className="group-hover:block absolute top-10 -left-16 hidden h-auto z-10">
+                <ul className="top-0 w-40 bg-white shadow-2xl px-3 py-4 rounded-xl">
+                  <li className="py-1">
+                    <Link
+                      to="/userprofile"
+                      className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                    >
+                      My Profile
+                    </Link>
+                  </li>
+                  <li className="py-1">
+                    <span
+                      className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                      onClick={handleLogout}
+                    >
+                      {t("Log_out")}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* ------------mobile / tablet--------------- */}
@@ -168,22 +171,23 @@ const Navbar = ({ activeText }) => {
           >
             <Link to="/aboutus">{t("About_Us")}</Link>
           </span>
+
           {userData ? (
             <>
-              <span
+              <p>
+                <Link
+                  to="/userprofile"
+                  className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                >
+                  My Profile
+                </Link>
+              </p>
+              <p
                 className="text-xl font-semibold ml-2 cursor-pointer"
                 onClick={handleLogout}
               >
                 {t("Log_out")}
-              </span>
-              {/* <div className="flex items-center bg-gray-100 w-auto h-12 px-2 rounded-lg">
-                <img
-                  src={userImage}
-                  alt="studentimg"
-                  className="object-center object-cover rounded-tl-lg rounded-br-lg rounded-bl-none rounded-tr-none w-10 h-10"
-                />
-                <span className="text-xl font-semibold ml-2">{userName}</span>
-              </div> */}
+              </p>
             </>
           ) : (
             <>
@@ -195,7 +199,7 @@ const Navbar = ({ activeText }) => {
               </Link>
             </>
           )}
-
+          {/* ----------------language change------------- */}
           <div className="flex flex-col relative items-center justify-center w-24 h-10 bg-gray-100 rounded-xl">
             <button
               className="inline-flex items-center"
@@ -231,6 +235,7 @@ const Navbar = ({ activeText }) => {
               </div>
             )}
           </div>
+          {/* --------------------my profile---------------------- */}
         </div>
       )}
     </nav>

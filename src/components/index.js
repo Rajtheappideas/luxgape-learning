@@ -15,9 +15,8 @@ export { default as ServiceWeProvide } from "./Aboutus/ServiceWeProvide";
 export { default as ClassDetails } from "./Aboutus/ClassDetails";
 
 // --------------------------courses page------------------
-export { default as MostPopularCourseCourses } from "./Courses/MostPopularCourse";
+export { default as MostPopularCourses } from "./Courses/MostPopularCourse";
 export { default as SearchBoxAndFilter } from "./Courses/SearchBoxAndFilter";
-export { default as FilterBox } from "./Courses/FilterBox";
 
 // ----------------------------About course--------------------------------
 export { default as CourseDetails } from "./AboutCourse/CourseDetails";
@@ -42,5 +41,9 @@ export { default as Faq2 } from "./Faq2";
 
 // ---------------------otp verify of forgot password------------------------------
 export { default as OtpVerify } from "./OtpVerify";
+
+// --------------------change password & edit profile-------------
+export { default as ChangePassword } from "./ChangePassword";
+export { default as EditProfile } from "./EditProfile";
 
 export { default as Footer } from "./Footer";

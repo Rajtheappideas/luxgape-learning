@@ -5,7 +5,7 @@ import { useUserContext } from "../context/usercontext";
 import { toast } from "react-toastify";
 
 const useUserData = () => {
-  const { userData, setUserdata } = useUserContext();
+const { userData, setUserdata } = useUserContext();
   const navigate = useNavigate();
   const handleFailure = (result) => {
     console.log(result);

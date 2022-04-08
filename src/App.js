@@ -12,6 +12,7 @@ const Home = lazy(() => import("./pages/Home"));
 const About = lazy(() => import("./pages/About"));
 const SignIn = lazy(() => import("./pages/SignIn"));
 const SignUp = lazy(() => import("./pages/Signup"));
+const UserProfile = lazy(() => import("./pages/UserProfile"));
 const AboutCourse = lazy(() => import("./pages/AboutCourse"));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
@@ -56,6 +57,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/userprofile" element={<UserProfile />} />
               <Route path="/aboutus" element={<About />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route
@@ -64,9 +66,12 @@ const App = () => {
               />
               <Route path="/faq" element={<Faq />} />
               <Route path="/courses" element={<Courses />} />
-              <Route path="/courses/aboutcourse" element={<AboutCourse />} />
               <Route
-                path="/courses/aboutcourse/payment"
+                path="/courses/aboutcourse/:id"
+                element={<AboutCourse />}
+              />
+              <Route
+                path="/courses/aboutcourse/payment/:id"
                 element={<Payment />}
               />
               <Route

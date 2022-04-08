@@ -1,41 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components/dist/tailwind";
-import mpcimg1 from "../../assets/mpcimg1.jpg";
-import mpcimg2 from "../../assets/mpcimg2.jpg";
-import mpcimg3 from "../../assets/mpcimg3.jpg";
 import { ArrowRightIcon, StarIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-
-const data = [
-  {
-    id: 1,
-    img: mpcimg1,
-    title: "Lorem Ipsum is simply dummy text.",
-    description:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    price: 22,
-  },
-  {
-    id: 2,
-    img: mpcimg2,
-    title: "Lorem Ipsum is simply dummy text.",
-    description:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    price: 25,
-  },
-  {
-    id: 3,
-    img: mpcimg3,
-    title: "Lorem Ipsum is simply dummy text.",
-    description:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,",
-    price: 20,
-  },
-];
+import axios from "axios";
+import { useUserContext } from "../../context/usercontext";
+import SkeletonLoading from "../SkeletonLoading";
 
 const MostPopularCourse = ({ showButton, showEclipse }) => {
+  const [mostPopularCourse, setMostPopularCourse] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const { userLanguage } = useUserContext();
   const { t } = useTranslation();
   const ScrollToTop = () => {
     window.scrollTo({
@@ -43,6 +19,29 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
       behavior: "smooth",
     });
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+      axios("https://chessmafia.com/php/luxgap/App/api/get-popular-course", {
+        method: "POST",
+        params: {
+          lang_code: userLanguage,
+        },
+      })
+        .then((response) => {
+          if (response?.data?.status === "Success") {
+            setMostPopularCourse(response?.data?.data);
+            setLoading(false);
+            return true;
+          }
+        })
+        .catch((err) => {
+          console.log(err?.response?.data);
+          setLoading(false);
+          return false;
+        });
+    }, 3000);
+  }, []);
   return (
     <div className="sm:p-10 p-3 relative">
       {/* ----------------eclipse 1--------------------- */}
@@ -55,7 +54,9 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
       )} */}
 
       <div className="sm:mb-10 mb-5 flex justify-between items-start">
-        <p className="font-semibold sm:text-5xl text-3xl">{t("most_popular_course")}</p>
+        <p className="font-semibold sm:text-5xl text-3xl">
+          {t("most_popular_course")}
+        </p>
         {showButton && (
           <Link to="/courses">
             <button
@@ -70,39 +71,54 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
       {/* --------------- main div---------- */}
       <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
         {/* --------------Courses div=-------------- */}
-        {data.map((course) => (
-          <RoundedDiv key={course.id} onClick={ScrollToTop}>
-            <Link to="/Courses">
-              <LazyLoadImage
-                src={course.img}
-                alt="mpcimg1"
-                className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
-              />
-              <div className="p-5 space-y-5">
-                <p className="sm:text-3xl text-2xl font-semibold">{course.title}</p>
-                <p className="text-secondary text-xl font-normal">
-                  {course.description}
-                </p>
-                <div className="flex items-start space-x-1">
-                  <StarIcon className="w-8 h-8" color="gold" />
-                  <StarIcon className="w-8 h-8" color="gold" />
-                  <StarIcon className="w-8 h-8" color="gold" />
-                  <StarIcon className="w-8 h-8" color="gold" />
-                  <StarIcon className="w-8 h-8" color="gold" />
-                </div>
-                <div className="flex items-center space-x-3">
-                  <p className="text-secondary">
-                    <span className="font-bold text-2xl">${course.price}</span>
-                    /employee
+        {loading ? (
+          <>
+            <SkeletonLoading />
+            <SkeletonLoading />
+            <SkeletonLoading />
+          </>
+        ) : (
+          mostPopularCourse.map((course) => (
+            <Link
+              to={`/courses/aboutcourse/${course?.course_details?.course_id}`}
+              key={course?.id}
+            >
+              <RoundedDiv onClick={ScrollToTop}>
+                <LazyLoadImage
+                  src={`https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}`}
+                  alt={course?.course_details?.title}
+                  className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
+                />
+                <div className="p-5 space-y-5">
+                  <p className="sm:text-3xl text-2xl font-semibold">
+                    {course?.course_details?.title}
                   </p>
-                  <button className="w-10 h-10 bg-black ">
-                    <ArrowRightIcon className="p-2" color="white" />
-                  </button>
+                  <p className="text-secondary text-xl font-normal">
+                    {course?.course_details?.about}
+                  </p>
+                  <div className="flex items-start space-x-1">
+                    <StarIcon className="w-8 h-8" color="gold" />
+                    <StarIcon className="w-8 h-8" color="gold" />
+                    <StarIcon className="w-8 h-8" color="gold" />
+                    <StarIcon className="w-8 h-8" color="gold" />
+                    <StarIcon className="w-8 h-8" color="gold" />
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <p className="text-secondary">
+                      <span className="font-bold text-2xl">
+                        ${course?.price}
+                      </span>
+                      /employee
+                    </p>
+                    <button className="w-10 h-10 bg-black ">
+                      <ArrowRightIcon className="p-2" color="white" />
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </RoundedDiv>
             </Link>
-          </RoundedDiv>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

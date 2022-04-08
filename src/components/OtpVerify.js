@@ -8,14 +8,17 @@ import ResetPassword from "../pages/ResetPassword";
 
 const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
   const [EnterOtp, SetEnterOtp] = useState("");
-  const [loading, setLaoding] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLaoding(true);
-    if (otp === "") return alert("you have to enter otp");
+    if (EnterOtp === "") {
+      alert("you have to enter otp");
+      return false;
+    }
+    setLoading(true);
     await axios("https://chessmafia.com/php/luxgap/App/api/otp-verify", {
       method: "POST",
       params: { email, otp: EnterOtp },

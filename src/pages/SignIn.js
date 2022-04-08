@@ -103,14 +103,7 @@ const SignIn = () => {
         });
     },
   });
-  const {
-    errors,
-    touched,
-    resetForm,
-    handleSubmit,
-    isSubmitting,
-    getFieldProps,
-  } = formik;
+  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
 
   // ------------------error text color tailwind-------------
   const TextError = tw.span`

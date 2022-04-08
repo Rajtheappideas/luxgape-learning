@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import img from "../../assets/moreaboutusimg.jpg";
 
 const MoreAboutUs = () => {
@@ -23,8 +24,11 @@ const MoreAboutUs = () => {
           <p className="sm:text-2xl text-xl w-full leading-normal text-left tracking-normal sm:mb-7">
             {t("more_about_us_paragraph")}
           </p>
-          <button className="bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none w-[185px] h-[58px] text-xl text-center font-bold ">
-            {t("learn_more")}
+          <button
+            type="button"
+            className="bg-primary rounded-tl-[29px] rounded-br-[29px] rounded-tr-none rounded-bl-none w-[185px] h-[58px] text-xl text-center font-bold "
+          >
+            <Link to="/aboutus">{t("learn_more")}</Link>
           </button>
         </div>
 

@@ -1,21 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MetaTags } from "react-meta-tags";
 import {
   Footer,
   Navbar,
   WhatOurEmployerSay,
-  MostPopularCourseCourses,
+  MostPopularCourses,
   SearchBoxAndFilter,
 } from "../components";
 import { useTranslation } from "react-i18next";
+import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
+import { useUserContext } from "../context/usercontext";
 
 const Courses = () => {
+  const [courses, setCourses] = useState([]);
+
   const { t } = useTranslation();
+
+  const { userLanguage } = useUserContext();
+
+  // fetch data when page loads up first time
+  useEffect(() => {
+    setTimeout(() => {
+      axios("https://chessmafia.com/php/luxgap/App/api/get-course-list", {
+        method: "POST",
+        params: {
+          lang_code: userLanguage,
+        },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response?.data?.status === "Success") {
+            setCourses(response?.data?.data);
+            return true;
+          }
+        })
+        .catch((err) => {
+          if (err?.response?.data?.status === "Error") {
+            console.log("error ->", err?.response?.data);
+            return false;
+          }
+        });
+    }, 2000);
+  }, []);
+
   return (
     <div className="bg-bgblank relative">
       <MetaTags>
         <title>{t("Course")}</title>
       </MetaTags>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {/* -----------------------eclipse 1-------------- */}
       {/* <div className="absolute top-1/2 left-0 -z-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
       {/* -----------------------eclipse 2-------------- */}
@@ -29,10 +76,34 @@ const Courses = () => {
       <Navbar activeText="Course" />
 
       {/* -----------------search input & filters------------------ */}
-      <SearchBoxAndFilter />
+      {/* <SearchBoxAndFilter
+        handleSearchCourse={handleSearchCourse}
+        setSearchCourse={setSearchCourse}
+        setRating={setRating}
+        setMinPrice={setMinPrice}
+        setMaxPrice={setMaxPrice}
+        setCategoriesId={setCategoriesId}
+        rating={rating}
+        handleFilterCourse={handleFilterCourse}
+        categoriesId={categoriesId}
+        minPrice={minPrice}
+        maxPrice={maxPrice}
+      /> */}
 
       {/* -------------most popular cousrse----------------- */}
-      <MostPopularCourseCourses />
+      <MostPopularCourses
+        courses={courses}
+        // searchCourse={searchCourse}
+        // setSearchCourse={setSearchCourse}
+        // setRating={setRating}
+        // setMinPrice={setMinPrice}
+        // setMaxPrice={setMaxPrice}
+        // setCategoriesId={setCategoriesId}
+        // rating={rating}
+        // categoriesId={categoriesId}
+        // minPrice={minPrice}
+        // maxPrice={maxPrice}
+      />
 
       {/* ------------------------WhatOurEmployerSay--------------------------- */}
       <WhatOurEmployerSay />

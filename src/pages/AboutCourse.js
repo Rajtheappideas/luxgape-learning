@@ -1,6 +1,8 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
+import { useParams } from "react-router-dom";
 import {
   Footer,
   Navbar,
@@ -12,9 +14,51 @@ import {
   MostPopularCourse,
 } from "../components";
 import Eclipse from "../components/Eclipse";
+import { useUserContext } from "../context/usercontext";
 
 const AboutCourse = () => {
+  const [courseDetails, setCourseDetails] = useState({});
+  const [userReviews, setUserReviews] = useState([]);
+  const [units, setUnits] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { userLanguage } = useUserContext();
+
+  const { id } = useParams();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    setTimeout(() => {
+      axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {
+        method: "POST",
+        params: {
+          lang_code: userLanguage,
+          course_id: id,
+        },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response?.data?.status === "Success") {
+            setCourseDetails(response?.data?.data);
+            setUnits(response?.data?.data?.unites);
+            setUserReviews(response?.data?.data?.review_info);
+            setLoading(false);
+            return true;
+          }
+        })
+        .catch((err) => {
+          console.log("error ->", err?.response);
+          if (err?.response?.status === 404) {
+            console.log("something went wrong!");
+            setLoading(false);
+            return false;
+          }
+        });
+    }, 2000);
+  }, []);
+
   return (
     <div className="">
       <MetaTags>
@@ -28,16 +72,16 @@ const AboutCourse = () => {
       </h1>
 
       {/* -------------cousrse details----------------- */}
-      <CourseDetails />
+      <CourseDetails courseDetails={courseDetails} loading={loading} />
 
       {/* -------------Skills you get----------------- */}
-      <SkillsYouGet />
+      <SkillsYouGet courseDetails={courseDetails} />
 
       {/* -------------cousrse description----------------- */}
-      <CourseDescription />
+      <CourseDescription units={units} courseDetails={courseDetails} loading={loading} />
 
       {/* -------------Reviews----------------- */}
-      <Reviews />
+      <Reviews course_id={id} userReviews={userReviews} loading={loading} />
 
       {/* -------------Reviews----------------- */}
       <MostPopularCourse showButton={false} />
