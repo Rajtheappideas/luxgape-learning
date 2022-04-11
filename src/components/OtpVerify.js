@@ -39,6 +39,7 @@ const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
         }
       });
   };
+
   useEffect(() => {
     Modal.setAppElement("body");
   }, []);

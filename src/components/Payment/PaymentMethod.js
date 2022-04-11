@@ -17,6 +17,7 @@ const PaymentMethod = ({ product }) => {
   const { t } = useTranslation();
 
   const { userLanguage, userData } = useUserContext();
+  console.log(userData);
 
   const today = new Date();
   let dd = today.getDate();
@@ -28,6 +29,11 @@ const PaymentMethod = ({ product }) => {
   let milliseconds = today.getMilliseconds();
 
   const makePayment = (token) => {
+    if (enterCouponCode === "") {
+      toast("Oops!!, you forgot to enter coupon code", { type: "warning" });
+      return false;
+    }
+    setLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/course-booking", {
       method: "POST",
       params: {
@@ -47,21 +53,20 @@ const PaymentMethod = ({ product }) => {
       .then((response) => {
         console.log(response?.data?.data);
         if (response?.status === 200) {
+          setLoading(false);
           setModalOpen(true);
         }
       })
       .catch((err) => {
         if (err?.response?.data) {
           console.log(err?.response?.data);
+          setLoading(false);
         }
       });
   };
   const handleCouponeCode = () => {
     if (!radioBtn) {
       toast("press the radio button", { type: "warning" });
-      return false;
-    } else if (enterCouponCode === "") {
-      toast("Oops!!, you forgot to enter coupon code", { type: "warning" });
       return false;
     }
     setLoading(true);
@@ -173,7 +178,7 @@ const PaymentMethod = ({ product }) => {
             >
               <button
                 type="button"
-                className="font-bold text-center sm:mr-5 sm:mb-0 mb-2 text-xl bg-primary text-white border  sm:w-48 w-60 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
+                className="font-bold text-center sm:mr-4 sm:mb-0 mb-2 text-xl bg-primary text-white border  sm:w-48 w-60 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
               >
                 {t("confirm_and_pay")}
               </button>

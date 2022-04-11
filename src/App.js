@@ -18,6 +18,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
 const Faq = lazy(() => import("./pages/Faq"));
 const Courses = lazy(() => import("./pages/Courses"));
+const MyCourses = lazy(() => import("./pages/MyCourses"));
 const Employee = lazy(() => import("./pages/Employee"));
 const Exam = lazy(() => import("./pages/Exam"));
 const AttendCourseHistory = lazy(() => import("./pages/AttendCourseHistory"));
@@ -26,6 +27,7 @@ const Erro404 = lazy(() => import("./pages/Error404"));
 const Class = lazy(() => import("./pages/Class"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const PrivateRoute = lazy(() => import("./pages/PrivateRoute"));
 
 const App = () => {
   // default options for lottie files
@@ -66,13 +68,18 @@ const App = () => {
               />
               <Route path="/faq" element={<Faq />} />
               <Route path="/courses" element={<Courses />} />
+              <Route path="/mycourses" element={<MyCourses />} />
               <Route
                 path="/courses/aboutcourse/:id"
                 element={<AboutCourse />}
               />
               <Route
                 path="/courses/aboutcourse/payment/:id"
-                element={<Payment />}
+                element={
+                  <PrivateRoute>
+                    <Payment />
+                  </PrivateRoute>
+                }
               />
               <Route
                 path="/attendcoursehistory"

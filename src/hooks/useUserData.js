@@ -5,14 +5,14 @@ import { useUserContext } from "../context/usercontext";
 import { toast } from "react-toastify";
 
 const useUserData = () => {
-const { userData, setUserdata } = useUserContext();
+  const { userData, setUserdata } = useUserContext();
   const navigate = useNavigate();
   const handleFailure = (result) => {
     console.log(result);
   };
-  const handleSuccess = (googledata) => {
-    localStorage.setItem("googlelogin", JSON.stringify(googledata));
-    setUserdata(googledata);
+  const handleSuccess = (data) => {
+    localStorage.setItem("user", JSON.stringify(data));
+    setUserdata(data);
     navigate("/");
   };
   const handleLogout = () => {
@@ -28,7 +28,6 @@ const { userData, setUserdata } = useUserContext();
         toast(res?.data?.message, { type: "success" });
       })
       .catch((err) => console.log(err?.response?.data));
-    localStorage.removeItem("googlelogin");
     localStorage.removeItem("user");
     setUserdata(null);
     navigate("/");

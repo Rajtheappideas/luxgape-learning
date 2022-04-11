@@ -5,9 +5,9 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [userData, setUserdata] = useState(
-    localStorage.getItem("googlelogin")
-      ? JSON.parse(localStorage.getItem("googlelogin"))
-      : JSON.parse(localStorage.getItem("user"))
+    localStorage.getItem("user")
+      ? JSON.parse(localStorage.getItem("user"))
+      : null
   );
   const [userLanguage, setUserLanguage] = useState(
     localStorage.getItem("lang_code")

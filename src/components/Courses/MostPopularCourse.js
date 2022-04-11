@@ -108,6 +108,7 @@ const MostPopularCourse = ({ courses }) => {
   useEffect(() => {
     handleClearFilters();
   }, [filtersOpen]);
+  
   // handle search data based on user enter value
   const handleSearchCourse = () => {
     if (searchCourse === "") {

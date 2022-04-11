@@ -48,8 +48,9 @@ const CourseHistory = ({ showButton }) => {
     <div className=" sm:p-10 p-3 relative">
       {/* ----------------eclipse---------------- */}
       {/* <div className="absolute -bottom-28 left-0 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
+
       {/* --------------heading-------------- */}
-      <div className="sm:mb-16 mb-5 flex justify-between items-start">
+      <div className="sm:mb-16 mb-5 flex justify-between items-start sm:items-center">
         <p className="sm:text-5xl text-3xl font-semibold tracking-wide">
           {t("attend_course_history")}
         </p>

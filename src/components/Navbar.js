@@ -13,9 +13,6 @@ const Navbar = ({ activeText }) => {
   const { userData, ChangeLanguage } = useUserContext();
   const { handleLogout } = useUserData();
 
-  const userName = userData?.Du?.tf;
-  const userImage = userData?.profileObj?.imageUrl;
-
   const { t } = useTranslation();
 
   return (
@@ -125,6 +122,14 @@ const Navbar = ({ activeText }) => {
                       className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                     >
                       My Profile
+                    </Link>
+                  </li>
+                  <li className="py-1">
+                    <Link
+                      to="/mycourses"
+                      className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                    >
+                      My Courses
                     </Link>
                   </li>
                   <li className="py-1">

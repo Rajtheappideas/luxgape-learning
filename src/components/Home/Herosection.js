@@ -10,11 +10,8 @@ import { useTranslation } from "react-i18next";
 
 const Herosection = () => {
   const { t } = useTranslation();
-
-  // useEffect(() => {}, []);
-
   return (
-    <div className="sm:p-10 p-3 xl:grid xl:grid-cols-2 xl:grid-flow-row xl:justify-items-end xl:items-start">
+    <div className="sm:px-10 p-3 xl:grid xl:grid-cols-2 xl:grid-flow-row xl:justify-items-end xl:items-start">
       {/* ------------text and search is here------------------------------ */}
       <div className="relative sm:space-y-20 space-y-7">
         {/* -------------------------------------text--------------------------------     */}
