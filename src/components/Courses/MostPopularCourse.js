@@ -285,7 +285,7 @@ const MostPopularCourse = ({ courses }) => {
   ];
 
   return (
-    <div className="sm:p-10 mb-10">
+    <div className="sm:p-10 mb-10 p-3">
       {/* --------------------search & filter divs---------------------- */}
       <div className="p-3">
         <div className="flex lg:justify-end justify-center lg:space-x-5 mb-5 flex-wrap items-start ">
@@ -299,7 +299,7 @@ const MostPopularCourse = ({ courses }) => {
               onChange={(e) => setSearchCourse(e.target.value.toLowerCase())}
               className="px-3 outline-none h-[72px] sm:w-[400px] w-full border bg-white rounded-tl-[36px] rounded-br-[36px] rounded-tr-none rounded-bl-none "
             />
-            {/* --------search button----------- */}(
+            {/* --------search button----------- */}
             <button
               type="button"
               onClick={handleSearchCourse}
@@ -322,12 +322,12 @@ const MostPopularCourse = ({ courses }) => {
           {filtersOpen && (
             <>
               {/* --------------filters box--------------- */}
-              <div className="bg-white my-8 sm:p-10 p-3 w-full h-auto border shadow-2xl rounded-tl-[184px] rounded-br-[184px] rounded-bl-none rounded-tr-none ">
-                {/* -----------grid first div--------------- */}
-                <div className="grid w-full lg:grid-cols-2 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start sm:gap-5 xl:justify-items-center justify-items-start items-center">
+              <div className="bg-white sm:my-8 my-2 sm:p-10 p-5 w-full h-auto border shadow-2xl rounded-tl-[184px] rounded-br-[184px] rounded-bl-none rounded-tr-none ">
+                {/* -----------first div--------------- */}
+                <div className="grid w-full p-10 md:grid-cols-2 grid-cols-1 grid-rows-1 md:items-start sm:gap-5 xl:justify-items-center justify-items-start items-center">
                   {/* ------------------firrst column-------------- */}
                   <div>
-                    <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
+                    <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
                       List of Categories
                     </p>
                     {categories.map((category) => (
@@ -350,7 +350,7 @@ const MostPopularCourse = ({ courses }) => {
                   {/* ------------------second column-------------- */}
 
                   <div>
-                    <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
+                    <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
                       Skills
                     </p>
                     {skills.map((skill) => (
@@ -377,10 +377,10 @@ const MostPopularCourse = ({ courses }) => {
                 <div className="border-dashed border-2 border-[#C4C4C4] w-full " />
 
                 {/* ------------------second grid div------------- */}
-                <div className="grid w-full lg:grid-cols-2 p-10 lg:grid-rows-1 md:grid-cols-2 md:grid-rows-2 grid-cols-1 grid-rows-3 md:items-start sm:gap-5 xl:justify-items-center justify-items-start items-center">
+                <div className="grid w-full p-10 md:grid-cols-2 grid-cols-1 grid-rows-1 md:items-start sm:gap-5 xl:justify-items-center justify-items-start items-center">
                   {/* ------------------first column-------------- */}
                   <div>
-                    <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
+                    <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
                       Ratings
                     </p>
                     {stars.map((star) => (
@@ -399,8 +399,8 @@ const MostPopularCourse = ({ courses }) => {
                   </div>
 
                   {/* ------------------second column-------------- */}
-                  <div className="lg:col-span-1 md:col-span-2">
-                    <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
+                  <div>
+                    <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
                       Price
                     </p>
                     <div className="flex items-center mb-3 ">
@@ -438,14 +438,14 @@ const MostPopularCourse = ({ courses }) => {
                 <div className="text-center flex sm:flex-row flex-col items-center sm:justify-center md:space-y-0 space-y-2">
                   <button
                     type="button"
-                    className="sm:w-[209px] active:scale-95 transition-all duration-150 ease-in-out w-36 md:mr-5 h-12 font-bold bg-[#E0E0E0] rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
+                    className="sm:w-[209px] w-32 h-10 active:scale-95 transition-all duration-150 ease-in-out md:mr-5 font-bold bg-[#E0E0E0] rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
                     onClick={handleClearFilters}
                   >
                     Clear All Filters
                   </button>
                   <button
                     type="button"
-                    className="sm:w-[209px] active:scale-95 transition-all duration-150 ease-in-out w-36 h-12 bg-primary text-white font-bold rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
+                    className="sm:w-[209px] w-32 h-10 active:scale-95 transition-all duration-150 ease-in-out  bg-primary text-white font-bold rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
                     onClick={handleFilterCourse}
                   >
                     Apply Filters
@@ -489,14 +489,14 @@ const MostPopularCourse = ({ courses }) => {
                       null
                     }
                     alt={course?.course_details?.title}
-                    className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
+                    className="h-1/2 w-full object-center rounded-tl-[182px] outline-none"
                   />
 
                   <div className="p-5 sm:space-y-5 space-y-2">
                     <p className="sm:text-3xl text-2xl font-semibold">
                       {course?.course_details?.title}
                     </p>
-                    <p className="text-secondary text-xl font-normal">
+                    <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
                       {course?.course_details?.about}
                     </p>
                     <div className="flex items-start space-x-1">
@@ -506,14 +506,15 @@ const MostPopularCourse = ({ courses }) => {
                       <StarIcon className="w-8 h-8" color="gold" />
                       <StarIcon className="w-8 h-8" color="gold" />
                     </div>
+                    {/* arrow button */}
                     <div className="flex items-center space-x-3">
                       <p className="text-secondary">
-                        <span className="font-bold text-2xl">
-                          ${course.price}
+                        <span className="font-bold sm:text-2xl text-xl">
+                          ${course?.price}
                         </span>
                         /employee
                       </p>
-                      <button className="w-10 h-10 bg-black cursor-pointer">
+                      <button className="w-10 h-10 bg-black ">
                         <ArrowRightIcon className="p-2" color="white" />
                       </button>
                     </div>
@@ -684,7 +685,6 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- sm:h-[673px]
-  sm:w-[364px] w-11/12
+ sm:h-[673px] h-[500px] sm:w-[364px] w-72
  cursor-pointer
  `;

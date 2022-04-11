@@ -30,7 +30,7 @@ const WhatOurEmployerSay = () => {
       })
       .catch((err) => {
         if (err?.response?.data?.status === "Error") {
-          toast("Somthing Went Wrong!!", { type: "error" });
+          // toast("Somthing Went Wrong!!", { type: "error" });
           return false;
         }
       });
@@ -70,7 +70,7 @@ const WhatOurEmployerSay = () => {
             key={review.id}
             className="flex w-full items-center h-full"
           >
-            <div className="relative sm:p-8 p-6 hover:shadow-xl border w-full h-auto rounded-tl-[85px] rounded-br-[85px] rounded-tr-none rounded-bl-none bg-white ">
+            <div className="relative sm:p-8 p-6 hover:shadow-xl border w-full sm:h-60 h-96 rounded-tl-[85px] rounded-br-[85px] rounded-tr-none rounded-bl-none bg-white ">
               {/* ----------------------profile and name div----------------------- */}
 
               <div className="flex items-center mb-3">
@@ -90,7 +90,7 @@ const WhatOurEmployerSay = () => {
                   <span className="block text-lg">employer</span>
                 </div>
               </div>
-              <p className="text-xl text-left leading-snug tracking-normal font-medium w-full h-36 break-words scrollbar-hide overflow-auto">
+              <p className="text-xl text-left leading-snug tracking-normal font-medium w-full sm:h-20 h-auto break-words scrollbar-hide overflow-auto">
                 {review.review.trim()}
               </p>
             </div>

@@ -35,12 +35,20 @@ const Footer = ({ classFooter, normalFooter }) => {
 
           {/* ---------------------------course----------------------------- */}
           <div>
-            <Label>{t("Course")}</Label>
+            <Label>{t("Support")}</Label>
             <ul className="sm:space-y-5 space-y-3">
-              <List>Lorem ipsum</List>
-              <List>Lorem ipsum</List>
-              <List>Lorem ipsum</List>
-              <List>Lorem ipsum</List>
+              <List onClick={ScrollToTop}>
+                <Link to="/terms&conditions">{t("terms_of_conditions")}</Link>
+              </List>
+              <List>
+                <Link to="/">Cancellations</Link>
+              </List>
+              <List onClick={ScrollToTop}>
+                <Link to="/userprofile">My profile</Link>
+              </List>
+              <List>
+                <Link to="/">Cookie Policy</Link>
+              </List>
             </ul>
           </div>
 

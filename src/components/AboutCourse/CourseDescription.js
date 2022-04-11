@@ -15,7 +15,7 @@ const CourseDescription = ({ units, courseDetails, loading }) => {
           <h1 className="sm:text-5xl text-3xl tracking-normal font-bold mb-4">
             Course Program:
           </h1>
-          <p className="font-bold text-secondary text-base">
+          <p className="font-bold text-secondary text-base block whitespace-nowrap">
             All Course - {courseDetails?.total_unit} Units (
             {courseDetails?.total_hour} hours)
           </p>
@@ -50,7 +50,7 @@ const CourseDescription = ({ units, courseDetails, loading }) => {
             <rect x="450" y="120" rx="3" ry="3" width="274" height="20" />
             <rect x="450" y="160" rx="3" ry="3" width="374" height="20" />
           </ContentLoader>
-          <ContentLoader
+          {/* <ContentLoader
             speed={1}
             width={800}
             height={274}
@@ -64,7 +64,7 @@ const CourseDescription = ({ units, courseDetails, loading }) => {
             <rect x="450" y="80" rx="3" ry="3" width="374" height="20" />
             <rect x="450" y="120" rx="3" ry="3" width="274" height="20" />
             <rect x="450" y="160" rx="3" ry="3" width="374" height="20" />
-          </ContentLoader>
+          </ContentLoader> */}
         </>
       ) : (
         units.map((unit) => (

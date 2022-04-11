@@ -28,6 +28,7 @@ const AboutCourse = () => {
 
   useEffect(() => {
     setTimeout(() => {
+      setLoading(true);
       axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {
         method: "POST",
         params: {
@@ -78,7 +79,11 @@ const AboutCourse = () => {
       <SkillsYouGet courseDetails={courseDetails} />
 
       {/* -------------cousrse description----------------- */}
-      <CourseDescription units={units} courseDetails={courseDetails} loading={loading} />
+      <CourseDescription
+        units={units}
+        courseDetails={courseDetails}
+        loading={loading}
+      />
 
       {/* -------------Reviews----------------- */}
       <Reviews course_id={id} userReviews={userReviews} loading={loading} />

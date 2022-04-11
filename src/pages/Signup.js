@@ -149,7 +149,7 @@ const Signup = () => {
         pauseOnHover
       />
       {/* -------------main div---------------- */}
-      <div className="sm:p-10 p-3">
+      <div className="sm:p-10">
         {/* --------------logo & lang box------------------- */}
         <div className="flex justify-between items-center">
           <Link to="/">
@@ -198,7 +198,7 @@ const Signup = () => {
         </div>
 
         {/* --------------------grid div---------------- */}
-        <div className="sm:p-10 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
+        <div className="sm:p-10 p-3 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
             <LazyLoadImage

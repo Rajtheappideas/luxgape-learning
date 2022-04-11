@@ -10,7 +10,7 @@ import SkeletonLoading from "../SkeletonLoading";
 
 const MostPopularCourse = ({ showButton, showEclipse }) => {
   const [mostPopularCourse, setMostPopularCourse] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { userLanguage } = useUserContext();
   const { t } = useTranslation();
   const ScrollToTop = () => {
@@ -42,6 +42,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
         });
     }, 3000);
   }, []);
+
   return (
     <div className="sm:p-10 p-3 relative">
       {/* ----------------eclipse 1--------------------- */}
@@ -89,11 +90,11 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                   alt={course?.course_details?.title}
                   className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
                 />
-                <div className="p-5 space-y-5">
+                <div className="sm:p-5 p-3 sm:space-y-5 space-y-3">
                   <p className="sm:text-3xl text-2xl font-semibold">
                     {course?.course_details?.title}
                   </p>
-                  <p className="text-secondary text-xl font-normal">
+                  <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
                     {course?.course_details?.about}
                   </p>
                   <div className="flex items-start space-x-1">
@@ -105,7 +106,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <p className="text-secondary">
-                      <span className="font-bold text-2xl">
+                      <span className="font-bold sm:text-2xl text-xl">
                         ${course?.price}
                       </span>
                       /employee
@@ -129,6 +130,6 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- sm:h-[673px] sm:w-[364px] w-auto
+ sm:h-[673px] h-[500px] sm:w-[364px] w-full
  cursor-pointer
  `;

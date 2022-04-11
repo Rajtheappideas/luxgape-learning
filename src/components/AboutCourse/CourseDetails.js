@@ -32,12 +32,12 @@ const CourseDetails = ({ courseDetails, loading }) => {
             backgroundColor="#efe6e6"
             foregroundColor="#d7bcbc"
             animate
-            className="w-full h-screen"
+            className="w-full sm:h-screen h-80"
           >
             <rect x="0" y="0" rx="3" ry="3" width="800" height="670" />
           </ContentLoader>
         ) : (
-          <div className="w-full sm:h-screen h-96 relative lg:mr-10 bg-black mix-blend-darken border border-gray-300 rounded-xl">
+          <div className="w-full sm:h-screen h-96 relative lg:mr-10 bg-black mix-blend-darken border border-gray-300">
             <ReactPlayer
               url={
                 `https://chessmafia.com/php/luxgap/App/${courseDetails?.course_details?.demo_video}` ||
@@ -105,7 +105,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
             animate
             className="w-full"
           >
-            <rect x="20" y="0" rx="3" ry="3" width="37" height="20" />
+            <rect x="20" y="10" rx="3" ry="3" width="37" height="20" />
             <rect x="20" y="50" rx="3" ry="3" width="200" height="20" />
             <rect x="20" y="100" rx="3" ry="3" width="260" height="20" />
             <rect x="20" y="170" rx="3" ry="3" width="200" height="20" />
@@ -127,44 +127,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
             <p className="font-semibold text-xl">{t("what_will_you_learn")}:</p>
             {/* ----------------course key points------------------ */}
             <div className="flex flex-row lg:justify-start justify-center items-center">
-              <ul className="space-y-3 mr-10">
-                <li className="flex ">
-                  <CheckCircleIcon
-                    className="h-6 w-6 sm:sm:mr-3"
-                    color="lightblue"
-                  />
-                  {courseDetails?.course_details?.what_will_learn}
-                </li>
-                <li className="flex ">
-                  <CheckCircleIcon
-                    className="h-6 w-6 sm:mr-3"
-                    color="lightblue"
-                  />
-                  {courseDetails?.course_details?.what_will_learn}
-                </li>
-                <li className="flex ">
-                  <CheckCircleIcon
-                    className="h-6 w-6 sm:mr-3"
-                    color="lightblue"
-                  />
-                  {courseDetails?.course_details?.what_will_learn}
-                </li>
-              </ul>
-              <ul className="space-y-3">
-                <li className="flex ">
-                  <CheckCircleIcon
-                    className="h-6 w-6 sm:mr-3"
-                    color="lightblue"
-                  />
-                  {courseDetails?.course_details?.what_will_learn}
-                </li>
-                <li className="flex ">
-                  <CheckCircleIcon
-                    className="h-6 w-6 sm:mr-3"
-                    color="lightblue"
-                  />
-                  {courseDetails?.course_details?.what_will_learn}
-                </li>
+              <ul className="space-y-3 sm:mr-10 mr-3">
                 <li className="flex ">
                   <CheckCircleIcon
                     className="h-6 w-6 sm:mr-3"

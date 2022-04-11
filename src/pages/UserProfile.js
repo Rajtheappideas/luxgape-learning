@@ -1,4 +1,4 @@
-import React, { useDebugValue, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChangePassword, EditProfile, Footer, Navbar } from "../components";
 import { MetaTags } from "react-meta-tags";
 import { t } from "i18next";
@@ -44,7 +44,6 @@ const UserProfile = () => {
         return true;
       })
       .catch((err) => {
-        console.log("error ->", err?.response?.data);
         return false;
       });
   }, []);
@@ -68,15 +67,15 @@ const UserProfile = () => {
       />
 
       <Navbar />
-      <div className="md:mx-auto shadow-2xl rounded-tl-[5rem] rounded-br-[5rem] rounded-tr-none rounded-bl-none md:w-9/12 mx-5 h-auto my-7 pb-10">
+      <div className="md:mx-auto shadow-2xl rounded-tl-[5rem] rounded-br-[5rem] rounded-tr-none rounded-bl-none md:w-9/12 sm:mx-5 w-full h-auto my-7 pb-10">
         <div className="pt-40">
           {/* --------------image and name------------  */}
           <div className="bg-primary h-28">
-            <div className="relative md:w-40 md:h-40">
+            <div className="relative md:w-40 md:h-40 w-32 h-32">
               <input
                 type="file"
                 accept="image/*"
-                className="absolute -top-20 left-28 h-full w-full cursor-pointer z-10 opacity-0"
+                className={`absolute sm:-top-20 sm:left-28 left-28 bottom-16 h-full w-full cursor-pointer z-10 opacity-0 ${changePassword && 'cursor-not-allowed'}`}
                 onChange={handleImageUpload}
                 disabled={changePassword ? true : false}
               />
@@ -84,10 +83,10 @@ const UserProfile = () => {
               {prevImage ? (
                 <img
                   src={prevImage}
-                  className="w-full h-full object-cover bg-gray-300 object-center rounded-full border-8 border-white absolute -top-20 left-28"
+                  className="w-full h-full object-cover bg-gray-300 object-center rounded-full border-8 border-white absolute -top-20 left-24"
                 />
               ) : null ? (
-                <UserIcon className="md:h-40 md:w-40 h-28 w-28 bg-gray-300 rounded-full border-8 border-white absolute md:-top-20 -top-10 md:left-28 left-32" />
+                <UserIcon className="md:h-40 md:w-40  h-32 w-32 bg-gray-300 rounded-full border-8 border-white absolute -top-20 left-24 " />
               ) : (
                 <img
                   src={
@@ -95,22 +94,14 @@ const UserProfile = () => {
                       ? prevImage
                       : `https://chessmafia.com/php/luxgap/App/${userDetails?.profile}`
                   }
-                  className="w-full h-full object-cover bg-gray-300 object-center rounded-full border-8 border-white absolute -top-20 left-28"
+                  className="w-full h-full object-cover bg-gray-300 object-center rounded-full border-8 border-white absolute -top-20 left-24"
                 />
               )}
-              <CameraIcon className="h-10 absolute md:bottom-20 md:-right-24 -bottom-20 right-36 z-10 w-auto bg-gray-100 rounded-full" />
+              <CameraIcon className="h-10 absolute md:bottom-20 md:-right-24 bottom-20 md:left-48 left-44 z-10 w-auto bg-gray-100 rounded-full" />
             </div>
-            {/* <div className="pt-2 text-xl space-y-1">
-              <p className="font-semibold">full name</p>
-              <p className="font-semibold">Email</p>
-            </div> */}
-            {/* <div />
-            <div />
-            <div />
-            <div /> */}
           </div>
           {/* ------------buttons edit profile and change password------------ */}
-          <div className="mx-auto text-lg flex justify-center bg-orange-200 items-center my-12 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none w-80 h-12">
+          <div className="mx-auto sm:w-96 text-lg flex sm:flex-row flex-col justify-center items-center sm:bg-orange-200 my-12 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none space-y-2 sm:space-y-0">
             <button
               type="button"
               onClick={() => {
@@ -118,8 +109,8 @@ const UserProfile = () => {
                 setEditProfile(true);
               }}
               className={`${
-                editProfile && "bg-primary"
-              } font-semibold w-full h-full rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
+                editProfile ? "bg-primary" : "bg-orange-200"
+              } font-semibold h-12 w-60 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
             >
               Edit Profile
             </button>
@@ -130,8 +121,8 @@ const UserProfile = () => {
                 setEditProfile(false);
               }}
               className={`${
-                changePassword && "bg-primary"
-              } font-semibold w-full h-full rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
+                changePassword ? "bg-primary" : "bg-orange-200"
+              } font-semibold h-12 w-60  rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
             >
               Change Password
             </button>
