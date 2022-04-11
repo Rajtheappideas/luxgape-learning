@@ -463,7 +463,7 @@ const MostPopularCourse = ({ courses }) => {
         </p>
       </div>
       {/* --------------------show filtered courses---------------------- */}
-      <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 items-center place-items-center lg:gap-10 md:gap-16 gap-4">
+      <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 items-center place-items-center lg:gap-10 md:gap-16 gap-4 min-w-full">
         {/* -------------- rounde div=-------------- */}
 
         {filteredCourses.length === 0 && searchedCourses.length === 0 ? (
@@ -685,6 +685,5 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- sm:h-[673px] h-[500px] sm:w-[364px] w-full
- cursor-pointer
- `;
+  sm:h-[673px] h-[550px] sm:w-[364px] w-72
+cursor-pointer`;
