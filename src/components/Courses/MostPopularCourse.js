@@ -685,6 +685,6 @@ export default MostPopularCourse;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- sm:h-[673px] h-[500px] sm:w-[364px] w-72
+ sm:h-[673px] h-[500px] sm:w-[364px] w-full
  cursor-pointer
  `;

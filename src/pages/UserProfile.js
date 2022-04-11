@@ -4,8 +4,8 @@ import { MetaTags } from "react-meta-tags";
 import { t } from "i18next";
 import { ToastContainer } from "react-toastify";
 import { UserIcon, CameraIcon } from "@heroicons/react/outline";
-import axios from "axios";
 import { useUserContext } from "../context/usercontext";
+import axios from "axios";
 
 const UserProfile = () => {
   const [editProfile, setEditProfile] = useState(true);
@@ -16,6 +16,7 @@ const UserProfile = () => {
 
   // ---context----------
   const { userData } = useUserContext();
+  
   //   ---------------language code--------
   const lang_code = localStorage.getItem("lang_code");
 
@@ -75,7 +76,9 @@ const UserProfile = () => {
               <input
                 type="file"
                 accept="image/*"
-                className={`absolute sm:-top-20 sm:left-28 left-28 bottom-16 h-full w-full cursor-pointer z-10 opacity-0 ${changePassword && 'cursor-not-allowed'}`}
+                className={`absolute sm:-top-20 sm:left-28 left-28 bottom-16 h-full w-full cursor-pointer z-10 opacity-0 ${
+                  changePassword && "cursor-not-allowed"
+                }`}
                 onChange={handleImageUpload}
                 disabled={changePassword ? true : false}
               />
