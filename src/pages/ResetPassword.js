@@ -44,7 +44,6 @@ const ResetPassword = () => {
         if (error === "OTP is not valid") {
           return toast("OTP is not valid!", { type: "error" });
         }
-        console.log("error ->", error);
       });
   };
   return (

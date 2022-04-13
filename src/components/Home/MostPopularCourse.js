@@ -88,7 +88,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                 <LazyLoadImage
                   src={`https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}`}
                   alt={course?.course_details?.title}
-                  className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
+                  className="h-1/2 w-full object-center rounded-tl-[182px]"
                 />
                 <div className="sm:p-5 p-3 sm:space-y-5 space-y-3">
                   <p className="sm:text-3xl text-2xl font-semibold">
@@ -128,8 +128,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
 export default MostPopularCourse;
 
 const RoundedDiv = tw.div`
-border relative
+border relative inline-block
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
- sm:h-[673px] h-[500px] sm:w-[364px] w-full
- cursor-pointer
- `;
+  sm:h-[673px] h-[550px] sm:w-[364px] w-72
+cursor-pointer`;

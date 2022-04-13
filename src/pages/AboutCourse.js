@@ -19,13 +19,16 @@ import { useUserContext } from "../context/usercontext";
 const AboutCourse = () => {
   const [courseDetails, setCourseDetails] = useState({});
   const [userReviews, setUserReviews] = useState([]);
+  const [skillsYouGet, setSkillsYouGet] = useState([]);
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
+  
   const { userLanguage } = useUserContext();
 
   const { id } = useParams();
   const { t } = useTranslation();
 
+  // fetch data on first rendering page
   useEffect(() => {
     setTimeout(() => {
       setLoading(true);
@@ -45,6 +48,7 @@ const AboutCourse = () => {
             setCourseDetails(response?.data?.data);
             setUnits(response?.data?.data?.unites);
             setUserReviews(response?.data?.data?.review_info);
+            setSkillsYouGet(response?.data?.data?.skill_details);
             setLoading(false);
             return true;
           }
@@ -76,7 +80,7 @@ const AboutCourse = () => {
       <CourseDetails courseDetails={courseDetails} loading={loading} />
 
       {/* -------------Skills you get----------------- */}
-      <SkillsYouGet courseDetails={courseDetails} />
+      <SkillsYouGet skillsYouGet={skillsYouGet} loading={loading} />
 
       {/* -------------cousrse description----------------- */}
       <CourseDescription

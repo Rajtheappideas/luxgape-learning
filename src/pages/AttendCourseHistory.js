@@ -11,6 +11,7 @@ const AttendCourseHistory = () => {
         <title>{t("attend_course_history")}</title>
       </MetaTags>
       <Navbar />
+
       <CourseHistory showButton={false} />
       <Footer />
     </div>

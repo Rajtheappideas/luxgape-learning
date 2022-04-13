@@ -322,13 +322,13 @@ const SignIn = () => {
                 </div>
 
                 {/* ----------text sign in with------------ */}
-                <div className="flex items-center justify-center w-full">
+                {/* <div className="flex items-center justify-center w-full">
                   <hr className="border w-[40%]" />
                   <p className="mx-5 whitespace-nowrap text-lg text-secondary">
                     {t("Or_sign_in_with")}
                   </p>
                   <hr className="border w-[40%]" />
-                </div>
+                </div> */}
 
                 {/* --------------social sign in button-------------- */}
                 {/* <div className="flex items-center justify-center sm:space-x-6 space-x-2 w-full">

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
-import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
-
+import { Link, useParams } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 import {
   Footer,
@@ -13,26 +13,92 @@ import {
   History,
   AboutCourse,
   Review,
+  UnitVideos,
 } from "../components";
+import { useUserContext } from "../context/usercontext";
 
 const Class = () => {
-  const [openAbout, setOpenAbout] = useState(true);
+  const [openVideo, setOpenVideo] = useState(true);
+  const [openAbout, setOpenAbout] = useState(false);
   const [openReview, setOpenReview] = useState(false);
   const [openHistory, setOpenHistory] = useState(false);
+  const [courseDetails, setCourseDetails] = useState({});
+  const [userReviews, setUserReviews] = useState([]);
+  const [units, setUnits] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const { id } = useParams();
+  const { userLanguage, userData } = useUserContext();
+
   const { t } = useTranslation();
+
+  // fetch data on first rendering page
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(true);
+      axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {
+        method: "POST",
+        params: {
+          lang_code: userLanguage,
+          course_id: id,
+        },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      }).then((response) => {
+        if (response?.data?.status === "Success") {
+          setCourseDetails(response?.data?.data);
+          setUnits(response?.data?.data?.unites);
+          setUserReviews(response?.data?.data?.review_info);
+          setLoading(false);
+          return true;
+        } else if (response?.data?.status === "Error") {
+          setLoading(false);
+          return false;
+        }
+      });
+
+      axios("https://chessmafia.com/php/luxgap/App/api/start-course", {
+        method: "POST",
+        params: {
+          lang_code: userLanguage,
+          course_id: id,
+        },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "consumer-access-token": userData?.api_token,
+        },
+      }).then((response) => {
+        if (response?.data?.status === "Success") {
+          console.log(response?.data?.data);
+          setLoading(false);
+          return true;
+        } else if (response?.data?.status === "Error") {
+          setLoading(false);
+          return false;
+        }
+      });
+    }, 2000);
+  }, []);
+  // console.log(courseDetails);
   return (
     <div className="relative">
       <MetaTags>
         <title>{t("class")}</title>
       </MetaTags>
-      {/* -----------------------eclipse 1-------------- */}
-      {/* <div className="absolute top-1/2 left-0 -z-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-pink-300 " /> */}
-      {/* -----------------------eclipse 2-------------- */}
-      {/* <div className="absolute top-1/4 left-0 -z-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
-      {/* -----------------------eclipse 3-------------- */}
-      {/* <div className="absolute top-3/4 right-0 -z-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
-      {/* -----------------------eclipse 4-------------- */}
-      {/* <div className="absolute top-80 right-0 -z-10 blur-[200px] w-[300px] h-[300px] rounded-full bg-blue-300 " /> */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {/* -------------------navbar---------------- */}
       <Navbar />
 
@@ -41,14 +107,33 @@ const Class = () => {
 
       {/* --------------buttons for toggle the componetns--------------- */}
       <div className="sm:px-10 px-5">
-        <p className="sm:text-5xl text-3xl block font-semibold sm:my-5 ">Course Name in Details</p>
+        <p className="sm:text-5xl text-3xl block font-semibold sm:my-5 ">
+          Course Name in Details
+        </p>
         {/* -------------------buttons-------------- */}
-        <div className="flex items-center relative sm:my-7 my-3 text-secondary sm:text-2xl text-xl ">
+        <div className="flex items-center relative sm:space-x-7 space-x-3 sm:my-7 my-3 text-secondary sm:text-2xl text-xl w-full">
+          <button
+            className={`font-semibold relative ${
+              openVideo && "text-green-400"
+            }`}
+            onClick={() => {
+              setOpenVideo(true);
+              setOpenAbout(false);
+              setOpenReview(false);
+              setOpenHistory(false);
+            }}
+          >
+            {t("Videos")}
+            {openVideo && (
+              <hr className=" absolute -bottom-4 left-0 h-1 z-10 bg-green-400 w-20" />
+            )}
+          </button>
           <button
             className={`font-semibold relative ${
               openAbout && "text-green-400"
             }`}
             onClick={() => {
+              setOpenVideo(false);
               setOpenAbout(true);
               setOpenReview(false);
               setOpenHistory(false);
@@ -60,11 +145,12 @@ const Class = () => {
             )}
           </button>
           <button
-            className={`font-semibold mx-5 relative ${
+            className={`font-semibold relative ${
               openReview && "text-green-400"
             }`}
             onClick={() => {
               setOpenAbout(false);
+              setOpenVideo(false);
               setOpenReview(true);
               setOpenHistory(false);
             }}
@@ -81,6 +167,7 @@ const Class = () => {
             }`}
             onClick={() => {
               setOpenAbout(false);
+              setOpenVideo(false);
               setOpenReview(false);
               setOpenHistory(true);
             }}
@@ -90,15 +177,25 @@ const Class = () => {
               <hr className=" absolute -bottom-4 left-0 h-1 z-10 bg-green-400 w-20" />
             )}
           </button>
-          <hr className=" absolute -bottom-4 left-0 h-[2px] bg-green-200 w-[17rem]" />
+          <hr className=" absolute -bottom-4 -left-5 h-[2px] bg-green-200 sm:w-96 w-72" />
         </div>
       </div>
 
+      {/* -------------------unit videos-------------------- */}
+      {openVideo && <UnitVideos />}
       {/* -------------------About course-------------------- */}
-      {openAbout && <AboutCourse />}
+      {openAbout && (
+        <AboutCourse
+          units={units}
+          courseDetails={courseDetails}
+          loading={loading}
+        />
+      )}
 
       {/* -------------------Reviews-------------------- */}
-      {openReview && <Review />}
+      {openReview && (
+        <Review userReviews={userReviews} loading={loading} course_id={id} />
+      )}
 
       {/* -------------------History-------------------- */}
       {openHistory && <History />}

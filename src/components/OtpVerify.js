@@ -35,6 +35,7 @@ const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
       .catch((err) => {
         const error = err?.response?.data?.message;
         if (error === "OTP is not valid") {
+          setLoading(false);
           return toast("OTP is not valid!", { type: "error" });
         }
       });

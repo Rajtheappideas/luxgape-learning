@@ -87,7 +87,7 @@ const App = () => {
               />
               <Route path="/employees" element={<Employee />} />
               <Route path="/exam" element={<Exam />} />
-              <Route path="/class" element={<Class />} />
+              <Route path="/class/:id" element={<Class />} />
               <Route path="/forgotpassword" element={<ForgotPassword />} />
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="*" element={<Erro404 />} />

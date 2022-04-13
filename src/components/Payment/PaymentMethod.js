@@ -17,8 +17,6 @@ const PaymentMethod = ({ product }) => {
   const { t } = useTranslation();
 
   const { userLanguage, userData } = useUserContext();
-  console.log(userData);
-
   const today = new Date();
   let dd = today.getDate();
   let mm = today.getMonth();
@@ -38,8 +36,11 @@ const PaymentMethod = ({ product }) => {
       method: "POST",
       params: {
         lang_code: userLanguage,
-        course_id: 2,
+        course_id: product?.course_details?.course_id,
+        coupon_id: 1,
+        discount_amount: 5,
         price: product?.price,
+        grand_total: 35,
         booking_time: `${hours}:${seconds}:${milliseconds}`,
         booking_date: `${dd}/${mm}/${yyyy}`,
         stripe_token: token?.id,

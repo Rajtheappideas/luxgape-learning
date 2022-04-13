@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
 import { FiSend } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
@@ -6,19 +6,25 @@ import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
 import { toast, ToastContainer } from "react-toastify";
 import ContentLoader from "react-content-loader";
+import { UserCircleIcon } from "@heroicons/react/outline";
 
 const Reviews = ({ course_id, userReviews, loading }) => {
   const [review, setReview] = useState("");
-  const [rating, setRating] = useState(0);
+  const [currentValue, setCurrentvalue] = useState(0);
+  const [hoverValue, setHoverValue] = useState(undefined);
   const [Loading, setLoading] = useState(false);
   const { t } = useTranslation();
+
+  const stars = Array(5).fill(0);
 
   // ---context----------
   const { userData, userLanguage } = useUserContext();
 
   const handlePostReview = () => {
-    if (rating === "" || review === "") {
-      toast("review and rating fields should be filled!", { type: "warning" });
+    if (currentValue === 0 || review === "") {
+      toast("review field and stars are should be filled!", {
+        type: "warning",
+      });
       return false;
     }
     setLoading(true);
@@ -27,7 +33,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
       params: {
         lang_code: userLanguage,
         course_id: course_id,
-        rating: rating,
+        rating: currentValue,
         review: review,
       },
       headers: {
@@ -40,7 +46,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
         if (response?.data?.status === "Success") {
           toast(response?.data?.message, { type: "success" });
           setLoading(false);
-          window.location.reload();
+          // window.location.reload();
           return true;
         }
       })
@@ -52,6 +58,35 @@ const Reviews = ({ course_id, userReviews, loading }) => {
           return false;
         }
       });
+    setCurrentvalue(0);
+    setReview("");
+  };
+
+  const handleClick = (value) => {
+    setCurrentvalue(value);
+  };
+
+  const handleMouseOver = (newHoverValue) => {
+    setHoverValue(newHoverValue);
+  };
+
+  const handleMouseLeave = () => {
+    setHoverValue(undefined);
+  };
+  const showRating = (rating) => {
+    if (rating >= 5) {
+      return Array(5).fill(0);
+    } else if (rating >= 4) {
+      return Array(4).fill(0);
+    } else if (rating >= 3) {
+      return Array(3).fill(0);
+    } else if (rating >= 2) {
+      return Array(2).fill(0);
+    } else if (rating >= 1) {
+      return Array(1).fill(0);
+    } else {
+      return Array(1).fill(0);
+    }
   };
 
   return (
@@ -114,21 +149,20 @@ const Reviews = ({ course_id, userReviews, loading }) => {
                 <div className="space-y-2 w-full">
                   {/* -----------photo & stars----------------- */}
                   <div className="flex items-start">
-                    <img
-                      src={
-                        `https://chessmafia.com/php/luxgap/App/${review?.user_info?.profile}` ||
-                        null
-                      }
-                      alt="img"
-                      className="h-16 w-16 object-cover object-center rounded-tr-none rounded-bl-none rounded-br-[32px] rounded-tl-[32px]"
-                    />
+                    {review?.user_info?.profile === null ? (
+                      <UserCircleIcon className="h-16 w-16 rounded-full" color="gray" />
+                    ) : (
+                      <img
+                        src={`https://chessmafia.com/php/luxgap/App/${review?.user_info?.profile}`}
+                        alt={review?.user_info?.name}
+                        className="h-16 w-16 object-cover object-center rounded-tr-none rounded-bl-none rounded-br-[32px] rounded-tl-[32px]"
+                      />
+                    )}
                     <div className="ml-4">
                       <div className="flex space-x-2">
-                        <BsStarFill size={25} color="gold" />
-                        <BsStarFill size={25} color="gold" />
-                        <BsStarFill size={25} color="gold" />
-                        <BsStarFill size={25} color="gold" />
-                        <BsStarHalf size={25} color="gold" />
+                        {showRating(review?.rating).map((_, index) => (
+                          <BsStarFill key={index} size={24} color="gold" />
+                        ))}
                       </div>
                       <span className="font-semibold text-red-500 text-xl">
                         {review?.rating}
@@ -150,26 +184,36 @@ const Reviews = ({ course_id, userReviews, loading }) => {
           )}
         </div>
         {/* -----------input field------------- */}
-        <div className="absolute flex md:flex-row flex-col items-center sm:bottom-16 bottom-4 lg:right-28 sm:right-16 right-3">
+        <div className="absolute flex md:flex-row flex-col sm:items-center space-y-1 sm:space-y-0 justify-end sm:bottom-14 bottom-4 lg:right-28 sm:right-16 left-7 backdrop-blur-sm sm:backdrop-blur-0">
           <div className="flex items-center mb-1 md:mb-0">
             <input
               type="text"
               placeholder="type your review"
               onChange={(e) => setReview(e.target.value)}
-              className="lg:w-96 md:w-60 w-[8.8rem] h-12 mr-1 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "
+              className="lg:w-96 md:w-60 w-64 h-12 mr-1 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "
             />
-            <input
-              type="text"
-              placeholder="enter your rating"
-              onChange={(e) => setRating(e.target.value)}
-              className="lg:w-96 md:w-60 w-[8.8rem] h-12 sm:mr-3 mr-1 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "
-            />
+          </div>
+          <div className="flex items-center sm:space-x-2 space-x-5">
+            {stars.map((_, index) => (
+              <BsStarFill
+                key={index}
+                size={26}
+                onClick={() => handleClick(index + 1)}
+                onMouseOver={() => handleMouseOver(index + 1)}
+                onMouseLeave={handleMouseLeave}
+                color={(hoverValue || currentValue) > index ? "orange" : "gray"}
+                style={{
+                  marginRight: 10,
+                  cursor: "pointer",
+                }}
+              />
+            ))}
           </div>
 
           <button
             type="button"
             onClick={handlePostReview}
-            className="w-12 h-12 rounded-tl-[24px] rounded-br-[24px] rounded-tr-none rounded-bl-none bg-primary"
+            className="sm:w-12 sm:h-12 w-60 h-10 active:scale-95 transition-all duration-75 ease-in-out rounded-tl-[24px] rounded-br-[24px] rounded-tr-none rounded-bl-none bg-primary"
           >
             {Loading ? (
               "..."

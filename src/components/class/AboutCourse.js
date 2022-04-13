@@ -1,7 +1,7 @@
 import React from "react";
 import { CourseDescription } from "..";
 
-const AboutCourse = () => {
+const AboutCourse = ({ units, courseDetails, loading }) => {
   return (
     <>
       <div className="text-xl sm:p-10 p-3">
@@ -23,7 +23,11 @@ const AboutCourse = () => {
       </div>
       <hr className="border-collapse border-black sm:mx-10 mx-3 sm:mt-10" />
       {/* -------------cousrse description----------------- */}
-      <CourseDescription />
+      <CourseDescription
+        units={units}
+        courseDetails={courseDetails}
+        loading={loading}
+      />
     </>
   );
 };

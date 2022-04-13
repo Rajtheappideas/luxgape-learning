@@ -187,6 +187,14 @@ const Navbar = ({ activeText }) => {
                   My Profile
                 </Link>
               </p>
+              <p className="py-1">
+                <Link
+                  to="/mycourses"
+                  className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                >
+                  My Courses
+                </Link>
+              </p>
               <p
                 className="text-xl font-semibold ml-2 cursor-pointer"
                 onClick={handleLogout}

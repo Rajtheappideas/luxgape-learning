@@ -537,7 +537,7 @@ const MostPopularCourse = ({ courses }) => {
                     null
                   }
                   alt={course?.course_details?.title}
-                  className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
+                  className="h-1/2 w-full object-center rounded-tl-[182px]"
                 />
 
                 <div className="p-5 sm:space-y-5 space-y-2">
@@ -582,7 +582,7 @@ const MostPopularCourse = ({ courses }) => {
                     null
                   }
                   alt={course?.course_details?.title}
-                  className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
+                  className="h-1/2 w-full object-center rounded-tl-[182px]"
                 />
 
                 <div className="p-5 sm:space-y-5 space-y-2">
@@ -627,7 +627,7 @@ const MostPopularCourse = ({ courses }) => {
                     null
                   }
                   alt={course?.course_details?.title}
-                  className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
+                  className="h-1/2 w-full object-center rounded-tl-[182px]"
                 />
 
                 <div className="p-5 sm:space-y-5 space-y-2">
@@ -684,7 +684,7 @@ const MostPopularCourse = ({ courses }) => {
 export default MostPopularCourse;
 
 const RoundedDiv = tw.div`
-border relative
+border relative inline-block
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
   sm:h-[673px] h-[550px] sm:w-[364px] w-72
 cursor-pointer`;
