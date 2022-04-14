@@ -6,7 +6,6 @@ import { DiCss3Full } from "react-icons/di";
 
 const SkillsYouGet = ({ skillsYouGet, loading }) => {
   const { t } = useTranslation();
-  console.log(skillsYouGet);
   // const data = [
   //   {
   //     id: 1,

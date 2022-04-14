@@ -11,8 +11,6 @@ import {
 } from "@heroicons/react/outline";
 import { useFormik, Form, FormikProvider, ErrorMessage } from "formik";
 import * as yup from "yup";
-import GoogleLogin from "react-google-login";
-import useUserData from "../hooks/useUserData";
 import { useUserContext } from "../context/usercontext";
 import tw from "tailwind-styled-components/dist/tailwind";
 import { useTranslation } from "react-i18next";
@@ -42,9 +40,6 @@ const SignIn = () => {
   const navigate = useNavigate();
   // ----------------language tranlate-----------
   const { t } = useTranslation();
-
-  // ------------------userhook-----------------------
-  const { handleFailure, handleLogout, handleSuccess } = useUserData();
 
   // ------------------usercontext-----------------------
   const { userData } = useUserContext();
@@ -201,9 +196,9 @@ const SignIn = () => {
                 </div>
                 {/* ------------------radio box of role-------------- */}
 
-                <div className="flex flex-row items-center justify-around sm:space-x-5 space-x-2">
-                  {/* ----------------butoon 1----------------- */}
-                  <div
+                {/* <div className="flex flex-row items-center justify-around sm:space-x-5 space-x-2"> */}
+                {/* ----------------butoon 1----------------- */}
+                {/* <div
                     className={`border ${
                       formik.values.role === "Employee" && "border-primary"
                     } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none lg:w-96 sm:w-full w-1/2 h-[61px] relative`}
@@ -221,10 +216,10 @@ const SignIn = () => {
                     <span className="absolute top-4 left-10 text-lg font-normal text-black">
                       {t("employee")}
                     </span>
-                  </div>
-                  {/* ----------------butoon 2----------------- */}
+                  </div> */}
+                {/* ----------------butoon 2----------------- */}
 
-                  <div
+                {/* <div
                     className={`border ${
                       formik.values.role === "Employer" && "border-primary"
                     } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
@@ -242,8 +237,8 @@ const SignIn = () => {
                     <span className="absolute top-4 left-10 text-lg font-normal text-secondary">
                       {t("employer")}
                     </span>
-                  </div>
-                </div>
+                  </div> */}
+                {/* </div> */}
 
                 {/* --------------email------------------ */}
                 <div className="w-full">
@@ -252,7 +247,7 @@ const SignIn = () => {
                     placeholder={t("email")}
                     name="email"
                     {...getFieldProps("email")}
-                    className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border focus:border-2 focus:border-emerald-400 px-6 lg:w-96 h-14 w-full rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.email && errors.email && "border-2 border-red-600"
                     }
@@ -268,7 +263,7 @@ const SignIn = () => {
                     placeholder={t("type_your_password")}
                     name="password"
                     {...getFieldProps("password")}
-                    className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
+                    className={`border focus:border-2 focus:border-emerald-400 px-6 xl:w-full lg:w-full h-14 w-full rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none
                     ${
                       touched.password &&
                       errors.password &&
@@ -291,7 +286,7 @@ const SignIn = () => {
                 <ErrorMessage name="password" component={TextError} />
 
                 {/* --------------forgot password------------------ */}
-                <div className=" cursor-pointer text-right w-full inline-block">
+                <div className="cursor-pointer text-right w-full inline-block">
                   <Link to="/forgotpassword">
                     <button
                       type="button"
@@ -306,7 +301,7 @@ const SignIn = () => {
                 <div className="w-full">
                   <button
                     type="submit"
-                    className="border active:scale-95 duration-100 transition-all ease-in-out bg-gradient-to-tr text-white text-xl font-semibold from-to to-from w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
+                    className="border active:scale-95 duration-100 transition-all ease-in-out bg-gradient-to-tr text-white text-xl font-semibold from-to to-from lg:w-96 h-14 w-full rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none"
                   >
                     {isSubmitting ? (
                       <Lottie

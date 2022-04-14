@@ -7,12 +7,15 @@ import { useUserContext } from "../context/usercontext";
 import * as yup from "yup";
 import { useFormik, Form, FormikProvider, ErrorMessage } from "formik";
 import tw from "tailwind-styled-components/dist/tailwind";
+import { useTranslation } from "react-i18next";
 
 const EditProfile = ({ profileImage, userDetails }) => {
   const [loading, setLoading] = useState(false);
 
   // ---context----------
   const { userData } = useUserContext();
+
+  const { t } = useTranslation();
 
   //   ---------------language code--------
   const lang_code = localStorage.getItem("lang_code");
@@ -100,10 +103,12 @@ const EditProfile = ({ profileImage, userDetails }) => {
           <div className="w-full flex lg:flex-row flex-col lg:justify-around items-center">
             {/* -----------email---------- */}
             <div className="lg:w-[40%] w-[90%]">
-              <label className="semifont-bold text-2xl ml-2">Email</label>
+              <label className="semifont-bold text-2xl ml-2">
+                {t("email")}
+              </label>
               <input
                 type="email"
-                placeholder="Enter your Display Name"
+                placeholder="Enter your email"
                 name="email"
                 {...getFieldProps("email")}
                 className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-12  rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none outline-none
@@ -115,7 +120,9 @@ const EditProfile = ({ profileImage, userDetails }) => {
             {/* -----------name---------- */}
 
             <div className="lg:w-[40%] w-[90%]">
-              <label className="semifont-bold text-2xl ml-2">Full Name</label>
+              <label className="semifont-bold text-2xl ml-2">
+                {t("full_name")}
+              </label>
               <input
                 type="text"
                 placeholder="Enter your Full Name"
@@ -137,7 +144,7 @@ const EditProfile = ({ profileImage, userDetails }) => {
           <div className="w-full mx-auto mt-3">
             <div className="lg:w-1/2 w-[90%] mx-auto">
               <label className="semifont-bold text-2xl ml-2">
-                Phone Number
+                {t("phone_number")}
               </label>
               <input
                 type="tel"
@@ -173,7 +180,7 @@ const EditProfile = ({ profileImage, userDetails }) => {
                   className="z-10"
                 />
               ) : (
-                "Save Changes"
+                t("save_changes")
               )}
             </button>
           </div>

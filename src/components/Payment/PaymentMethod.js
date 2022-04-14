@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { InformationCircleIcon } from "@heroicons/react/outline";
 import { Successful } from "..";
 import { useTranslation } from "react-i18next";
 import StripeCheckout from "react-stripe-checkout";
@@ -10,7 +9,7 @@ import { toast } from "react-toastify";
 
 const PaymentMethod = ({ product }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [radioBtn, setRadioBtn] = useState(false);
+  const [radioBtn, setRadioBtn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [enterCouponCode, setEnterCouponCode] = useState("");
 
@@ -27,8 +26,8 @@ const PaymentMethod = ({ product }) => {
   let milliseconds = today.getMilliseconds();
 
   const makePayment = (token) => {
-    if (enterCouponCode === "") {
-      toast("Oops!!, you forgot to enter coupon code", { type: "warning" });
+    if (!radioBtn) {
+      toast("press the radio button", { type: "warning" });
       return false;
     }
     setLoading(true);
@@ -66,8 +65,8 @@ const PaymentMethod = ({ product }) => {
       });
   };
   const handleCouponeCode = () => {
-    if (!radioBtn) {
-      toast("press the radio button", { type: "warning" });
+    if (enterCouponCode === "") {
+      toast("Oops forgot to enter coupon code!!", { type: "warning" });
       return false;
     }
     setLoading(true);
@@ -123,7 +122,7 @@ const PaymentMethod = ({ product }) => {
               type="radio"
               checked={radioBtn}
               onChange={(e) => setRadioBtn(e.target.value)}
-              onClick={() => setRadioBtn(!radioBtn)}
+              onClick={() => setRadioBtn(true)}
               className="w-5 h-5 cursor-pointer"
             />
             <img
@@ -180,6 +179,7 @@ const PaymentMethod = ({ product }) => {
               <button
                 type="button"
                 className="font-bold text-center sm:mr-4 sm:mb-0 mb-2 text-xl bg-primary text-white border  sm:w-48 w-60 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
+                // onClick={makePayment}
               >
                 {t("confirm_and_pay")}
               </button>

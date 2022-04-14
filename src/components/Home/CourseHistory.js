@@ -71,13 +71,13 @@ const CourseHistory = ({ showButton }) => {
           setLoading(false);
           return true;
         } else if (response?.data?.status === "Error") {
+          console.log(response?.data);
           setLoading(false);
           return false;
         }
       });
     }, 2000);
   }, []);
-  console.log(courseHistory);
 
   var date_future = 15 / 4 / 2022;
   var date_now = new Date().getDate();
@@ -98,7 +98,7 @@ const CourseHistory = ({ showButton }) => {
 
   // what's left is seconds
   var seconds = delta % 60; // in theory the modulus is not required
-  console.log(delta.toLocaleString('en-US'));
+  // console.log(delta.toLocaleString("en-US"));
   return (
     <div className=" sm:p-10 p-3 relative">
       {/* ----------------eclipse---------------- */}
@@ -169,7 +169,7 @@ const CourseHistory = ({ showButton }) => {
             </ContentLoader>
           </>
         ) : (
-          courseHistory.map((course) => (
+          courseHistory.slice(0,3).map((course) => (
             <BorderDiv
               key={course?.course_details?.course_id}
               className={`${

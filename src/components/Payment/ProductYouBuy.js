@@ -20,7 +20,7 @@ const ProductYouBuy = ({ product }) => {
         <img
           src={`https://chessmafia.com/php/luxgap/App/${product?.course_details?.image}`}
           alt="mpcimg1"
-          className="h-1/2 w-full object-center rounded-tl-[182px] border-b"
+          className="h-1/2 w-full object-center object-cover rounded-tl-[182px] border-b"
         />
         <div className="p-5 space-y-10">
           {/* =---------------------title-------------- */}

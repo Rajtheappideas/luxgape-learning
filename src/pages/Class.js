@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
 import { Link, useParams } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 import {
   Footer,
@@ -34,53 +34,52 @@ const Class = () => {
 
   // fetch data on first rendering page
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(true);
-      axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {
-        method: "POST",
-        params: {
-          lang_code: userLanguage,
-          course_id: id,
-        },
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }).then((response) => {
-        if (response?.data?.status === "Success") {
-          setCourseDetails(response?.data?.data);
-          setUnits(response?.data?.data?.unites);
-          setUserReviews(response?.data?.data?.review_info);
-          setLoading(false);
-          return true;
-        } else if (response?.data?.status === "Error") {
-          setLoading(false);
-          return false;
-        }
-      });
+    setLoading(true);
+    axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {
+      method: "POST",
+      params: {
+        lang_code: userLanguage,
+        course_id: id,
+      },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response?.data?.status === "Success") {
+        setCourseDetails(response?.data?.data);
+        setUnits(response?.data?.data?.unites);
+        setUserReviews(response?.data?.data?.review_info);
+        setLoading(false);
+        return true;
+      } else if (response?.data?.status === "Error") {
+        setLoading(false);
+        return false;
+      }
+    });
 
-      axios("https://chessmafia.com/php/luxgap/App/api/start-course", {
-        method: "POST",
-        params: {
-          lang_code: userLanguage,
-          course_id: id,
-        },
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "consumer-access-token": userData?.api_token,
-        },
-      }).then((response) => {
-        if (response?.data?.status === "Success") {
-          console.log(response?.data?.data);
-          setLoading(false);
-          return true;
-        } else if (response?.data?.status === "Error") {
-          setLoading(false);
-          return false;
-        }
-      });
-    }, 2000);
+    axios("https://chessmafia.com/php/luxgap/App/api/start-course", {
+      method: "POST",
+      params: {
+        lang_code: userLanguage,
+        course_id: id,
+      },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "consumer-access-token": userData?.api_token,
+      },
+    }).then((response) => {
+      if (response?.data?.status === "Success") {
+        toast("course is started", { type: "success" });
+        setLoading(false);
+        return true;
+      } else if (response?.data?.status === "Error") {
+        toast("course is already started", { type: "warning" });
+        setLoading(false);
+        return false;
+      }
+    });
   }, []);
   // console.log(courseDetails);
   return (

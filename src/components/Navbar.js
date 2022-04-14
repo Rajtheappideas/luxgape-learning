@@ -115,26 +115,26 @@ const Navbar = ({ activeText }) => {
             <div className="group  relative cursor-pointer rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none bg-gray-200 w-16 h-10">
               <UserIcon className="h-10 mx-auto" color="gray" />
               <div className="group-hover:block absolute top-10 -left-16 hidden h-auto z-10">
-                <ul className="top-0 w-40 bg-white shadow-2xl px-3 py-4 rounded-xl">
+                <ul className="top-0 w-auto bg-white shadow-2xl px-3 py-4 rounded-xl">
                   <li className="py-1">
                     <Link
                       to="/userprofile"
-                      className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                      className="text-xl font-semibold ml-2 block whitespace-nowrap cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                     >
-                      My Profile
+                      {t("my_profile")}
                     </Link>
                   </li>
                   <li className="py-1">
                     <Link
                       to="/mycourses"
-                      className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                      className="text-xl font-semibold ml-2 block whitespace-nowrap cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                     >
-                      My Courses
+                      {t("my_courses")}
                     </Link>
                   </li>
                   <li className="py-1">
                     <span
-                      className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                      className="text-xl font-semibold ml-2 block whitespace-nowrap cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                       onClick={handleLogout}
                     >
                       {t("Log_out")}
@@ -184,7 +184,7 @@ const Navbar = ({ activeText }) => {
                   to="/userprofile"
                   className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                 >
-                  My Profile
+                  {t("my_profile")}
                 </Link>
               </p>
               <p className="py-1">
@@ -192,7 +192,7 @@ const Navbar = ({ activeText }) => {
                   to="/mycourses"
                   className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                 >
-                  My Courses
+                  {t("my_courses")}
                 </Link>
               </p>
               <p

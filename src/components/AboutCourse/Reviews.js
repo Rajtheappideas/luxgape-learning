@@ -184,16 +184,16 @@ const Reviews = ({ course_id, userReviews, loading }) => {
           )}
         </div>
         {/* -----------input field------------- */}
-        <div className="absolute flex md:flex-row flex-col sm:items-center space-y-1 sm:space-y-0 justify-end sm:bottom-14 bottom-4 lg:right-28 sm:right-16 left-7 backdrop-blur-sm sm:backdrop-blur-0">
+        <div className="absolute flex md:flex-row flex-col sm:items-center space-y-1 sm:space-y-0 justify-end sm:bottom-14 bottom-5 lg:right-24 sm:right-16 left-7 backdrop-blur-sm sm:backdrop-blur-0">
           <div className="flex items-center mb-1 md:mb-0">
             <input
               type="text"
               placeholder="type your review"
               onChange={(e) => setReview(e.target.value)}
-              className="lg:w-96 md:w-60 w-64 h-12 mr-1 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "
+              className="xl:w-[38rem] md:w-80 w-64 h-12 mr-1 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "
             />
           </div>
-          <div className="flex items-center sm:space-x-2 space-x-5">
+          <div className="flex items-center sm:space-x-2 space-x-5 sm:mx-5">
             {stars.map((_, index) => (
               <BsStarFill
                 key={index}

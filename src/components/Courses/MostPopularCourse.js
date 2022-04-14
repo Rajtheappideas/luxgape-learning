@@ -108,7 +108,7 @@ const MostPopularCourse = ({ courses }) => {
   useEffect(() => {
     handleClearFilters();
   }, [filtersOpen]);
-  
+
   // handle search data based on user enter value
   const handleSearchCourse = () => {
     if (searchCourse === "") {
@@ -284,7 +284,7 @@ const MostPopularCourse = ({ courses }) => {
       ),
     },
   ];
-
+  console.log(displayCourse);
   return (
     <div className="sm:p-10 mb-10 p-3">
       {/* --------------------search & filter divs---------------------- */}
@@ -478,51 +478,54 @@ const MostPopularCourse = ({ courses }) => {
               <SkeletonLoading />
             </>
           ) : (
-            displayCourse.map((course) => (
-              <Link
-                to={`/courses/aboutcourse/${course?.course_details?.course_id}`}
-                key={course?.id}
-              >
-                <RoundedDiv key={course.id} onClick={ScrollToTop}>
-                  <LazyLoadImage
-                    src={
-                      `https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}` ||
-                      null
-                    }
-                    alt={course?.course_details?.title}
-                    className="h-1/2 w-full object-center rounded-tl-[182px] outline-none"
-                  />
+            displayCourse.map((course) => {
+              // if (course?.course_details === null) return false;
+              return (
+                <Link
+                  to={`/courses/aboutcourse/${course?.course_details?.course_id}`}
+                  key={course?.id}
+                >
+                  <RoundedDiv key={course.id} onClick={ScrollToTop}>
+                    <LazyLoadImage
+                      src={
+                        `https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}` ||
+                        null
+                      }
+                      alt={course?.course_details?.title}
+                      className="h-1/2 w-full object-center object-cover rounded-tl-[182px] outline-none"
+                    />
 
-                  <div className="p-5 sm:space-y-5 space-y-2">
-                    <p className="sm:text-3xl text-2xl font-semibold">
-                      {course?.course_details?.title}
-                    </p>
-                    <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
-                      {course?.course_details?.about}
-                    </p>
-                    <div className="flex items-start space-x-1">
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                    </div>
-                    {/* arrow button */}
-                    <div className="flex items-center space-x-3">
-                      <p className="text-secondary">
-                        <span className="font-bold sm:text-2xl text-xl">
-                          ${course?.price}
-                        </span>
-                        /employee
+                    <div className="p-5 sm:space-y-5 space-y-2">
+                      <p className="sm:text-3xl text-2xl font-semibold">
+                        {course?.course_details?.title}
                       </p>
-                      <button className="w-10 h-10 bg-black ">
-                        <ArrowRightIcon className="p-2" color="white" />
-                      </button>
+                      <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
+                        {course?.course_details?.about}
+                      </p>
+                      <div className="flex items-start space-x-1">
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                      </div>
+                      {/* arrow button */}
+                      <div className="flex items-center space-x-3">
+                        <p className="text-secondary">
+                          <span className="font-bold sm:text-2xl text-xl">
+                            ${course?.sale_price}
+                          </span>
+                          /employee
+                        </p>
+                        <button className="w-10 h-10 bg-black ">
+                          <ArrowRightIcon className="p-2" color="white" />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                </RoundedDiv>
-              </Link>
-            ))
+                  </RoundedDiv>
+                </Link>
+              );
+            })
           )
         ) : filteredCourses.length === 0 && searchCourse === "" ? (
           displayCourse.map((course) => (
@@ -537,7 +540,7 @@ const MostPopularCourse = ({ courses }) => {
                     null
                   }
                   alt={course?.course_details?.title}
-                  className="h-1/2 w-full object-center rounded-tl-[182px]"
+                  className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
                 />
 
                 <div className="p-5 sm:space-y-5 space-y-2">
@@ -557,7 +560,7 @@ const MostPopularCourse = ({ courses }) => {
                   <div className="flex items-center space-x-3">
                     <p className="text-secondary">
                       <span className="font-bold text-2xl">
-                        ${course.price}
+                        ${course?.sale_price}
                       </span>
                       /employee
                     </p>
@@ -582,7 +585,7 @@ const MostPopularCourse = ({ courses }) => {
                     null
                   }
                   alt={course?.course_details?.title}
-                  className="h-1/2 w-full object-center rounded-tl-[182px]"
+                  className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
                 />
 
                 <div className="p-5 sm:space-y-5 space-y-2">
@@ -602,7 +605,7 @@ const MostPopularCourse = ({ courses }) => {
                   <div className="flex items-center space-x-3">
                     <p className="text-secondary">
                       <span className="font-bold text-2xl">
-                        ${course.price}
+                        ${course?.sale_price}
                       </span>
                       /employee
                     </p>
@@ -627,7 +630,7 @@ const MostPopularCourse = ({ courses }) => {
                     null
                   }
                   alt={course?.course_details?.title}
-                  className="h-1/2 w-full object-center rounded-tl-[182px]"
+                  className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
                 />
 
                 <div className="p-5 sm:space-y-5 space-y-2">
@@ -647,7 +650,7 @@ const MostPopularCourse = ({ courses }) => {
                   <div className="flex items-center space-x-3">
                     <p className="text-secondary">
                       <span className="font-bold text-2xl">
-                        ${course.price}
+                        ${course?.sale_price}
                       </span>
                       /employee
                     </p>

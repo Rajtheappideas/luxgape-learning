@@ -1,12 +1,23 @@
 import React, { useState } from "react";
-import { CheckCircleIcon, ShareIcon } from "@heroicons/react/solid";
+import { CheckCircleIcon, ShareIcon, XIcon } from "@heroicons/react/solid";
 import { BsStarFill, BsStarHalf, BsFillPlayCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ReactPlayer from "react-player";
 import ContentLoader from "react-content-loader";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  WhatsappIcon,
+  WhatsappShareButton,
+  EmailIcon,
+  EmailShareButton,
+  LinkedinShareButton,
+  LinkedinIcon,
+} from "react-share";
 
 const CourseDetails = ({ courseDetails, loading }) => {
+  const [openModal, setOpenModal] = useState(false);
   const { t } = useTranslation();
   const ScrollToTop = () => {
     window.scrollTo({
@@ -14,6 +25,10 @@ const CourseDetails = ({ courseDetails, loading }) => {
       behavior: "smooth",
     });
   };
+  const salePrice = courseDetails?.sale_price;
+  const discount = 50 / 100;
+  const discountPrice = salePrice - salePrice * discount;
+
   return (
     <div className="sm:p-10 p-3 w-full">
       {/* ---------------course details paragraph-------------- */}
@@ -66,7 +81,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
           </div>
         )}
         {/* <div className="h-full w-full relative lg:mr-10 bg-black mix-blend-darken  rounded-tl-[243px] rounded-br-[243px] rounded-tr-none rounded-bl-none "> */}
-        {/* <Link to="/class" onClick={ScrollToTop}> */}
+        {/* <Link to="/className" onClick={ScrollToTop}> */}
         {/* <img
             src={`https://chessmafia.com/php/luxgap/App/${courseDetails?.course_details?.demo_video}`}
             alt="img"
@@ -159,10 +174,10 @@ const CourseDetails = ({ courseDetails, loading }) => {
             <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full">
               <p className="sm:space-x-5 space-x-2">
                 <span className="font-bold sm:text-4xl text-xl">
-                  $ {courseDetails?.sale_price}
+                  $ {discountPrice.toFixed(2)}
                 </span>
                 <del className="text-[#c4c4c4] text-xl">
-                  $ {courseDetails?.price}
+                  $ {courseDetails?.sale_price}
                 </del>
                 <span className="border text-primary text-xl w-full sm:p-3 p-1 border-primary rounded-2xl">
                   Save 50%
@@ -171,7 +186,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
             </div>
 
             {/* ----------------enroill now & share----------------- */}
-            <div className="flex flex-row items-center lg:justify-start justify-center w-full sm:space-x-4 space-x-2">
+            <div className="relative flex flex-row items-center lg:justify-start justify-center w-full sm:space-x-4 space-x-2">
               <Link
                 // to={`/courses/aboutcourse/payment/${courseDetails?.course_details?.course_id}`}
                 to={{
@@ -184,12 +199,78 @@ const CourseDetails = ({ courseDetails, loading }) => {
                   {t("enroll_now")}
                 </button>
               </Link>
-              <p className="border mr-2 w-14 h-14 cursor-pointer rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
+              <button
+                type="button"
+                onClick={() => setOpenModal(true)}
+                className="border mr-2 w-14 h-14 cursor-pointer rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none"
+              >
                 <ShareIcon className="h-6 w-6 mx-auto my-4" color="gray" />
-              </p>
-              <p className="text-secondary sm:inline-block hidden text-xl font-semibold cursor-pointer">
+              </button>
+              <button
+                type="button"
+                onClick={() => setOpenModal(true)}
+                className="text-secondary sm:inline-block hidden text-xl font-semibold cursor-pointer"
+              >
                 {t("share")}
-              </p>
+              </button>
+              {openModal && (
+                <div className="absolute top-16 lg:left-32 md:left-56 z-50 h-auto overflow-y-auto w-72 overflow-x-hidden shadow-lg rounded-lg bg-white">
+                  <div className="block text-right p-3 border-b border-gray-400">
+                    <button type="button" onClick={() => setOpenModal(false)}>
+                      <XIcon className="h-7" />
+                    </button>
+                  </div>
+                  <div className="px-6 py-2 items-center flex-auto space-x-2">
+                    <EmailShareButton
+                      url={`https://luxgape-learning.netlify.app/courses/aboutcourse/${courseDetails?.course_details?.course_id}`}
+                      subject="luxgapcourse"
+                      body="learn from lux gap courses"
+                    >
+                      <EmailIcon
+                        color="blue"
+                        size={40}
+                        className="rounded-full"
+                        round={true}
+                      />
+                    </EmailShareButton>
+                    <WhatsappShareButton
+                      url={`https://luxgape-learning.netlify.app/courses/aboutcourse/${courseDetails?.course_details?.course_id}`}
+                      title="laxgapcourse"
+                    >
+                      <WhatsappIcon
+                        color="green"
+                        size={40}
+                        className="rounded-full"
+                        round={true}
+                      />
+                    </WhatsappShareButton>
+                    <FacebookShareButton
+                      url={`https://luxgape-learning.netlify.app/courses/aboutcourse/${courseDetails?.course_details?.course_id}`}
+                      title="luxgapcourses"
+                      hashtag="#luxgapelearning"
+                    >
+                      <FacebookIcon
+                        color="blue"
+                        size={40}
+                        className="rounded-full"
+                        round={true}
+                      />
+                    </FacebookShareButton>
+                    <LinkedinShareButton
+                      url={`https://luxgape-learning.netlify.app/courses/aboutcourse/${courseDetails?.course_details?.course_id}`}
+                      title="lux gap course"
+                      summary="learn from lux gap courses"
+                    >
+                      <LinkedinIcon
+                        color="blue"
+                        size={40}
+                        className="rounded-full"
+                        round={true}
+                      />
+                    </LinkedinShareButton>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}

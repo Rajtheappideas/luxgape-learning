@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { UserIcon, CameraIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../context/usercontext";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const UserProfile = () => {
   const [editProfile, setEditProfile] = useState(true);
@@ -16,7 +17,9 @@ const UserProfile = () => {
 
   // ---context----------
   const { userData } = useUserContext();
-  
+
+  const { t } = useTranslation();
+
   //   ---------------language code--------
   const lang_code = localStorage.getItem("lang_code");
 
@@ -52,7 +55,7 @@ const UserProfile = () => {
   return (
     <>
       <MetaTags>
-        <title>{t("User_Profile")}</title>
+        <title>{t("user_profile")}</title>
       </MetaTags>
 
       <ToastContainer
@@ -115,7 +118,7 @@ const UserProfile = () => {
                 editProfile ? "bg-primary" : "bg-orange-200"
               } font-semibold h-12 w-60 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
             >
-              Edit Profile
+              {t("edit_profile")}
             </button>
             <button
               type="button"
@@ -127,7 +130,7 @@ const UserProfile = () => {
                 changePassword ? "bg-primary" : "bg-orange-200"
               } font-semibold h-12 w-60  rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
             >
-              Change Password
+              {t("change_password")}
             </button>
           </div>
           {/* ----------------edit profile div--------------- */}

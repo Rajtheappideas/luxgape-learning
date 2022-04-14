@@ -97,13 +97,15 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                   <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
                     {course?.course_details?.about}
                   </p>
-                  <div className="flex items-start space-x-1">
-                    <StarIcon className="w-8 h-8" color="gold" />
-                    <StarIcon className="w-8 h-8" color="gold" />
-                    <StarIcon className="w-8 h-8" color="gold" />
-                    <StarIcon className="w-8 h-8" color="gold" />
-                    <StarIcon className="w-8 h-8" color="gold" />
-                  </div>
+                  {course?.review_info_count === "5.0" && (
+                    <div className="flex items-start space-x-1">
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                    </div>
+                  )}
                   <div className="flex items-center space-x-3">
                     <p className="text-secondary">
                       <span className="font-bold sm:text-2xl text-xl">

@@ -4,6 +4,7 @@ import { useUserContext } from "../context/usercontext";
 import { toast } from "react-toastify";
 import Loading from "../assets/animations/loading1.json";
 import Lottie from "react-lottie";
+import { useTranslation } from "react-i18next";
 
 const ChangePassword = () => {
   const [newPassword, setNewPassword] = useState("");
@@ -13,6 +14,8 @@ const ChangePassword = () => {
 
   // ---context----------
   const { userData } = useUserContext();
+
+  const { t } = useTranslation();
 
   //--------------api request----------
   const handleChangePassword = () => {
@@ -71,7 +74,9 @@ const ChangePassword = () => {
       {/* -----------------input fields-------------------- */}
       <div className="w-full mx-auto">
         <div className="md:w-1/2 w-[90%] mx-auto">
-          <label className="semifont-bold text-2xl ml-2">Old Password</label>
+          <label className="semifont-bold text-2xl ml-2">
+            {t("old_password")}
+          </label>
           <input
             type="text"
             placeholder="Enter your old password"
@@ -84,7 +89,9 @@ const ChangePassword = () => {
       <div className="w-full flex md:flex-row flex-col md:justify-around items-center mt-4">
         {/* -----------new password---------- */}
         <div className="md:w-[40%] w-[90%]">
-          <label className="semifont-bold text-2xl ml-2">New Password</label>
+          <label className="semifont-bold text-2xl ml-2">
+            {t("new_password")}
+          </label>
           <input
             type="text"
             placeholder="Enter your new password"
@@ -95,7 +102,9 @@ const ChangePassword = () => {
         {/* -----------confirm passwrord---------- */}
 
         <div className="md:w-[40%] w-[90%]">
-          <label className="semifont-bold text-2xl ml-2">Confirm Password</label>
+          <label className="semifont-bold text-2xl ml-2">
+            {t("confirm_password")}
+          </label>
           <input
             type="text"
             placeholder="Enter your confirm password"
@@ -120,7 +129,7 @@ const ChangePassword = () => {
               className="z-10"
             />
           ) : (
-            "Change Password"
+            t("change_password")
           )}
         </button>
       </div>

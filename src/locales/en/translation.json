@@ -128,5 +128,21 @@
   "view_demo": "View Demo",
   "enroll_now": "Enroll Now",
   "share": "Share",
-  "what_will_you_learn": "What will you learn"
+  "what_will_you_learn": "What will you learn",
+  "your_message": "your message",
+  "type_your_message": "type your message",
+  "terms_of_conditions": "terms & Conditions",
+  "cancellations": "Cancellations",
+  "my_profile": "My Profile",
+  "cookie_policy": "Cookie Policy",
+  "my_courses": "My Courses",
+  "edit_profile": "Edit Profile",
+  "change_password": "Change Password",
+  "user_profile": "User Profile",
+  "full_name": "Full Name",
+  "phone_number": "Phone Number",
+  "save_changes": "Save Changes",
+  "old_password": "Old Password",
+  "new_password": "New Password",
+  "videos": "Videos"
 }

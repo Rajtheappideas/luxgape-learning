@@ -61,7 +61,7 @@ const AboutCourse = () => {
             return false;
           }
         });
-    }, 2000);
+    }, 1000);
   }, []);
 
   return (

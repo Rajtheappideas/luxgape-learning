@@ -5,7 +5,7 @@ import { GiCircle } from "react-icons/gi";
 import ContentLoader from "react-content-loader";
 
 const CourseDescription = ({ units, courseDetails, loading }) => {
-  console.log(courseDetails);
+  // console.log(courseDetails);
   return (
     <div className="sm:px-10 px-3">
       {/* ------------------course program details-------------- */}

@@ -223,9 +223,9 @@ const Signup = () => {
                 </div>
                 {/* ------------------radio box of role-------------- */}
 
-                <div className="flex flex-row items-center justify-around sm:space-x-10 space-x-2 w-full">
+                {/* <div className="flex flex-row items-center justify-around sm:space-x-10 space-x-2 w-full"> */}
                   {/* ----------------butoon 1----------------- */}
-                  <div
+                  {/* <div
                     className={`border ${
                       formik.values.role === "Employee" && "border-primary"
                     } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
@@ -243,10 +243,10 @@ const Signup = () => {
                     <span className="absolute top-4 left-10 text-lg font-normal text-black">
                       {t("employee")}
                     </span>
-                  </div>
+                  </div> */}
                   {/* ----------------butoon 2----------------- */}
 
-                  <div
+                  {/* <div
                     className={`border ${
                       formik.values.role === "Employer" && "border-primary"
                     } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
@@ -264,8 +264,8 @@ const Signup = () => {
                     <span className="absolute top-4 left-10 text-lg font-normal text-secondary">
                       {t("employer")}
                     </span>
-                  </div>
-                </div>
+                  </div> */}
+                {/* </div> */}
                 {/* --------------name------------------ */}
                 <div className="w-full">
                   <input

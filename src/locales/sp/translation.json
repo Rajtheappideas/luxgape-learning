@@ -128,5 +128,21 @@
   "view_demo": "Ver demostración",
   "enroll_now": "inscribirse ahora",
   "share": "compartir",
-  "what_will_you_learn": "Que aprenderás"
+  "what_will_you_learn": "Que aprenderás",
+  "your_message": "tu mensaje",
+  "type_your_message": "escribe tu mensaje",
+  "terms_of_conditions": "Términos y condiciones",
+  "cancellations": "Anulaciones",
+  "my_profile": "Mi perfil",
+  "cookie_policy": "Política de cookies",
+  "my_courses": "Mis cursos",
+  "edit_profile": "Editar perfil",
+  "change_password": "Cambiar la contraseña",
+  "user_profile": "Perfil del usuario",
+  "full_name": "Nombre completo",
+  "phone_number": "Número de teléfono",
+  "save_changes": "Guardar cambios",
+  "old_password": "Contraseña antigua",
+  "new_password": "Nueva contraseña",
+  "videos": "Vídeos"
 }
