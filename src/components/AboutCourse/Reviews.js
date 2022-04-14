@@ -14,7 +14,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
   const [hoverValue, setHoverValue] = useState(undefined);
   const [Loading, setLoading] = useState(false);
   const { t } = useTranslation();
-
+  console.log(userReviews);
   const stars = Array(5).fill(0);
 
   // ---context----------
@@ -45,6 +45,8 @@ const Reviews = ({ course_id, userReviews, loading }) => {
       .then((response) => {
         if (response?.data?.status === "Success") {
           toast(response?.data?.message, { type: "success" });
+          setCurrentvalue(0);
+          setReview("");
           setLoading(false);
           // window.location.reload();
           return true;
@@ -58,8 +60,6 @@ const Reviews = ({ course_id, userReviews, loading }) => {
           return false;
         }
       });
-    setCurrentvalue(0);
-    setReview("");
   };
 
   const handleClick = (value) => {
@@ -150,7 +150,10 @@ const Reviews = ({ course_id, userReviews, loading }) => {
                   {/* -----------photo & stars----------------- */}
                   <div className="flex items-start">
                     {review?.user_info?.profile === null ? (
-                      <UserCircleIcon className="h-16 w-16 rounded-full" color="gray" />
+                      <UserCircleIcon
+                        className="h-16 w-16 rounded-full"
+                        color="gray"
+                      />
                     ) : (
                       <img
                         src={`https://chessmafia.com/php/luxgap/App/${review?.user_info?.profile}`}
@@ -165,7 +168,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
                         ))}
                       </div>
                       <span className="font-semibold text-red-500 text-xl">
-                        {review?.rating}
+                        {Math.floor(review?.rating)}
                       </span>
                     </div>
                   </div>
@@ -189,6 +192,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
             <input
               type="text"
               placeholder="type your review"
+              value={review}
               onChange={(e) => setReview(e.target.value)}
               className="xl:w-[38rem] md:w-80 w-64 h-12 mr-1 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "
             />

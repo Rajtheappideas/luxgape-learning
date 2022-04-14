@@ -144,5 +144,6 @@
   "save_changes": "Save Changes",
   "old_password": "Old Password",
   "new_password": "New Password",
-  "videos": "Videos"
+  "videos": "Videos",
+  "message_is_required": "Message is required"
 }

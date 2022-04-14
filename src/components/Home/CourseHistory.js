@@ -66,7 +66,6 @@ const CourseHistory = ({ showButton }) => {
         },
       }).then((response) => {
         if (response?.data?.status === "Success") {
-          console.log(response?.data?.data);
           setCourseHistory(response?.data?.data);
           setLoading(false);
           return true;

@@ -106,6 +106,14 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                       <StarIcon className="w-8 h-8" color="gold" />
                     </div>
                   )}
+                  {course?.review_info_count === "4.3" && (
+                    <div className="flex items-start space-x-1">
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                    </div>
+                  )}
                   <div className="flex items-center space-x-3">
                     <p className="text-secondary">
                       <span className="font-bold sm:text-2xl text-xl">

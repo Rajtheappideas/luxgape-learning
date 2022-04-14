@@ -144,5 +144,6 @@
   "save_changes": "Guardar cambios",
   "old_password": "Contraseña antigua",
   "new_password": "Nueva contraseña",
-  "videos": "Vídeos"
+  "videos": "Vídeos",
+  "message_is_required": "se requiere un mensaje"
 }
