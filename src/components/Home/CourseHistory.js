@@ -78,26 +78,17 @@ const CourseHistory = ({ showButton }) => {
     }, 2000);
   }, []);
 
-  var date_future = 15 / 4 / 2022;
-  var date_now = new Date().getDate();
-  // get total seconds between the times
-  var delta = Math.abs(date_future - date_now) / 1000;
+  function totalSeconds(time) {
+    var parts = time.split(":");
+    return parts[0] * 3600 + parts[1] * 60 + parts[2];
+  }
 
-  // calculate (and subtract) whole days
-  var days = Math.floor(delta / 86400);
-  delta -= days * 86400;
-
-  // calculate (and subtract) whole hours
-  var hours = Math.floor(delta / 3600) % 24;
-  delta -= hours * 3600;
-
-  // calculate (and subtract) whole minutes
-  var minutes = Math.floor(delta / 60) % 60;
-  delta -= minutes * 60;
-
-  // what's left is seconds
-  var seconds = delta % 60; // in theory the modulus is not required
-  // console.log(delta.toLocaleString("en-US"));
+  var timeElapsed = "03:32:00"; // time elapsed
+  var totalTime = "04:10:00"; // total time
+  var percentage = Math.floor(
+    (100 * totalSeconds(timeElapsed)) / totalSeconds(totalTime)
+  );
+  console.log(percentage);
   return (
     <div className=" sm:p-10 p-3 relative">
       {/* ----------------eclipse---------------- */}
@@ -168,7 +159,7 @@ const CourseHistory = ({ showButton }) => {
             </ContentLoader>
           </>
         ) : (
-          courseHistory.slice(0,3).map((course) => (
+          courseHistory.slice(0, 3).map((course) => (
             <BorderDiv
               key={course?.course_details?.course_id}
               className={`${
@@ -194,7 +185,9 @@ const CourseHistory = ({ showButton }) => {
                     Certified
                   </p>
                 ) : (
-                  <p className="font-bold text-red-500">2:30:49 / 4:22:10</p>
+                  <p className="font-bold text-red-500">
+                    {timeElapsed} / {totalTime}
+                  </p>
                 )}
                 {course.certified ? (
                   <button>
@@ -219,11 +212,13 @@ const CourseHistory = ({ showButton }) => {
               ) : (
                 <div className="flex text-red-600">
                   <p className="rounded-full  w-14 px-2 py-3 text-center h-14  border-b-2 bg-gray-200 border-red-600">
-                    {course.percetange}%
+                    {percentage}%
                   </p>
                   <div className="flex-col mx-2 text-red-600 font-bold">
-                    <span className="block text-xl">{course.percetange}%</span>
-                    <span className="block text-sm">{course.completion}</span>
+                    <span className="block text-xl">{percentage}%</span>
+                    <span className="block text-sm">
+                      {timeElapsed === totalTime ? "Done" : "Pending"}
+                    </span>
                   </div>
                 </div>
               )}

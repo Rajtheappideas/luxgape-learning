@@ -16,7 +16,7 @@ const UserProfile = () => {
   const [userDetails, setUserDetails] = useState({});
 
   // ---context----------
-  const { userData } = useUserContext();
+  const { userData, userLanguage } = useUserContext();
 
   const { t } = useTranslation();
 
@@ -35,7 +35,7 @@ const UserProfile = () => {
     axios("https://chessmafia.com/php/luxgap/App/api/get-user-details", {
       method: "POST",
       params: {
-        lang_code: lang_code,
+        lang_code: userLanguage,
       },
       headers: {
         Accept: "application/json",

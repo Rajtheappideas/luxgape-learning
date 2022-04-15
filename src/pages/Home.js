@@ -14,9 +14,11 @@ import {
 import { MetaTags } from "react-meta-tags";
 import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
+import { useUserContext } from "../context/usercontext";
 
 const Home = () => {
   const { t } = useTranslation();
+  const { userData } = useUserContext();
 
   return (
     <div className="bg-white overflow-hidden">
@@ -43,7 +45,7 @@ const Home = () => {
       <Herosection />
 
       {/* -----------------course history--------------------------- */}
-      <CourseHistory showButton={true} />
+      {userData && <CourseHistory showButton={true} />}
 
       {/* -------------------whychooseus=------------------------- */}
       <WhyChooseUs />
