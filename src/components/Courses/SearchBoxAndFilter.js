@@ -145,9 +145,9 @@ const SearchBoxAndFilter = ({
                   <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
                     Skills
                   </p>
-                  {skills.map((skill) => (
+                  {skills.map((skill,index) => (
                     <div
-                      key={skill.skills_id}
+                      key={index}
                       className="flex items-center mb-2"
                     >
                       <input

@@ -24,7 +24,7 @@ const Footer = ({ classFooter, normalFooter }) => {
                 <img
                   src={logo}
                   alt="companylogo"
-                  className="sm:h-20 h-16 cursor-pointer object-center object-contain inline-block"
+                  className="sm:h-16 h-16 cursor-pointer object-center object-contain inline-block"
                 />
               </Link>
             </div>
@@ -117,8 +117,8 @@ const Footer = ({ classFooter, normalFooter }) => {
 export default Footer;
 
 const Label = tw.p`
-sm:mb-5 sm:text-3xl mb-1 text-xl font-bold text-left tracking-wide`;
+sm:mb-5 sm:text-2xl mb-1 text-xl font-semibold text-left tracking-wide`;
 
 const List = tw.li`
-sm:text-2xl text-lg font-normal text-left tracking-normal cursor-pointer
+sm:text-xl text-lg font-normal text-left tracking-normal cursor-pointer
 `;

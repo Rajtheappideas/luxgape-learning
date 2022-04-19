@@ -1,4 +1,4 @@
-import { ArrowRightIcon, StarIcon } from "@heroicons/react/outline";
+import { ArrowRightIcon, StarIcon } from "@heroicons/react/solid";
 import axios from "axios";
 import tw from "tailwind-styled-components/dist/tailwind";
 import React, { useEffect, useState } from "react";

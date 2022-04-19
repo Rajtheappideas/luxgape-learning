@@ -31,6 +31,14 @@ module.exports = {
       bg: {
         bgblank: "./src/assets/LXG_BG.png",
       },
+      keyframes: {
+        animate: {
+          "100%": { strokeDashoffset: "0" },
+        },
+      },
+      animation: {
+        progress: "animate 4s linear",
+      },
     },
   },
   plugins: [

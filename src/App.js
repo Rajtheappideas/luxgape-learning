@@ -59,7 +59,14 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/userprofile" element={<UserProfile />} />
+              <Route
+                path="/userprofile"
+                element={
+                  <PrivateRoute>
+                    <UserProfile />
+                  </PrivateRoute>
+                }
+              />
               <Route path="/aboutus" element={<About />} />
               <Route path="/privacypolicy" element={<PrivacyPolicy />} />
               <Route
@@ -68,7 +75,14 @@ const App = () => {
               />
               <Route path="/faq" element={<Faq />} />
               <Route path="/courses" element={<Courses />} />
-              <Route path="/mycourses" element={<MyCourses />} />
+              <Route
+                path="/mycourses"
+                element={
+                  <PrivateRoute>
+                    <MyCourses />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="/courses/aboutcourse/:id"
                 element={<AboutCourse />}
@@ -83,11 +97,36 @@ const App = () => {
               />
               <Route
                 path="/attendcoursehistory"
-                element={<AttendCourseHistory />}
+                element={
+                  <PrivateRoute>
+                    <AttendCourseHistory />
+                  </PrivateRoute>
+                }
               />
-              <Route path="/employees" element={<Employee />} />
-              <Route path="/exam" element={<Exam />} />
-              <Route path="/class/:id" element={<Class />} />
+              <Route
+                path="/employees"
+                element={
+                  <PrivateRoute>
+                    <Employee />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/exam"
+                element={
+                  <PrivateRoute>
+                    <Exam />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/class/:id"
+                element={
+                  <PrivateRoute>
+                    <Class />
+                  </PrivateRoute>
+                }
+              />
               <Route path="/forgotpassword" element={<ForgotPassword />} />
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="*" element={<Erro404 />} />

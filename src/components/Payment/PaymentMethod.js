@@ -36,7 +36,7 @@ const PaymentMethod = ({ product }) => {
       params: {
         lang_code: userLanguage,
         course_id: product?.course_details?.course_id,
-        coupon_id: 1,
+        coupon_id: null,
         discount_amount: 5,
         price: product?.price,
         grand_total: 35,
@@ -63,7 +63,9 @@ const PaymentMethod = ({ product }) => {
           setLoading(false);
         }
       });
+      console.log(token)
   };
+
   const handleCouponeCode = () => {
     if (enterCouponCode === "") {
       toast("Oops forgot to enter coupon code!!", { type: "warning" });
@@ -74,7 +76,7 @@ const PaymentMethod = ({ product }) => {
       method: "POST",
       params: {
         lang_code: userLanguage,
-        coupon_code: enterCouponCode,
+        coupon_code: enterCouponCode || null,
       },
     })
       .then((response) => {

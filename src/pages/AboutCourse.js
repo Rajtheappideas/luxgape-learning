@@ -62,7 +62,7 @@ const AboutCourse = () => {
           }
         });
     }, 1000);
-  }, []);
+  }, [id]);
   return (
     <div className="">
       <MetaTags>

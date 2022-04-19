@@ -48,6 +48,7 @@ const data = [
 const CourseHistory = ({ showButton }) => {
   const [courseHistory, setCourseHistory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [counter, setCounter] = useState(0);
 
   const { userData, userLanguage } = useUserContext();
 
@@ -78,17 +79,17 @@ const CourseHistory = ({ showButton }) => {
     }, 2000);
   }, []);
 
+  // percentage from total time to elapsed time
   function totalSeconds(time) {
     var parts = time.split(":");
     return parts[0] * 3600 + parts[1] * 60 + parts[2];
   }
-
   var timeElapsed = "03:32:00"; // time elapsed
   var totalTime = "04:10:00"; // total time
   var percentage = Math.floor(
     (100 * totalSeconds(timeElapsed)) / totalSeconds(totalTime)
   );
-  console.log(percentage);
+console.log(courseHistory);
   return (
     <div className=" sm:p-10 p-3 relative">
       {/* ----------------eclipse---------------- */}
@@ -211,8 +212,21 @@ const CourseHistory = ({ showButton }) => {
                 </div>
               ) : (
                 <div className="flex text-red-600">
-                  <p className="rounded-full  w-14 px-2 py-3 text-center h-14  border-b-2 bg-gray-200 border-red-600">
+                  {/* <p className="rounded-full  w-14 px-2 py-3 text-center h-14  border-b-2 bg-gray-200 border-red-600">
                     {percentage}%
+                  </p> */}
+                  <p className="w-16 h-10 -rotate-90">
+                    <svg
+                      fill="#D3D3D3"
+                      stroke="red"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeDasharray="160"
+                      strokeDashoffset="160"
+                      className="animate-progress"
+                    >
+                      <circle cx="28" cy="28" r="25"></circle>
+                    </svg>
                   </p>
                   <div className="flex-col mx-2 text-red-600 font-bold">
                     <span className="block text-xl">{percentage}%</span>

@@ -143,7 +143,7 @@ const SkillsYouGet = ({ skillsYouGet, loading }) => {
           skillsYouGet.map((skill) => (
             // -------------main div--------------
             <div
-              className="h-64 w-64  cursor-pointer group perspective"
+              className="h-[16rem] w-[16rem]  cursor-pointer group perspective"
               key={skill?.skills_id}
             >
               {/* ------------------main content div-------------- */}

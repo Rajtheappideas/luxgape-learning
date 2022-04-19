@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
 import {
@@ -26,11 +26,13 @@ const Class = () => {
   const [userReviews, setUserReviews] = useState([]);
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [startExamLoading, setStartExamLoading] = useState(false);
 
   const { id } = useParams();
   const { userLanguage, userData } = useUserContext();
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   // fetch data on first rendering page
   useEffect(() => {
@@ -70,18 +72,52 @@ const Class = () => {
         "consumer-access-token": userData?.api_token,
       },
     }).then((response) => {
-      if (response?.data?.status === "Success") {
+      if (
+        response?.data?.status === "Success" &&
+        response?.data?.message === "success"
+      ) {
         toast("course is started", { type: "success" });
         setLoading(false);
         return true;
-      } else if (response?.data?.status === "Error") {
+      } else if (response?.data?.message === "already exists") {
         toast("course is already started", { type: "warning" });
         setLoading(false);
         return false;
       }
     });
   }, []);
-  // console.log(courseDetails);
+
+  const StartExam = () => {
+    setStartExamLoading(true);
+    axios("https://chessmafia.com/php/luxgap/App/api/start-exam", {
+      method: "POST",
+      params: {
+        lang_code: userLanguage,
+        course_id: id,
+      },
+      headers: {
+        "consumer-access-token": userData?.api_token,
+      },
+    }).then((response) => {
+      if (response?.data?.status === "Success") {
+        console.log("Exam ->", response?.data);
+        setStartExamLoading(false);
+        if (response?.data?.message === "your course is not finished") {
+          toast("your course is not finished yet!", { type: "warning" });
+          setStartExamLoading(false);
+          return false;
+        }
+        return true;
+      } else if (response?.data?.status === "Error") {
+        console.log(response?.data);
+        setStartExamLoading(false);
+        return false;
+      } else {
+        navigate("/exam");
+        return true;
+      }
+    });
+  };
   return (
     <div className="relative">
       <MetaTags>
@@ -198,7 +234,19 @@ const Class = () => {
 
       {/* -------------------History-------------------- */}
       {openHistory && <History />}
-
+      <div className="text-center my-10 ">
+        <button
+          type="button"
+          className="h-10 cursor-not-allowed active:scale-95 duration-100 ease-in-out transition-all delay-75 w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
+          // disabled={true}
+          onClick={StartExam}
+        >
+          {startExamLoading ? "loading..." : t("start_exam")}
+        </button>
+        <p className="text-center mt-3 w-2/5 font-normal text-base tracking-wide text-gray-500 mx-auto">
+          {t("history_exam_paragraph")}
+        </p>
+      </div>
       {/* -------------most popular cousrse----------------- */}
       <MostPopularCourse showButton={false} />
 

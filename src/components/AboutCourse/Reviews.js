@@ -27,6 +27,10 @@ const Reviews = ({ course_id, userReviews, loading }) => {
       });
       return false;
     }
+    if (userData === null) {
+      toast("Login First!!!", { type: "warning" });
+      return false;
+    }
     setLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/post-review", {
       method: "POST",

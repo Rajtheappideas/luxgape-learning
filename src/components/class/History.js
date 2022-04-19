@@ -85,18 +85,6 @@ const History = () => {
           </div>
         ))}
       </div>
-      <div className="text-center my-10 ">
-        <button
-          type="button"
-          className="h-10 cursor-not-allowed w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
-          disabled={true}
-        >
-          {t("start_exam")}
-        </button>
-        <p className="text-center mt-3 w-2/5 font-normal text-base tracking-wide text-gray-500 mx-auto">
-          {t("history_exam_paragraph")}
-        </p>
-      </div>
     </div>
   );
 };
