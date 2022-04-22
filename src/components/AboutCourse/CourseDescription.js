@@ -67,7 +67,7 @@ const CourseDescription = ({ units, courseDetails, loading }) => {
           </ContentLoader> */}
         </>
       ) : (
-        units.map((unit) => (
+        units.map((unit, index) => (
           <div
             key={unit?.id}
             className="flex md:flex-row flex-col justify-center items-start w-full border-b py-10 border-[#c4c4c4] last:border-b-0"
@@ -76,7 +76,7 @@ const CourseDescription = ({ units, courseDetails, loading }) => {
             <div className="w-2/4">
               <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
                 <GiCircle className="h-3 w-3 bg-gradient-to-br from-to to-from rounded-full mr-2" />
-                {unit?.id} Unit
+                {index + 1} Unit
               </p>
               <p className="font-bold text-secondary text-base sm:ml-3">
                 {unit?.hours} hours

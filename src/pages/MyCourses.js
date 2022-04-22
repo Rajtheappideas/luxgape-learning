@@ -13,7 +13,8 @@ const MyCourses = () => {
   const [loading, setLoading] = useState(true);
   const [getMyCourse, setGetMyCourse] = useState([]);
 
-  const { userLanguage, userData } = useUserContext();
+  const { userLanguage, userData, setCourseDetails, courseDetails } =
+    useUserContext();
 
   const ScrollToTop = () => {
     window.scrollTo({
@@ -35,6 +36,7 @@ const MyCourses = () => {
     }).then((response) => {
       if (response?.data?.status === "Success") {
         setGetMyCourse(response?.data?.data);
+        setCourseDetails(response?.data?.data);
         setLoading(false);
         return true;
       } else if (response?.data?.status === "Error") {
@@ -82,13 +84,48 @@ const MyCourses = () => {
                     <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
                       {course?.course_details?.about}
                     </p>
-                    <div className="flex items-start space-x-1">
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                    </div>
+                    {/* --------------reviews in star----------- */}
+                    {course?.review_info_count === null ? null : parseInt(
+                        course?.review_info_count
+                      ) === 5 ? (
+                      <div className="flex items-start space-x-1">
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                      </div>
+                    ) : parseInt(course?.review_info_count) === 4 ? (
+                      <div className="flex items-start space-x-1">
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                      </div>
+                    ) : parseInt(course?.review_info_count) === 3 ? (
+                      <div className="flex items-start space-x-1">
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                      </div>
+                    ) : parseInt(course?.review_info_count) === 2 ? (
+                      <div className="flex items-start space-x-1">
+                        <StarIcon className="w-8 h-8" color="gold" />
+                        <StarIcon className="w-8 h-8" color="gold" />
+                      </div>
+                    ) : parseInt(course?.review_info_count) === 1 ? (
+                      <div className="flex items-start space-x-1">
+                        <StarIcon className="w-8 h-8" color="gold" />
+                      </div>
+                    ) : (
+                      parseInt(course?.review_info_count) <= 0 && (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      )
+                    )}
+
+                    {/* --------------price----------- */}
                     <div className="flex items-center space-x-3">
                       <p className="text-secondary">
                         <span className="font-bold sm:text-2xl text-xl">

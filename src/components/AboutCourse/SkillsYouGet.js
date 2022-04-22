@@ -1,8 +1,6 @@
 import React from "react";
 import ContentLoader from "react-content-loader";
 import { useTranslation } from "react-i18next";
-import { AiFillHtml5 } from "react-icons/ai";
-import { DiCss3Full } from "react-icons/di";
 
 const SkillsYouGet = ({ skillsYouGet, loading }) => {
   const { t } = useTranslation();

@@ -30,7 +30,11 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
       })
         .then((response) => {
           if (response?.data?.status === "Success") {
-            setMostPopularCourse(response?.data?.data);
+            setMostPopularCourse(
+              response?.data?.data.filter(
+                (course) => course?.course_details !== null
+              )
+            );
             setLoading(false);
             return true;
           }
@@ -79,14 +83,17 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
             <SkeletonLoading />
           </>
         ) : (
-          mostPopularCourse.map((course) => (
+          mostPopularCourse.slice(0,6).map((course) => (
             <Link
               to={`/courses/aboutcourse/${course?.course_details?.course_id}`}
               key={course?.id}
             >
               <RoundedDiv onClick={ScrollToTop}>
                 <LazyLoadImage
-                  src={`https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}`}
+                  src={
+                    `https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}` ||
+                    null
+                  }
                   alt={course?.course_details?.title}
                   className="h-1/2 w-full object-center rounded-tl-[182px]"
                 />
@@ -97,7 +104,10 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                   <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
                     {course?.course_details?.about}
                   </p>
-                  {course?.review_info_count === "5.0" && (
+                  {/* --------------reviews in star----------- */}
+                  {course?.review_info_count === null ? null : parseInt(
+                      course?.review_info_count
+                    ) === 5 ? (
                     <div className="flex items-start space-x-1">
                       <StarIcon className="w-8 h-8" color="gold" />
                       <StarIcon className="w-8 h-8" color="gold" />
@@ -105,14 +115,34 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                       <StarIcon className="w-8 h-8" color="gold" />
                       <StarIcon className="w-8 h-8" color="gold" />
                     </div>
-                  )}
-                  {course?.review_info_count === "4.3" && (
+                  ) : parseInt(course?.review_info_count) === 4 ? (
                     <div className="flex items-start space-x-1">
                       <StarIcon className="w-8 h-8" color="gold" />
                       <StarIcon className="w-8 h-8" color="gold" />
                       <StarIcon className="w-8 h-8" color="gold" />
                       <StarIcon className="w-8 h-8" color="gold" />
                     </div>
+                  ) : parseInt(course?.review_info_count) === 3 ? (
+                    <div className="flex items-start space-x-1">
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                    </div>
+                  ) : parseInt(course?.review_info_count) === 2 ? (
+                    <div className="flex items-start space-x-1">
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                    </div>
+                  ) : parseInt(course?.review_info_count) === 1 ? (
+                    <div className="flex items-start space-x-1">
+                      <StarIcon className="w-8 h-8" color="gold" />
+                    </div>
+                  ) : (
+                    parseInt(course?.review_info_count) <= 0 && (
+                      <div className="flex items-start space-x-1">
+                        <StarIcon className="w-8 h-8" color="gold" />
+                      </div>
+                    )
                   )}
                   <div className="flex items-center space-x-3">
                     <p className="text-secondary">
@@ -138,7 +168,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
 export default MostPopularCourse;
 
 const RoundedDiv = tw.div`
-border relative inline-block
+border relative inline-block 
 rounded-tl-[182px] rounded-tr-0 rounded-br-[182px] rounded-bl-0
   sm:h-[673px] h-[550px] sm:w-[364px] w-72
 cursor-pointer`;

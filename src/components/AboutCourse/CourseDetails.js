@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CheckCircleIcon, ShareIcon, XIcon } from "@heroicons/react/solid";
 import { BsStarFill, BsStarHalf, BsFillPlayCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -26,6 +26,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
     });
   };
   const salePrice = courseDetails?.sale_price;
+  // const price = Math.round(salePrice / courseDetails?.price) * 100;
   const discount = 50 / 100;
   const discountPrice = salePrice - salePrice * discount;
 
@@ -39,7 +40,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
       </div>
 
       {/* ----------------Deatails of course---------------- */}
-      <div className="flex lg:flex-row flex-col justify-center items-start mt-10">
+      <div className="flex lg:flex-row flex-col justify-center items-start mt-10 h-auto">
         {/* -------------------left side div video content----------------- */}
         {loading ? (
           <ContentLoader
@@ -52,7 +53,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
             <rect x="0" y="0" rx="3" ry="3" width="800" height="670" />
           </ContentLoader>
         ) : (
-          <div className="w-full sm:h-screen h-96 relative lg:mr-10 bg-black mix-blend-darken border border-gray-300">
+          <div className="w-full md:h-screen h-80 relative overflow-hidden lg:mr-10 bg-black mix-blend-darken border rounded-xl border-gray-300">
             <ReactPlayer
               url={
                 `https://chessmafia.com/php/luxgap/App/${courseDetails?.course_details?.demo_video}` ||
@@ -63,9 +64,9 @@ const CourseDetails = ({ courseDetails, loading }) => {
                 <div>
                   <BsFillPlayCircleFill
                     className="w-16 h-16 mx-auto"
-                    color="gray"
+                    color="white"
                   />
-                  <span className="text-gray-400 font-bold text-2xl">
+                  <span className="text-white font-bold text-2xl">
                     {t("view_demo")}
                   </span>
                 </div>
@@ -77,6 +78,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
                 null
               }
               style={{ borderRadius: "2rem" }}
+              className="object-cover object-center"
             />
           </div>
         )}

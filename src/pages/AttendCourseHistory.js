@@ -12,7 +12,7 @@ const AttendCourseHistory = () => {
       </MetaTags>
       <Navbar />
 
-      <CourseHistory showButton={false} />
+      <CourseHistory showButton={false} slice={false} />
       <Footer />
     </div>
   );

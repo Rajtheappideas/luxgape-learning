@@ -76,11 +76,11 @@ const Class = () => {
         response?.data?.status === "Success" &&
         response?.data?.message === "success"
       ) {
-        toast("course is started", { type: "success" });
+        // toast("course is started", { type: "success" });
         setLoading(false);
         return true;
       } else if (response?.data?.message === "already exists") {
-        toast("course is already started", { type: "warning" });
+        // toast("course is already started", { type: "warning" });
         setLoading(false);
         return false;
       }
@@ -99,22 +99,19 @@ const Class = () => {
         "consumer-access-token": userData?.api_token,
       },
     }).then((response) => {
-      if (response?.data?.status === "Success") {
+      if (response?.data?.message === "your course is not finished") {
+        toast("your course is not finished yet!", { type: "warning" });
+        setStartExamLoading(false);
+        return false;
+      } else if (response?.data?.status === "Success") {
         console.log("Exam ->", response?.data);
         setStartExamLoading(false);
-        if (response?.data?.message === "your course is not finished") {
-          toast("your course is not finished yet!", { type: "warning" });
-          setStartExamLoading(false);
-          return false;
-        }
+        navigate("/exam", { state: { id: id } });
         return true;
       } else if (response?.data?.status === "Error") {
         console.log(response?.data);
         setStartExamLoading(false);
         return false;
-      } else {
-        navigate("/exam");
-        return true;
       }
     });
   };

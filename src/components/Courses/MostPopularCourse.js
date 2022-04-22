@@ -38,10 +38,9 @@ const MostPopularCourse = ({ courses }) => {
   // ----------pagination logic-------
   const coursesPerPage = 6;
   const pagesVisited = pageNumber * coursesPerPage;
-  const displayCourse = courses.slice(
-    pagesVisited,
-    pagesVisited + coursesPerPage
-  );
+  const displayCourse = courses
+    .filter((course) => course?.course_details !== null)
+    .slice(pagesVisited, pagesVisited + coursesPerPage);
   const pageCount = Math.ceil(courses.length / coursesPerPage);
   const changePage = ({ selected }) => {
     setPageNumber(selected);
@@ -479,7 +478,7 @@ const MostPopularCourse = ({ courses }) => {
             </>
           ) : (
             displayCourse.map((course) => {
-              // if (course?.course_details === null) return false;
+              if (course?.course_details === null) console.log(true);
               return (
                 <Link
                   to={`/courses/aboutcourse/${course?.course_details?.course_id}`}
@@ -502,13 +501,46 @@ const MostPopularCourse = ({ courses }) => {
                       <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
                         {course?.course_details?.about}
                       </p>
-                      <div className="flex items-start space-x-1">
-                        <StarIcon className="w-8 h-8" color="gold" />
-                        <StarIcon className="w-8 h-8" color="gold" />
-                        <StarIcon className="w-8 h-8" color="gold" />
-                        <StarIcon className="w-8 h-8" color="gold" />
-                        <StarIcon className="w-8 h-8" color="gold" />
-                      </div>
+                      {/* --------------reviews in star----------- */}
+                      {course?.review_info_count === null ? null : parseInt(
+                          course?.review_info_count
+                        ) === 5 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : parseInt(course?.review_info_count) === 4 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : parseInt(course?.review_info_count) === 3 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : parseInt(course?.review_info_count) === 2 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : parseInt(course?.review_info_count) === 1 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : (
+                        parseInt(course?.review_info_count) <= 0 && (
+                          <div className="flex items-start space-x-1">
+                            <StarIcon className="w-8 h-8" color="gold" />
+                          </div>
+                        )
+                      )}
                       {/* arrow button */}
                       <div className="flex items-center space-x-3">
                         <p className="text-secondary">

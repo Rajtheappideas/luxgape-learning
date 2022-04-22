@@ -34,7 +34,11 @@ const Courses = () => {
       })
         .then((response) => {
           if (response?.data?.status === "Success") {
-            setCourses(response?.data?.data);
+            setCourses(
+              response?.data?.data.filter(
+                (course) => course?.course_details !== null
+              )
+            );
             return true;
           }
         })
@@ -46,7 +50,6 @@ const Courses = () => {
         });
     }, 2000);
   }, []);
-
   return (
     <div className="bg-bgblank relative">
       <MetaTags>

@@ -5,17 +5,19 @@ import {
   ChevronRightIcon,
   UserIcon,
 } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useUserContext } from "../context/usercontext";
 import ContentLoader from "react-content-loader";
+import { toast, ToastContainer } from "react-toastify";
 
 const Exam = () => {
   const [userDetails, setUserDetails] = useState({});
-  const [getExamQuestions, setGetExamQuestions] = useState({});
+  const [getExamDetails, setGetExamDetails] = useState();
+  const [getExamQuestions, setGetExamQuestions] = useState([]);
   const [employerDetails, setEmployerDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [userDetailsLoading, setuserDetailsLoading] = useState(true);
@@ -26,32 +28,44 @@ const Exam = () => {
   const [hours, sethours] = useState("00");
   const [minutes, setMinutes] = useState("00");
   const [seconds, setSeconds] = useState("00");
+  const [countDown, setCountDown] = useState();
   const [startExam, setStartExam] = useState(true);
+  const [currentPage, setCurrentPage] = useState();
+  const [currentUrl, setCurrentUrl] = useState(null);
+  // const [examSubmitted, setExamSubmitted] = useState(false);
 
   const currentYear = new Date().getFullYear();
 
   const { t } = useTranslation();
 
-  const { userData, userLanguage } = useUserContext();
+  const { userData, userLanguage, examSubmitted, setExamSubmitted } =
+    useUserContext();
 
-  let interval = useRef();
+  let interval;
+  const { id } = useLocation().state;
+
+  const navigate = useNavigate();
 
   const startTimer = () => {
-    // const nextDay = new Date("April 20, 2022 00:10:00").getTime();
-
-    const timer = getExamQuestions?.data[0]?.exam_info.total_time * 60 * 1000;
+    // const timer = getExamDetails?.data[0]?.exam_info.total_time * 60 * 1000;
+    const timer = 1 * 20 * 1000;
     const nextDay = timer + new Date().getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
-      const countDown = nextDay - now;
-      // calculate time left
+      const countdown = nextDay - now;
+      setCountDown(countdown);
       const hours = Math.floor(
-        (countDown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      const minutes = Math.floor((countDown % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((countDown % (1000 * 60)) / 1000);
-      if (countDown <= 0) {
-        clearInterval(interval.current);
+      const minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+      if (examSubmitted) {
+        return false;
+      } else if (countdown <= 0 && examSubmitted === false) {
+        SubmitExam();
+        setCountDown(0);
+        clearInterval(interval);
+        alert("Time is Over!! Exam Automatically submited");
       } else {
         sethours(hours);
         setMinutes(minutes);
@@ -59,10 +73,18 @@ const Exam = () => {
       }
     }, 1000);
   };
+  let timer = useRef(null);
+
+  const startTime = () => {
+    timer = setInterval(() => {
+      console.log("heloo");
+    }, 1000);
+  };
 
   // fetch user details first rendering
   useEffect(() => {
     // fetch the userdetails
+    startTime();
     if (!startExam) {
       startTimer();
     }
@@ -90,18 +112,27 @@ const Exam = () => {
 
     // fetch the exam questions
     setLoading(true);
+    let url =
+      "https://chessmafia.com/php/luxgap/App/api/get-exam-question?lang_code=en&course_id=1&page=1&exam_id=1";
+    setCurrentUrl(url);
     axios("https://chessmafia.com/php/luxgap/App/api/get-exam-question", {
       method: "POST",
       params: {
         lang_code: userLanguage,
-        course_id: 1,
+        course_id: id,
+        exam_id: id,
+        page: 1,
       },
       headers: {
         "consumer-access-token": userData?.api_token,
       },
     }).then((response) => {
       if (response?.data?.status === "Success") {
-        setGetExamQuestions(response?.data?.data?.questions);
+        setGetExamDetails(response?.data?.data?.questions);
+        setGetExamQuestions(
+          response?.data?.data?.questions?.data[0]?.exam_questions_details
+        );
+        setCurrentPage(response?.data?.data?.questions?.current_page);
         setEmployerDetails(response?.data?.data?.employer_id);
         setLoading(false);
         return true;
@@ -113,28 +144,41 @@ const Exam = () => {
         return false;
       }
     });
-    return () => {
-      clearInterval(interval.current);
-    };
+    return () => clearInterval(interval);
   }, []);
 
+  // nexy questions
   const NextQuestions = () => {
+    let option = getExamQuestions?.exam_questions_options_info.map(
+      (options) => options.is_answer_count === 0
+    );
+    let checker = (arr) => arr.every((option) => option === true);
     if (
-      getExamQuestions?.current_page === getExamQuestions?.total &&
-      getExamQuestions.next_page_url === null
+      selectedQuestionId === "" &&
+      selectedOptionId === "" &&
+      checker(option) === true
+    ) {
+      toast("you have to choose the answer!!!", { type: "warning" });
+      return false;
+    }
+    if (
+      getExamDetails?.current_page === getExamDetails?.total &&
+      getExamDetails.next_page_url === null
     )
       return false;
-    if (getExamQuestions?.current_page >= getExamQuestions?.total) {
+    if (getExamDetails?.current_page >= getExamDetails?.total) {
       return false;
     } else {
       setQuestionLoading(true);
       setTimeout(() => {
+        setCurrentUrl(getExamDetails?.next_page_url);
         // next question calling
-        axios(getExamQuestions?.next_page_url, {
+        axios(getExamDetails?.next_page_url, {
           method: "POST",
           params: {
             lang_code: userLanguage,
-            course_id: 1,
+            course_id: id,
+            exam_id: id,
           },
           headers: {
             "consumer-access-token": userData?.api_token,
@@ -142,60 +186,74 @@ const Exam = () => {
         }).then((response) => {
           console.log("new page =>", response?.data?.data?.questions);
           if (response?.data?.status === "Success") {
-            setGetExamQuestions(response?.data?.data?.questions);
+            setGetExamDetails(response?.data?.data?.questions);
+            setGetExamQuestions(
+              response?.data?.data?.questions?.data[0]?.exam_questions_details
+            );
+            setCurrentPage(response?.data?.data?.questions?.current_page);
             setQuestionLoading(false);
-            return true;
-          } else if (response?.data?.status === Error) {
-            setQuestionLoading(false);
-            return false;
-          }
-        });
-
-        // submit answer is here at every single quetion
-        axios("https://chessmafia.com/php/luxgap/App/api/submit-answer", {
-          method: "POST",
-          params: {
-            lang_code: userLanguage,
-            question_id: selectedQuestionId,
-            option_id: selectedOptionId,
-          },
-          headers: {
-            "consumer-access-token": userData?.api_token,
-          },
-        }).then((response) => {
-          console.log("submit answer =>", response?.data?.data);
-          if (response?.data?.status === "Success") {
             setSelectedOptionId("");
             setSelectedQuestionId("");
             return true;
           } else if (response?.data?.status === Error) {
-            setSelectedOptionId("");
-            setSelectedQuestionId("");
+            setQuestionLoading(false);
             return false;
           }
         });
       }, 1000);
-    }
-  };
-  const PrevQuestions = () => {
-    if (getExamQuestions?.prev_page_url === null) {
-      return false;
-    } else {
-      // call prev page question
-      setQuestionLoading(true);
-      axios(getExamQuestions?.prev_page_url, {
+      // submit answer is here at every single quetion
+      axios("https://chessmafia.com/php/luxgap/App/api/submit-answer", {
         method: "POST",
         params: {
           lang_code: userLanguage,
-          course_id: 1,
+          question_id: selectedQuestionId,
+          option_id: selectedOptionId,
+          exam_id: 1,
+          course_id: id,
         },
         headers: {
           "consumer-access-token": userData?.api_token,
         },
       }).then((response) => {
-        console.log("new page =>", response?.data?.data);
+        console.log("submit answer =>", response?.data?.data);
         if (response?.data?.status === "Success") {
-          setGetExamQuestions(response?.data?.data?.questions);
+          setSelectedOptionId("");
+          setSelectedQuestionId("");
+          return true;
+        } else if (response?.data?.status === Error) {
+          setSelectedOptionId("");
+          setSelectedQuestionId("");
+          return false;
+        }
+      });
+    }
+  };
+  // prev questions
+  const PrevQuestions = () => {
+    if (getExamDetails?.prev_page_url === null) {
+      return false;
+    } else {
+      // call prev page question
+      setQuestionLoading(true);
+      setCurrentUrl(getExamDetails?.prev_page_url);
+      axios(getExamDetails?.prev_page_url, {
+        method: "POST",
+        params: {
+          lang_code: userLanguage,
+          course_id: id,
+          exam_id: id,
+        },
+        headers: {
+          "consumer-access-token": userData?.api_token,
+        },
+      }).then((response) => {
+        console.log("new page =>", response?.data?.data?.questions);
+        if (response?.data?.status === "Success") {
+          setGetExamDetails(response?.data?.data?.questions);
+          setGetExamQuestions(
+            response?.data?.data?.questions?.data[0]?.exam_questions_details
+          );
+          setCurrentPage(response?.data?.data?.questions?.current_page);
           setQuestionLoading(false);
           return true;
         } else if (response?.data?.status === Error) {
@@ -205,15 +263,30 @@ const Exam = () => {
       });
     }
   };
-  const SubmitExam = () => {
+  // submit exam
+  const SubmitExam = (e) => {
+    // e.preventDefault();
+    let option = getExamQuestions?.exam_questions_options_info.map(
+      (options) => options.is_answer_count === 0
+    );
+    let checker = (arr) => arr.every((option) => option === true);
+    if (
+      selectedQuestionId === "" &&
+      selectedOptionId === "" &&
+      checker(option) === true
+    ) {
+      toast("you have to choose the answer!!!", { type: "warning" });
+      return false;
+    }
+
     setSubmitExam(true);
     setTimeout(() => {
       axios("https://chessmafia.com/php/luxgap/App/api/finish-exam", {
         method: "POST",
         params: {
           lang_code: userLanguage,
-          course_id: getExamQuestions?.data[0]?.course_id,
-          exam_id: getExamQuestions?.data[0]?.exam_id,
+          course_id: getExamDetails?.data[0]?.course_id,
+          exam_id: getExamDetails?.data[0]?.exam_id,
         },
         headers: {
           "consumer-access-token": userData?.api_token,
@@ -221,8 +294,12 @@ const Exam = () => {
       }).then((response) => {
         if (response?.data?.status === "Success") {
           console.log(response?.data?.data);
+          clearInterval(interval);
+          setCountDown(0);
+          setExamSubmitted(true);
           setSubmitExam(false);
-          ShowResult();
+          navigate("/");
+          toast("Exam Succesfully Submitted!!", { type: "success" });
           return true;
         } else if (response?.data?.status === "Error") {
           console.log(response?.data);
@@ -230,7 +307,6 @@ const Exam = () => {
           return false;
         }
       });
-      clearInterval(interval.current);
     }, 2000);
     // submit answer is here at every single quetion
     axios("https://chessmafia.com/php/luxgap/App/api/submit-answer", {
@@ -239,6 +315,8 @@ const Exam = () => {
         lang_code: userLanguage,
         question_id: selectedQuestionId,
         option_id: selectedOptionId,
+        course_id: id,
+        exam_id: id,
       },
       headers: {
         "consumer-access-token": userData?.api_token,
@@ -256,13 +334,14 @@ const Exam = () => {
       }
     });
   };
+  // show result
   const ShowResult = () => {
     axios("https://chessmafia.com/php/luxgap/App/api/get-result", {
       method: "POST",
       params: {
         lang_code: userLanguage,
-        course_id: getExamQuestions?.data[0]?.course_id,
-        exam_id: getExamQuestions?.data[0]?.exam_id,
+        course_id: getExamDetails?.data[0]?.course_id,
+        exam_id: getExamDetails?.data[0]?.exam_id,
       },
       headers: {
         "consumer-access-token": userData?.api_token,
@@ -279,15 +358,31 @@ const Exam = () => {
       }
     });
   };
+  // start exam
   const StartExam = () => {
+    // if (examSubmitted) {
+    //   return false;
+    // }
     setStartExam(false);
     startTimer();
   };
+  console.log(examSubmitted);
   return (
     <div>
       <MetaTags>
         <title>{t("exam")}</title>
       </MetaTags>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       {/* ---------------navbar----------- */}
       <nav className="sm:p-10 p-3">
         <div className="sm:flex sm:flex-row  sm:justify-between flex-col items-center space-y-3 sm:space-y-0">
@@ -305,26 +400,112 @@ const Exam = () => {
           <div className="flex items-center bg-gray-100 p-2 rounded-lg">
             {userDetails?.profile === null ? (
               <UserIcon className="h- w-9" color="gray" />
+            ) : userDetailsLoading ? (
+              <ContentLoader
+                speed={1}
+                // width={500}
+                // height={374}
+                backgroundColor="#efe6e6"
+                foregroundColor="#d7bcbc"
+                animate
+                className="w-40 h-10"
+              >
+                <rect x="1100" y="20" rx="3" ry="3" width="50" height="10" />
+              </ContentLoader>
             ) : (
-              <LazyLoadImage
-                src={`https://chessmafia.com/php/luxgap/App/${userDetails?.profile}`}
-                alt={userDetails?.name}
-                className="object-center object-cover rounded-tl-lg rounded-br-lg rounded-bl-none rounded-tr-none w-12 h-12"
-              />
+              <>
+                <LazyLoadImage
+                  src={`https://chessmafia.com/php/luxgap/App/${userDetails?.profile}`}
+                  alt={userDetails?.name}
+                  className="object-center object-cover rounded-tl-lg rounded-br-lg rounded-bl-none rounded-tr-none w-12 h-12"
+                />
+                <span className="text-2xl font-semibold ml-2 text-center">
+                  {userDetails?.name}
+                </span>
+              </>
             )}
-            <span className="text-2xl font-semibold ml-2 text-center">
-              {userDetailsLoading ? <p>fetching...</p> : userDetails?.name}
-            </span>
           </div>
         </div>
       </nav>
+      <button type="button" onClick={clearInterval(timer.current)}>
+        stop
+      </button>
       {/* --------------------main div----------- */}
       {loading ? (
         <p className="text-center text-4xl font-semibold leading-4">
-          Loading...
+          <ContentLoader
+            speed={1}
+            // width={500}
+            // height={374}
+            backgroundColor="#efe6e6"
+            foregroundColor="#d7bcbc"
+            animate
+            className="sm:w-full w-72 sm:h-screen h-60"
+          >
+            <rect x="70" y="80" rx="3" ry="3" width="200" height="20" />
+            <rect x="70" y="120" rx="3" ry="3" width="200" height="20" />
+            <rect
+              x="1100"
+              y="100"
+              rx="3"
+              ry="3"
+              width="200"
+              height="50"
+              className="xl:block hidden"
+            />
+            <rect
+              x="580"
+              y="300"
+              rx="3"
+              ry="3"
+              width="200"
+              height="50"
+              className="xl:block hidden"
+            />
+            <rect
+              x="800"
+              y="100"
+              rx="3"
+              ry="3"
+              width="200"
+              height="50"
+              className="xl:hidden lg:block hidden"
+            />
+            <rect
+              x="500"
+              y="100"
+              rx="3"
+              ry="3"
+              width="200"
+              height="50"
+              className="lg:hidden md:block"
+            />
+            <rect
+              x="300"
+              y="100"
+              rx="3"
+              ry="3"
+              width="200"
+              height="50"
+              className="md:hidden block"
+            />
+            <rect
+              x="400"
+              y="300"
+              rx="3"
+              ry="3"
+              width="200"
+              height="50"
+              className="xl:hidden block"
+            />
+          </ContentLoader>
+        </p>
+      ) : getExamDetails === undefined ? (
+        <p className="text-3xl font-semibold text-center m-10">
+          Oops No Exam for this Course
         </p>
       ) : (
-        getExamQuestions?.data.map((question, indx) => (
+        getExamDetails?.data.map((question, indx) => (
           <div className="sm:p-14 p-5 mb-10" key={indx}>
             {/* ---------------exam name and timer------------------ */}
             <div className="flex justify-between sm:items-center items-start ">
@@ -386,25 +567,27 @@ const Exam = () => {
                 <div className="flex justify-between items-center sm:mx-5">
                   <div>
                     <p className="font-bold text-primary text-xl">
-                      questions {getExamQuestions?.current_page} of{" "}
-                      {getExamQuestions?.total}
+                      questions {getExamDetails?.current_page} of{" "}
+                      {getExamDetails?.total}
                     </p>
                   </div>
                   <div className="flex items-center">
-                    {getExamQuestions?.prev_page_url === null ? null : (
+                    {getExamDetails?.prev_page_url === null ? null : (
                       <button
                         type="button"
                         onClick={PrevQuestions}
                         className="border p-2 border-primary text-orange-400 rounded-lg hover:bg-primary hover:text-white"
+                        disabled={countDown === 0}
                       >
                         <ChevronLeftIcon className="h-5 w-5" />
                       </button>
                     )}
-                    {getExamQuestions?.next_page_url === null ? null : (
+                    {getExamDetails?.next_page_url === null ? null : (
                       <button
                         type="button"
                         onClick={NextQuestions}
                         className="border p-2 border-primary text-orange-400 rounded-lg hover:bg-primary hover:text-white"
+                        disabled={countDown === 0}
                       >
                         <ChevronRightIcon className="h-5 w-5" />
                       </button>
@@ -416,13 +599,13 @@ const Exam = () => {
                   {/* ---------------que------------- */}
                   <p className="text-xl font-semibold">
                     <span className="text-primary sm:text-3xl text-xl font-semibold mr-3">
-                      {getExamQuestions?.current_page}
+                      {getExamDetails?.current_page}
                     </span>
-                    {question?.exam_questions_details?.questions}
+                    {getExamQuestions?.questions}
                   </p>
                 </div>
                 {/* -------------------options / ans-------------- */}
-                {question?.exam_questions_details?.exam_questions_options_info.map(
+                {getExamQuestions?.exam_questions_options_info.map(
                   (option, indx) => (
                     <div
                       className="first:mt-3 space-y-6 sm:p-3 p-2 cursor-pointer"
@@ -435,21 +618,28 @@ const Exam = () => {
                       <div
                         className={`flex items-center hover:bg-gray-100 w-full rounded-lg`}
                       >
-                        <span
-                          className={`rounded-full capitalize border border-gray-400 pt-2 text-center w-12 h-12 mr-2 text-xl ${
-                            option?.id === selectedOptionId
+                        <button
+                          className={`rounded-full capitalize text-center border border-gray-400 w-12 h-12 mr-2 text-xl ${
+                            countDown !== 0 && option?.id === selectedOptionId
                               ? "text-white bg-primary"
                               : "text-primary bg-white"
+                          } ${
+                            countDown !== 0 && selectedOptionId !== ""
+                              ? null
+                              : option?.is_answer_count === 1 &&
+                                "bg-orange-200 text-white"
                           }`}
+                          disabled={countDown === 0}
                         >
                           {option?.option_name}
-                        </span>
+                        </button>
                         <button
                           type="button"
                           onClick={() => {
                             setSelectedOptionId(option?.id);
                             setSelectedQuestionId(option?.questions_id);
                           }}
+                          disabled={countDown === 0}
                           className="text-base"
                         >
                           {option?.option_value}
@@ -464,10 +654,11 @@ const Exam = () => {
                     type="button"
                     onClick={PrevQuestions}
                     className=" border mr-3 w-32 h-10 rounded-lg text-gray-400 text-center"
+                    disabled={countDown === 0}
                   >
                     previous
                   </button>
-                  {getExamQuestions?.next_page_url === null ? (
+                  {getExamDetails?.next_page_url === null ? (
                     <button
                       type="button"
                       onClick={SubmitExam}
@@ -479,6 +670,7 @@ const Exam = () => {
                     <button
                       type="button"
                       onClick={NextQuestions}
+                      disabled={countDown === 0}
                       className="border w-32 h-10 rounded-lg text-center bg-primary text-white"
                     >
                       Next Question
