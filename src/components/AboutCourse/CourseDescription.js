@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { ClockIcon } from "@heroicons/react/solid";
+import React from "react";
+import { ClockIcon, PlayIcon } from "@heroicons/react/solid";
 import { FcComboChart } from "react-icons/fc";
 import { GiCircle } from "react-icons/gi";
 import ContentLoader from "react-content-loader";
+import img from "../../assets/cimg3.jpg";
 
-const CourseDescription = ({ units, courseDetails, loading }) => {
-  // console.log(courseDetails);
+const CourseDescription = ({ courseDetails, loading }) => {
   return (
     <div className="sm:px-10 px-3">
       {/* ------------------course program details-------------- */}
       <div className="flex md:flex-row flex-col justify-center items-start w-full border-b sm:py-10 py-5 border-[#c4c4c4]">
         {/* ---------------heading-------------- */}
         <div className="w-2/4">
-          <h1 className="sm:text-5xl text-3xl tracking-normal font-bold mb-4">
+          <h1 className="sm:text-5xl text-3xl tracking-normal font-semibold mb-4">
             Course Program:
           </h1>
           <p className="font-bold text-secondary text-base block whitespace-nowrap">
@@ -50,27 +50,13 @@ const CourseDescription = ({ units, courseDetails, loading }) => {
             <rect x="450" y="120" rx="3" ry="3" width="274" height="20" />
             <rect x="450" y="160" rx="3" ry="3" width="374" height="20" />
           </ContentLoader>
-          {/* <ContentLoader
-            speed={1}
-            width={800}
-            height={274}
-            backgroundColor="#efe6e6"
-            foregroundColor="#d7bcbc"
-            animate
-          >
-            <rect x="50" y="40" rx="3" ry="3" width="40" height="20" />
-            <rect x="50" y="80" rx="3" ry="3" width="90" height="20" />
-            <rect x="450" y="40" rx="3" ry="3" width="274" height="20" />
-            <rect x="450" y="80" rx="3" ry="3" width="374" height="20" />
-            <rect x="450" y="120" rx="3" ry="3" width="274" height="20" />
-            <rect x="450" y="160" rx="3" ry="3" width="374" height="20" />
-          </ContentLoader> */}
         </>
       ) : (
-        units.map((unit, index) => (
+        courseDetails?.unites?.map((unit, index) => (
           <div
             key={unit?.id}
-            className="flex md:flex-row flex-col justify-center items-start w-full border-b py-10 border-[#c4c4c4] last:border-b-0"
+            // className="flex md:flex-row flex-col justify-around items-start w-full border-b py-10 border-[#c4c4c4] last:border-b-0"
+            className="grid grid-cols-3 items-start place-items-start w-full border-b border-[#c4c4c4] py-10"
           >
             {/* ---------------left side heading-------------- */}
             <div className="w-2/4">
@@ -84,9 +70,9 @@ const CourseDescription = ({ units, courseDetails, loading }) => {
             </div>
 
             {/* --------------course details---------------- */}
-            <div className="w-full space-y-5">
+            <div className="w-full space-y-5 col-span-2">
               {/* ---------------course title ---------------- */}
-              <p className="font-bold sm:text-3xl text-xl tracking-wide">
+              <p className="font-semibold sm:text-3xl text-xl tracking-wide">
                 Course: {unit?.unite_info?.unite_title}
               </p>
 

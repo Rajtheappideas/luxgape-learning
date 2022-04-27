@@ -22,12 +22,12 @@ const AboutCourse = () => {
   const [skillsYouGet, setSkillsYouGet] = useState([]);
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
-  
-  const { userLanguage } = useUserContext();
+
+  const { userLanguage, userData } = useUserContext();
 
   const { id } = useParams();
   const { t } = useTranslation();
-
+  console.log(courseDetails);
   // fetch data on first rendering page
   useEffect(() => {
     setTimeout(() => {
@@ -41,6 +41,7 @@ const AboutCourse = () => {
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
+          "consumer-access-token": userData?.api_token,
         },
       })
         .then((response) => {

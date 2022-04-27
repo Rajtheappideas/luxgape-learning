@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CourseDescription } from "..";
 
 const AboutCourse = ({ units, courseDetails, loading }) => {
@@ -27,6 +27,7 @@ const AboutCourse = ({ units, courseDetails, loading }) => {
         units={units}
         courseDetails={courseDetails}
         loading={loading}
+        showVideos={true}
       />
     </>
   );

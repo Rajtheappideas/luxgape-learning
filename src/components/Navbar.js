@@ -87,6 +87,7 @@ const Navbar = ({ activeText }) => {
               <li className="py-1">
                 <button
                   onClick={() => {
+                    window.location.reload();
                     ChangeLanguage("en");
                     localStorage.setItem("lang_code", "en");
                   }}
@@ -98,6 +99,7 @@ const Navbar = ({ activeText }) => {
               <li className="py-1">
                 <button
                   onClick={() => {
+                    window.location.reload();
                     ChangeLanguage("sp");
                     localStorage.setItem("lang_code", "sp");
                   }}

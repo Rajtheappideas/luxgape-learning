@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
@@ -27,6 +28,12 @@ const Class = () => {
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
   const [startExamLoading, setStartExamLoading] = useState(false);
+  const [Url, setUrl] = useState(null);
+  const [UniteId, setUnitId] = useState(null);
+  const [UniteVideoId, setUnitVideoId] = useState(null);
+  const [CourseId, setCourseId] = useState(null);
+  const [watchedTime, setWathcedTime] = useState(null);
+  const [videoTitle, setVideoTitle] = useState("");
 
   const { id } = useParams();
   const { userLanguage, userData } = useUserContext();
@@ -46,11 +53,11 @@ const Class = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "consumer-access-token": userData?.api_token,
       },
     }).then((response) => {
       if (response?.data?.status === "Success") {
         setCourseDetails(response?.data?.data);
-        setUnits(response?.data?.data?.unites);
         setUserReviews(response?.data?.data?.review_info);
         setLoading(false);
         return true;
@@ -85,6 +92,27 @@ const Class = () => {
         return false;
       }
     });
+    axios("https://chessmafia.com/php/luxgap/App/api/get-course-video", {
+      method: "POST",
+      params: {
+        lang_code: userLanguage,
+        course_id: id,
+      },
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "consumer-access-token": userData?.api_token,
+      },
+    }).then((response) => {
+      if (response?.data?.status === "Success") {
+        setUnits(response?.data?.data?.unites);
+        setLoading(false);
+        return true;
+      } else if (response?.data?.message === "Error") {
+        setLoading(false);
+        return false;
+      }
+    });
   }, []);
 
   const StartExam = () => {
@@ -115,6 +143,22 @@ const Class = () => {
       }
     });
   };
+  const handlePassData = (
+    url,
+    uniteId,
+    unitevideoId,
+    courseid,
+    watchedtime,
+    videotitle
+  ) => {
+    setUrl(String(url));
+    setUnitId(uniteId);
+    setUnitVideoId(unitevideoId);
+    setCourseId(courseid);
+    setWathcedTime(watchedtime);
+    setVideoTitle(videotitle);
+  };
+  console.log(units);
   return (
     <div className="relative">
       <MetaTags>
@@ -135,7 +179,18 @@ const Class = () => {
       <Navbar />
 
       {/* -------------------Aboutclass-------------------- */}
-      <AboutClass openAbout={openAbout} setOpenAbout={setOpenAbout} />
+      <AboutClass
+        openAbout={openAbout}
+        setOpenAbout={setOpenAbout}
+        Url={Url}
+        UniteVideoId={UniteVideoId}
+        UniteId={UniteId}
+        CourseId={CourseId}
+        units={units}
+        watchedTime={watchedTime}
+        courseDetails={courseDetails}
+        videoTitle={videoTitle}
+      />
 
       {/* --------------buttons for toggle the componetns--------------- */}
       <div className="sm:px-10 px-5">
@@ -214,7 +269,14 @@ const Class = () => {
       </div>
 
       {/* -------------------unit videos-------------------- */}
-      {openVideo && <UnitVideos />}
+
+      {openVideo && (
+        <UnitVideos
+          units={units}
+          loading={loading}
+          handlePassData={handlePassData}
+        />
+      )}
       {/* -------------------About course-------------------- */}
       {openAbout && (
         <AboutCourse
@@ -230,7 +292,7 @@ const Class = () => {
       )}
 
       {/* -------------------History-------------------- */}
-      {openHistory && <History />}
+      {openHistory && <History handlePassData={handlePassData} />}
       <div className="text-center my-10 ">
         <button
           type="button"

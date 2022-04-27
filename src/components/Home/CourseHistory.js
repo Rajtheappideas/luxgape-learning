@@ -195,7 +195,10 @@ const CourseHistory = ({ showButton, slice }) => {
                     </p>
                   ) : (
                     <p className="font-bold text-red-500">
-                      {timeElapsed} / {totalTime}
+                      {timeElapsed} /{" "}
+                      {course?.total_hours
+                        ? `${course?.total_hours}:00`
+                        : totalTime}
                     </p>
                   )}
                   {course.certified ? (
@@ -221,7 +224,11 @@ const CourseHistory = ({ showButton, slice }) => {
                 ) : (
                   <div className="flex text-red-600">
                     <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
-                      {percentage}%
+                      {Math.floor(
+                        (100 * totalSeconds(timeElapsed)) /
+                          totalSeconds(`${course?.total_hours}:00`).toString()
+                      ) || percentage}
+                      %
                     </p>
                     {/* <p className="w-16 h-10 -rotate-90">
                     <svg
@@ -237,7 +244,13 @@ const CourseHistory = ({ showButton, slice }) => {
                     </svg>
                   </p> */}
                     <div className="flex-col mx-2 text-red-600 font-bold">
-                      <span className="block text-xl">{percentage}%</span>
+                      <span className="block text-xl">
+                        {Math.floor(
+                          (100 * totalSeconds(timeElapsed)) /
+                            totalSeconds(`${course?.total_hours}:00`).toString()
+                        ) || percentage}
+                        %
+                      </span>
                       <span className="block text-sm">
                         {timeElapsed === totalTime ? "Done" : "Pending"}
                       </span>
