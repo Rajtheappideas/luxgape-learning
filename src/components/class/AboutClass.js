@@ -11,7 +11,14 @@ import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
 import moment from "moment";
 
-const AboutClass = ({ Url, UniteVideoId, UniteId, CourseId, watchedTime ,videoTitle}) => {
+const AboutClass = ({
+  Url,
+  UniteVideoId,
+  UniteId,
+  CourseId,
+  watchedTime,
+  videoTitle,
+}) => {
   const [playing, setPlaying] = useState(false);
   const [played, setPlayed] = useState(
     watchedTime || JSON.parse(localStorage.getItem("playedSeconds"))
@@ -19,7 +26,6 @@ const AboutClass = ({ Url, UniteVideoId, UniteId, CourseId, watchedTime ,videoTi
   const [showButtons, setShowButtons] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [getVideoTotalTime, setGetVideoTotalTime] = useState(null);
-console.log(videoTitle);
   const { userLanguage, userData } = useUserContext();
 
   function convertSeconds(seconds) {
@@ -61,8 +67,8 @@ console.log(videoTitle);
         video_id: UniteVideoId,
         unit_id: UniteId,
         course_id: CourseId,
-        // watching_time: moment().format("HH:mm:ss"),
-        watching_time: getVideoTotalTime,
+        // total_video_time: moment().format("HH:mm:ss"),
+        total_video_time: getVideoTotalTime,
         watching_date: moment().format("l"),
         watched_time: JSON.parse(localStorage.getItem("playedSeconds")),
       },
@@ -90,8 +96,7 @@ console.log(videoTitle);
         video_id: UniteVideoId,
         unit_id: UniteId,
         course_id: CourseId,
-        // watching_time: moment().format("HH:mm:ss"),
-        watching_time: getVideoTotalTime,
+        total_video_time: getVideoTotalTime,
         watching_date: moment().format("l"),
         watched_time: JSON.parse(localStorage.getItem("playedSeconds")),
       },
@@ -154,7 +159,7 @@ console.log(videoTitle);
         {showButtons && (
           <>
             <div className="absolute top-8 left-14 z-50 text-white text-3xl">
-              <span>{UniteVideoId}.</span> Ttle
+              <span>{UniteVideoId}.</span> Title
             </div>
             <div className="absolute space-x-7 flex items-center sm:top-[35%] top-[20%] left-1/2 -translate-x-1/2 z-50">
               <button

@@ -158,7 +158,6 @@ const Class = () => {
     setWathcedTime(watchedtime);
     setVideoTitle(videotitle);
   };
-  console.log(units);
   return (
     <div className="relative">
       <MetaTags>

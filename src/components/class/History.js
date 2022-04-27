@@ -30,6 +30,7 @@ const History = ({ handlePassData }) => {
     }).then((response) => {
       if (response?.data?.status === "Success") {
         setCourseHistory(response?.data?.data);
+        console.log(response?.data?.data);
         setLoading(false);
       } else if (response?.data?.status === "Error") {
         toast("somthing went wrong!!", { type: "error" });
