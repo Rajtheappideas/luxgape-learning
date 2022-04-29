@@ -47,7 +47,7 @@ const UnitVideos = ({ units, handlePassData, loading }) => {
                   </div>
                 </div>
               </div>
-              <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-start items-start gap-5 py-5 border-b border-[#c4c4c4]">
+              <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:place-items-start place-items-center md:items-start items-center gap-5 py-5 border-b border-[#c4c4c4]">
                 {unit.video_list.map((video, index) => (
                   <div
                     key={index}
@@ -57,19 +57,28 @@ const UnitVideos = ({ units, handlePassData, loading }) => {
                         video.video,
                         video?.unite_video_id,
                         video?.unite_id,
-                        video?.course_id
+                        video?.course_id,
+                        video?.watched_time,
+                        video?.title
                       )
                     }
                   >
-                    <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden">
-                      <iframe
-                        src={
-                          `https://chessmafia.com/php/luxgap/App/${video?.video}?autoplay="false"` ||
-                          null
-                        }
+                    <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden w-72">
+                      <video
+                        width="100%"
+                        height="100%"
+                        controls={true}
                         alt="courseimage"
                         className="h-48 object-center w-full object-cover opacity-70 "
-                      />
+                      >
+                        <source
+                          src={
+                            `https://chessmafia.com/php/luxgap/App/${video?.video}?autoplay="false"` ||
+                            null
+                          }
+                          type="video/mp4"
+                        />
+                      </video>
                       <PlayIcon
                         className="h-14 text-center absolute top-[40%] left-1/2 -translate-x-1/2 "
                         color="white"
@@ -78,7 +87,7 @@ const UnitVideos = ({ units, handlePassData, loading }) => {
                     <p className="font-medium text-lg">
                       <span className="mx-1 text-xl">
                         {index + 1}.{" "}
-                        <span className="sm:ml-2 text-lg">title</span>
+                        <span className="sm:ml-2 text-lg">{video?.title}</span>
                       </span>
                     </p>
                     <p className="font-light text-xl">{video?.description}</p>

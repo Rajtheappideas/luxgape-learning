@@ -145,15 +145,15 @@ const Class = () => {
   };
   const handlePassData = (
     url,
+    unitevideoid,
     uniteId,
-    unitevideoId,
     courseid,
     watchedtime,
     videotitle
   ) => {
     setUrl(String(url));
+    setUnitVideoId(unitevideoid);
     setUnitId(uniteId);
-    setUnitVideoId(unitevideoId);
     setCourseId(courseid);
     setWathcedTime(watchedtime);
     setVideoTitle(videotitle);

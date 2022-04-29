@@ -92,7 +92,10 @@ const CourseHistory = ({ showButton, slice }) => {
   var percentage = Math.floor(
     (100 * totalSeconds(timeElapsed)) / totalSeconds(totalTime)
   );
-  console.log(courseHistory);
+  var totalVideo = 15;
+  var watchedvideo = 3;
+  var total = Math.floor((watchedvideo * 100) / totalVideo);
+  console.log((total = total || 0));
   return (
     <div className=" sm:p-10 p-3 relative">
       {/* ----------------eclipse---------------- */}
@@ -185,7 +188,7 @@ const CourseHistory = ({ showButton, slice }) => {
                 </p>
                 <p className="text-gray-400 font-bold">
                   {/* {course.hours} */}
-                  4.1 hours video
+                  {course?.total_video_count} total videos
                 </p>
                 <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
                   {course.certified ? (
@@ -195,10 +198,11 @@ const CourseHistory = ({ showButton, slice }) => {
                     </p>
                   ) : (
                     <p className="font-bold text-red-500">
-                      {timeElapsed} /{" "}
-                      {course?.total_hours
+                      {course?.total_watch_video_count} /{" "}
+                      {course?.total_video_count}
+                      {/* {course?.total_hours
                         ? `${course?.total_hours}:00`
-                        : totalTime}
+                        : totalTime} */}
                     </p>
                   )}
                   {course.certified ? (
@@ -225,9 +229,13 @@ const CourseHistory = ({ showButton, slice }) => {
                   <div className="flex text-red-600">
                     <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
                       {Math.floor(
+                        (100 * course?.total_watch_video_count) /
+                          course?.total_video_count
+                      ) || 0}
+                      {/* {Math.floor(
                         (100 * totalSeconds(timeElapsed)) /
                           totalSeconds(`${course?.total_hours}:00`).toString()
-                      ) || percentage}
+                      ) || percentage} */}
                       %
                     </p>
                     {/* <p className="w-16 h-10 -rotate-90">
@@ -246,9 +254,13 @@ const CourseHistory = ({ showButton, slice }) => {
                     <div className="flex-col mx-2 text-red-600 font-bold">
                       <span className="block text-xl">
                         {Math.floor(
+                          (100 * course?.total_watch_video_count) /
+                            course?.total_video_count
+                        ) || 0}
+                        {/* {Math.floor(
                           (100 * totalSeconds(timeElapsed)) /
                             totalSeconds(`${course?.total_hours}:00`).toString()
-                        ) || percentage}
+                        ) || percentage} */}
                         %
                       </span>
                       <span className="block text-sm">

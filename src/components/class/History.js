@@ -41,7 +41,7 @@ const History = ({ handlePassData }) => {
   }, []);
   return (
     <>
-      <div className="grid sm:gap-x-16 gap-y-5 lg:grid-cols-3 md:grid-cols-2 place-items-center grid-flow-row sm:p-10 p-3">
+      <div className="grid sm:gap-x-16 gap-y-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:place-items-start place-items-center md:items-start items-center grid-flow-row sm:p-10 p-3">
         {loading ? (
           <>
             <ContentLoader
@@ -71,7 +71,20 @@ const History = ({ handlePassData }) => {
             >
               <rect x="0" y="0" rx="3" ry="3" width="300" height="200" />
             </ContentLoader>
+            <ContentLoader
+              speed={1}
+              backgroundColor="#efe6e6"
+              foregroundColor="#d7bcbc"
+              animate
+              className="sm:w-full w-72 h-60"
+            >
+              <rect x="0" y="0" rx="3" ry="3" width="300" height="200" />
+            </ContentLoader>
           </>
+        ) : courseHistory.length === 0 ? (
+          <p className="text-xl font-bold text-center col-span-3">
+            Oops, There is no video in history!!!
+          </p>
         ) : (
           courseHistory.map((unites, index) => (
             <div
@@ -80,32 +93,35 @@ const History = ({ handlePassData }) => {
               onClick={() =>
                 handlePassData(
                   unites?.video_list?.video,
-                  unites?.course_id,
-                  unites?.unit_id,
                   unites?.video_list?.unite_video_id,
+                  unites?.unite_id,
+                  unites?.course_id,
                   unites?.watched_time
                 )
               }
             >
-              <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden">
-                <iframe
-                  src={
-                    `https://chessmafia.com/php/luxgap/App/${unites?.video_list?.video}?autoplay='false'` ||
-                    null
-                  }
-                  className="h-48 object-center w-full object-cover opacity-70 "
-                />
-
+              <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden 2xl:w-[35rem] w-72">
+                <video
+                  width="100%"
+                  height="100%"
+                  controls={true}
+                  className="h-48 2xl:h-72 object-center w-full object-cover opacity-70 "
+                >
+                  <source
+                    src={
+                      `https://chessmafia.com/php/luxgap/App/${unites?.video_list?.video}?autoplay='false'` ||
+                      null
+                    }
+                    type="video/mp4"
+                  />
+                </video>
                 <PlayIcon
                   className="h-14 text-center absolute top-[40%] left-1/2 -translate-x-1/2 "
                   color="white"
                 />
               </div>
-              <p className="font-bold text-xl ml-2">
-                {index + 1}. {courseHistory.title}title
-              </p>
-              <p className="font-normal text-lg">
-                {/* {unites?.video_list?.description} */}
+              <p className="font-bold text-xl sm:ml-2 sm:w-full w-72">
+                {index + 1}.<span className="font-medium text-lg">{unites?.video_list?.title}</span>
               </p>
             </div>
           ))

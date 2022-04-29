@@ -41,7 +41,7 @@ const AboutClass = ({
     );
   }
   const playerRef = useRef(null);
-
+// console.log(UniteVideoId);
   const handlePlayPause = () => {
     setPlaying(!playing);
   };
@@ -159,7 +159,7 @@ const AboutClass = ({
         {showButtons && (
           <>
             <div className="absolute top-8 left-14 z-50 text-white text-3xl">
-              <span>{UniteVideoId}.</span> Title
+              <span>{UniteVideoId}.</span> {videoTitle}
             </div>
             <div className="absolute space-x-7 flex items-center sm:top-[35%] top-[20%] left-1/2 -translate-x-1/2 z-50">
               <button
