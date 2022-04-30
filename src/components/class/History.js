@@ -94,9 +94,10 @@ const History = ({ handlePassData }) => {
                 handlePassData(
                   unites?.video_list?.video,
                   unites?.video_list?.unite_video_id,
-                  unites?.unite_id,
+                  unites?.video_list?.unite_id,
                   unites?.course_id,
-                  unites?.watched_time
+                  unites?.watched_time,
+                  unites?.video_list?.title
                 )
               }
             >

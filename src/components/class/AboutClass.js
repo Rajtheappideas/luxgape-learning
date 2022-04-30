@@ -41,7 +41,7 @@ const AboutClass = ({
     );
   }
   const playerRef = useRef(null);
-// console.log(UniteVideoId);
+console.log(UniteId);
   const handlePlayPause = () => {
     setPlaying(!playing);
   };
