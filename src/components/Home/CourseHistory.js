@@ -188,7 +188,8 @@ const CourseHistory = ({ showButton, slice }) => {
                 </p>
                 <p className="text-gray-400 font-bold">
                   {/* {course.hours} */}
-                  {course?.total_video_count} total videos
+                  {totalVideo} total videos
+                  {/* {course?.total_video_count} total videos */}
                 </p>
                 <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
                   {course.certified ? (
@@ -198,8 +199,9 @@ const CourseHistory = ({ showButton, slice }) => {
                     </p>
                   ) : (
                     <p className="font-bold text-red-500">
-                      {course?.total_watch_video_count} /{" "}
-                      {course?.total_video_count}
+                      {course?.total_watch_video_count} /{totalVideo}
+                      {/* {course?.total_watch_video_count} /{" "}
+                      {course?.total_video_count} */}
                       {/* {course?.total_hours
                         ? `${course?.total_hours}:00`
                         : totalTime} */}
@@ -229,9 +231,12 @@ const CourseHistory = ({ showButton, slice }) => {
                   <div className="flex text-red-600">
                     <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
                       {Math.floor(
+                        (100 * course?.total_watch_video_count) / totalVideo
+                      ) || 0}
+                      {/* {Math.floor(
                         (100 * course?.total_watch_video_count) /
                           course?.total_video_count
-                      ) || 0}
+                      ) || 0} */}
                       {/* {Math.floor(
                         (100 * totalSeconds(timeElapsed)) /
                           totalSeconds(`${course?.total_hours}:00`).toString()
@@ -254,9 +259,12 @@ const CourseHistory = ({ showButton, slice }) => {
                     <div className="flex-col mx-2 text-red-600 font-bold">
                       <span className="block text-xl">
                         {Math.floor(
+                          (100 * course?.total_watch_video_count) / totalVideo
+                        ) || 0}
+                        {/* {Math.floor(
                           (100 * course?.total_watch_video_count) /
                             course?.total_video_count
-                        ) || 0}
+                        ) || 0} */}
                         {/* {Math.floor(
                           (100 * totalSeconds(timeElapsed)) /
                             totalSeconds(`${course?.total_hours}:00`).toString()
