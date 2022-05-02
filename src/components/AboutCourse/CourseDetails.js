@@ -143,11 +143,11 @@ const CourseDetails = ({ courseDetails, loading }) => {
             {/* ------------what you learn------------ */}
             <p className="font-semibold text-xl">{t("what_will_you_learn")}:</p>
             {/* ----------------course key points------------------ */}
-            <div className="flex flex-row lg:justify-start justify-center items-center">
+            <div className="flex flex-row text-left">
               <ul className="space-y-3 sm:mr-10 mr-3">
-                <li className="flex ">
+                <li className="flex items-start justify-start">
                   <CheckCircleIcon
-                    className="h-6 w-6 sm:mr-3"
+                    className="h-10 w-10 sm:mr-1"
                     color="lightblue"
                   />
                   {courseDetails?.course_details?.what_will_learn}

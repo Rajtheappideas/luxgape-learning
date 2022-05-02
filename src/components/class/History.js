@@ -97,7 +97,8 @@ const History = ({ handlePassData }) => {
                   unites?.video_list?.unite_id,
                   unites?.course_id,
                   unites?.watched_time,
-                  unites?.video_list?.title
+                  unites?.video_list?.title,
+                  console.log(unites?.watched_time)
                 )
               }
             >
@@ -122,7 +123,10 @@ const History = ({ handlePassData }) => {
                 />
               </div>
               <p className="font-bold text-xl sm:ml-2 sm:w-full w-72">
-                {index + 1}.<span className="font-medium text-lg">{unites?.video_list?.title}</span>
+                {index + 1}.
+                <span className="font-medium text-lg">
+                  {unites?.video_list?.title}
+                </span>
               </p>
             </div>
           ))

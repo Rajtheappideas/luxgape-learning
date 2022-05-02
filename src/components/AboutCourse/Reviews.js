@@ -52,7 +52,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
           setCurrentvalue(0);
           setReview("");
           setLoading(false);
-          // window.location.reload();
+          window.location.reload();
           return true;
         }
       })

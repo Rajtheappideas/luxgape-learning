@@ -48,120 +48,138 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
   }, []);
 
   return (
-    <div className="sm:p-10 p-3 relative">
-      {/* ----------------eclipse 1--------------------- */}
-      {/* {showEclipse && (
-        <div className="absolute -top-32 left-56 w-[300px] h-[300px] blur-[200px] rounded-full bg-pink-300 " />
-      )} */}
-      {/* ----------------eclipse 2--------------------- */}
-      {/* {showEclipse && (
-        <div className="absolute bottom-10 -left-40 blur-[200px] w-[300px] h-[300px]  rounded-full bg-pink-300 " />
-      )} */}
-
-      <div className="sm:mb-10 mb-5 flex justify-between items-start">
-        <p className="font-semibold sm:text-5xl text-3xl">
-          {t("most_popular_course")}
-        </p>
-        {showButton && (
-          <Link to="/courses">
-            <button
-              onClick={ScrollToTop}
-              className="text-primary text-center text-2xl tracking-wide cursor-pointer underline font-semibold"
-            >
-              {t("view_more")}
-            </button>
-          </Link>
-        )}
-      </div>
-      {/* --------------- main div---------- */}
-      <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
-        {/* --------------Courses div=-------------- */}
-        {loading ? (
-          <>
+    <>
+      {loading ? (
+        <>
+          <div className="sm:p-10 p-3 relative sm:mb-5 mb-5 flex justify-between items-start">
+            <p className="font-semibold sm:text-5xl text-3xl">
+              {t("most_popular_course")}
+            </p>
+            {showButton && (
+              <Link to="/courses">
+                <button
+                  onClick={ScrollToTop}
+                  className="text-primary text-center text-2xl tracking-wide cursor-pointer underline font-semibold"
+                >
+                  {t("view_more")}
+                </button>
+              </Link>
+            )}
+          </div>
+          <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
             <SkeletonLoading />
             <SkeletonLoading />
             <SkeletonLoading />
-          </>
-        ) : (
-          mostPopularCourse.slice(0,6).map((course) => (
-            <Link
-              to={`/courses/aboutcourse/${course?.course_details?.course_id}`}
-              key={course?.id}
-            >
-              <RoundedDiv onClick={ScrollToTop}>
-                <LazyLoadImage
-                  src={
-                    `https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}` ||
-                    null
-                  }
-                  alt={course?.course_details?.title}
-                  className="h-1/2 w-full object-center rounded-tl-[182px]"
-                />
-                <div className="sm:p-5 p-3 sm:space-y-5 space-y-3">
-                  <p className="sm:text-3xl text-2xl font-semibold">
-                    {course?.course_details?.title}
-                  </p>
-                  <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden w-64">
-                    {course?.course_details?.about}
-                  </p>
-                  {/* --------------reviews in star----------- */}
-                  {course?.review_info_count === null ? null : parseInt(
-                      course?.review_info_count
-                    ) === 5 ? (
-                    <div className="flex items-start space-x-1">
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                    </div>
-                  ) : parseInt(course?.review_info_count) === 4 ? (
-                    <div className="flex items-start space-x-1">
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                    </div>
-                  ) : parseInt(course?.review_info_count) === 3 ? (
-                    <div className="flex items-start space-x-1">
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                    </div>
-                  ) : parseInt(course?.review_info_count) === 2 ? (
-                    <div className="flex items-start space-x-1">
-                      <StarIcon className="w-8 h-8" color="gold" />
-                      <StarIcon className="w-8 h-8" color="gold" />
-                    </div>
-                  ) : parseInt(course?.review_info_count) === 1 ? (
-                    <div className="flex items-start space-x-1">
-                      <StarIcon className="w-8 h-8" color="gold" />
-                    </div>
-                  ) : (
-                    parseInt(course?.review_info_count) <= 0 && (
-                      <div className="flex items-start space-x-1">
-                        <StarIcon className="w-8 h-8" color="gold" />
+          </div>
+        </>
+      ) : mostPopularCourse.length === 0 ? null : (
+        <div className="sm:p-10 p-3 relative">
+          <div className="sm:mb-10 mb-5 flex justify-between items-start">
+            <p className="font-semibold sm:text-5xl text-3xl">
+              {t("most_popular_course")}
+            </p>
+            {showButton && (
+              <Link to="/courses">
+                <button
+                  onClick={ScrollToTop}
+                  className="text-primary text-center text-2xl tracking-wide cursor-pointer underline font-semibold"
+                >
+                  {t("view_more")}
+                </button>
+              </Link>
+            )}
+          </div>
+          {/* --------------- main div---------- */}
+          <div className="grid xl:grid-cols-3 w-full grid-flow-row md:grid-cols-2 place-items-center items-center lg:gap-2 md:gap-16 gap-y-4">
+            {/* --------------Courses div=-------------- */}
+            {loading ? (
+              <>
+                <SkeletonLoading />
+                <SkeletonLoading />
+                <SkeletonLoading />
+              </>
+            ) : (
+              mostPopularCourse.slice(0, 6).map((course) => (
+                <Link
+                  to={`/courses/aboutcourse/${course?.course_details?.course_id}`}
+                  key={course?.id}
+                >
+                  <RoundedDiv onClick={ScrollToTop}>
+                    <LazyLoadImage
+                      src={
+                        `https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}` ||
+                        null
+                      }
+                      alt={course?.course_details?.title}
+                      className="h-1/2 w-full object-center rounded-tl-[182px]"
+                    />
+                    <div className="sm:p-5 p-3 sm:space-y-5 space-y-3">
+                      <p className="sm:text-3xl text-2xl font-semibold">
+                        {course?.course_details?.title}
+                      </p>
+                      <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
+                        {course?.course_details?.about}
+                      </p>
+                      {/* --------------reviews in star----------- */}
+                      {course?.review_info_count === null ? null : parseInt(
+                          course?.review_info_count
+                        ) === 5 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : parseInt(course?.review_info_count) === 4 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : parseInt(course?.review_info_count) === 3 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : parseInt(course?.review_info_count) === 2 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : parseInt(course?.review_info_count) === 1 ? (
+                        <div className="flex items-start space-x-1">
+                          <StarIcon className="w-8 h-8" color="gold" />
+                        </div>
+                      ) : (
+                        parseInt(course?.review_info_count) <= 0 && (
+                          <div className="flex items-start space-x-1">
+                            <StarIcon className="w-8 h-8" color="gold" />
+                          </div>
+                        )
+                      )}
+                      <div className="flex items-center space-x-3">
+                        <p className="text-secondary">
+                          <span className="font-bold sm:text-2xl text-xl">
+                            ${course?.price}
+                          </span>
+                          {/* /employee */}
+                        </p>
+                        <button className="w-10 h-10 bg-black ">
+                          <ArrowRightIcon className="p-2" color="white" />
+                        </button>
                       </div>
-                    )
-                  )}
-                  <div className="flex items-center space-x-3">
-                    <p className="text-secondary">
-                      <span className="font-bold sm:text-2xl text-xl">
-                        ${course?.price}
-                      </span>
-                      /employee
-                    </p>
-                    <button className="w-10 h-10 bg-black ">
-                      <ArrowRightIcon className="p-2" color="white" />
-                    </button>
-                  </div>
-                </div>
-              </RoundedDiv>
-            </Link>
-          ))
-        )}
-      </div>
-    </div>
+                    </div>
+                  </RoundedDiv>
+                </Link>
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

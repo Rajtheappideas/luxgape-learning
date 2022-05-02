@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 const WhyChooseUs = () => {
   const { t } = useTranslation();
   return (
-    <div className="sm:p-10 p-3 sm:mb-10 mb-5">
+    <div className="sm:p-10 p-3">
       <div className="sm:mb-10 mb-5">
         <p className="text-center font-semibold sm:text-5xl text-3xl sm:mb-7">
           {t("why_choose_us")}

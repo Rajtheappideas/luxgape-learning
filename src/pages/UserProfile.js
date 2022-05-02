@@ -20,9 +20,6 @@ const UserProfile = () => {
 
   const { t } = useTranslation();
 
-  //   ---------------language code--------
-  const lang_code = localStorage.getItem("lang_code");
-
   // image upload
   const handleImageUpload = (e) => {
     e.preventDefault();
@@ -91,8 +88,16 @@ const UserProfile = () => {
                   src={prevImage}
                   className="w-full h-full object-cover bg-gray-300 object-center rounded-full border-8 border-white absolute -top-20 left-24"
                 />
-              ) : null ? (
-                <UserIcon className="md:h-40 md:w-40  h-32 w-32 bg-gray-300 rounded-full border-8 border-white absolute -top-20 left-24 " />
+              ) : <UserIcon className="md:h-40 md:w-40  h-32 w-32 bg-gray-300 rounded-full border-8 border-white absolute -top-20 left-24 " /> ? (
+                // <UserIcon className="md:h-40 md:w-40  h-32 w-32 bg-gray-300 rounded-full border-8 border-white absolute -top-20 left-24 " />
+                <img
+                  src={
+                    prevImage
+                      ? prevImage
+                      : `https://chessmafia.com/php/luxgap/App/${userDetails?.profile}`
+                  }
+                  className="w-full h-full object-cover bg-gray-300 object-center rounded-full border-8 border-white absolute -top-20 left-24"
+                />
               ) : (
                 <img
                   src={

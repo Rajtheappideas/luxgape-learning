@@ -12,6 +12,9 @@ const PaymentMethod = ({ product }) => {
   const [radioBtn, setRadioBtn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [enterCouponCode, setEnterCouponCode] = useState("");
+  const [couponId, setCouponId] = useState(null);
+  const [grandTotal, setGrandTotal] = useState(null);
+  const [discountAmount, setdiscountAmount] = useState(null);
 
   const { t } = useTranslation();
 
@@ -26,6 +29,7 @@ const PaymentMethod = ({ product }) => {
   let milliseconds = today.getMilliseconds();
 
   const makePayment = (token) => {
+    let grandtotal = product?.price - discountAmount;
     if (!radioBtn) {
       toast("press the radio button", { type: "warning" });
       return false;
@@ -36,10 +40,10 @@ const PaymentMethod = ({ product }) => {
       params: {
         lang_code: userLanguage,
         course_id: product?.course_details?.course_id,
-        coupon_id: null,
-        discount_amount: 5,
+        coupon_id: couponId,
+        discount_amount: discountAmount,
         price: product?.price,
-        grand_total: 35,
+        grand_total: grandTotal,
         booking_time: `${hours}:${seconds}:${milliseconds}`,
         booking_date: `${dd}/${mm}/${yyyy}`,
         stripe_token: token?.id,
@@ -63,7 +67,6 @@ const PaymentMethod = ({ product }) => {
           setLoading(false);
         }
       });
-      console.log(token)
   };
 
   const handleCouponeCode = () => {
@@ -86,6 +89,7 @@ const PaymentMethod = ({ product }) => {
         ) {
           toast("coupon code apply", { type: "success" });
           console.log("cc -> ", response?.data?.data);
+          setdiscountAmount(response?.data?.data?.amount);
           setLoading(false);
           return true;
         } else if (response?.data?.status === "Error") {

@@ -14,6 +14,7 @@ import { useUserContext } from "../context/usercontext";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
 
@@ -21,6 +22,7 @@ const Courses = () => {
 
   // fetch data when page loads up first time
   useEffect(() => {
+    setLoading(true);
     setTimeout(() => {
       axios("https://chessmafia.com/php/luxgap/App/api/get-course-list", {
         method: "POST",
@@ -39,12 +41,14 @@ const Courses = () => {
                 (course) => course?.course_details !== null
               )
             );
+            setLoading(false);
             return true;
           }
         })
         .catch((err) => {
           if (err?.response?.data?.status === "Error") {
             console.log("error ->", err?.response?.data);
+            setLoading(false);
             return false;
           }
         });
@@ -96,6 +100,7 @@ const Courses = () => {
       {/* -------------most popular cousrse----------------- */}
       <MostPopularCourses
         courses={courses}
+        loading={loading}
         // searchCourse={searchCourse}
         // setSearchCourse={setSearchCourse}
         // setRating={setRating}

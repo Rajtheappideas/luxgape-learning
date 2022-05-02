@@ -73,7 +73,7 @@ const CourseDescription = ({ courseDetails, loading }) => {
             <div className="w-full space-y-5 col-span-2">
               {/* ---------------course title ---------------- */}
               <p className="font-semibold sm:text-3xl text-xl tracking-wide">
-                Course: {unit?.unite_info?.unite_title}
+                {unit?.unite_info?.unite_title}
               </p>
 
               {/* --------------------course deacription----------------- */}

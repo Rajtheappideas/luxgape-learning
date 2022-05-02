@@ -54,6 +54,7 @@ const MyCourses = () => {
       <Navbar />
       <div className="sm:p-10 p-3 w-full">
         {/* ----------------heading-------------- */}
+
         <h1 className="sm:text-5xl text-3xl font-semibold text-center sm:mb-10 mb-5">
           My Courses
         </h1>
@@ -65,6 +66,10 @@ const MyCourses = () => {
               <SkeletonLoading />
               <SkeletonLoading />
             </>
+          ) : getMyCourse.length === 0 ? (
+            <p className="text-center font-normal text-2xl col-span-3">
+              No Course Available
+            </p>
           ) : (
             getMyCourse.map((course) => (
               <Link

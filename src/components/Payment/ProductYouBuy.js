@@ -30,7 +30,7 @@ const ProductYouBuy = ({ product }) => {
           </p>
           {/* =---------------------description about course-------------- */}
 
-          <p className="text-secondary text-xl font-semibold">
+          <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
             {product?.course_details?.about}
           </p>
 

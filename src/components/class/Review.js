@@ -47,7 +47,7 @@ const Review = ({ userReviews, course_id, loading }) => {
         if (response?.data?.status === "Success") {
           toast(response?.data?.message, { type: "success" });
           setLoading(false);
-          // window.location.reload();
+          window.location.reload();
           return true;
         }
       })

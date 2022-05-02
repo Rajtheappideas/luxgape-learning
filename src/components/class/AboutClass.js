@@ -41,7 +41,6 @@ const AboutClass = ({
     );
   }
   const playerRef = useRef(null);
-console.log(UniteId);
   const handlePlayPause = () => {
     setPlaying(!playing);
   };
@@ -67,7 +66,6 @@ console.log(UniteId);
         video_id: UniteVideoId,
         unit_id: UniteId,
         course_id: CourseId,
-        // total_video_time: moment().format("HH:mm:ss"),
         total_video_time: getVideoTotalTime,
         watching_date: moment().format("l"),
         watched_time: JSON.parse(localStorage.getItem("playedSeconds")),
@@ -113,6 +111,9 @@ console.log(UniteId);
   };
   const handleReady = () => {
     setIsReady(true);
+    setGetVideoTotalTime(
+      convertSeconds(playerRef.current.getDuration().toFixed(0))
+    );
   };
   useEffect(() => {
     localStorage.setItem("playedSeconds", JSON.stringify(played));
@@ -125,6 +126,7 @@ console.log(UniteId);
     playerRef.current.seekTo(totalSeconds);
     // setWathcedTime(watchedTime)
   }, [watchedTime]);
+
   return (
     <div className="sm:p-10 p-3">
       {/* -------------------img-------------------------- */}

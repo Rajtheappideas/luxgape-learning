@@ -25,12 +25,14 @@ const useUserData = () => {
       },
     })
       .then((res) => {
-        toast(res?.data?.message, { type: "success" });
+        if (res?.data?.data) {
+          toast(res?.data?.message, { type: "success" });
+          localStorage.removeItem("user");
+          setUserdata(null);
+          navigate("/");
+        }
       })
       .catch((err) => console.log(err?.response?.data));
-    localStorage.removeItem("user");
-    setUserdata(null);
-    navigate("/");
   };
   return { handleLogout, handleFailure, handleSuccess };
 };
