@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Successful } from "..";
 import { useTranslation } from "react-i18next";
@@ -7,15 +7,15 @@ import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
 import { toast } from "react-toastify";
 
-const PaymentMethod = ({ product }) => {
+const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [radioBtn, setRadioBtn] = useState(true);
   const [loading, setLoading] = useState(false);
   const [enterCouponCode, setEnterCouponCode] = useState("");
   const [couponId, setCouponId] = useState(null);
-  const [grandTotal, setGrandTotal] = useState(null);
   const [discountAmount, setdiscountAmount] = useState(null);
-
+  const [couponDate, setCouponDate] = useState(null);
+  const [success, setSuccess] = useState(null);
   const { t } = useTranslation();
 
   const { userLanguage, userData } = useUserContext();
@@ -29,12 +29,6 @@ const PaymentMethod = ({ product }) => {
   let milliseconds = today.getMilliseconds();
 
   const makePayment = (token) => {
-    let grandtotal = product?.price - discountAmount;
-    if (!radioBtn) {
-      toast("press the radio button", { type: "warning" });
-      return false;
-    }
-    setLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/course-booking", {
       method: "POST",
       params: {
@@ -57,14 +51,12 @@ const PaymentMethod = ({ product }) => {
       .then((response) => {
         console.log(response?.data?.data);
         if (response?.status === 200) {
-          setLoading(false);
           setModalOpen(true);
         }
       })
       .catch((err) => {
         if (err?.response?.data) {
           console.log(err?.response?.data);
-          setLoading(false);
         }
       });
   };
@@ -83,17 +75,31 @@ const PaymentMethod = ({ product }) => {
       },
     })
       .then((response) => {
-        if (
-          response?.data?.status === "Success" &&
-          response?.data?.data?.coupon_code === enterCouponCode
-        ) {
+        setGrandTotal(null);
+        if (response?.data?.status === "Success") {
           toast("coupon code apply", { type: "success" });
           console.log("cc -> ", response?.data?.data);
           setdiscountAmount(response?.data?.data?.amount);
+          setCouponId(response?.data?.data?.id);
+          setCouponDate(response?.data?.data?.expiry_date);
+          if (response?.data?.data?.discount_type === "fixed_course") {
+            setGrandTotal(
+              finalAmountFixed(product?.price, response?.data?.data?.amount)
+            );
+          } else if (response?.data?.data?.discount_type === "percent") {
+            setGrandTotal(
+              finalAmountPercentage(
+                product?.price,
+                response?.data?.data?.amount
+              )
+            );
+          }
+          setSuccess(true);
           setLoading(false);
           return true;
         } else if (response?.data?.status === "Error") {
           toast(response?.data?.message, { type: "error" });
+          setSuccess(false);
           setLoading(false);
           return false;
         }
@@ -104,6 +110,20 @@ const PaymentMethod = ({ product }) => {
         return false;
       });
   };
+  function finalAmountPercentage(price, discountamount) {
+    return price - (price * parseFloat(discountamount)) / (100).toFixed(2);
+  }
+  function finalAmountFixed(price, discountamount) {
+    return (price - discountamount).toFixed(2);
+  }
+  function getPercentageIncrease(numA, numB) {
+    return Math.abs(((numA - numB) / numB) * 100);
+  }
+
+  useEffect(() => {
+    setGrandTotal(null);
+  }, []);
+
   return (
     <>
       <Successful
@@ -147,19 +167,33 @@ const PaymentMethod = ({ product }) => {
                 placeholder="Enter Coupon Code here"
                 value={enterCouponCode}
                 className="rounded-tl-3xl rounded-br-3xl px-2 rounded-tr-none rounded-bl-none w-full h-12 border focus:border-lime-500 outline-none"
-                onChange={(e) => setEnterCouponCode(e.target.value)}
+                onChange={(e) =>
+                  setEnterCouponCode(e.target.value.replace(/^\s+|\s+$/gm, ""))
+                }
               />
             </div>
             <div className="w-full">
               <button
                 type="button"
                 className={`rounded-xl bg-gradient-to-r rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none outline-none  from-to to-from lg:w-40 w-full h-12 p-2 text-white text-xl font-semibold active:scale-95 duration-200 transition-all ease-in-out`}
-                onClick={handleCouponeCode}
+                onClick={() => handleCouponeCode()}
               >
                 {loading ? "Checking..." : "Apply"}
               </button>
             </div>
           </div>
+          {success === true ? (
+            <label className="text-green-500 text-base font-semibold">
+              -$
+              {(product?.price - grandTotal).toFixed(2)}&nbsp;(
+              {getPercentageIncrease(grandTotal, product?.price).toFixed(2)} %
+              off) Coupon Applied
+            </label>
+          ) : success === false ? (
+            <label className="text-red-500 text-base font-semibold">
+              Coupon Invalid
+            </label>
+          ) : null}
         </div>
 
         {/* -----------------cancellation policy ---------------- */}
@@ -178,7 +212,9 @@ const PaymentMethod = ({ product }) => {
           <div className="flex items-center sm:flex-row flex-col mt-5 w-full">
             <StripeCheckout
               token={makePayment}
-              amount={product?.price * 100}
+              amount={
+                grandTotal === null ? product?.price * 100 : grandTotal * 100
+              }
               name="Buy course"
               stripeKey={process.env.REACT_APP_KEY}
             >

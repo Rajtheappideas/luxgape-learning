@@ -14,7 +14,6 @@ const Reviews = ({ course_id, userReviews, loading }) => {
   const [hoverValue, setHoverValue] = useState(undefined);
   const [Loading, setLoading] = useState(false);
   const { t } = useTranslation();
-  console.log(userReviews);
   const stars = Array(5).fill(0);
 
   // ---context----------

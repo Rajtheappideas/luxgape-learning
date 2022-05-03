@@ -158,7 +158,6 @@ const Class = () => {
     setWathcedTime(watchedtime);
     setVideoTitle(videotitle);
   };
-  console.log(UniteId);
   return (
     <div className="relative">
       <MetaTags>
@@ -194,8 +193,8 @@ const Class = () => {
 
       {/* --------------buttons for toggle the componetns--------------- */}
       <div className="sm:px-10 px-5">
-        <p className="sm:text-5xl text-3xl block font-semibold sm:my-5 ">
-          Course Name in Details
+        <p className="sm:text-4xl text-3xl block font-semibold sm:my-5 ">
+          {courseDetails?.course_details?.title}
         </p>
         {/* -------------------buttons-------------- */}
         <div className="flex items-center relative sm:space-x-7 space-x-3 sm:my-7 my-3 text-secondary sm:text-2xl text-xl w-full">
@@ -292,7 +291,7 @@ const Class = () => {
       )}
 
       {/* -------------------History-------------------- */}
-      {openHistory && <History handlePassData={handlePassData} />}
+      {openHistory && <History handlePassData={handlePassData} courseDetails={courseDetails} />}
       <div className="text-center my-10 ">
         <button
           type="button"

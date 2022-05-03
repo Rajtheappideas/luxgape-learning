@@ -126,7 +126,6 @@ const AboutClass = ({
     playerRef.current.seekTo(totalSeconds);
     // setWathcedTime(watchedTime)
   }, [watchedTime]);
-
   return (
     <div className="sm:p-10 p-3">
       {/* -------------------img-------------------------- */}

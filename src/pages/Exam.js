@@ -25,14 +25,13 @@ const Exam = () => {
   const [questionLoading, setQuestionLoading] = useState(false);
   const [selectedOptionId, setSelectedOptionId] = useState("");
   const [selectedQuestionId, setSelectedQuestionId] = useState("");
-  const [hours, sethours] = useState("00");
-  const [minutes, setMinutes] = useState("00");
-  const [seconds, setSeconds] = useState("00");
+  const [hours, sethours] = useState(null);
+  const [minutes, setMinutes] = useState(null);
+  const [seconds, setSeconds] = useState(null);
   const [countDown, setCountDown] = useState();
   const [startExam, setStartExam] = useState(true);
   const [currentPage, setCurrentPage] = useState();
   const [currentUrl, setCurrentUrl] = useState(null);
-  // const [examSubmitted, setExamSubmitted] = useState(false);
 
   const currentYear = new Date().getFullYear();
 
@@ -41,50 +40,40 @@ const Exam = () => {
   const { userData, userLanguage, examSubmitted, setExamSubmitted } =
     useUserContext();
 
-  let interval;
+  let interval = useRef();
   const { id } = useLocation().state;
 
   const navigate = useNavigate();
 
   const startTimer = () => {
-    // const timer = getExamDetails?.data[0]?.exam_info.total_time * 60 * 1000;
-    const timer = 1 * 20 * 1000;
+    const timer = getExamDetails?.data[0]?.exam_info.total_time * 60 * 1000;
+    // const timer = 1 * 20 * 1000;
     const nextDay = timer + new Date().getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
       const countdown = nextDay - now;
-      setCountDown(countdown);
-      const hours = Math.floor(
+      const Hours = Math.floor(
         (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      const minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((countdown % (1000 * 60)) / 1000);
-      if (examSubmitted) {
-        return false;
-      } else if (countdown <= 0 && examSubmitted === false) {
+      const Minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+      const Seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+      if (countdown < 0) {
         SubmitExam();
-        setCountDown(0);
-        clearInterval(interval);
+        clearInterval(interval.current);
         alert("Time is Over!! Exam Automatically submited");
       } else {
-        sethours(hours);
-        setMinutes(minutes);
-        setSeconds(seconds);
+        sethours(Hours);
+        setMinutes(Minutes);
+        setSeconds(Seconds);
       }
     }, 1000);
   };
-  let timer = useRef(null);
-
-  const startTime = () => {
-    timer = setInterval(() => {
-      console.log("heloo");
-    }, 1000);
-  };
+  console.log(hours, minutes, seconds);
 
   // fetch user details first rendering
   useEffect(() => {
     // fetch the userdetails
-    startTime();
+    // startTime();
     if (!startExam) {
       startTimer();
     }
@@ -144,7 +133,6 @@ const Exam = () => {
         return false;
       }
     });
-    return () => clearInterval(interval);
   }, []);
 
   // nexy questions
@@ -360,13 +348,10 @@ const Exam = () => {
   };
   // start exam
   const StartExam = () => {
-    // if (examSubmitted) {
-    //   return false;
-    // }
     setStartExam(false);
     startTimer();
   };
-  console.log(examSubmitted);
+  console.log(getExamDetails);
   return (
     <div>
       <MetaTags>
@@ -427,9 +412,9 @@ const Exam = () => {
           </div>
         </div>
       </nav>
-      <button type="button" onClick={clearInterval(timer.current)}>
+      {/* <button type="button" onClick={clearInterval(timer.current)}>
         stop
-      </button>
+      </button> */}
       {/* --------------------main div----------- */}
       {loading ? (
         <p className="text-center text-4xl font-semibold leading-4">
@@ -525,7 +510,8 @@ const Exam = () => {
               <div>
                 {startExam ? (
                   <p className="bg-pink-200 text-center text-pink-500 rounded-lg sm:p-3 p-1 text-xl font-semibold">
-                    Time {hours}:{question?.exam_info?.total_time}:{seconds}
+                    {/* Time {hours}:{question?.exam_info?.total_time}:{seconds} */}
+                    Time 00:{question?.exam_info?.total_time}
                   </p>
                 ) : (
                   <p className="bg-pink-200 text-center text-pink-500 rounded-lg sm:p-3 p-1 text-xl font-semibold">
@@ -640,7 +626,7 @@ const Exam = () => {
                             setSelectedQuestionId(option?.questions_id);
                           }}
                           disabled={countDown === 0}
-                          className="text-base"
+                          className="text-base text-left"
                         >
                           {option?.option_value}
                         </button>

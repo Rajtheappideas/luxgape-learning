@@ -11,12 +11,15 @@ import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useUserContext } from "../context/usercontext";
+import { useLocation } from "react-router-dom";
 
 const Courses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const { t } = useTranslation();
+
+  const { state } = useLocation();
 
   const { userLanguage } = useUserContext();
 
@@ -53,6 +56,7 @@ const Courses = () => {
           }
         });
     }, 2000);
+    if (state === null) return false;
   }, []);
   return (
     <div className="bg-bgblank relative">
@@ -101,6 +105,7 @@ const Courses = () => {
       <MostPopularCourses
         courses={courses}
         loading={loading}
+        state={state}
         // searchCourse={searchCourse}
         // setSearchCourse={setSearchCourse}
         // setRating={setRating}

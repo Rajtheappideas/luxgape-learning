@@ -15,7 +15,6 @@ const WhatOurEmployerSay = () => {
   const { userLanguage } = useUserContext();
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
-  console.log(reviews);
   useEffect(() => {
     setLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/get-review", {

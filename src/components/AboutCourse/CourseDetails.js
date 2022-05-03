@@ -30,6 +30,11 @@ const CourseDetails = ({ courseDetails, loading }) => {
   const discount = 50 / 100;
   const discountPrice = salePrice - salePrice * discount;
 
+  
+  function getPercentageIncrease(numA, numB) {
+    return Math.abs(((numA - numB) / numB) * 100);
+  }
+
   return (
     <div className="sm:p-10 p-3 w-full">
       {/* ---------------course details paragraph-------------- */}
@@ -147,7 +152,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
               <ul className="space-y-3 sm:mr-10 mr-3">
                 <li className="flex items-start justify-start">
                   <CheckCircleIcon
-                    className="h-10 w-10 sm:mr-1"
+                    className="h-7 w-7 sm:mr-1"
                     color="lightblue"
                   />
                   {courseDetails?.course_details?.what_will_learn}
@@ -176,13 +181,19 @@ const CourseDetails = ({ courseDetails, loading }) => {
             <div className="flex sm:flex-row flex-col items-center lg:justify-start justify-center w-full">
               <p className="sm:space-x-5 space-x-2">
                 <span className="font-bold sm:text-4xl text-xl">
-                  $ {discountPrice.toFixed(2)}
+                  {/* $ {discountPrice.toFixed(2)} */}${" "}
+                  {courseDetails?.sale_price}
                 </span>
                 <del className="text-[#c4c4c4] text-xl">
-                  $ {courseDetails?.sale_price}
+                  $ {courseDetails?.price}
                 </del>
                 <span className="border text-primary text-xl w-full sm:p-3 p-1 border-primary rounded-2xl">
-                  Save 50%
+                  Save{" "}
+                  {getPercentageIncrease(
+                    courseDetails?.sale_price,
+                    courseDetails?.price
+                  ).toFixed(0)}
+                  %
                 </span>
               </p>
             </div>

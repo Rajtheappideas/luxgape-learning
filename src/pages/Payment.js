@@ -7,11 +7,15 @@ import { toast, ToastContainer } from "react-toastify";
 import { Footer, Navbar, PaymentMethod, ProductYouBuy } from "../components";
 import { useUserContext } from "../context/usercontext";
 const Payment = () => {
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState(null);
+  const [productLoading, setProductLoading] = useState(false);
+  const [grandTotal, setGrandTotal] = useState(null);
+
   const { userLanguage } = useUserContext();
   const { t } = useTranslation();
   const { id } = useParams();
   useEffect(() => {
+    setProductLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {
       method: "POST",
       params: {
@@ -26,6 +30,7 @@ const Payment = () => {
       .then((response) => {
         if (response?.data?.status === "Success") {
           setProduct(response?.data?.data);
+          setProductLoading(false);
           return true;
         }
       })
@@ -33,6 +38,7 @@ const Payment = () => {
         console.log("error ->", err?.response);
         if (err?.response?.status === 404) {
           toast("something went wrong!", { type: "error" });
+          setProductLoading(false);
           return false;
         }
       });
@@ -61,11 +67,16 @@ const Payment = () => {
       <div className="sm:p-5 p-5 md:grid md:grid-cols-2 sm:gap-x-4 grid-flow-row place-items-start items-start ">
         {/* --------------------payment method and product for large screen----------------- */}
         <div className="md:hidden block">
-          <ProductYouBuy product={product} />
+          <ProductYouBuy product={product} grandTotal={grandTotal} />
         </div>
-        <PaymentMethod product={product} />
+        <PaymentMethod
+          product={product}
+          productLoading={productLoading}
+          grandTotal={grandTotal}
+          setGrandTotal={setGrandTotal}
+        />
         <div className="md:block hidden">
-          <ProductYouBuy product={product} />
+          <ProductYouBuy product={product} grandTotal={grandTotal} />
         </div>
       </div>
 

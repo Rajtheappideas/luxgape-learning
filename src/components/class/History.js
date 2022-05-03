@@ -8,7 +8,7 @@ import { useUserContext } from "../../context/usercontext";
 import ContentLoader from "react-content-loader";
 import { toast } from "react-toastify";
 
-const History = ({ handlePassData }) => {
+const History = ({ handlePassData, courseDetails }) => {
   const [courseHistory, setCourseHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
@@ -21,7 +21,7 @@ const History = ({ handlePassData }) => {
       method: "POST",
       params: {
         lang_code: userLanguage,
-        course_id: 1,
+        course_id: courseDetails?.course_details?.course_id,
       },
       headers: {
         // "consumer-access-token": "gGvQAS3rh5vSDB1fBc2g",

@@ -114,7 +114,7 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
                       className="h-1/2 w-full object-center rounded-tl-[182px]"
                     />
                     <div className="sm:p-5 p-3 sm:space-y-5 space-y-3">
-                      <p className="sm:text-3xl text-2xl font-semibold">
+                      <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
                         {course?.course_details?.title}
                       </p>
                       <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
