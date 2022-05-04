@@ -106,7 +106,14 @@ const Class = () => {
     }).then((response) => {
       if (response?.data?.status === "Success") {
         setUnits(response?.data?.data?.unites);
-        setLoading(false);
+        setUrl(response?.data?.data?.unites[0]?.video_list[0]?.video);
+        setUnitVideoId(
+          response?.data?.data?.unites[0]?.video_list[0]?.unite_video_id
+        );
+        setUnitId(response?.data?.data?.unites[0]?.video_list[0]?.unite_id);
+        setCourseId(response?.data?.data?.unites[0]?.video_list[0]?.course_id);
+        setWathcedTime(null);
+        setVideoTitle(response?.data?.data?.unites[0]?.video_list[0]?.title);
         return true;
       } else if (response?.data?.message === "Error") {
         setLoading(false);
@@ -114,7 +121,6 @@ const Class = () => {
       }
     });
   }, []);
-
   const StartExam = () => {
     setStartExamLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/start-exam", {
@@ -134,7 +140,9 @@ const Class = () => {
       } else if (response?.data?.status === "Success") {
         console.log("Exam ->", response?.data);
         setStartExamLoading(false);
-        navigate("/exam", { state: { id: id } });
+        navigate("/exam", {
+          state: { id: id, message: response?.data?.message },
+        });
         return true;
       } else if (response?.data?.status === "Error") {
         console.log(response?.data);
@@ -189,6 +197,7 @@ const Class = () => {
         watchedTime={watchedTime}
         courseDetails={courseDetails}
         videoTitle={videoTitle}
+        loading={loading}
       />
 
       {/* --------------buttons for toggle the componetns--------------- */}
@@ -291,7 +300,12 @@ const Class = () => {
       )}
 
       {/* -------------------History-------------------- */}
-      {openHistory && <History handlePassData={handlePassData} courseDetails={courseDetails} />}
+      {openHistory && (
+        <History
+          handlePassData={handlePassData}
+          courseDetails={courseDetails}
+        />
+      )}
       <div className="text-center my-10 ">
         <button
           type="button"

@@ -25,9 +25,9 @@ const Exam = () => {
   const [questionLoading, setQuestionLoading] = useState(false);
   const [selectedOptionId, setSelectedOptionId] = useState("");
   const [selectedQuestionId, setSelectedQuestionId] = useState("");
-  const [hours, sethours] = useState(null);
-  const [minutes, setMinutes] = useState(null);
-  const [seconds, setSeconds] = useState(null);
+  const [hours, sethours] = useState("00");
+  const [minutes, setMinutes] = useState("00");
+  const [seconds, setSeconds] = useState("00");
   const [countDown, setCountDown] = useState();
   const [startExam, setStartExam] = useState(true);
   const [currentPage, setCurrentPage] = useState();
@@ -39,16 +39,19 @@ const Exam = () => {
 
   const { userData, userLanguage, examSubmitted, setExamSubmitted } =
     useUserContext();
-
   let interval = useRef();
-  const { id } = useLocation().state;
+  const { id,message } = useLocation().state;
 
   const navigate = useNavigate();
 
   const startTimer = () => {
-    const timer = getExamDetails?.data[0]?.exam_info.total_time * 60 * 1000;
+    const timer = getExamDetails?.data[0]?.exam_info?.total_time;
     // const timer = 1 * 20 * 1000;
-    const nextDay = timer + new Date().getTime();
+    const nextDay =
+      timer.split(":")[0] * 60 * 1000 +
+      timer.split(":")[1] * 1000 +
+      new Date().getTime();
+    // const nextDay = timer + new Date().getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
       const countdown = nextDay - now;
@@ -57,26 +60,33 @@ const Exam = () => {
       );
       const Minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
       const Seconds = Math.floor((countdown % (1000 * 60)) / 1000);
-      if (countdown < 0) {
+      if (countdown <= 0) {
         SubmitExam();
+        setCountDown(0);
         clearInterval(interval.current);
         alert("Time is Over!! Exam Automatically submited");
       } else {
         sethours(Hours);
         setMinutes(Minutes);
         setSeconds(Seconds);
+        sessionStorage.setItem("examTime", countdown);
       }
     }, 1000);
   };
-  console.log(hours, minutes, seconds);
 
+  window.onbeforeunload = () => {
+    sessionStorage.removeItem("currentUrl");
+  };
   // fetch user details first rendering
   useEffect(() => {
     // fetch the userdetails
     // startTime();
+    setCountDown(sessionStorage.getItem("examTime"));
+    sessionStorage.setItem("examTime", countDown);
     if (!startExam) {
       startTimer();
     }
+
     setuserDetailsLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/get-user-details", {
       method: "POST",
@@ -101,9 +111,6 @@ const Exam = () => {
 
     // fetch the exam questions
     setLoading(true);
-    let url =
-      "https://chessmafia.com/php/luxgap/App/api/get-exam-question?lang_code=en&course_id=1&page=1&exam_id=1";
-    setCurrentUrl(url);
     axios("https://chessmafia.com/php/luxgap/App/api/get-exam-question", {
       method: "POST",
       params: {
@@ -120,6 +127,11 @@ const Exam = () => {
         setGetExamDetails(response?.data?.data?.questions);
         setGetExamQuestions(
           response?.data?.data?.questions?.data[0]?.exam_questions_details
+        );
+        setCurrentUrl(response?.data?.data?.questions?.first_page_url);
+        sessionStorage.setItem(
+          "currentUrl",
+          JSON.stringify(response?.data?.data?.questions?.first_page_url)
         );
         setCurrentPage(response?.data?.data?.questions?.current_page);
         setEmployerDetails(response?.data?.data?.employer_id);
@@ -160,6 +172,7 @@ const Exam = () => {
       setQuestionLoading(true);
       setTimeout(() => {
         setCurrentUrl(getExamDetails?.next_page_url);
+        sessionStorage.setItem("currentUrl", getExamDetails?.next_page_url);
         // next question calling
         axios(getExamDetails?.next_page_url, {
           method: "POST",
@@ -196,7 +209,7 @@ const Exam = () => {
           lang_code: userLanguage,
           question_id: selectedQuestionId,
           option_id: selectedOptionId,
-          exam_id: 1,
+          exam_id: id,
           course_id: id,
         },
         headers: {
@@ -224,6 +237,7 @@ const Exam = () => {
       // call prev page question
       setQuestionLoading(true);
       setCurrentUrl(getExamDetails?.prev_page_url);
+      sessionStorage.setItem("currentUrl", getExamDetails?.prev_page_url);
       axios(getExamDetails?.prev_page_url, {
         method: "POST",
         params: {
@@ -273,8 +287,10 @@ const Exam = () => {
         method: "POST",
         params: {
           lang_code: userLanguage,
-          course_id: getExamDetails?.data[0]?.course_id,
-          exam_id: getExamDetails?.data[0]?.exam_id,
+          course_id: id,
+          exam_id: id,
+          // course_id: getExamDetails?.data[0]?.course_id,
+          // exam_id: getExamDetails?.data[0]?.exam_id,
         },
         headers: {
           "consumer-access-token": userData?.api_token,
@@ -282,7 +298,7 @@ const Exam = () => {
       }).then((response) => {
         if (response?.data?.status === "Success") {
           console.log(response?.data?.data);
-          clearInterval(interval);
+          clearInterval(interval.current);
           setCountDown(0);
           setExamSubmitted(true);
           setSubmitExam(false);
@@ -321,6 +337,8 @@ const Exam = () => {
         return false;
       }
     });
+    setCurrentUrl(null);
+    sessionStorage.clear("currentUrl");
   };
   // show result
   const ShowResult = () => {
@@ -351,7 +369,6 @@ const Exam = () => {
     setStartExam(false);
     startTimer();
   };
-  console.log(getExamDetails);
   return (
     <div>
       <MetaTags>
@@ -562,7 +579,7 @@ const Exam = () => {
                       <button
                         type="button"
                         onClick={PrevQuestions}
-                        className="border p-2 border-primary text-orange-400 rounded-lg hover:bg-primary hover:text-white"
+                        className="active:scale-95 duration-100 ease-in-out transition-all border p-2 border-primary text-orange-400 rounded-lg hover:bg-primary hover:text-white"
                         disabled={countDown === 0}
                       >
                         <ChevronLeftIcon className="h-5 w-5" />
@@ -572,7 +589,7 @@ const Exam = () => {
                       <button
                         type="button"
                         onClick={NextQuestions}
-                        className="border p-2 border-primary text-orange-400 rounded-lg hover:bg-primary hover:text-white"
+                        className="active:scale-95 duration-100 ease-in-out transition-all border p-2 border-primary text-orange-400 rounded-lg hover:bg-primary hover:text-white"
                         disabled={countDown === 0}
                       >
                         <ChevronRightIcon className="h-5 w-5" />
@@ -602,10 +619,10 @@ const Exam = () => {
                       }}
                     >
                       <div
-                        className={`flex items-center hover:bg-gray-100 w-full rounded-lg`}
+                        className={`flex items-center hover:bg-gray-100 rounded-lg`}
                       >
                         <button
-                          className={`rounded-full capitalize text-center border border-gray-400 w-12 h-12 mr-2 text-xl ${
+                          className={`rounded-full capitalize text-center border border-gray-400 w-12 h-12  text-xl ${
                             countDown !== 0 && option?.id === selectedOptionId
                               ? "text-white bg-primary"
                               : "text-primary bg-white"
@@ -626,7 +643,7 @@ const Exam = () => {
                             setSelectedQuestionId(option?.questions_id);
                           }}
                           disabled={countDown === 0}
-                          className="text-base text-left"
+                          className="text-base text-left w-full ml-2"
                         >
                           {option?.option_value}
                         </button>
@@ -639,7 +656,7 @@ const Exam = () => {
                   <button
                     type="button"
                     onClick={PrevQuestions}
-                    className=" border mr-3 w-32 h-10 rounded-lg text-gray-400 text-center"
+                    className=" border mr-3 w-32 active:scale-95 duration-100 ease-in-out transition-all h-10 rounded-lg text-gray-400 text-center"
                     disabled={countDown === 0}
                   >
                     previous
@@ -648,7 +665,7 @@ const Exam = () => {
                     <button
                       type="button"
                       onClick={SubmitExam}
-                      className="border w-32 h-10 rounded-lg text-center bg-primary text-white"
+                      className="border w-32 h-10 active:scale-95 duration-100 ease-in-out transition-all rounded-lg text-center bg-primary text-white"
                     >
                       {submitExam ? "submitting..." : "Submit Exam"}
                     </button>

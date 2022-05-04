@@ -18,6 +18,7 @@ const AboutClass = ({
   CourseId,
   watchedTime,
   videoTitle,
+  loading,
 }) => {
   const [playing, setPlaying] = useState(false);
   const [played, setPlayed] = useState(
@@ -132,29 +133,29 @@ const AboutClass = ({
       <div
         onMouseOver={() => setShowButtons(true)}
         onMouseLeave={() => setShowButtons(false)}
-        className="relative bg-black mix-blend-darken overflow-hidden rounded-3xl md:h-screen h-80 border border-gray-300"
+        className="relative bg-black mix-blend-darken w-full overflow-hidden rounded-3xl md:h-screen h-80 border border-gray-300"
       >
-        <ReactPlayer
-          url={`https://chessmafia.com/php/luxgap/App/${Url}`}
-          ref={playerRef}
-          controls={true}
-          playing={playing}
-          width="100%"
-          height="100%"
-          light={false}
-          onPause={handlePause}
-          onPlay={handlePlay}
-          onProgress={handleProgress}
-          onError={(e) => {
-            console.log("onError", e);
-            toast("somthing went wrong !!!", {
-              type: "warning",
-            });
-          }}
-          onReady={handleReady}
-
-          // onDuration={this.handleDuration}
-        />
+        {!loading && (
+          <ReactPlayer
+            url={`https://chessmafia.com/php/luxgap/App/${Url}`}
+            ref={playerRef}
+            controls={true}
+            playing={playing}
+            width="100%"
+            height="100%"
+            light={false}
+            onPause={handlePause}
+            onPlay={handlePlay}
+            onProgress={handleProgress}
+            onError={(e) => {
+              console.log("onError", e);
+              toast("somthing went wrong !!!", {
+                type: "warning",
+              });
+            }}
+            onReady={handleReady}
+          />
+        )}
 
         {/* -----------palyer buttons-------------- */}
         {showButtons && (

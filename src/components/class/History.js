@@ -1,8 +1,6 @@
 import { PlayIcon } from "@heroicons/react/solid";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import img from "../../assets/cimg3.jpg";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
 import ContentLoader from "react-content-loader";
@@ -24,13 +22,11 @@ const History = ({ handlePassData, courseDetails }) => {
         course_id: courseDetails?.course_details?.course_id,
       },
       headers: {
-        // "consumer-access-token": "gGvQAS3rh5vSDB1fBc2g",
         "consumer-access-token": userData?.api_token,
       },
     }).then((response) => {
       if (response?.data?.status === "Success") {
         setCourseHistory(response?.data?.data);
-        console.log(response?.data?.data);
         setLoading(false);
       } else if (response?.data?.status === "Error") {
         toast("somthing went wrong!!", { type: "error" });
@@ -97,8 +93,7 @@ const History = ({ handlePassData, courseDetails }) => {
                   unites?.video_list?.unite_id,
                   unites?.course_id,
                   unites?.watched_time,
-                  unites?.video_list?.title,
-                  console.log(unites?.watched_time)
+                  unites?.video_list?.title
                 )
               }
             >

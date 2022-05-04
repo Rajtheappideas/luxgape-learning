@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useUserContext } from "../../context/usercontext";
 import axios from "axios";
 import ContentLoader from "react-content-loader";
+import examIcon from "../../assets/exam-icon.png";
 
 const data = [
   {
@@ -210,32 +211,34 @@ const CourseHistory = ({ showButton, slice }) => {
                         {course?.course_details?.title}
                       </p>
                       <p className="text-gray-400 font-bold">
-                        {/* {course.hours} */}
-                        {/* {totalVideo} total videos */}
                         {course?.total_video_count} total videos
                       </p>
                       <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
                         {course?.total_watch_video_count ===
-                        course?.total_video_count ? (
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 0 ? (
                           <p className="font-bold flex">
-                            <DocumentTextIcon
-                              className="h-5 w-5 mr-1"
-                              color="gray"
-                            />
-                            Certified
+                            <img src={examIcon} className="h-7 w-7 mr-1" />
+                            Start Exam
+                          </p>
+                        ) : course?.total_watch_video_count ===
+                            course?.total_video_count &&
+                          course?.start_exam_info?.is_completed === 1 ? (
+                          <p className="font-bold text-secondary text-base">
+                            Download Certificate
                           </p>
                         ) : (
                           <p className="font-bold text-red-500">
-                            {/* {course?.total_watch_video_count} /{totalVideo} */}
                             {course?.total_watch_video_count} /{" "}
                             {course?.total_video_count}
                             {/* {course?.total_hours
-                        ? `${course?.total_hours}:00`
-                        : totalTime} */}
+                    ? `${course?.total_hours}:00`
+                    : totalTime} */}
                           </p>
                         )}
                         {course?.total_watch_video_count ===
-                        course?.total_video_count ? (
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 1 ? (
                           <button>
                             <DownloadIcon className="h-5 w-5" />
                           </button>
@@ -248,7 +251,7 @@ const CourseHistory = ({ showButton, slice }) => {
                       {course?.total_watch_video_count ===
                       course?.total_video_count ? (
                         <div className="flex text-green-600">
-                          <p className="rounded-full w-14 px-2 py-3 text-center h-14 border-2 bg-gray-200 border-green-600">
+                          <p className="rounded-full w-14 px-2 py-3 text-center h-14 bg-gray-200">
                             100%
                           </p>
                           <div className="flex-col mx-2 font-bold">
@@ -375,32 +378,34 @@ const CourseHistory = ({ showButton, slice }) => {
                         {course?.course_details?.title}
                       </p>
                       <p className="text-gray-400 font-bold">
-                        {/* {course.hours} */}
-                        {/* {totalVideo} total videos */}
                         {course?.total_video_count} total videos
                       </p>
                       <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
                         {course?.total_watch_video_count ===
-                        course?.total_video_count ? (
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 0 ? (
                           <p className="font-bold flex">
-                            <DocumentTextIcon
-                              className="h-5 w-5 mr-1"
-                              color="gray"
-                            />
-                            Certified
+                            <img src={examIcon} className="h-7 w-7 mr-1" />
+                            Start Exam
+                          </p>
+                        ) : course?.total_watch_video_count ===
+                            course?.total_video_count &&
+                          course?.start_exam_info?.is_completed === 1 ? (
+                          <p className="font-bold text-secondary text-base">
+                            Download Certificate
                           </p>
                         ) : (
                           <p className="font-bold text-red-500">
-                            {/* {course?.total_watch_video_count} /{totalVideo} */}
                             {course?.total_watch_video_count} /{" "}
                             {course?.total_video_count}
                             {/* {course?.total_hours
-                    ? `${course?.total_hours}:00`
-                    : totalTime} */}
+                ? `${course?.total_hours}:00`
+                : totalTime} */}
                           </p>
                         )}
                         {course?.total_watch_video_count ===
-                        course?.total_video_count ? (
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 1 ? (
                           <button>
                             <DownloadIcon className="h-5 w-5" />
                           </button>
@@ -413,7 +418,7 @@ const CourseHistory = ({ showButton, slice }) => {
                       {course?.total_watch_video_count ===
                       course?.total_video_count ? (
                         <div className="flex text-green-600">
-                          <p className="rounded-full w-14 px-2 py-3 text-center h-14 border-2 bg-gray-200 border-green-600">
+                          <p className="rounded-full w-14 px-2 py-3 text-center h-14 bg-gray-200">
                             100%
                           </p>
                           <div className="flex-col mx-2 font-bold">

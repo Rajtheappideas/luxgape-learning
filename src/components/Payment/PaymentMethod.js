@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Successful } from "..";
 import { useTranslation } from "react-i18next";
 import StripeCheckout from "react-stripe-checkout";
@@ -28,6 +28,8 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
   let seconds = today.getSeconds();
   let milliseconds = today.getMilliseconds();
 
+  const navigate = useNavigate();
+
   const makePayment = (token) => {
     axios("https://chessmafia.com/php/luxgap/App/api/course-booking", {
       method: "POST",
@@ -52,6 +54,7 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
         console.log(response?.data?.data);
         if (response?.status === 200) {
           setModalOpen(true);
+          navigate('/mycourses')
         }
       })
       .catch((err) => {
