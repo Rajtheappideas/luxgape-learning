@@ -8,7 +8,7 @@ import {
   SearchIcon,
   ChevronDownIcon,
 } from "@heroicons/react/solid";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import Paginate from "react-paginate";
@@ -20,7 +20,7 @@ import SkeletonLoading from "../SkeletonLoading";
 
 const MostPopularCourse = ({ courses, loading, state }) => {
   const [searchCourse, setSearchCourse] = useState("");
-  const [searchedValue, setSearchedValue] = useState();
+  const [searchedValue, setSearchedValue] = useState(null);
   const [Loading, setLoading] = useState(false);
   const [rating, setRating] = useState([]);
   const [minPrice, setMinPrice] = useState(0);
@@ -33,6 +33,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
   const [skills, setSkills] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [searchedCourses, setSearchedCourses] = useState([]);
+  const [courseNotFound, setCourseNotFound] = useState(false);
 
   const { userLanguage } = useUserContext();
 
@@ -101,45 +102,46 @@ const MostPopularCourse = ({ courses, loading, state }) => {
           return false;
         }
       });
-    // if (state === null) {
-    //   return false;
-    // } else {
-    //   setLoading(true);
-    //   setSearchedValue(state.searchValue);
-    //   axios("https://chessmafia.com/php/luxgap/App/api/apply-filter", {
-    //     method: "POST",
-    //     params: {
-    //       lang_code: userLanguage,
-    //       search_text: searchedValue,
-    //       category_id: [],
-    //       max_price: "",
-    //       min_price: "",
-    //       rating: "",
-    //     },
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //   })
-    //     .then((response) => {
-    //       if (response?.data?.status === "Success") {
-    //         setSearchedCourses(response?.data?.data);
-    //         if (response?.data?.data.length === 0) {
-    //           toast("Course not found!!", { type: "warning" });
-    //           return false;
-    //         }
-    //         setLoading(false);
-    //         return true;
-    //       }
-    //     })
-    //     .catch((err) => {
-    //       console.log("search err->", err?.response);
-    //       if (err?.response?.data?.status === "Error") {
-    //         setLoading(false);
-    //         return false;
-    //       }
-    //     });
-    // }
+    if (state === null) {
+      return false;
+    } else {
+      setLoading(true);
+      setSearchedValue(state.searchValue);
+      axios("https://chessmafia.com/php/luxgap/App/api/apply-filter", {
+        method: "POST",
+        params: {
+          lang_code: userLanguage,
+          search_text: state.searchValue,
+          category_id: [],
+          max_price: "",
+          min_price: "",
+          rating: "",
+        },
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response?.data?.status === "Success") {
+            setSearchedCourses(response?.data?.data);
+            if (response?.data?.data.length === 0) {
+              toast(t("Course not found!!"), { type: "warning" });
+              return false;
+            }
+            setCourseNotFound(true);
+            setLoading(false);
+            return true;
+          }
+        })
+        .catch((err) => {
+          console.log("search err->", err?.response);
+          if (err?.response?.data?.status === "Error") {
+            setLoading(false);
+            return false;
+          }
+        });
+    }
   }, []);
 
   // for clear filters when advance filter close
@@ -150,10 +152,10 @@ const MostPopularCourse = ({ courses, loading, state }) => {
   // handle search data based on user enter value
   const handleSearchCourse = () => {
     if (searchCourse === "") {
-      toast("search field should be filled!", { type: "warning" });
+      toast(t("search field should be filled!"), { type: "warning" });
       return false;
     }
-
+    setSearchedValue(null);
     setLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/apply-filter", {
       method: "POST",
@@ -174,9 +176,10 @@ const MostPopularCourse = ({ courses, loading, state }) => {
         if (response?.data?.status === "Success") {
           setSearchedCourses(response?.data?.data);
           if (response?.data?.data.length === 0) {
-            toast("Course not found!!", { type: "warning" });
+            toast(t("Course not found!!"), { type: "warning" });
             return false;
           }
+          // setSearchCourse("");
           setLoading(false);
           return true;
         }
@@ -200,7 +203,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
       skillName === [] &&
       rating === []
     ) {
-      toast("Add some filters", { type: "warning" });
+      toast(t("Add some filters"), { type: "warning" });
       return false;
     }
     let formData = new FormData();
@@ -220,7 +223,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
         if (response?.data?.status === "Success") {
           setFilteredCourses(response?.data?.data);
           if (response?.data?.data.length === 0) {
-            toast("No Courses Found on this filters!!", { type: "warning" });
+            toast(t("No Courses Found on this filters!!"), { type: "warning" });
             return false;
           }
           return true;
@@ -246,6 +249,9 @@ const MostPopularCourse = ({ courses, loading, state }) => {
     setFilteredCourses([]);
     setSearchCourse("");
     setSearchedCourses([]);
+    // setFiltersOpen(false);
+
+    // window.location.reload();
   };
 
   const handleChangeSkillName = (e) => {
@@ -323,7 +329,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
       ),
     },
   ];
-  console.log(searchedValue);
+
   return (
     <>
       <div className="sm:p-10 mb-10 p-3">
@@ -336,7 +342,9 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                 type="text"
                 placeholder={t("search_course")}
                 name="search"
+                // value={searchCourse || searchedValue}
                 value={searchCourse}
+                // value={state === null ? searchCourse : state.searchValue}
                 onChange={(e) => setSearchCourse(e.target.value.toLowerCase())}
                 className="px-3 outline-none h-[72px] sm:w-[400px] w-full border bg-white rounded-tl-[36px] rounded-br-[36px] rounded-tr-none rounded-bl-none "
               />
@@ -369,7 +377,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                     {/* ------------------firrst column-------------- */}
                     <div>
                       <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
-                        List of Categories
+                        {t("List of Categories")}
                       </p>
                       {categories.map((category) => (
                         <div
@@ -392,7 +400,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
 
                     <div>
                       <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
-                        Skills
+                        {t("Skills")}
                       </p>
                       {skills.map((skill) => (
                         <div
@@ -422,7 +430,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                     {/* ------------------first column-------------- */}
                     <div>
                       <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
-                        Ratings
+                        {t("Ratings")}
                       </p>
                       {stars.map((star) => (
                         <div className="flex items-center mb-3" key={star.id}>
@@ -442,11 +450,13 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                     {/* ------------------second column-------------- */}
                     <div>
                       <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
-                        Price
+                        {t("Price")}
                       </p>
                       <div className="flex items-center mb-3 ">
                         <div className="flex-col flex items-start relative">
-                          <span className="text-lg font-semibold">min</span>
+                          <span className="text-lg font-semibold">
+                            {t("min")}
+                          </span>
                           <BiDollar
                             className="bg-[#C4C4C4] rounded-sm absolute h-10 top-[43%] left-0 w-6"
                             color="white"
@@ -459,7 +469,9 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                           />
                         </div>
                         <div className="flex-col flex items-start relative">
-                          <span className="text-lg font-semibold">max</span>
+                          <span className="text-lg font-semibold">
+                            {t("max")}
+                          </span>
                           <BiDollar
                             className="bg-[#C4C4C4]  w-6 absolute top-[43%] left-0 h-10"
                             color="white"
@@ -480,16 +492,16 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                     <button
                       type="button"
                       className="sm:w-[209px] w-32 h-10 active:scale-95 transition-all duration-150 ease-in-out md:mr-5 font-bold bg-[#E0E0E0] rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
-                      onClick={handleClearFilters}
+                      onClick={() => handleClearFilters()}
                     >
-                      Clear All Filters
+                      {t("Clear All Filters")}
                     </button>
                     <button
                       type="button"
                       className="sm:w-[209px] w-32 h-10 active:scale-95 transition-all duration-150 ease-in-out  bg-primary text-white font-bold rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
-                      onClick={handleFilterCourse}
+                      onClick={() => handleFilterCourse()}
                     >
-                      Apply Filters
+                      {t("Apply Filters")}
                     </button>
                   </div>
                 </div>
@@ -507,8 +519,55 @@ const MostPopularCourse = ({ courses, loading, state }) => {
         <div className="grid xl:grid-cols-3 grid-flow-row md:grid-cols-2 items-center place-items-center lg:gap-10 md:gap-16 gap-4 min-w-full">
           {/* -------------- rounde div=-------------- */}
 
-          {filteredCourses.length === 0 && searchedCourses.length === 0 ? (
-            courses.length === 0 && loading ? (
+          {state !== null &&
+          searchedValue !== null &&
+          courseNotFound === true ? (
+            searchedCourses.map((course) => (
+              <Link
+                to={`/courses/aboutcourse/${course?.course_details?.course_id}`}
+                key={course.id}
+              >
+                <RoundedDiv key={course.id} onClick={ScrollToTop}>
+                  <LazyLoadImage
+                    src={
+                      `https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}` ||
+                      null
+                    }
+                    alt={course?.course_details?.title}
+                    className="h-1/2 w-full object-center object-cover rounded-tl-[182px]"
+                  />
+
+                  <div className="p-5 sm:space-y-5 space-y-2">
+                    <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
+                      {course?.course_details?.title}
+                    </p>
+                    <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
+                      {course?.course_details?.about}
+                    </p>
+                    <div className="flex items-start space-x-1">
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                      <StarIcon className="w-8 h-8" color="gold" />
+                    </div>
+                    <div className="flex items-center space-x-3">
+                      <p className="text-secondary">
+                        <span className="font-bold text-2xl">
+                          ${course?.sale_price}
+                        </span>
+                        /employee
+                      </p>
+                      <button className="w-10 h-10 bg-black cursor-pointer">
+                        <ArrowRightIcon className="p-2" color="white" />
+                      </button>
+                    </div>
+                  </div>
+                </RoundedDiv>
+              </Link>
+            ))
+          ) : filteredCourses.length === 0 && searchedCourses.length === 0 ? (
+            courses.length === 0 ? (
               <>
                 <SkeletonLoading />
                 <SkeletonLoading />
@@ -537,7 +596,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                       />
 
                       <div className="p-5 sm:space-y-5 space-y-2">
-                      <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
+                        <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
                           {course?.course_details?.title}
                         </p>
                         <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
@@ -617,7 +676,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                   />
 
                   <div className="p-5 sm:space-y-5 space-y-2">
-                  <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
+                    <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
                       {course?.course_details?.title}
                     </p>
                     <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
@@ -662,7 +721,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                   />
 
                   <div className="p-5 sm:space-y-5 space-y-2">
-                  <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
+                    <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
                       {course?.course_details?.title}
                     </p>
                     <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
@@ -707,7 +766,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                   />
 
                   <div className="p-5 sm:space-y-5 space-y-2">
-                  <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
+                    <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
                       {course?.course_details?.title}
                     </p>
                     <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">

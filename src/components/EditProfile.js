@@ -64,7 +64,7 @@ const EditProfile = ({ profileImage, userDetails }) => {
         })
         .then((response) => {
           if (response?.data?.status === "Success") {
-            toast(response?.data?.message, { type: "success" });
+            toast(t("profile updated"), { type: "success" });
             setLoading(false);
             window.location.reload();
             return true;
@@ -108,7 +108,7 @@ const EditProfile = ({ profileImage, userDetails }) => {
               </label>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder={`${t("type_your_email")}`}
                 name="email"
                 {...getFieldProps("email")}
                 className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-12  rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none outline-none
@@ -125,7 +125,7 @@ const EditProfile = ({ profileImage, userDetails }) => {
               </label>
               <input
                 type="text"
-                placeholder="Enter your Full Name"
+                placeholder={`${t("type_your_name")}`}
                 name="fullName"
                 {...getFieldProps("fullName")}
                 className={`border focus:border-2 focus:border-emerald-400 px-6 w-full h-12  rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none outline-none
@@ -148,7 +148,7 @@ const EditProfile = ({ profileImage, userDetails }) => {
               </label>
               <input
                 type="tel"
-                placeholder="Enter your Phone Number"
+                placeholder={`${t("Enter your Phone Number")}`}
                 max={10}
                 maxLength={10}
                 minLength={10}

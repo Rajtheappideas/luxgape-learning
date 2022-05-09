@@ -31,61 +31,169 @@ const Exam = () => {
   const [countDown, setCountDown] = useState();
   const [startExam, setStartExam] = useState(true);
   const [currentPage, setCurrentPage] = useState();
+  const [intervalId, setIntervalId] = useState(0);
   const [currentUrl, setCurrentUrl] = useState(null);
+  const [examTime, setExamTime] = useState(null);
 
   const currentYear = new Date().getFullYear();
 
   const { t } = useTranslation();
 
-  const { userData, userLanguage, examSubmitted, setExamSubmitted } =
-    useUserContext();
-  let interval = useRef();
-  const { id,message } = useLocation().state;
+  const { userData, userLanguage, setExamSubmitted } = useUserContext();
+
+  // let interval;
+
+  const { id, message } = useLocation().state;
 
   const navigate = useNavigate();
 
+  // const startTimer = () => {
+  //   if (intervalId && interval) {
+  //     clearInterval(intervalId);
+  //     clearInterval(interval);
+  //     setIntervalId(0);
+  //     return;
+  //   }
+  //   const timer = 1 * 20 * 1000;
+  //   const nextDay = timer + new Date().getTime();
+  //   // const timer = getExamDetails?.data[0]?.exam_info?.total_time;
+  //   // const nextDay =
+  //   //   timer.split(":")[0] * 60 * 1000 +
+  //   //   timer.split(":")[1] * 1000 +
+  //   //   new Date().getTime();
+  //   const interval = setInterval(() => {
+  //     const now = new Date().getTime();
+  //     const countdown = nextDay - now;
+  //     const Hours = Math.floor(
+  //       (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  //     );
+  //     const Minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+  //     const Seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+
+  //     if (countdown <= 0) {
+  //       console.log("if");
+  //       SubmitExam();
+  //       setCountDown(0);
+  //       // clearTheInt();
+  //       clearInterval(interval);
+  //       alert("Time is Over!! Exam Automatically submitted");
+  //       // clearInterval(intervalId);
+  //       // clearInterval(interval.current);
+  //       // navigate("/");
+  //     } else {
+  //       sethours(Hours);
+  //       setMinutes(Minutes);
+  //       setSeconds(Seconds);
+  //       sessionStorage.setItem("examTime", countdown);
+  //       // sessionStorage.setItem("examTime", interval);
+  //       setExamTime(sessionStorage.getItem("examTime"));
+  //       setIntervalId(interval);
+  //     }
+  //   }, 1000);
+  // };
   const startTimer = () => {
-    const timer = getExamDetails?.data[0]?.exam_info?.total_time;
-    // const timer = 1 * 20 * 1000;
-    const nextDay =
-      timer.split(":")[0] * 60 * 1000 +
-      timer.split(":")[1] * 1000 +
-      new Date().getTime();
-    // const nextDay = timer + new Date().getTime();
+    let interval;
+    if (intervalId && interval) {
+      clearInterval(intervalId);
+      clearInterval(interval);
+      setIntervalId(0);
+      return;
+    }
+    const timer = 1 * 20 * 1000;
+    const nextDay = timer + new Date().getTime();
+
+    // const timer = getExamDetails?.data[0]?.exam_info?.total_time;
+    // const nextDay =
+    //   timer.split(":")[0] * 60 * 1000 +
+    //   timer.split(":")[1] * 1000 +
+    //   new Date().getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
+
       const countdown = nextDay - now;
       const Hours = Math.floor(
         (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      const Minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+      const Minutes = Math.floor(
+        (countdown % (1000 * 60 * 60)) / (1000 * 60)
+      );
       const Seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+
       if (countdown <= 0) {
+        console.log("if");
         SubmitExam();
         setCountDown(0);
-        clearInterval(interval.current);
-        alert("Time is Over!! Exam Automatically submited");
+        // clearTheInt();
+        clearInterval(interval);
+        alert("Time is Over!! Exam Automatically submitted");
+        // clearInterval(intervalId);
+        // clearInterval(interval.current);
+        // navigate("/");
       } else {
         sethours(Hours);
         setMinutes(Minutes);
         setSeconds(Seconds);
         sessionStorage.setItem("examTime", countdown);
+        // sessionStorage.setItem("examTime", interval);
+        setExamTime(sessionStorage.getItem("examTime"));
+        setIntervalId(interval);
       }
     }, 1000);
+    // if (examTime === null) {
+    // } else {
+    //   interval = setInterval(() => {
+    //     // const now = new Date().getTime();
+
+    //     // const countdown = nextDay - now;
+    //     const Hours = Math.floor(
+    //       (examTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    //     );
+    //     const Minutes = Math.floor((examTime % (1000 * 60 * 60)) / (1000 * 60));
+    //     const Seconds = Math.floor((examTime % (1000 * 60)) / 1000);
+    //     console.log(examTime);
+    //     console.log(Hours, Minutes, Seconds);
+    //     if (examTime <= 0) {
+    //       console.log("if");
+    //       SubmitExam();
+    //       setCountDown(0);
+    //       // clearTheInt();
+    //       clearInterval(interval);
+    //       alert("Time is Over!! Exam Automatically submitted");
+    //       // clearInterval(intervalId);
+    //       // clearInterval(interval.current);
+    //       // navigate("/");
+    //     } else {
+    //       sethours(Hours);
+    //       setMinutes(Minutes);
+    //       setSeconds(Seconds);
+    //       sessionStorage.setItem("examTime", examTime);
+    //       // sessionStorage.setItem("examTime", interval);
+    //       setExamTime(sessionStorage.getItem("examTime"));
+    //       setIntervalId(interval);
+    //     }
+    //   }, 1000);
+    // }
   };
+  // console.log(hours, minutes, seconds);
+  console.log(startExam);
+  function clearTheInt() {
+    // console.log("clearTheInt", interval);
+    // clearInterval(interval);
+    // setinterval(clearInterval(interval));
+    // sessionStorage.removeItem("examTime");
+    clearInterval(intervalId);
+    // clearInterval(interval);
+  }
 
   window.onbeforeunload = () => {
-    sessionStorage.removeItem("currentUrl");
+    setCurrentUrl(sessionStorage.getItem("currentUrl"));
+    setExamTime(sessionStorage.getItem("examTime"));
   };
+
   // fetch user details first rendering
   useEffect(() => {
-    // fetch the userdetails
-    // startTime();
-    setCountDown(sessionStorage.getItem("examTime"));
-    sessionStorage.setItem("examTime", countDown);
-    if (!startExam) {
-      startTimer();
-    }
+    setExamTime(sessionStorage.getItem("examTime"));
+    setCurrentUrl(sessionStorage.getItem("currentUrl"));
 
     setuserDetailsLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/get-user-details", {
@@ -128,11 +236,11 @@ const Exam = () => {
         setGetExamQuestions(
           response?.data?.data?.questions?.data[0]?.exam_questions_details
         );
-        setCurrentUrl(response?.data?.data?.questions?.first_page_url);
-        sessionStorage.setItem(
-          "currentUrl",
-          JSON.stringify(response?.data?.data?.questions?.first_page_url)
-        );
+        // setCurrentUrl(response?.data?.data?.questions?.first_page_url);
+        // sessionStorage.setItem(
+        //   "currentUrl",
+        //   JSON.stringify(response?.data?.data?.questions?.first_page_url)
+        // );
         setCurrentPage(response?.data?.data?.questions?.current_page);
         setEmployerDetails(response?.data?.data?.employer_id);
         setLoading(false);
@@ -145,6 +253,7 @@ const Exam = () => {
         return false;
       }
     });
+    return () => clearTheInt();
   }, []);
 
   // nexy questions
@@ -268,6 +377,8 @@ const Exam = () => {
   // submit exam
   const SubmitExam = (e) => {
     // e.preventDefault();
+    clearTheInt();
+    // clearInterval(intervalId);
     let option = getExamQuestions?.exam_questions_options_info.map(
       (options) => options.is_answer_count === 0
     );
@@ -298,10 +409,11 @@ const Exam = () => {
       }).then((response) => {
         if (response?.data?.status === "Success") {
           console.log(response?.data?.data);
-          clearInterval(interval.current);
           setCountDown(0);
-          setExamSubmitted(true);
           setSubmitExam(false);
+          setExamSubmitted(true);
+          sessionStorage.removeItem("currentUrl");
+          sessionStorage.removeItem("examTime");
           navigate("/");
           toast("Exam Succesfully Submitted!!", { type: "success" });
           return true;
@@ -311,7 +423,7 @@ const Exam = () => {
           return false;
         }
       });
-    }, 2000);
+    }, 1000);
     // submit answer is here at every single quetion
     axios("https://chessmafia.com/php/luxgap/App/api/submit-answer", {
       method: "POST",
@@ -326,7 +438,7 @@ const Exam = () => {
         "consumer-access-token": userData?.api_token,
       },
     }).then((response) => {
-      console.log("submit answer =>", response?.data?.data);
+      // console.log("submit answer =>", response?.data?.data);
       if (response?.data?.status === "Success") {
         setSelectedOptionId("");
         setSelectedQuestionId("");
@@ -337,33 +449,11 @@ const Exam = () => {
         return false;
       }
     });
+
     setCurrentUrl(null);
     sessionStorage.clear("currentUrl");
   };
-  // show result
-  const ShowResult = () => {
-    axios("https://chessmafia.com/php/luxgap/App/api/get-result", {
-      method: "POST",
-      params: {
-        lang_code: userLanguage,
-        course_id: getExamDetails?.data[0]?.course_id,
-        exam_id: getExamDetails?.data[0]?.exam_id,
-      },
-      headers: {
-        "consumer-access-token": userData?.api_token,
-      },
-    }).then((response) => {
-      if (response?.data?.status === "Success") {
-        console.log(response?.data?.data);
-        setSubmitExam(false);
-        return true;
-      } else if (response?.data?.status === "Error") {
-        console.log(response?.data);
-        setSubmitExam(false);
-        return false;
-      }
-    });
-  };
+
   // start exam
   const StartExam = () => {
     setStartExam(false);
@@ -399,6 +489,7 @@ const Exam = () => {
             </Link>
           </div>
 
+          {/* ---------------------user details========== */}
           <div className="flex items-center bg-gray-100 p-2 rounded-lg">
             {userDetails?.profile === null ? (
               <UserIcon className="h- w-9" color="gray" />
@@ -429,9 +520,7 @@ const Exam = () => {
           </div>
         </div>
       </nav>
-      {/* <button type="button" onClick={clearInterval(timer.current)}>
-        stop
-      </button> */}
+
       {/* --------------------main div----------- */}
       {loading ? (
         <p className="text-center text-4xl font-semibold leading-4">
@@ -664,7 +753,7 @@ const Exam = () => {
                   {getExamDetails?.next_page_url === null ? (
                     <button
                       type="button"
-                      onClick={SubmitExam}
+                      onClick={() => SubmitExam()}
                       className="border w-32 h-10 active:scale-95 duration-100 ease-in-out transition-all rounded-lg text-center bg-primary text-white"
                     >
                       {submitExam ? "submitting..." : "Submit Exam"}

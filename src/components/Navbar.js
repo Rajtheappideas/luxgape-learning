@@ -100,12 +100,12 @@ const Navbar = ({ activeText }) => {
                 <button
                   onClick={() => {
                     window.location.reload();
-                    ChangeLanguage("sp");
-                    localStorage.setItem("lang_code", "sp");
+                    ChangeLanguage("fr");
+                    localStorage.setItem("lang_code", "fr");
                   }}
                   className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                 >
-                  {t("spanish")}
+                  {t("français")}
                 </button>
               </li>
             </ul>
@@ -239,13 +239,13 @@ const Navbar = ({ activeText }) => {
                 </button>
                 <button
                   onClick={() => {
-                    ChangeLanguage("sp");
+                    ChangeLanguage("fr");
                     setShowDropdown(false);
-                    localStorage.setItem("lang_code", "sp");
+                    localStorage.setItem("lang_code", "fr");
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >
-                  {t("spanish")}
+                  {t("français")}
                 </button>
               </div>
             )}

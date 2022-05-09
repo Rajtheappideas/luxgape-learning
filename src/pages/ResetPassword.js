@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { MetaTags } from "react-meta-tags";
 import { toast, ToastContainer } from "react-toastify";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { EyeOffIcon, EyeIcon } from "@heroicons/react/outline";
+import { useTranslation } from "react-i18next";
 
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
@@ -11,10 +12,14 @@ const ResetPassword = () => {
   const [ShowPassword, setShowPassword] = useState(false);
   const { email } = useLocation().state;
 
+  const { t } = useTranslation();
+
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === "" || ConfirmPassword === "") {
-      return toast("you have to enter password and confirm password!", {
+      return toast(t("you have to enter password and confirm password!"), {
         type: "warning",
       });
     }
@@ -30,10 +35,11 @@ const ResetPassword = () => {
       .then((res) => {
         const response = res?.data;
         if (password === ConfirmPassword) {
-          toast("password reset successfully", { type: "success" });
+          toast(t("password reset successfully"), { type: "success" });
+          // navigate("/signin");
           return true;
         } else {
-          toast("confirm password does not mach with password!", {
+          toast(t("confirm password does not mach with password!"), {
             type: "warning",
           });
           return false;
@@ -49,7 +55,7 @@ const ResetPassword = () => {
   return (
     <>
       <MetaTags>
-        <title>Reset Password</title>
+        <title>{t("Reset Password")}</title>
       </MetaTags>
 
       {/* -----------react toasatify toast container--------------- */}
@@ -67,7 +73,7 @@ const ResetPassword = () => {
       />
       <div className="md:h-[500px] h-full md:w-[500px] w-full p-5 space-y-5 absolute top-[10%] left-1/2 -translate-x-1/2 flex flex-col items-center justify-center  rounded-tl-[130px] rounded-br-[130px] rounded-tr-none rounded-bl-none sm:shadow-2xl bg-white">
         <h1 className="font-bold text-4xl text-center tracking-wide">
-          Reset Password
+          {t("Reset Password")}
         </h1>
 
         {/* -------------input fieilds--------------- */}
@@ -85,7 +91,7 @@ const ResetPassword = () => {
             <div className="relative">
               <input
                 type={ShowPassword ? "text" : "password"}
-                placeholder="Enter your new password"
+                placeholder={`${t("Enter your new password")}`}
                 name="password"
                 onChange={(e) => setPassword(e.target.value)}
                 className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none`}
@@ -105,7 +111,7 @@ const ResetPassword = () => {
             <div>
               <input
                 type="password"
-                placeholder="Confirm your password"
+                placeholder={`${t("Confirm your password")}`}
                 name="ConfirmPassword"
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none`}
@@ -117,7 +123,7 @@ const ResetPassword = () => {
                 className={`border active:scale-95 transition transform duration-100 ease-in-out text-lg font-semibold text-white text-center px-6 w-full h-[56px] bg-gradient-to-r from-to to-from rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none`}
                 onClick={handleSubmit}
               >
-                Submit
+                {t("Submit")}
               </button>
             </div>
             <div>
@@ -126,7 +132,7 @@ const ResetPassword = () => {
                   type="button"
                   className={`border active:scale-95 transition transform duration-100 ease-in-out text-lg font-semibold text-white text-center px-6 w-full h-[56px] bg-gradient-to-r from-to to-from rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none`}
                 >
-                  Back to Login
+                  {t("Back to Login")}
                 </button>
               </Link>
             </div>

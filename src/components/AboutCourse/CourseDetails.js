@@ -30,7 +30,6 @@ const CourseDetails = ({ courseDetails, loading }) => {
   const discount = 50 / 100;
   const discountPrice = salePrice - salePrice * discount;
 
-  
   function getPercentageIncrease(numA, numB) {
     return Math.abs(((numA - numB) / numB) * 100);
   }
@@ -164,7 +163,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
             <div>
               {/* ------------------complete course users/student------------- */}
               <p className="font-semibold text-primary mb-2">
-                204,559 Students done this course
+                204,559 {t("Students_done_this_course")}
               </p>
               {/* ------------------review--------------- */}
               <div className="flex items-center lg:justify-start justify-center space-x-2">
@@ -188,7 +187,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
                   $ {courseDetails?.price}
                 </del>
                 <span className="border text-primary text-xl w-full sm:p-3 p-1 border-primary rounded-2xl">
-                  Save{" "}
+                  {t("Save")}{" "}
                   {getPercentageIncrease(
                     courseDetails?.sale_price,
                     courseDetails?.price

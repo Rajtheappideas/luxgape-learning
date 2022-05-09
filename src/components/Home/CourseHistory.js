@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import tw from "tailwind-styled-components/dist/tailwind";
-import cimg1 from "../../assets/cimg1.jpg";
-import cimg2 from "../../assets/cimg2.jpg";
-import cimg3 from "../../assets/cimg3.jpg";
 import { DocumentTextIcon, DownloadIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -10,42 +7,8 @@ import { useUserContext } from "../../context/usercontext";
 import axios from "axios";
 import ContentLoader from "react-content-loader";
 import examIcon from "../../assets/exam-icon.png";
+import FileDownload from "js-file-download";
 
-const data = [
-  {
-    id: 1,
-    img: cimg1,
-    title: "Bond Physics",
-    hours: "3.2",
-    attendedhours: "1:30:49",
-    totalhours: "3:22:10",
-    percetange: 50,
-    certified: false,
-    completion: "Pending",
-  },
-  {
-    id: 2,
-    img: cimg2,
-    title: "Humans Heart",
-    hours: "4.2",
-    attendedhours: "1:30:49",
-    totalhours: "4:22:10",
-    percetange: 100,
-    certified: true,
-    completion: "Done",
-  },
-  {
-    id: 3,
-    img: cimg3,
-    title: "Bond Physics",
-    hours: "4.1",
-    attendedhours: "2:30:49",
-    totalhours: "4:10:10",
-    percetange: 100,
-    certified: true,
-    completion: "Done",
-  },
-];
 const CourseHistory = ({ showButton, slice }) => {
   const [courseHistory, setCourseHistory] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -96,6 +59,39 @@ const CourseHistory = ({ showButton, slice }) => {
   var totalVideo = 15;
   var watchedvideo = 3;
   var total = Math.floor((watchedvideo * 100) / totalVideo);
+
+  const DownloadCertificate = () => {
+    const fd = new FormData();
+    fd.append("lang_code", userLanguage);
+    fd.append("course_id", 3);
+
+    axios
+      .post("https://chessmafia.com/php/luxgap/App/api/get-certificate", fd, {
+        headers: {
+          Accept: "multipart/form-data",
+          "Content-Type": "application/pdf",
+          "consumer-access-token": userData?.api_token,
+        },
+        responseType: "blob",
+      })
+      .then((res) => {
+        FileDownload(res.data, "filename.pdf");
+      });
+
+    // .then((response) => {
+    //   // Create blob link to download
+    //   const url = URL.createObjectURL(
+    //     new Blob([response.data?.data?.document])
+    //   );
+    //   console.log(url);
+    //   const link = document.createElement("a");
+    //   link.href = url;
+    //   link.setAttribute("download", `FileName.pdf`);
+    //   document.body.appendChild(link);
+    //   link.click();
+    //   link.parentNode.removeChild(link);
+    // });
+  };
   return (
     <>
       {loading ? (
@@ -165,7 +161,7 @@ const CourseHistory = ({ showButton, slice }) => {
         <div className=" sm:p-10 p-3 relative">
           {/* --------------heading-------------- */}
           <div className="sm:mb-16 mb-5 flex justify-between items-start sm:items-center">
-            <p className="sm:text-5xl text-3xl font-semibold tracking-wide">
+            <p className="sm:text-5xl text-3xl font-semibold tracking-wide capitalize">
               {t("attend_course_history")}
             </p>
             {showButton ? (
@@ -188,94 +184,120 @@ const CourseHistory = ({ showButton, slice }) => {
           <div className="grid lg:grid-cols-3 grid-flow-row md:grid-cols-2 gap-x-10 gap-y-5 grid-cols-1 justify-items-center items-center">
             {slice
               ? courseHistory.slice(0, 3).map((course, index) => (
-                  <Link
-                    to={`/class/${course?.course_details?.course_id}`}
+                  // <Link
+                  //   to={`/class/${course?.course_details?.course_id}`}
+                  //   key={course?.id}
+                  // >
+                  <BorderDiv
+                    // key={course?.course_details?.course_id}
                     key={course?.id}
+                    className={`${
+                      course?.total_watch_video_count ===
+                      course?.total_video_count
+                        ? "border-from"
+                        : "border-red-500"
+                    }`}
                   >
-                    <BorderDiv
-                      // key={course?.course_details?.course_id}
-                      key={index}
-                      className={`${
-                        course?.total_watch_video_count ===
-                        course?.total_video_count
-                          ? "border-from"
-                          : "border-red-500"
-                      }`}
+                    <Link
+                      to={`/class/${course?.course_details?.course_id}`}
+                      key={course?.id}
+                      className="space-y-2"
                     >
                       <img
                         src={`https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}`}
                         alt={course?.course_details?.title}
-                        className="w-full h-44 rounded-tl-[81.5px] rounded-tr-none rounded-br-[81.5px] rounded-bl-none object-center object-fill"
+                        className="w-full h-44 outline-none rounded-tl-[81.5px] rounded-tr-none rounded-br-[81.5px] rounded-bl-none object-center object-fill"
                       />
-                      <p className="font-bold text-2xl tracking-tight truncate text-ellipsis overflow-hidden sm:w-72 w-64">
-                        {course?.course_details?.title}
-                      </p>
-                      <p className="text-gray-400 font-bold">
-                        {course?.total_video_count} total videos
-                      </p>
-                      <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
-                        {course?.total_watch_video_count ===
-                          course?.total_video_count &&
-                        course?.start_exam_info?.is_completed === 0 ? (
-                          <p className="font-bold flex">
-                            <img src={examIcon} className="h-7 w-7 mr-1" />
-                            Start Exam
-                          </p>
-                        ) : course?.total_watch_video_count ===
-                            course?.total_video_count &&
-                          course?.start_exam_info?.is_completed === 1 ? (
-                          <p className="font-bold text-secondary text-base">
-                            Download Certificate
-                          </p>
-                        ) : (
-                          <p className="font-bold text-red-500">
-                            {course?.total_watch_video_count} /{" "}
-                            {course?.total_video_count}
-                            {/* {course?.total_hours
-                    ? `${course?.total_hours}:00`
-                    : totalTime} */}
-                          </p>
-                        )}
-                        {course?.total_watch_video_count ===
-                          course?.total_video_count &&
-                        course?.start_exam_info?.is_completed === 1 ? (
-                          <button>
-                            <DownloadIcon className="h-5 w-5" />
-                          </button>
-                        ) : (
-                          <button className="text-red-600 underline font-bold">
-                            Resume
-                          </button>
-                        )}
-                      </div>
-                      {course?.total_watch_video_count ===
-                      course?.total_video_count ? (
-                        <div className="flex text-green-600">
-                          <p className="rounded-full w-14 px-2 py-3 text-center h-14 bg-gray-200">
-                            100%
-                          </p>
-                          <div className="flex-col mx-2 font-bold">
-                            <span className="block text-xl">100%</span>
-                            <span className="block text-sm">Done</span>
-                          </div>
-                        </div>
+                      {course?.course_details?.title ? (
+                        <p className="font-bold text-2xl tracking-tight truncate text-ellipsis overflow-hidden sm:w-72 w-64">
+                          {course?.course_details?.title}
+                        </p>
                       ) : (
-                        <div className="flex text-red-600">
-                          <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
-                            {/* {Math.floor(
+                        <p className="font-bold text-2xl tracking-tight truncate text-ellipsis overflow-hidden sm:w-72 w-64 h-8"></p>
+                      )}
+                      <p className="text-gray-400 font-bold">
+                        {course?.total_video_count} {t("total_videos")}
+                      </p>
+                    </Link>
+                    <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
+                      {course?.total_watch_video_count ===
+                        course?.total_video_count &&
+                      course?.start_exam_info?.is_completed === 0 ? (
+                        <p className="font-bold flex">
+                          <img src={examIcon} className="h-7 w-7 mr-1" />
+                          {t("Start_Exam")}
+                        </p>
+                      ) : course?.total_watch_video_count ===
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 1 &&
+                        course?.start_exam_info?.is_certified === 1 ? (
+                        <p className="font-bold text-secondary text-base">
+                          {t("Download_Certificate")}
+                        </p>
+                      ) : course?.total_watch_video_count ===
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 1 &&
+                        course?.start_exam_info?.is_certified === 0 ? (
+                        <p className="font-bold text-red-500">
+                          {t("Uncertified")}
+                        </p>
+                      ) : (
+                        <p className="font-bold text-red-500">
+                          {course?.total_watch_video_count} /{" "}
+                          {course?.total_video_count}
+                          {/* {course?.total_hours
+                ? `${course?.total_hours}:00`
+                : totalTime} */}
+                        </p>
+                      )}
+                      {course?.total_watch_video_count ===
+                        course?.total_video_count &&
+                      course?.start_exam_info?.is_completed === 1 &&
+                      course?.start_exam_info?.is_certified === 1 ? (
+                        <button
+                          className="active:scale-95 duration-100 ease-in-out transition-all"
+                          type="button"
+                          onClick={() => DownloadCertificate()}
+                        >
+                          <DownloadIcon className="h-5 w-5" />
+                        </button>
+                      ) : course?.total_watch_video_count ===
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 1 &&
+                        course?.start_exam_info?.is_certified === 0 ? null : (
+                        <button className="text-red-600 underline font-bold">
+                          {t("Resume")}
+                        </button>
+                      )}
+                    </div>
+                    {course?.total_watch_video_count ===
+                    course?.total_video_count ? (
+                      <div className="flex text-green-600">
+                        <p className="rounded-full w-14 px-2 py-3 text-center h-14 bg-gray-200">
+                          100%
+                        </p>
+                        <div className="flex-col mx-2 font-bold">
+                          <span className="block text-xl">100%</span>
+                          <span className="block text-sm">{t("Done")}</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex text-red-600">
+                        <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
+                          {/* {Math.floor(
                             (100 * course?.total_watch_video_count) / totalVideo
                           ) || 0} */}
-                            {Math.floor(
-                              (100 * course?.total_watch_video_count) /
-                                course?.total_video_count
-                            ) || 0}
-                            {/* {Math.floor(
+                          {Math.floor(
+                            (100 * course?.total_watch_video_count) /
+                              course?.total_video_count
+                          ) || 0}
+                          {/* {Math.floor(
                         (100 * totalSeconds(timeElapsed)) /
                           totalSeconds(`${course?.total_hours}:00`).toString()
                       ) || percentage} */}
-                            %
-                          </p>
-                          {/* <p className="w-16 h-10 -rotate-90">
+                          %
+                        </p>
+                        {/* <p className="w-16 h-10 -rotate-90">
                     <svg
                       fill="#D3D3D3"
                       stroke="red"
@@ -288,161 +310,178 @@ const CourseHistory = ({ showButton, slice }) => {
                       <circle cx="28" cy="28" r="25"></circle>
                     </svg>
                   </p> */}
-                          <div className="flex-col mx-2 text-red-600 font-bold">
-                            <span className="block text-xl">
-                              {/* {Math.floor(
+                        <div className="flex-col mx-2 text-red-600 font-bold">
+                          <span className="block text-xl">
+                            {/* {Math.floor(
                               (100 * course?.total_watch_video_count) /
                                 totalVideo
                             ) || 0} */}
-                              {Math.floor(
-                                (100 * course?.total_watch_video_count) /
-                                  course?.total_video_count
-                              ) || 0}
-                              %
-                              {/* {Math.floor(
-                          (100 * totalSeconds(timeElapsed)) /
-                            totalSeconds(`${course?.total_hours}:00`).toString()
-                        ) || percentage} */}
-                            </span>
-                            <span className="block text-sm">
-                              {/* {timeElapsed === totalTime ? "Done" : "Pending"} */}
-                              {course?.total_watch_video_count ===
-                              course?.total_video_count
-                                ? "Done"
-                                : "Pending"}
-                            </span>
-                          </div>
-                        </div>
-                      )}
-                      {course?.booking_info?.payment_method ===
-                        "Free Course" && (
-                        <div className="absolute -top-10 sm:-right-7 -right-5 transform -rotate-45">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            x="0px"
-                            y="0px"
-                            width="74"
-                            height="74"
-                            viewBox="0 0 172 172"
-                          >
-                            <g
-                              fill="none"
-                              fillRule="nonzero"
-                              stroke="none"
-                              strokeWidth="1"
-                              strokeLinecap="butt"
-                              strokeLinejoin="miter"
-                              strokeMiterlimit="10"
-                              strokeDasharray=""
-                              strokeDashoffset="0"
-                              fontFamily="none"
-                              fontWeight="none"
-                              fontSize="none"
-                              textAnchor="none"
-                            >
-                              <path d="M0,172v-172h172v172z" fill="none"></path>
-                              <g fill="#e74c3c">
-                                <path d="M86.00197,8.90234l-20.26714,14.72417h-25.05096l-7.74034,23.82466l-20.26714,14.72417l7.74034,23.82466l-7.74034,23.82466l20.26714,14.72417l7.74034,23.82466h25.05096l20.26714,14.72417l20.2632,-14.72417h25.05096l7.74362,-23.82466l20.26385,-14.72417l-7.74034,-23.82466l7.74034,-23.82466l-20.26385,-14.72417l-7.74362,-23.82466h-25.05096z"></path>
-                              </g>
-                              <g fill="#ffffff">
-                                <path d="M61.38,84.075v3.68h-14.32v15.07h-4.5v-34.12h21.14v3.7h-16.64v11.67zM80.06,77.325v4.03c-0.65333,-0.10667 -1.36333,-0.16 -2.13,-0.16v0c-2.84667,0 -4.77667,1.21 -5.79,3.63v0v18h-4.34v-25.36h4.22l0.07,2.93c1.42667,-2.26667 3.44333,-3.4 6.05,-3.4v0c0.84,0 1.48,0.11 1.92,0.33zM94.12,103.295v0c-3.43333,0 -6.23,-1.13 -8.39,-3.39c-2.15333,-2.25333 -3.23,-5.27333 -3.23,-9.06v0v-0.79c0,-2.52 0.48,-4.76667 1.44,-6.74c0.96,-1.98 2.30333,-3.52667 4.03,-4.64c1.72667,-1.12 3.59667,-1.68 5.61,-1.68v0c3.3,0 5.86333,1.08667 7.69,3.26c1.82667,2.17333 2.74,5.28333 2.74,9.33v0v1.8h-17.18c0.06667,2.5 0.8,4.52 2.2,6.06c1.39333,1.54 3.17,2.31 5.33,2.31v0c1.52667,0 2.82333,-0.31333 3.89,-0.94c1.06,-0.62667 1.99,-1.45333 2.79,-2.48v0l2.65,2.06c-2.12667,3.26667 -5.31667,4.9 -9.57,4.9zM93.58,80.555v0c-1.74667,0 -3.21333,0.63667 -4.4,1.91c-1.18667,1.27333 -1.92,3.06 -2.2,5.36v0h12.7v-0.33c-0.12667,-2.2 -0.72,-3.90667 -1.78,-5.12c-1.06667,-1.21333 -2.50667,-1.82 -4.32,-1.82zM119.55,103.295v0c-3.43333,0 -6.23,-1.13 -8.39,-3.39c-2.15333,-2.25333 -3.23,-5.27333 -3.23,-9.06v0v-0.79c0,-2.52 0.48,-4.76667 1.44,-6.74c0.96,-1.98 2.30333,-3.52667 4.03,-4.64c1.72667,-1.12 3.59667,-1.68 5.61,-1.68v0c3.3,0 5.86333,1.08667 7.69,3.26c1.82667,2.17333 2.74,5.28333 2.74,9.33v0v1.8h-17.18c0.06667,2.5 0.8,4.52 2.2,6.06c1.39333,1.54 3.17,2.31 5.33,2.31v0c1.52667,0 2.82333,-0.31333 3.89,-0.94c1.06,-0.62667 1.99,-1.45333 2.79,-2.48v0l2.65,2.06c-2.12667,3.26667 -5.31667,4.9 -9.57,4.9zM119.01,80.555v0c-1.74667,0 -3.21333,0.63667 -4.4,1.91c-1.18667,1.27333 -1.92333,3.06 -2.21,5.36v0h12.71v-0.33c-0.12667,-2.2 -0.72,-3.90667 -1.78,-5.12c-1.06667,-1.21333 -2.50667,-1.82 -4.32,-1.82z"></path>
-                              </g>
-                            </g>
-                          </svg>
-                        </div>
-                      )}
-                    </BorderDiv>
-                  </Link>
-                ))
-              : courseHistory.map((course, index) => (
-                  <Link
-                    to={`/class/${course?.course_details?.course_id}`}
-                    key={course?.id}
-                  >
-                    <BorderDiv
-                      // key={course?.course_details?.course_id}
-                      key={index}
-                      className={`${
-                        course?.total_watch_video_count ===
-                        course?.total_video_count
-                          ? "border-from"
-                          : "border-red-500"
-                      }`}
-                    >
-                      <img
-                        src={`https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}`}
-                        alt={course?.course_details?.title}
-                        className="w-full h-44 rounded-tl-[81.5px] rounded-tr-none rounded-br-[81.5px] rounded-bl-none object-center object-fill"
-                      />
-                      <p className="font-bold text-2xl tracking-tight truncate text-ellipsis overflow-hidden sm:w-72 w-64">
-                        {course?.course_details?.title}
-                      </p>
-                      <p className="text-gray-400 font-bold">
-                        {course?.total_video_count} total videos
-                      </p>
-                      <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
-                        {course?.total_watch_video_count ===
-                          course?.total_video_count &&
-                        course?.start_exam_info?.is_completed === 0 ? (
-                          <p className="font-bold flex">
-                            <img src={examIcon} className="h-7 w-7 mr-1" />
-                            Start Exam
-                          </p>
-                        ) : course?.total_watch_video_count ===
-                            course?.total_video_count &&
-                          course?.start_exam_info?.is_completed === 1 ? (
-                          <p className="font-bold text-secondary text-base">
-                            Download Certificate
-                          </p>
-                        ) : (
-                          <p className="font-bold text-red-500">
-                            {course?.total_watch_video_count} /{" "}
-                            {course?.total_video_count}
-                            {/* {course?.total_hours
-                ? `${course?.total_hours}:00`
-                : totalTime} */}
-                          </p>
-                        )}
-                        {course?.total_watch_video_count ===
-                          course?.total_video_count &&
-                        course?.start_exam_info?.is_completed === 1 ? (
-                          <button>
-                            <DownloadIcon className="h-5 w-5" />
-                          </button>
-                        ) : (
-                          <button className="text-red-600 underline font-bold">
-                            Resume
-                          </button>
-                        )}
-                      </div>
-                      {course?.total_watch_video_count ===
-                      course?.total_video_count ? (
-                        <div className="flex text-green-600">
-                          <p className="rounded-full w-14 px-2 py-3 text-center h-14 bg-gray-200">
-                            100%
-                          </p>
-                          <div className="flex-col mx-2 font-bold">
-                            <span className="block text-xl">100%</span>
-                            <span className="block text-sm">Done</span>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="flex text-red-600">
-                          <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
-                            {/* {Math.floor(
-                        (100 * course?.total_watch_video_count) / totalVideo
-                      ) || 0} */}
                             {Math.floor(
                               (100 * course?.total_watch_video_count) /
                                 course?.total_video_count
                             ) || 0}
+                            %
                             {/* {Math.floor(
+                          (100 * totalSeconds(timeElapsed)) /
+                            totalSeconds(`${course?.total_hours}:00`).toString()
+                        ) || percentage} */}
+                          </span>
+                          <span className="block text-sm">
+                            {/* {timeElapsed === totalTime ? "Done" : "Pending"} */}
+                            {course?.total_watch_video_count ===
+                            course?.total_video_count
+                              ? t("Done")
+                              : t("Pending")}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                    {course?.booking_info?.payment_method === "Free Course" && (
+                      <div className="absolute -top-10 sm:-right-7 -right-5 transform -rotate-45">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          x="0px"
+                          y="0px"
+                          width="74"
+                          height="74"
+                          viewBox="0 0 172 172"
+                        >
+                          <g
+                            fill="none"
+                            fillRule="nonzero"
+                            stroke="none"
+                            strokeWidth="1"
+                            strokeLinecap="butt"
+                            strokeLinejoin="miter"
+                            strokeMiterlimit="10"
+                            strokeDasharray=""
+                            strokeDashoffset="0"
+                            fontFamily="none"
+                            fontWeight="none"
+                            fontSize="none"
+                            textAnchor="none"
+                          >
+                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                            <g fill="#e74c3c">
+                              <path d="M86.00197,8.90234l-20.26714,14.72417h-25.05096l-7.74034,23.82466l-20.26714,14.72417l7.74034,23.82466l-7.74034,23.82466l20.26714,14.72417l7.74034,23.82466h25.05096l20.26714,14.72417l20.2632,-14.72417h25.05096l7.74362,-23.82466l20.26385,-14.72417l-7.74034,-23.82466l7.74034,-23.82466l-20.26385,-14.72417l-7.74362,-23.82466h-25.05096z"></path>
+                            </g>
+                            <g fill="#ffffff">
+                              <path d="M61.38,84.075v3.68h-14.32v15.07h-4.5v-34.12h21.14v3.7h-16.64v11.67zM80.06,77.325v4.03c-0.65333,-0.10667 -1.36333,-0.16 -2.13,-0.16v0c-2.84667,0 -4.77667,1.21 -5.79,3.63v0v18h-4.34v-25.36h4.22l0.07,2.93c1.42667,-2.26667 3.44333,-3.4 6.05,-3.4v0c0.84,0 1.48,0.11 1.92,0.33zM94.12,103.295v0c-3.43333,0 -6.23,-1.13 -8.39,-3.39c-2.15333,-2.25333 -3.23,-5.27333 -3.23,-9.06v0v-0.79c0,-2.52 0.48,-4.76667 1.44,-6.74c0.96,-1.98 2.30333,-3.52667 4.03,-4.64c1.72667,-1.12 3.59667,-1.68 5.61,-1.68v0c3.3,0 5.86333,1.08667 7.69,3.26c1.82667,2.17333 2.74,5.28333 2.74,9.33v0v1.8h-17.18c0.06667,2.5 0.8,4.52 2.2,6.06c1.39333,1.54 3.17,2.31 5.33,2.31v0c1.52667,0 2.82333,-0.31333 3.89,-0.94c1.06,-0.62667 1.99,-1.45333 2.79,-2.48v0l2.65,2.06c-2.12667,3.26667 -5.31667,4.9 -9.57,4.9zM93.58,80.555v0c-1.74667,0 -3.21333,0.63667 -4.4,1.91c-1.18667,1.27333 -1.92,3.06 -2.2,5.36v0h12.7v-0.33c-0.12667,-2.2 -0.72,-3.90667 -1.78,-5.12c-1.06667,-1.21333 -2.50667,-1.82 -4.32,-1.82zM119.55,103.295v0c-3.43333,0 -6.23,-1.13 -8.39,-3.39c-2.15333,-2.25333 -3.23,-5.27333 -3.23,-9.06v0v-0.79c0,-2.52 0.48,-4.76667 1.44,-6.74c0.96,-1.98 2.30333,-3.52667 4.03,-4.64c1.72667,-1.12 3.59667,-1.68 5.61,-1.68v0c3.3,0 5.86333,1.08667 7.69,3.26c1.82667,2.17333 2.74,5.28333 2.74,9.33v0v1.8h-17.18c0.06667,2.5 0.8,4.52 2.2,6.06c1.39333,1.54 3.17,2.31 5.33,2.31v0c1.52667,0 2.82333,-0.31333 3.89,-0.94c1.06,-0.62667 1.99,-1.45333 2.79,-2.48v0l2.65,2.06c-2.12667,3.26667 -5.31667,4.9 -9.57,4.9zM119.01,80.555v0c-1.74667,0 -3.21333,0.63667 -4.4,1.91c-1.18667,1.27333 -1.92333,3.06 -2.21,5.36v0h12.71v-0.33c-0.12667,-2.2 -0.72,-3.90667 -1.78,-5.12c-1.06667,-1.21333 -2.50667,-1.82 -4.32,-1.82z"></path>
+                            </g>
+                          </g>
+                        </svg>
+                      </div>
+                    )}
+                  </BorderDiv>
+                  // </Link>
+                ))
+              : courseHistory.map((course, index) => (
+                  <BorderDiv
+                    // key={course?.course_details?.course_id}
+                    key={course?.id}
+                    className={`${
+                      course?.total_watch_video_count ===
+                      course?.total_video_count
+                        ? "border-from"
+                        : "border-red-500"
+                    }`}
+                  >
+                    <Link
+                      to={`/class/${course?.course_details?.course_id}`}
+                      key={course?.id}
+                      className="space-y-2"
+                    >
+                      <img
+                        src={`https://chessmafia.com/php/luxgap/App/${course?.course_details?.image}`}
+                        alt={course?.course_details?.title}
+                        className="w-full h-44 outline-none rounded-tl-[81.5px] rounded-tr-none rounded-br-[81.5px] rounded-bl-none object-center object-fill"
+                      />
+                      {course?.course_details?.title ? (
+                        <p className="font-bold text-2xl tracking-tight truncate text-ellipsis overflow-hidden sm:w-72 w-64">
+                          {course?.course_details?.title}
+                        </p>
+                      ) : (
+                        <p className="font-bold text-2xl tracking-tight truncate text-ellipsis overflow-hidden sm:w-72 w-64 h-8"></p>
+                      )}
+                      <p className="text-gray-400 font-bold">
+                        {course?.total_video_count} {t("total_videos")}
+                      </p>
+                    </Link>
+                    <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
+                      {course?.total_watch_video_count ===
+                        course?.total_video_count &&
+                      course?.start_exam_info?.is_completed === 0 ? (
+                        <p className="font-bold flex">
+                          <img src={examIcon} className="h-7 w-7 mr-1" />
+                          {t("Start_Exam")}
+                        </p>
+                      ) : course?.total_watch_video_count ===
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 1 &&
+                        course?.start_exam_info?.is_certified === 1 ? (
+                        <p className="font-bold text-secondary text-base">
+                          {t("Download_Certificate")}
+                        </p>
+                      ) : course?.total_watch_video_count ===
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 1 &&
+                        course?.start_exam_info?.is_certified === 0 ? (
+                        <p className="font-bold text-red-500">
+                          {t("Uncertified")}
+                        </p>
+                      ) : (
+                        <p className="font-bold text-red-500">
+                          {course?.total_watch_video_count} /{" "}
+                          {course?.total_video_count}
+                          {/* {course?.total_hours
+            ? `${course?.total_hours}:00`
+            : totalTime} */}
+                        </p>
+                      )}
+                      {course?.total_watch_video_count ===
+                        course?.total_video_count &&
+                      course?.start_exam_info?.is_completed === 1 &&
+                      course?.start_exam_info?.is_certified === 1 ? (
+                        <button>
+                          <DownloadIcon className="h-5 w-5" />
+                        </button>
+                      ) : course?.total_watch_video_count ===
+                          course?.total_video_count &&
+                        course?.start_exam_info?.is_completed === 1 &&
+                        course?.start_exam_info?.is_certified === 0 ? null : (
+                        <button className="text-red-600 underline font-bold">
+                          {t("Resume")}
+                        </button>
+                      )}
+                    </div>
+                    {course?.total_watch_video_count ===
+                    course?.total_video_count ? (
+                      <div className="flex text-green-600">
+                        <p className="rounded-full w-14 px-2 py-3 text-center h-14 bg-gray-200">
+                          100%
+                        </p>
+                        <div className="flex-col mx-2 font-bold">
+                          <span className="block text-xl">100%</span>
+                          <span className="block text-sm">{t("Done")}</span>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex text-red-600">
+                        <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
+                          {/* {Math.floor(
+                        (100 * course?.total_watch_video_count) / totalVideo
+                      ) || 0} */}
+                          {Math.floor(
+                            (100 * course?.total_watch_video_count) /
+                              course?.total_video_count
+                          ) || 0}
+                          {/* {Math.floor(
                     (100 * totalSeconds(timeElapsed)) /
                       totalSeconds(`${course?.total_hours}:00`).toString()
                   ) || percentage} */}
-                            %
-                          </p>
-                          {/* <p className="w-16 h-10 -rotate-90">
+                          %
+                        </p>
+                        {/* <p className="w-16 h-10 -rotate-90">
                 <svg
                   fill="#D3D3D3"
                   stroke="red"
@@ -455,71 +494,69 @@ const CourseHistory = ({ showButton, slice }) => {
                   <circle cx="28" cy="28" r="25"></circle>
                 </svg>
               </p> */}
-                          <div className="flex-col mx-2 text-red-600 font-bold">
-                            <span className="block text-xl">
-                              {/* {Math.floor(
+                        <div className="flex-col mx-2 text-red-600 font-bold">
+                          <span className="block text-xl">
+                            {/* {Math.floor(
                           (100 * course?.total_watch_video_count) /
                             totalVideo
                         ) || 0} */}
-                              {Math.floor(
-                                (100 * course?.total_watch_video_count) /
-                                  course?.total_video_count
-                              ) || 0}
-                              %
-                              {/* {Math.floor(
+                            {Math.floor(
+                              (100 * course?.total_watch_video_count) /
+                                course?.total_video_count
+                            ) || 0}
+                            %
+                            {/* {Math.floor(
                       (100 * totalSeconds(timeElapsed)) /
                         totalSeconds(`${course?.total_hours}:00`).toString()
                     ) || percentage} */}
-                            </span>
-                            <span className="block text-sm">
-                              {/* {timeElapsed === totalTime ? "Done" : "Pending"} */}
-                              {course?.total_watch_video_count ===
-                              course?.total_video_count
-                                ? "Done"
-                                : "Pending"}
-                            </span>
-                          </div>
+                          </span>
+                          <span className="block text-sm">
+                            {/* {timeElapsed === totalTime ? "Done" : "Pending"} */}
+                            {course?.total_watch_video_count ===
+                            course?.total_video_count
+                              ? t("Done")
+                              : t("Pending")}
+                          </span>
                         </div>
-                      )}
-                      {course?.booking_info?.payment_method ===
-                        "Free Course" && (
-                        <div className="absolute -top-10 sm:-right-7 -right-5 transform -rotate-45">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            x="0px"
-                            y="0px"
-                            width="74"
-                            height="74"
-                            viewBox="0 0 172 172"
+                      </div>
+                    )}
+                    {course?.booking_info?.payment_method === "Free Course" && (
+                      <div className="absolute -top-10 sm:-right-7 -right-5 transform -rotate-45">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          x="0px"
+                          y="0px"
+                          width="74"
+                          height="74"
+                          viewBox="0 0 172 172"
+                        >
+                          <g
+                            fill="none"
+                            fillRule="nonzero"
+                            stroke="none"
+                            strokeWidth="1"
+                            strokeLinecap="butt"
+                            strokeLinejoin="miter"
+                            strokeMiterlimit="10"
+                            strokeDasharray=""
+                            strokeDashoffset="0"
+                            fontFamily="none"
+                            fontWeight="none"
+                            fontSize="none"
+                            textAnchor="none"
                           >
-                            <g
-                              fill="none"
-                              fillRule="nonzero"
-                              stroke="none"
-                              strokeWidth="1"
-                              strokeLinecap="butt"
-                              strokeLinejoin="miter"
-                              strokeMiterlimit="10"
-                              strokeDasharray=""
-                              strokeDashoffset="0"
-                              fontFamily="none"
-                              fontWeight="none"
-                              fontSize="none"
-                              textAnchor="none"
-                            >
-                              <path d="M0,172v-172h172v172z" fill="none"></path>
-                              <g fill="#e74c3c">
-                                <path d="M86.00197,8.90234l-20.26714,14.72417h-25.05096l-7.74034,23.82466l-20.26714,14.72417l7.74034,23.82466l-7.74034,23.82466l20.26714,14.72417l7.74034,23.82466h25.05096l20.26714,14.72417l20.2632,-14.72417h25.05096l7.74362,-23.82466l20.26385,-14.72417l-7.74034,-23.82466l7.74034,-23.82466l-20.26385,-14.72417l-7.74362,-23.82466h-25.05096z"></path>
-                              </g>
-                              <g fill="#ffffff">
-                                <path d="M61.38,84.075v3.68h-14.32v15.07h-4.5v-34.12h21.14v3.7h-16.64v11.67zM80.06,77.325v4.03c-0.65333,-0.10667 -1.36333,-0.16 -2.13,-0.16v0c-2.84667,0 -4.77667,1.21 -5.79,3.63v0v18h-4.34v-25.36h4.22l0.07,2.93c1.42667,-2.26667 3.44333,-3.4 6.05,-3.4v0c0.84,0 1.48,0.11 1.92,0.33zM94.12,103.295v0c-3.43333,0 -6.23,-1.13 -8.39,-3.39c-2.15333,-2.25333 -3.23,-5.27333 -3.23,-9.06v0v-0.79c0,-2.52 0.48,-4.76667 1.44,-6.74c0.96,-1.98 2.30333,-3.52667 4.03,-4.64c1.72667,-1.12 3.59667,-1.68 5.61,-1.68v0c3.3,0 5.86333,1.08667 7.69,3.26c1.82667,2.17333 2.74,5.28333 2.74,9.33v0v1.8h-17.18c0.06667,2.5 0.8,4.52 2.2,6.06c1.39333,1.54 3.17,2.31 5.33,2.31v0c1.52667,0 2.82333,-0.31333 3.89,-0.94c1.06,-0.62667 1.99,-1.45333 2.79,-2.48v0l2.65,2.06c-2.12667,3.26667 -5.31667,4.9 -9.57,4.9zM93.58,80.555v0c-1.74667,0 -3.21333,0.63667 -4.4,1.91c-1.18667,1.27333 -1.92,3.06 -2.2,5.36v0h12.7v-0.33c-0.12667,-2.2 -0.72,-3.90667 -1.78,-5.12c-1.06667,-1.21333 -2.50667,-1.82 -4.32,-1.82zM119.55,103.295v0c-3.43333,0 -6.23,-1.13 -8.39,-3.39c-2.15333,-2.25333 -3.23,-5.27333 -3.23,-9.06v0v-0.79c0,-2.52 0.48,-4.76667 1.44,-6.74c0.96,-1.98 2.30333,-3.52667 4.03,-4.64c1.72667,-1.12 3.59667,-1.68 5.61,-1.68v0c3.3,0 5.86333,1.08667 7.69,3.26c1.82667,2.17333 2.74,5.28333 2.74,9.33v0v1.8h-17.18c0.06667,2.5 0.8,4.52 2.2,6.06c1.39333,1.54 3.17,2.31 5.33,2.31v0c1.52667,0 2.82333,-0.31333 3.89,-0.94c1.06,-0.62667 1.99,-1.45333 2.79,-2.48v0l2.65,2.06c-2.12667,3.26667 -5.31667,4.9 -9.57,4.9zM119.01,80.555v0c-1.74667,0 -3.21333,0.63667 -4.4,1.91c-1.18667,1.27333 -1.92333,3.06 -2.21,5.36v0h12.71v-0.33c-0.12667,-2.2 -0.72,-3.90667 -1.78,-5.12c-1.06667,-1.21333 -2.50667,-1.82 -4.32,-1.82z"></path>
-                              </g>
+                            <path d="M0,172v-172h172v172z" fill="none"></path>
+                            <g fill="#e74c3c">
+                              <path d="M86.00197,8.90234l-20.26714,14.72417h-25.05096l-7.74034,23.82466l-20.26714,14.72417l7.74034,23.82466l-7.74034,23.82466l20.26714,14.72417l7.74034,23.82466h25.05096l20.26714,14.72417l20.2632,-14.72417h25.05096l7.74362,-23.82466l20.26385,-14.72417l-7.74034,-23.82466l7.74034,-23.82466l-20.26385,-14.72417l-7.74362,-23.82466h-25.05096z"></path>
                             </g>
-                          </svg>
-                        </div>
-                      )}
-                    </BorderDiv>
-                  </Link>
+                            <g fill="#ffffff">
+                              <path d="M61.38,84.075v3.68h-14.32v15.07h-4.5v-34.12h21.14v3.7h-16.64v11.67zM80.06,77.325v4.03c-0.65333,-0.10667 -1.36333,-0.16 -2.13,-0.16v0c-2.84667,0 -4.77667,1.21 -5.79,3.63v0v18h-4.34v-25.36h4.22l0.07,2.93c1.42667,-2.26667 3.44333,-3.4 6.05,-3.4v0c0.84,0 1.48,0.11 1.92,0.33zM94.12,103.295v0c-3.43333,0 -6.23,-1.13 -8.39,-3.39c-2.15333,-2.25333 -3.23,-5.27333 -3.23,-9.06v0v-0.79c0,-2.52 0.48,-4.76667 1.44,-6.74c0.96,-1.98 2.30333,-3.52667 4.03,-4.64c1.72667,-1.12 3.59667,-1.68 5.61,-1.68v0c3.3,0 5.86333,1.08667 7.69,3.26c1.82667,2.17333 2.74,5.28333 2.74,9.33v0v1.8h-17.18c0.06667,2.5 0.8,4.52 2.2,6.06c1.39333,1.54 3.17,2.31 5.33,2.31v0c1.52667,0 2.82333,-0.31333 3.89,-0.94c1.06,-0.62667 1.99,-1.45333 2.79,-2.48v0l2.65,2.06c-2.12667,3.26667 -5.31667,4.9 -9.57,4.9zM93.58,80.555v0c-1.74667,0 -3.21333,0.63667 -4.4,1.91c-1.18667,1.27333 -1.92,3.06 -2.2,5.36v0h12.7v-0.33c-0.12667,-2.2 -0.72,-3.90667 -1.78,-5.12c-1.06667,-1.21333 -2.50667,-1.82 -4.32,-1.82zM119.55,103.295v0c-3.43333,0 -6.23,-1.13 -8.39,-3.39c-2.15333,-2.25333 -3.23,-5.27333 -3.23,-9.06v0v-0.79c0,-2.52 0.48,-4.76667 1.44,-6.74c0.96,-1.98 2.30333,-3.52667 4.03,-4.64c1.72667,-1.12 3.59667,-1.68 5.61,-1.68v0c3.3,0 5.86333,1.08667 7.69,3.26c1.82667,2.17333 2.74,5.28333 2.74,9.33v0v1.8h-17.18c0.06667,2.5 0.8,4.52 2.2,6.06c1.39333,1.54 3.17,2.31 5.33,2.31v0c1.52667,0 2.82333,-0.31333 3.89,-0.94c1.06,-0.62667 1.99,-1.45333 2.79,-2.48v0l2.65,2.06c-2.12667,3.26667 -5.31667,4.9 -9.57,4.9zM119.01,80.555v0c-1.74667,0 -3.21333,0.63667 -4.4,1.91c-1.18667,1.27333 -1.92333,3.06 -2.21,5.36v0h12.71v-0.33c-0.12667,-2.2 -0.72,-3.90667 -1.78,-5.12c-1.06667,-1.21333 -2.50667,-1.82 -4.32,-1.82z"></path>
+                            </g>
+                          </g>
+                        </svg>
+                      </div>
+                    )}
+                  </BorderDiv>
                 ))}
           </div>
         </div>
@@ -533,7 +570,7 @@ export default CourseHistory;
 const BorderDiv = tw.div`
 border-2
 rounded-tl-[103px] rounded-tr-0 rounded-br-[119px] rounded-bl-0
- h-auto sm:w-[322px] w-auto
+ h-[28rem] sm:w-[322px] w-auto
  p-5
  space-y-4
  relative

@@ -54,7 +54,7 @@ const ContactUs = () => {
             setLoading(false);
             return true;
           } else if (response?.data?.status === "Error") {
-            toast("Somthing went wrong!", { type: "error" });
+            toast(t("Somthing went wrong!"), { type: "error" });
             setLoading(false);
             return false;
           }

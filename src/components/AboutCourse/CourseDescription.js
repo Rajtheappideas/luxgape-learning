@@ -3,9 +3,11 @@ import { ClockIcon, PlayIcon } from "@heroicons/react/solid";
 import { FcComboChart } from "react-icons/fc";
 import { GiCircle } from "react-icons/gi";
 import ContentLoader from "react-content-loader";
-import img from "../../assets/cimg3.jpg";
+import { useTranslation } from "react-i18next";
 
 const CourseDescription = ({ courseDetails, loading }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="sm:px-10 px-3">
       {/* ------------------course program details-------------- */}
@@ -13,22 +15,16 @@ const CourseDescription = ({ courseDetails, loading }) => {
         {/* ---------------heading-------------- */}
         <div className="w-2/4">
           <h1 className="sm:text-5xl text-3xl tracking-normal font-semibold mb-4">
-            Course Program:
+            {t("Course_Program")}:
           </h1>
           <p className="font-bold text-secondary text-base block whitespace-nowrap">
-            All Course - {courseDetails?.total_unit} Units (
-            {courseDetails?.total_hour} hours)
+            {t("All_Course")} - {courseDetails?.total_unit} {t("Units")} (
+            {courseDetails?.total_hour} {t("hours")})
           </p>
         </div>
         {/* --------------course details---------------- */}
         <p className="w-full font-light text-lg">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book.Lorem Ipsum is simply dummy
-          text of the printing and typesetting industry.Lorem Ipsum is simply
-          dummy text of the printing and typesetting industry. Lorem Ipsum has
-          been the industry's standard dummy text ever since the 1500s.
+          {courseDetails?.course_details?.about}
         </p>
       </div>
 
@@ -62,10 +58,10 @@ const CourseDescription = ({ courseDetails, loading }) => {
             <div className="w-2/4">
               <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
                 <GiCircle className="h-3 w-3 bg-gradient-to-br from-to to-from rounded-full mr-2" />
-                {index + 1} Unit
+                {index + 1} {t("Unit")}
               </p>
               <p className="font-bold text-secondary text-base sm:ml-3">
-                {unit?.hours} hours
+                {unit?.hours} {t("hours")}
               </p>
             </div>
 
@@ -82,13 +78,13 @@ const CourseDescription = ({ courseDetails, loading }) => {
               {/* --------------------video hours ---------------- */}
               <p className="flex font-semibold text-secondary">
                 <ClockIcon className="w-6 h-6 mr-2" color="orange" />
-                {unit?.video_list_count} Video Lectures
+                {unit?.video_list_count} {t("Video_Lectures")}
               </p>
 
               {/*-------------------------skills ---------------------  */}
               <p className="flex font-semibold text-secondary">
                 <FcComboChart className="w-6 h-6 mr-2" />
-                Skills You Get: {unit?.skills_info?.skills_name}
+                {t("Skills_You_Get")}: {unit?.skills_info?.skills_name}
               </p>
             </div>
           </div>

@@ -42,6 +42,7 @@ const AboutClass = ({
     );
   }
   const playerRef = useRef(null);
+
   const handlePlayPause = () => {
     setPlaying(!playing);
   };
@@ -119,6 +120,7 @@ const AboutClass = ({
   useEffect(() => {
     localStorage.setItem("playedSeconds", JSON.stringify(played));
   }, [played]);
+  
   useEffect(() => {
     // if (JSON.parse(localStorage.getItem("playedSeconds")) === null)
     if (watchedTime === null || watchedTime === undefined) return false;

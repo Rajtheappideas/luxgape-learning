@@ -4,18 +4,20 @@ import Modal from "react-modal";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate, Navigate } from "react-router-dom";
-import ResetPassword from "../pages/ResetPassword";
+import { useTranslation } from "react-i18next";
 
 const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
   const [EnterOtp, SetEnterOtp] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (EnterOtp === "") {
-      alert("you have to enter otp");
+      alert(t("you have to enter otp"));
       return false;
     }
     setLoading(true);
@@ -36,7 +38,7 @@ const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
         const error = err?.response?.data?.message;
         if (error === "OTP is not valid") {
           setLoading(false);
-          return toast("OTP is not valid!", { type: "error" });
+          return toast(t("OTP_is_not_valid!"), { type: "error" });
         }
       });
   };
@@ -57,7 +59,7 @@ const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
       </button>
       <div className="md:h-[500px] h-full md:w-[500px] w-full p-5 space-y-5 mt-5 absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center justify-center  rounded-tl-[130px] rounded-br-[130px] rounded-tr-none rounded-bl-none sm:shadow-2xl bg-white">
         <h1 className="font-bold text-4xl text-center tracking-wide">
-          Enter yout OTP
+          {t("Enter_your_OTP")}
         </h1>
 
         {/* -------------input fieilds--------------- */}
@@ -75,7 +77,7 @@ const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
             <div>
               <input
                 type="number"
-                placeholder="Enter your otp here"
+                placeholder={`${t("Enter_your_otp_here")}`}
                 name="otp"
                 onChange={(e) => SetEnterOtp(e.target.value)}
                 className={`border px-6 w-full h-[56px] rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none`}
@@ -87,7 +89,7 @@ const OtpVerify = ({ openModal, CloseModal, email, otp }) => {
                 className={`border active:scale-95 transition transform duration-100 ease-in-out text-lg font-semibold text-white text-center px-6 w-full h-[56px] bg-gradient-to-r from-to to-from rounded-tl-[30px] rounded-br-[30px] rounded-tr-none rounded-bl-none outline-none`}
                 onClick={handleSubmit}
               >
-                {loading ? "Loading..." : "Check"}
+                {loading ? t("Loading...") : t("Send")}
               </button>
             </div>
           </div>

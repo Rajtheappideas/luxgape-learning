@@ -34,6 +34,8 @@ const Class = () => {
   const [CourseId, setCourseId] = useState(null);
   const [watchedTime, setWathcedTime] = useState(null);
   const [videoTitle, setVideoTitle] = useState("");
+  const [startExamInfo, setStartExamInfo] = useState({});
+  const [attendedCourseInfo, setAttendedCourseInfo] = useState({});
 
   const { id } = useParams();
   const { userLanguage, userData } = useUserContext();
@@ -110,6 +112,8 @@ const Class = () => {
         setUnitVideoId(
           response?.data?.data?.unites[0]?.video_list[0]?.unite_video_id
         );
+        setStartExamInfo(response?.data?.data?.start_exam_info);
+        setAttendedCourseInfo(response?.data?.data?.attended_course_info);
         setUnitId(response?.data?.data?.unites[0]?.video_list[0]?.unite_id);
         setCourseId(response?.data?.data?.unites[0]?.video_list[0]?.course_id);
         setWathcedTime(null);
@@ -121,6 +125,7 @@ const Class = () => {
       }
     });
   }, []);
+
   const StartExam = () => {
     setStartExamLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/start-exam", {
@@ -138,19 +143,18 @@ const Class = () => {
         setStartExamLoading(false);
         return false;
       } else if (response?.data?.status === "Success") {
-        console.log("Exam ->", response?.data);
         setStartExamLoading(false);
         navigate("/exam", {
           state: { id: id, message: response?.data?.message },
         });
         return true;
       } else if (response?.data?.status === "Error") {
-        console.log(response?.data);
         setStartExamLoading(false);
         return false;
       }
     });
   };
+
   const handlePassData = (
     url,
     unitevideoid,
@@ -306,12 +310,21 @@ const Class = () => {
           courseDetails={courseDetails}
         />
       )}
+      {/* start Exam button */}
       <div className="text-center my-10 ">
         <button
           type="button"
-          className="h-10 cursor-not-allowed active:scale-95 duration-100 ease-in-out transition-all delay-75 w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
-          // disabled={true}
-          onClick={StartExam}
+          className={`${
+            attendedCourseInfo?.is_completed === 0 && "cursor-not-allowed"
+          } h-10 active:scale-95 duration-100 ease-in-out transition-all delay-75 w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none `}
+          disabled={attendedCourseInfo?.is_completed === 0}
+          onClick={() => {
+            // attendedCourseInfo?.is_completed === 1 &&
+            // startExamInfo?.is_completed === 1
+            //   ? toast("Exam Is already submitted", { type: "warning" })
+            //   : StartExam();
+            StartExam();
+          }}
         >
           {startExamLoading ? "loading..." : t("start_exam")}
         </button>

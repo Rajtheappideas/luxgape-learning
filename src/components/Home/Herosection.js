@@ -18,7 +18,7 @@ const Herosection = () => {
 
   const handleSearch = () => {
     if (searchValue === "") {
-      toast("search something!!", { type: "warning" });
+      toast(t("search something!!"), { type: "warning" });
       return false;
     } else {
       return navigate("/courses", { state: { searchValue: searchValue } });
@@ -41,10 +41,7 @@ const Herosection = () => {
         {/* ------------text and search is here------------------------------ */}
         <div className="relative sm:space-y-20 space-y-7">
           {/* -------------------------------------text--------------------------------     */}
-          <div
-            v
-            className="sm:text-6xl text-3xl space-y-6 font-semibold text-black"
-          >
+          <div className="sm:text-6xl text-3xl space-y-6 font-semibold text-black">
             {/* ---------------heading of herosection------------ */}
             <div className="sm:space-y-6 text-left  space-y-3 w-full">
               <span className="block tracking-normal">{t("learning_and")}</span>
@@ -58,7 +55,7 @@ const Herosection = () => {
               </p>
             </div>
           </div>
-          {/* -----------main image of herosection for xl screen--------------- */}
+          {/* -----------main image of herosection for mobile screen--------------- */}
           <div className="relative md:flex items-center justify-center hidden xl:hidden">
             {/* ------------bg blue of image------------ */}
             <div className="rounded-tl-[282.5px] rounded-tr-[0px] rounded-br-[82px] rounded-bl-none h-[600px] w-[540px] bg-gradient-to-l from-from to-to" />
@@ -114,7 +111,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
                 />
               </svg>
               <p className="text-lg whitespace-nowrap font-bold absolute top-[21.5rem] h-full left-[25rem]">
-                50k+ {t("hero_section_picture_1")}
+                {t("hero_section_picture_1")}
               </p>
               {/*-------profsseinal bg div-------------  */}
               <div
@@ -250,7 +247,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
             />
           </svg>
           <p className="text-lg font-bold whitespace-nowrap absolute top-[21.5rem] h-full left-[24rem]">
-            50k+ {t("hero_section_picture_1")}
+            {t("hero_section_picture_1")}
           </p>
           {/*-------profsseinal bg div-------------  */}
           <div

@@ -32,10 +32,10 @@ const WhyChooseUs = () => {
             />
           </RoundedSmallDiv>
           <div>
-            <p className="text-3xl font-bold tracking-widest">
+            <p className="text-3xl font-bold tracking-widest sm:w-80 w-60">
               {t("why_choose_us_div_1_heading")}
             </p>
-            <p className="sm:my-7 my-4 text-secondary tracking-wider text-xl leading-relaxed">
+            <p className="sm:my-5 my-2 text-secondary tracking-wider text-xl leading-relaxed">
               {t("why_choose_us_div_1_paragraph")}
             </p>
             <p className="w-10 h-10 bg-black">
@@ -95,7 +95,7 @@ export default WhyChooseUs;
 const RoundedDiv = tw.div`
 border relative
 rounded-tl-[190px] rounded-tr-0 rounded-br-[190px] rounded-bl-0
- h-[410px] sm:w-[380px] w-auto
+ h-[410px] sm:w-[380px] w-[19rem]
  flex items-center
  px-12 pt-16 hover:shadow-2xl `;
 

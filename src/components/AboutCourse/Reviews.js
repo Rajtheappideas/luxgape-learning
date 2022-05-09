@@ -13,7 +13,9 @@ const Reviews = ({ course_id, userReviews, loading }) => {
   const [currentValue, setCurrentvalue] = useState(0);
   const [hoverValue, setHoverValue] = useState(undefined);
   const [Loading, setLoading] = useState(false);
+
   const { t } = useTranslation();
+
   const stars = Array(5).fill(0);
 
   // ---context----------
@@ -21,13 +23,13 @@ const Reviews = ({ course_id, userReviews, loading }) => {
 
   const handlePostReview = () => {
     if (currentValue === 0 || review === "") {
-      toast("review field and stars are should be filled!", {
+      toast(t("review field and stars are should be filled!"), {
         type: "warning",
       });
       return false;
     }
     if (userData === null) {
-      toast("Login First!!!", { type: "warning" });
+      toast(t("Login First!!!"), { type: "warning" });
       return false;
     }
     setLoading(true);
@@ -194,7 +196,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
           <div className="flex items-center mb-1 md:mb-0">
             <input
               type="text"
-              placeholder="type your review"
+              placeholder={`${t("type_your_review")}`}
               value={review}
               onChange={(e) => setReview(e.target.value)}
               className="xl:w-[38rem] md:w-80 w-64 h-12 mr-1 px-3 outline-none rounded-tl-[24px] rounded-br-[24px] rounded-bl-none rounded-tr-none border bg-white "

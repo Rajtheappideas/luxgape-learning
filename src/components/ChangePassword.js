@@ -20,12 +20,12 @@ const ChangePassword = () => {
   //--------------api request----------
   const handleChangePassword = () => {
     if (oldPassword === "" || newPassword === "" || ConfirmPassword === "") {
-      toast("Fields Should not be empty!!", {
+      toast(t("Fields Should not be empty!!"), {
         type: "warning",
       });
       return false;
     } else if (!(newPassword === ConfirmPassword)) {
-      toast("password does not match with confirm password!!", {
+      toast(t("password does not match with confirm password!!"), {
         type: "warning",
       });
       return false;
@@ -79,7 +79,7 @@ const ChangePassword = () => {
           </label>
           <input
             type="text"
-            placeholder="Enter your old password"
+            placeholder={`${t("Enter your old password")}`}
             onChange={(e) => setOldPassword(e.target.value)}
             className="w-full h-12 px-4 outline-green-400 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none border border-gray-400"
           />
@@ -94,7 +94,7 @@ const ChangePassword = () => {
           </label>
           <input
             type="text"
-            placeholder="Enter your new password"
+            placeholder={`${t("Enter your new password")}`}
             onChange={(e) => setNewPassword(e.target.value)}
             className="w-full h-12 px-4 outline-green-400 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none border border-gray-400"
           />
@@ -107,7 +107,7 @@ const ChangePassword = () => {
           </label>
           <input
             type="text"
-            placeholder="Enter your confirm password"
+            placeholder={`${t("Enter your confirm password")}`}
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="w-full h-12 px-4 outline-green-400 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none border border-gray-400"
           />

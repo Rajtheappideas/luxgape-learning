@@ -25,6 +25,7 @@ const SearchBoxAndFilter = ({
   const [skills, setSkills] = useState([]);
 
   const { userLanguage } = useUserContext();
+
   const { t } = useTranslation();
 
   // fetch data when page loads up first time
@@ -79,7 +80,9 @@ const SearchBoxAndFilter = ({
     setCategoriesId([0]);
     setMinPrice(0);
     setMaxPrice([0]);
+    window.location.reload();
   };
+
   return (
     <div className="sm:p-10 p-3">
       <div className="flex lg:justify-end justify-center lg:space-x-5 mb-5 flex-wrap items-start ">
@@ -121,7 +124,7 @@ const SearchBoxAndFilter = ({
                 {/* ------------------firrst column-------------- */}
                 <div>
                   <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
-                    List of Categories
+                    {t("List of Categories")}
                   </p>
                   {categories.map((category) => (
                     <div key={category?.id} className="flex items-center mb-2">
@@ -143,13 +146,10 @@ const SearchBoxAndFilter = ({
 
                 <div>
                   <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
-                    Skills
+                   {t("Skills")}
                   </p>
-                  {skills.map((skill,index) => (
-                    <div
-                      key={index}
-                      className="flex items-center mb-2"
-                    >
+                  {skills.map((skill, index) => (
+                    <div key={index} className="flex items-center mb-2">
                       <input
                         type="checkbox"
                         value={skill?.skills_id}
@@ -171,7 +171,7 @@ const SearchBoxAndFilter = ({
                 {/* ------------------first column-------------- */}
                 <div>
                   <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
-                    Ratings
+                    {t("Ratings")}
                   </p>
                   {/* -----------5 star---------- */}
                   <div className="flex items-center mb-3">
@@ -263,7 +263,7 @@ const SearchBoxAndFilter = ({
                 {/* ------------------second column-------------- */}
                 <div className="lg:col-span-1 md:col-span-2">
                   <p className="text-2xl text-[#C4C4C4] font-semibold mb-5">
-                    Price
+                    {("Price")}
                   </p>
                   <div className="flex items-center mb-3 ">
                     <div className="flex-col flex items-start relative">
@@ -303,14 +303,14 @@ const SearchBoxAndFilter = ({
                   className="sm:w-[209px] active:scale-95 transition-all duration-150 ease-in-out w-36 md:mr-5 h-12 font-bold bg-[#E0E0E0] rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
                   onClick={handleClearFilters}
                 >
-                  Clear All Filters
+                  {t("Clear All Filters")}
                 </button>
                 <button
                   type="button"
                   className="sm:w-[209px] active:scale-95 transition-all duration-150 ease-in-out w-36 h-12 bg-primary text-white font-bold rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none "
                   onClick={handleFilterCourse}
                 >
-                  Apply Filters
+                  {t("Apply Filters")}
                 </button>
               </div>
             </div>

@@ -3,20 +3,20 @@ import { initReactI18next } from "react-i18next";
 import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 import translationEn from "./locales/en/translation.json";
-import translationSp from "./locales/sp/translation.json";
+import translationFr from "./locales/fr/translation.json";
 
 i18next
   .use(HttpApi)
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    supportedLngs: ["en", "sp"],
+    supportedLngs: ["en", "fr"],
     resources: {
       en: {
         translation: translationEn,
       },
-      sp: {
-        translation: translationSp,
+      fr: {
+        translation: translationFr,
       },
     },
 

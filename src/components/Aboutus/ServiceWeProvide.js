@@ -14,12 +14,15 @@ const ServiceWeProvide = () => {
 
       {/* --------------heading-------------- */}
       <div className="text-center sm:mb-5 mb-3">
-        <p className="sm:text-5xl text-3xl font-semibold sm:my-6">{t("service_we_provide")}</p>
+        <p className="sm:text-5xl text-3xl font-semibold sm:my-6">
+          {t("service_we_provide")}
+        </p>
 
         {/* -----------------------text---------------- */}
         <p className=" text-secondary sm:text-xl text-lg text-center sm:mb-16 mb-5">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suscipit
-          tristique volutp
+          {t(
+            "Luxgap offers several services tailored to you and/or your company"
+          )}
         </p>
         {/* ------------------img serviceprovideimg--------------- */}
         <div className="lg:hidden block ">
@@ -45,11 +48,13 @@ const ServiceWeProvide = () => {
             />
             {/* ----------------info------------ */}
             <div className="flex-col mx-3">
-              <p className="font-bold text-2xl mb-2">Personal Training</p>
+              <p className="font-bold text-2xl mb-2">
+                {t("Personal Training")}
+              </p>
               <p className="text-secondary text-lg font-normal leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
-                aliquam, purus sit amet luctus venenatis, lectus mag na
-                fringilla urna, porttitor
+                {t(
+                  "Train yourself in good data security practices to minimize the risk of leaks."
+                )}
               </p>
             </div>
           </div>
@@ -64,11 +69,11 @@ const ServiceWeProvide = () => {
             />
             {/* ----------------info------------ */}
             <div className="flex-col mx-3">
-              <p className="font-bold text-2xl mb-2">Community Training</p>
+              <p className="font-bold text-2xl mb-2">{t("Adapted Tools")}</p>
               <p className="text-secondary text-lg font-normal leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
-                aliquam, purus sit amet luctus venenatis, lectus mag na
-                fringilla urna, porttitor
+                {t(
+                  "You have GDPR-focused tools to help you do your job better."
+                )}
               </p>
             </div>
           </div>
@@ -83,11 +88,11 @@ const ServiceWeProvide = () => {
             />
             {/* ----------------info------------ */}
             <div className="flex-col mx-3">
-              <p className="font-bold text-2xl mb-2">Yoga Studio Rent</p>
+              <p className="font-bold text-2xl mb-2">{t("Sound advice")}</p>
               <p className="text-secondary text-lg font-normal leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit ut
-                aliquam, purus sit amet luctus venenatis, lectus mag na
-                fringilla urna, porttitor
+                {t(
+                  "Thanks to our experience, we offer you wise advice that will help you improve your day-to-day life."
+                )}
               </p>
             </div>
           </div>

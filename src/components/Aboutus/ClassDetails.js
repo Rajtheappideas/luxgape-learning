@@ -1,13 +1,17 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import classdetail from "../../assets/classdetails.jpg";
 import logo from "../../assets/LXG_RVB.png";
 
 const ClassDetails = () => {
+  const { t } = useTranslation();
   return (
     <div className="sm:p-10 p-3 grid lg:grid-cols-2 lg:grid-rows-1 grid-cols-1 grid-rows-1 gap-10 justify-items-center items-center">
       <div className="space-y-7">
         {/* ---------------title text-------------- */}
-        <span className="sm:text-5xl text-3xl font-semibold block">Lorem Ipsum</span>
+        <span className="sm:text-5xl text-3xl font-semibold block">
+          {t("About Luxgap")}
+        </span>
         {/* -----------image on large screen-------------- */}
         <div className="lg:hidden block">
           <div className="relative w-full">
@@ -25,20 +29,13 @@ const ClassDetails = () => {
         </div>
         {/* ----------------------deatils------------------ */}
         <p className="text-secondary text-lg leading-relaxed tracking-tighter">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged.
+          {t("about_us_para_1")}
         </p>
         <p className="text-secondary text-lg leading-relaxed tracking-tighter">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged.
+          {t("about_us_para_2")}
+        </p>
+        <p className="text-secondary text-lg leading-relaxed tracking-tighter">
+          {t("about_us_para_3")}
         </p>
       </div>
       {/* -----------image on large screen-------------- */}
@@ -51,7 +48,7 @@ const ClassDetails = () => {
         <img
           src={logo}
           alt="logo"
-          className=" h-20 absolute top-[30%] left-[53%] -translate-x-1/2 object-center object-cover"
+          className="h-20 absolute top-[30%] left-[53%] -translate-x-1/2 object-center object-cover"
         />
       </div>
     </div>

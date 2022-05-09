@@ -15,11 +15,13 @@ export const UserProvider = ({ children }) => {
       : localStorage.setItem("lang_code", "en")
   );
   const [courseDetails, setCourseDetails] = useState([]);
-  const [examSubmitted, setExamSubmitted] = useState(false);
   const ChangeLanguage = (lang) => {
     return setUserLanguage(i18next.changeLanguage(lang));
   };
+  const [interval, setinterval] = useState(null);
+  const [examSubmitted, setExamSubmitted] = useState(false);
 
+  // let interval;
   const currentLanguage = userLanguage || "en";
   return (
     <UserContext.Provider
@@ -31,8 +33,10 @@ export const UserProvider = ({ children }) => {
         currentLanguage,
         setCourseDetails,
         courseDetails,
-        examSubmitted,
+        interval,
+        setinterval,
         setExamSubmitted,
+        examSubmitted,
       }}
     >
       {children}

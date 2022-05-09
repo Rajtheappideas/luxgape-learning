@@ -39,11 +39,12 @@ const Courses = () => {
       })
         .then((response) => {
           if (response?.data?.status === "Success") {
-            setCourses(
-              response?.data?.data.filter(
-                (course) => course?.course_details !== null
-              )
-            );
+            setCourses(response?.data?.data);
+            // setCourses(
+            //   response?.data?.data.filter(
+            //     (course) => course?.course_details !== null
+            //   )
+            // );
             setLoading(false);
             return true;
           }

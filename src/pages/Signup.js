@@ -57,8 +57,11 @@ const Signup = () => {
     password: yup
       .string()
       .required(t("password_is_required"))
-      .min(8, t("password_validation_1"))
-      .matches(/[a-zA-Z0-9]/, t("password_validation")),
+      .min(10, t("password_validation_1"))
+      .matches(
+        /^(?=.*[A-Z])(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{10,}$/,
+        t("password_validation")
+      ),
     confirmpassword: yup
       .string()
       .oneOf([yup.ref("password"), null], t("password_must_match"))
@@ -127,8 +130,8 @@ const Signup = () => {
     values,
   } = formik;
   // -------------------input errror text color--------------
-  const TextError = tw.span`
-  text-red-500
+  const TextError = tw.p`
+  text-red-500 w-96 p-0
   `;
 
   return (
@@ -184,13 +187,13 @@ const Signup = () => {
                 </button>
                 <button
                   onClick={() => {
-                    ChangeLanguage("sp");
+                    ChangeLanguage("fr");
                     setShowDropdown(false);
-                    localStorage.setItem("lang_code", "sp");
+                    localStorage.setItem("lang_code", "fr");
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >
-                  {t("spanish")}
+                  {t("français")}
                 </button>
               </div>
             )}
@@ -198,7 +201,7 @@ const Signup = () => {
         </div>
 
         {/* --------------------grid div---------------- */}
-        <div className="sm:p-10 p-3 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center">
+        <div className="sm:p-10 p-3 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center items-start w-full">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
             <LazyLoadImage
@@ -211,7 +214,7 @@ const Signup = () => {
           <FormikProvider value={formik}>
             <Form autoComplete="off" onSubmit={handleSubmit}>
               {/* --------------main form ------------------ */}
-              <div className="space-y-7">
+              <div className="space-y-7 w-full">
                 {/* ----------form start from here */}
                 <div className="flex justify-between items-center w-full">
                   <h1 className="font-bold text-4xl block my-5">
@@ -224,8 +227,8 @@ const Signup = () => {
                 {/* ------------------radio box of role-------------- */}
 
                 {/* <div className="flex flex-row items-center justify-around sm:space-x-10 space-x-2 w-full"> */}
-                  {/* ----------------butoon 1----------------- */}
-                  {/* <div
+                {/* ----------------butoon 1----------------- */}
+                {/* <div
                     className={`border ${
                       formik.values.role === "Employee" && "border-primary"
                     } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
@@ -244,9 +247,9 @@ const Signup = () => {
                       {t("employee")}
                     </span>
                   </div> */}
-                  {/* ----------------butoon 2----------------- */}
+                {/* ----------------butoon 2----------------- */}
 
-                  {/* <div
+                {/* <div
                     className={`border ${
                       formik.values.role === "Employer" && "border-primary"
                     } rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none sm:w-full w-1/2 h-[61px] relative`}
@@ -388,7 +391,7 @@ const Signup = () => {
                     )}
                   </div>
                   <p className="text-xl text-secondary">
-                    I have read and agree to the
+                    {t("i_have_read_and_agree_to_the")}
                     <Link to="/terms&conditions">
                       <span className="text-primary ml-1">
                         {t("terms_of_service")}

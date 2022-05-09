@@ -159,13 +159,13 @@ const SignIn = () => {
                 </button>
                 <button
                   onClick={() => {
-                    ChangeLanguage("sp");
+                    ChangeLanguage("fr");
                     setShowDropdown(false);
-                    localStorage.setItem("lang_code", "sp");
+                    localStorage.setItem("lang_code", "fr");
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >
-                  {t("spanish")}
+                  {t("français")}
                 </button>
               </div>
             )}

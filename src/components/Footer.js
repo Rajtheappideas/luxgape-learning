@@ -41,13 +41,13 @@ const Footer = ({ classFooter, normalFooter }) => {
                 <Link to="/terms&conditions">{t("terms_of_conditions")}</Link>
               </List>
               <List>
-                <Link to="/">Cancellations</Link>
+                <Link to="/">{t("Cancellations")}</Link>
               </List>
               <List onClick={ScrollToTop}>
-                <Link to="/userprofile">My profile</Link>
+                <Link to="/userprofile">{t("My_profile")}</Link>
               </List>
               <List>
-                <Link to="/">Cookie Policy</Link>
+                <Link to="/faq">{t("Faq")}</Link>
               </List>
             </ul>
           </div>
@@ -97,6 +97,15 @@ const Footer = ({ classFooter, normalFooter }) => {
               <List>
                 <a href="https://twitter.com/" target="_blank" rel="noreferrer">
                   {t("twitter")}
+                </a>
+              </List>
+              <List>
+                <a
+                  href="https://www.linkedin.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
                 </a>
               </List>
             </ul>
