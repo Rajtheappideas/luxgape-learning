@@ -323,11 +323,11 @@ const Class = () => {
           } h-10 active:scale-95 duration-100 ease-in-out transition-all delay-75 w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none `}
           disabled={attendedCourseInfo?.is_completed === 0}
           onClick={() => {
-            attendedCourseInfo?.is_completed === 1 &&
-            startExamInfo?.is_completed === 1
-              ? toast("Exam Is already submitted", { type: "warning" })
-              : StartExam();
-            // StartExam();
+            // attendedCourseInfo?.is_completed === 1 &&
+            // startExamInfo?.is_completed === 1
+            //   ? toast(t("Exam Is already submitted"), { type: "warning" })
+            //   : StartExam();
+            StartExam();
           }}
         >
           {startExamLoading ? "loading..." : t("start_exam")}

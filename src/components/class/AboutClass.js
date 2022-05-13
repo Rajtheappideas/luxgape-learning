@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
 import moment from "moment";
+import { t } from "i18next";
 
 const AboutClass = ({
   Url,
@@ -79,7 +80,7 @@ const AboutClass = ({
       if (response?.data?.status === "Success") {
         console.log(response?.data?.data);
       } else if (response?.data?.status === "Error") {
-        toast("Somthing Went Wrong!!", { type: "error" });
+        toast(t("Something went wrong"), { type: "error" });
         console.log(response?.data);
       }
     });
@@ -120,7 +121,7 @@ const AboutClass = ({
   useEffect(() => {
     localStorage.setItem("playedSeconds", JSON.stringify(played));
   }, [played]);
-  
+
   useEffect(() => {
     // if (JSON.parse(localStorage.getItem("playedSeconds")) === null)
     if (watchedTime === null || watchedTime === undefined) return false;
@@ -151,7 +152,7 @@ const AboutClass = ({
             onProgress={handleProgress}
             onError={(e) => {
               console.log("onError", e);
-              toast("somthing went wrong !!!", {
+              toast(t("something went wrong"), {
                 type: "warning",
               });
             }}

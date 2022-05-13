@@ -30,12 +30,12 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
       })
         .then((response) => {
           if (response?.data?.status === "Success") {
-            setMostPopularCourse(response?.data?.data);
-            // setMostPopularCourse(
-            //   response?.data?.data.filter(
-            //     (course) => course?.course_details !== null
-            //   )
-            // );
+            // setMostPopularCourse(response?.data?.data);
+            setMostPopularCourse(
+              response?.data?.data.filter(
+                (course) => course?.course_details !== null
+              )
+            );
             setLoading(false);
             return true;
           }

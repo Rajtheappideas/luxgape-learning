@@ -8,7 +8,13 @@ import { useUserContext } from "../../context/usercontext";
 import { toast } from "react-toastify";
 import moment from "moment";
 
-const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
+const PaymentMethod = ({
+  product,
+  grandTotal,
+  setGrandTotal,
+  paymentLoading,
+  setPaymentLoading,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [radioBtn, setRadioBtn] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -30,6 +36,7 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
       console.log("true");
       return false;
     } else {
+      setPaymentLoading(true);
       axios("https://chessmafia.com/php/luxgap/App/api/course-booking", {
         method: "POST",
         params: {
@@ -51,24 +58,28 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
       })
         .then((response) => {
           console.log(response?.data?.data);
-          if (response?.status === 200) {
-            setModalOpen(true);
+          if (response?.data?.status === "Success") {
+            toast(t("Payment Successfully"), { type: "success" });
+            setPaymentLoading(false);
             navigate("/mycourses");
+            // setModalOpen(true);
+
+            return true;
           }
         })
         .catch((err) => {
           if (err?.response?.data) {
             console.log(err?.response?.data);
+            toast(t("Oops Somthing went wrong"), { type: "error" });
+            setPaymentLoading(false);
           }
         });
     }
-
-    console.log(token);
   };
 
   const handleCouponeCode = () => {
     if (enterCouponCode === "") {
-      toast("Oops forgot to enter coupon code!!", { type: "warning" });
+      toast(t("Oops forgot to enter coupon code"), { type: "warning" });
       return false;
     }
     setLoading(true);
@@ -82,7 +93,7 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
       .then((response) => {
         setGrandTotal(null);
         if (response?.data?.status === "Success") {
-          toast("coupon code apply", { type: "success" });
+          toast(t("coupon code applied"), { type: "success" });
           console.log("cc -> ", response?.data?.data);
           setdiscountAmount(response?.data?.data?.amount);
           setCouponId(response?.data?.data?.id);
@@ -118,7 +129,6 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
         return false;
       });
   };
-
   function finalAmountPercentage(price, discountamount) {
     return price - (price * parseFloat(discountamount)) / (100).toFixed(2);
   }
@@ -169,11 +179,11 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
           <div className="flex items-end lg:flex-row flex-col lg:space-x-3 w-full lg:space-y-0 space-y-3">
             <div className="w-full">
               <label className="font-semibold text-xl mb-1 text-secondary">
-                Promo Code / Coupon
+                {t("Promo Code / Coupon")}
               </label>
               <input
                 type="text"
-                placeholder="Enter Coupon Code here"
+                placeholder={t("Enter Coupon Code here")}
                 value={enterCouponCode}
                 className="rounded-tl-3xl rounded-br-3xl px-2 rounded-tr-none rounded-bl-none w-full h-12 border focus:border-lime-500 outline-none"
                 onChange={(e) =>
@@ -187,7 +197,7 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
                 className={`rounded-xl bg-gradient-to-r rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none outline-none  from-to to-from lg:w-40 w-full h-12 p-2 text-white text-xl font-semibold active:scale-95 duration-200 transition-all ease-in-out`}
                 onClick={() => handleCouponeCode()}
               >
-                {loading ? "Checking..." : "Apply"}
+                {loading ? t("Checking...") : t("Apply")}
               </button>
             </div>
           </div>
@@ -198,11 +208,11 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
               {getPercentageIncrease(grandTotal, product?.sale_price).toFixed(
                 2
               )}{" "}
-              % off) Coupon Applied
+              % off) {t("Coupon Applied")}
             </label>
           ) : success === false ? (
             <label className="text-red-500 text-base font-semibold">
-              Coupon Invalid
+              {t("Coupon Invalid")}
             </label>
           ) : null}
         </div>

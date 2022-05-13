@@ -332,7 +332,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
 
   return (
     <>
-      <div className="sm:p-10 mb-10 p-3">
+      <div className="sm:p-10 p-3">
         {/* --------------------search & filter divs---------------------- */}
         <div className="p-3">
           <div className="flex lg:justify-end justify-center lg:space-x-5 mb-5 flex-wrap items-start ">

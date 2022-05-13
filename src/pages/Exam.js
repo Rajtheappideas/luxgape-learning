@@ -421,7 +421,7 @@ const Exam = () => {
           clearTheInt();
           sessionStorage.clear();
           navigate("/");
-          toast("Exam Succesfully Submitted!!", { type: "success" });
+          toast(t("Exam Succesfully Submitted"), { type: "success" });
           return true;
         } else if (response?.data?.status === "Error") {
           console.log(response?.data);
@@ -596,9 +596,9 @@ const Exam = () => {
             />
           </ContentLoader>
         </p>
-      ) : getExamDetails === undefined ? (
-        <p className="text-3xl font-semibold text-center m-10 h-full">
-          Oops No Exam for this Course
+      ) : getExamDetails === undefined || getExamQuestions === null ? (
+        <p className="text-3xl font-semibold text-center m-10 h-auto">
+          {t("Oops No Exam for this Course")}
         </p>
       ) : (
         getExamDetails?.data.map((question, indx) => (
@@ -640,7 +640,7 @@ const Exam = () => {
                   onClick={StartExam}
                   className="border sm:w-60 w-40 h-10 rounded-lg text-2xl text-center bg-primary text-white"
                 >
-                  Start Exam
+                  {t("Start Exam")}
                 </button>
               </div>
             ) : questionLoading ? (
@@ -664,7 +664,7 @@ const Exam = () => {
                 <div className="flex justify-between items-center sm:mx-5">
                   <div>
                     <p className="font-bold text-primary text-xl">
-                      questions {getExamDetails?.current_page} of{" "}
+                      {t("questions")} {getExamDetails?.current_page} of{" "}
                       {getExamDetails?.total}
                     </p>
                   </div>
@@ -753,24 +753,24 @@ const Exam = () => {
                     className=" border mr-3 w-32 active:scale-95 duration-100 ease-in-out transition-all h-10 rounded-lg text-gray-400 text-center"
                     disabled={countDown === 0}
                   >
-                    previous
+                    {t("previous")}
                   </button>
                   {getExamDetails?.next_page_url === null ? (
                     <button
                       type="button"
                       onClick={() => SubmitExam()}
-                      className="border w-32 h-10 active:scale-95 duration-100 ease-in-out transition-all rounded-lg text-center bg-primary text-white"
+                      className="border w-auto px-1 h-10 active:scale-95 duration-100 ease-in-out transition-all rounded-lg text-center bg-primary text-white"
                     >
-                      {submitExam ? "submitting..." : "Submit Exam"}
+                      {submitExam ? t("submitting...") : t("Submit Exam")}
                     </button>
                   ) : (
                     <button
                       type="button"
                       onClick={NextQuestions}
                       disabled={countDown === 0}
-                      className="border w-32 h-10 rounded-lg text-center bg-primary text-white"
+                      className="border w-auto px-1 h-10 rounded-lg text-center bg-primary text-white"
                     >
-                      Next Question
+                      {t("Next Question")}
                     </button>
                   )}
                 </div>
@@ -787,7 +787,7 @@ const Exam = () => {
               <LazyLoadImage
                 src={logo}
                 alt="companylogo"
-                className="w-48 h-20 cursor-pointer object-contain"
+                className="w-52 h-20 cursor-pointer object-contain"
               />
             </Link>
           </div>
