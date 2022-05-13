@@ -223,6 +223,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
             type="button"
             onClick={handlePostReview}
             className="sm:w-12 sm:h-12 w-60 h-10 active:scale-95 transition-all duration-75 ease-in-out rounded-tl-[24px] rounded-br-[24px] rounded-tr-none rounded-bl-none bg-primary"
+            disabled={Loading}
           >
             {Loading ? (
               "..."

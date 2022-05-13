@@ -36,6 +36,7 @@ const Class = () => {
   const [videoTitle, setVideoTitle] = useState("");
   const [startExamInfo, setStartExamInfo] = useState({});
   const [attendedCourseInfo, setAttendedCourseInfo] = useState({});
+  const [examId, setExamId] = useState(null);
 
   const { id } = useParams();
   const { userLanguage, userData } = useUserContext();
@@ -113,6 +114,7 @@ const Class = () => {
           response?.data?.data?.unites[0]?.video_list[0]?.unite_video_id
         );
         setStartExamInfo(response?.data?.data?.start_exam_info);
+        setExamId(response?.data?.data?.start_exam_info?.exam_id);
         setAttendedCourseInfo(response?.data?.data?.attended_course_info);
         setUnitId(response?.data?.data?.unites[0]?.video_list[0]?.unite_id);
         setCourseId(response?.data?.data?.unites[0]?.video_list[0]?.course_id);
@@ -125,7 +127,7 @@ const Class = () => {
       }
     });
   }, []);
-
+  
   const StartExam = () => {
     setStartExamLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/start-exam", {
@@ -140,12 +142,14 @@ const Class = () => {
     }).then((response) => {
       if (response?.data?.message === "your course is not finished") {
         toast("your course is not finished yet!", { type: "warning" });
+
         setStartExamLoading(false);
         return false;
       } else if (response?.data?.status === "Success") {
+        console.log(response?.data?.status);
         setStartExamLoading(false);
         navigate("/exam", {
-          state: { id: id, message: response?.data?.message },
+          state: { id: id, examid: examId },
         });
         return true;
       } else if (response?.data?.status === "Error") {
@@ -319,11 +323,11 @@ const Class = () => {
           } h-10 active:scale-95 duration-100 ease-in-out transition-all delay-75 w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none `}
           disabled={attendedCourseInfo?.is_completed === 0}
           onClick={() => {
-            // attendedCourseInfo?.is_completed === 1 &&
-            // startExamInfo?.is_completed === 1
-            //   ? toast("Exam Is already submitted", { type: "warning" })
-            //   : StartExam();
-            StartExam();
+            attendedCourseInfo?.is_completed === 1 &&
+            startExamInfo?.is_completed === 1
+              ? toast("Exam Is already submitted", { type: "warning" })
+              : StartExam();
+            // StartExam();
           }}
         >
           {startExamLoading ? "loading..." : t("start_exam")}

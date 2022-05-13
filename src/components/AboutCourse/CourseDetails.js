@@ -33,7 +33,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
   function getPercentageIncrease(numA, numB) {
     return Math.abs(((numA - numB) / numB) * 100);
   }
-
+  console.log(getPercentageIncrease(20, 400).toFixed(0));
   return (
     <div className="sm:p-10 p-3 w-full">
       {/* ---------------course details paragraph-------------- */}
@@ -148,12 +148,9 @@ const CourseDetails = ({ courseDetails, loading }) => {
             <p className="font-semibold text-xl">{t("what_will_you_learn")}:</p>
             {/* ----------------course key points------------------ */}
             <div className="flex flex-row text-left">
-              <ul className="space-y-3 sm:mr-10 mr-3">
+              <ul className="space-y-3 sm:mr-5 mr-3">
                 <li className="flex items-start justify-start">
-                  <CheckCircleIcon
-                    className="h-7 w-7 sm:mr-1"
-                    color="lightblue"
-                  />
+                  <CheckCircleIcon className="h-5 sm:mr-1" color="lightblue" />
                   {courseDetails?.course_details?.what_will_learn}
                 </li>
               </ul>

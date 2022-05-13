@@ -43,8 +43,7 @@ const Exam = () => {
 
   // let interval;
 
-  const { id, message } = useLocation().state;
-
+  const { id, examid } = useLocation().state;
   const navigate = useNavigate();
 
   // const startTimer = () => {
@@ -91,22 +90,28 @@ const Exam = () => {
   //     }
   //   }, 1000);
   // };
+
+  let interval;
   const startTimer = () => {
-    let interval;
     if (intervalId && interval) {
       clearInterval(intervalId);
       clearInterval(interval);
       setIntervalId(0);
       return;
     }
-    const timer = 1 * 20 * 1000;
-    const nextDay = timer + new Date().getTime();
+    // const timer = 1 * 20 * 1000;
+    // const nextDay = timer + new Date().getTime();
 
-    // const timer = getExamDetails?.data[0]?.exam_info?.total_time;
-    // const nextDay =
-    //   timer.split(":")[0] * 60 * 1000 +
-    //   timer.split(":")[1] * 1000 +
-    //   new Date().getTime();
+    const timer = getExamDetails?.data[0]?.exam_info?.total_time;
+    const nextDay =
+      timer.split(":")[0] * 60 * 1000 +
+      timer.split(":")[1] * 1000 +
+      new Date().getTime();
+    if (examTime === null) {
+      console.log("new timer", examTime);
+    } else {
+      console.log("old timer", examTime);
+    }
     interval = setInterval(() => {
       const now = new Date().getTime();
 
@@ -114,9 +119,7 @@ const Exam = () => {
       const Hours = Math.floor(
         (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      const Minutes = Math.floor(
-        (countdown % (1000 * 60 * 60)) / (1000 * 60)
-      );
+      const Minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
       const Seconds = Math.floor((countdown % (1000 * 60)) / 1000);
 
       if (countdown <= 0) {
@@ -175,7 +178,6 @@ const Exam = () => {
     // }
   };
   // console.log(hours, minutes, seconds);
-  console.log(startExam);
   function clearTheInt() {
     // console.log("clearTheInt", interval);
     // clearInterval(interval);
@@ -190,6 +192,11 @@ const Exam = () => {
     setExamTime(sessionStorage.getItem("examTime"));
   };
 
+  window.onunload = () => {
+    // sessionStorage.removeItem("examTime");
+    // sessionStorage.removeItem("currentUrl");
+    // sessionStorage.clear();
+  };
   // fetch user details first rendering
   useEffect(() => {
     setExamTime(sessionStorage.getItem("examTime"));
@@ -224,7 +231,7 @@ const Exam = () => {
       params: {
         lang_code: userLanguage,
         course_id: id,
-        exam_id: id,
+        exam_id: examid,
         page: 1,
       },
       headers: {
@@ -253,7 +260,7 @@ const Exam = () => {
         return false;
       }
     });
-    return () => clearTheInt();
+    return () => clearInterval(intervalId);
   }, []);
 
   // nexy questions
@@ -288,7 +295,7 @@ const Exam = () => {
           params: {
             lang_code: userLanguage,
             course_id: id,
-            exam_id: id,
+            exam_id: examid,
           },
           headers: {
             "consumer-access-token": userData?.api_token,
@@ -318,7 +325,7 @@ const Exam = () => {
           lang_code: userLanguage,
           question_id: selectedQuestionId,
           option_id: selectedOptionId,
-          exam_id: id,
+          exam_id: examid,
           course_id: id,
         },
         headers: {
@@ -352,7 +359,7 @@ const Exam = () => {
         params: {
           lang_code: userLanguage,
           course_id: id,
-          exam_id: id,
+          exam_id: examid,
         },
         headers: {
           "consumer-access-token": userData?.api_token,
@@ -377,7 +384,6 @@ const Exam = () => {
   // submit exam
   const SubmitExam = (e) => {
     // e.preventDefault();
-    clearTheInt();
     // clearInterval(intervalId);
     let option = getExamQuestions?.exam_questions_options_info.map(
       (options) => options.is_answer_count === 0
@@ -399,7 +405,7 @@ const Exam = () => {
         params: {
           lang_code: userLanguage,
           course_id: id,
-          exam_id: id,
+          exam_id: examid,
           // course_id: getExamDetails?.data[0]?.course_id,
           // exam_id: getExamDetails?.data[0]?.exam_id,
         },
@@ -412,8 +418,8 @@ const Exam = () => {
           setCountDown(0);
           setSubmitExam(false);
           setExamSubmitted(true);
-          sessionStorage.removeItem("currentUrl");
-          sessionStorage.removeItem("examTime");
+          clearTheInt();
+          sessionStorage.clear();
           navigate("/");
           toast("Exam Succesfully Submitted!!", { type: "success" });
           return true;
@@ -432,7 +438,7 @@ const Exam = () => {
         question_id: selectedQuestionId,
         option_id: selectedOptionId,
         course_id: id,
-        exam_id: id,
+        exam_id: examid,
       },
       headers: {
         "consumer-access-token": userData?.api_token,
@@ -451,7 +457,6 @@ const Exam = () => {
     });
 
     setCurrentUrl(null);
-    sessionStorage.clear("currentUrl");
   };
 
   // start exam
@@ -592,7 +597,7 @@ const Exam = () => {
           </ContentLoader>
         </p>
       ) : getExamDetails === undefined ? (
-        <p className="text-3xl font-semibold text-center m-10">
+        <p className="text-3xl font-semibold text-center m-10 h-full">
           Oops No Exam for this Course
         </p>
       ) : (

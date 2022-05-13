@@ -30,6 +30,7 @@ const Payment = () => {
       .then((response) => {
         if (response?.data?.status === "Success") {
           setProduct(response?.data?.data);
+          setGrandTotal(response?.data?.data?.sale_price);
           setProductLoading(false);
           return true;
         }
@@ -67,7 +68,11 @@ const Payment = () => {
       <div className="sm:p-5 p-5 md:grid md:grid-cols-2 sm:gap-x-4 grid-flow-row place-items-start items-start ">
         {/* --------------------payment method and product for large screen----------------- */}
         <div className="md:hidden block">
-          <ProductYouBuy product={product} grandTotal={grandTotal} />
+          <ProductYouBuy
+            product={product}
+            grandTotal={grandTotal}
+            productLoading={productLoading}
+          />
         </div>
         <PaymentMethod
           product={product}
@@ -76,7 +81,11 @@ const Payment = () => {
           setGrandTotal={setGrandTotal}
         />
         <div className="md:block hidden">
-          <ProductYouBuy product={product} grandTotal={grandTotal} />
+          <ProductYouBuy
+            product={product}
+            grandTotal={grandTotal}
+            productLoading={productLoading}
+          />
         </div>
       </div>
 

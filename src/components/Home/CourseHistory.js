@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import tw from "tailwind-styled-components/dist/tailwind";
-import { DocumentTextIcon, DownloadIcon } from "@heroicons/react/outline";
+import { DownloadIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUserContext } from "../../context/usercontext";
 import axios from "axios";
 import ContentLoader from "react-content-loader";
 import examIcon from "../../assets/exam-icon.png";
-import FileDownload from "js-file-download";
+import { Circle, ProgressProps } from "rc-progress";
 
 const CourseHistory = ({ showButton, slice }) => {
   const [courseHistory, setCourseHistory] = useState([]);
@@ -46,6 +46,9 @@ const CourseHistory = ({ showButton, slice }) => {
     }, 2000);
   }, []);
 
+  useEffect(() => {
+    DownloadCertificate();
+  });
   // percentage from total time to elapsed time
   function totalSeconds(time) {
     var parts = time.split(":");
@@ -69,29 +72,24 @@ const CourseHistory = ({ showButton, slice }) => {
       .post("https://chessmafia.com/php/luxgap/App/api/get-certificate", fd, {
         headers: {
           Accept: "multipart/form-data",
-          "Content-Type": "application/pdf",
+          // "Content-Type": "application/pdf",
           "consumer-access-token": userData?.api_token,
         },
-        responseType: "blob",
+        // responseType: "blob",
       })
-      .then((res) => {
-        FileDownload(res.data, "filename.pdf");
+      .then((response) => {
+        // if (response?.data?.data?.document === null) return false;
+        const json = `https://chessmafia.com/php/luxgap/App/${response?.data?.data?.document}`;
+        const blob = new Blob([json], { type: "application/json" });
+        // const href = URL.createObjectURL(blob);
+        const link = document.getElementById("downloadcertificate");
+        if (link) {
+          link.setAttribute("href", json);
+          link.setAttribute("download", `${response?.data?.data?.document}`);
+        }
       });
-
-    // .then((response) => {
-    //   // Create blob link to download
-    //   const url = URL.createObjectURL(
-    //     new Blob([response.data?.data?.document])
-    //   );
-    //   console.log(url);
-    //   const link = document.createElement("a");
-    //   link.href = url;
-    //   link.setAttribute("download", `FileName.pdf`);
-    //   document.body.appendChild(link);
-    //   link.click();
-    //   link.parentNode.removeChild(link);
-    // });
   };
+
   return (
     <>
       {loading ? (
@@ -184,10 +182,6 @@ const CourseHistory = ({ showButton, slice }) => {
           <div className="grid lg:grid-cols-3 grid-flow-row md:grid-cols-2 gap-x-10 gap-y-5 grid-cols-1 justify-items-center items-center">
             {slice
               ? courseHistory.slice(0, 3).map((course, index) => (
-                  // <Link
-                  //   to={`/class/${course?.course_details?.course_id}`}
-                  //   key={course?.id}
-                  // >
                   <BorderDiv
                     // key={course?.course_details?.course_id}
                     key={course?.id}
@@ -219,6 +213,7 @@ const CourseHistory = ({ showButton, slice }) => {
                         {course?.total_video_count} {t("total_videos")}
                       </p>
                     </Link>
+                    {/* -----------------videos and start exam logic conditionally----------------- */}
                     <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
                       {course?.total_watch_video_count ===
                         course?.total_video_count &&
@@ -254,13 +249,20 @@ const CourseHistory = ({ showButton, slice }) => {
                         course?.total_video_count &&
                       course?.start_exam_info?.is_completed === 1 &&
                       course?.start_exam_info?.is_certified === 1 ? (
-                        <button
-                          className="active:scale-95 duration-100 ease-in-out transition-all"
-                          type="button"
-                          onClick={() => DownloadCertificate()}
+                        <a
+                          href="#"
+                          download="file.pdf"
+                          target="_blank"
+                          id="downloadcertificate"
                         >
-                          <DownloadIcon className="h-5 w-5" />
-                        </button>
+                          <button
+                            className="active:scale-95 duration-100 ease-in-out transition-all"
+                            type="button"
+                            // onClick={() => DownloadCertificate()}
+                          >
+                            <DownloadIcon className="h-5 w-5" />
+                          </button>
+                        </a>
                       ) : course?.total_watch_video_count ===
                           course?.total_video_count &&
                         course?.start_exam_info?.is_completed === 1 &&
@@ -273,7 +275,7 @@ const CourseHistory = ({ showButton, slice }) => {
                     {course?.total_watch_video_count ===
                     course?.total_video_count ? (
                       <div className="flex text-green-600">
-                        <p className="rounded-full w-14 px-2 py-3 text-center h-14 bg-gray-200">
+                        <p className="rounded-full w-14 px-2 py-3 text-center border-green-500 border-2 h-14 bg-gray-200">
                           100%
                         </p>
                         <div className="flex-col mx-2 font-bold">
@@ -282,45 +284,43 @@ const CourseHistory = ({ showButton, slice }) => {
                         </div>
                       </div>
                     ) : (
-                      <div className="flex text-red-600">
-                        <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
-                          {/* {Math.floor(
-                            (100 * course?.total_watch_video_count) / totalVideo
-                          ) || 0} */}
+                      <div className="flex text-red-600 relative">
+                        <div className="absolute top-0 left-0">
+                          <Circle
+                            percent={
+                              Math.floor(
+                                (100 * course?.total_watch_video_count) /
+                                  course?.total_video_count
+                              ) || 0
+                            }
+                            strokeWidth={5}
+                            strokeLinecap="round"
+                            strokeColor="red"
+                            className="h-14 w-14 inline-block "
+                          />
+                        </div>
+                        <p className="rounded-full text-lg  w-14 px-2 py-3 text-center h-14 bg-gray-200">
                           {Math.floor(
                             (100 * course?.total_watch_video_count) /
                               course?.total_video_count
                           ) || 0}
+                          %
                           {/* {Math.floor(
                         (100 * totalSeconds(timeElapsed)) /
                           totalSeconds(`${course?.total_hours}:00`).toString()
                       ) || percentage} */}
-                          %
                         </p>
-                        {/* <p className="w-16 h-10 -rotate-90">
-                    <svg
-                      fill="#D3D3D3"
-                      stroke="red"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeDasharray="160"
-                      strokeDashoffset="160"
-                      className="animate-progress"
-                    >
-                      <circle cx="28" cy="28" r="25"></circle>
-                    </svg>
-                  </p> */}
                         <div className="flex-col mx-2 text-red-600 font-bold">
                           <span className="block text-xl">
-                            {/* {Math.floor(
-                              (100 * course?.total_watch_video_count) /
-                                totalVideo
-                            ) || 0} */}
                             {Math.floor(
                               (100 * course?.total_watch_video_count) /
                                 course?.total_video_count
                             ) || 0}
                             %
+                            {/* {Math.floor(
+                              (100 * course?.total_watch_video_count) /
+                                totalVideo
+                            ) || 0} */}
                             {/* {Math.floor(
                           (100 * totalSeconds(timeElapsed)) /
                             totalSeconds(`${course?.total_hours}:00`).toString()
@@ -373,7 +373,6 @@ const CourseHistory = ({ showButton, slice }) => {
                       </div>
                     )}
                   </BorderDiv>
-                  // </Link>
                 ))
               : courseHistory.map((course, index) => (
                   <BorderDiv
@@ -407,10 +406,12 @@ const CourseHistory = ({ showButton, slice }) => {
                         {course?.total_video_count} {t("total_videos")}
                       </p>
                     </Link>
+                    {/* -----------------videos and start exam logic conditionally----------------- */}
                     <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
                       {course?.total_watch_video_count ===
                         course?.total_video_count &&
-                      course?.start_exam_info?.is_completed === 0 ? (
+                      course?.start_exam_info?.is_completed === 0 &&
+                      course?.attended_course_info?.is_completed === 1 ? (
                         <p className="font-bold flex">
                           <img src={examIcon} className="h-7 w-7 mr-1" />
                           {t("Start_Exam")}
@@ -442,9 +443,20 @@ const CourseHistory = ({ showButton, slice }) => {
                         course?.total_video_count &&
                       course?.start_exam_info?.is_completed === 1 &&
                       course?.start_exam_info?.is_certified === 1 ? (
-                        <button>
-                          <DownloadIcon className="h-5 w-5" />
-                        </button>
+                        <a
+                          href="https://chessmafia.com/php/luxgap/App/"
+                          download="file.pdf"
+                          target="_blank"
+                          id="downloadcertificate"
+                        >
+                          <button
+                            className="active:scale-95 duration-100 ease-in-out transition-all"
+                            type="button"
+                            // onClick={() => DownloadCertificate()}
+                          >
+                            <DownloadIcon className="h-5 w-5" />
+                          </button>
+                        </a>
                       ) : course?.total_watch_video_count ===
                           course?.total_video_count &&
                         course?.start_exam_info?.is_completed === 1 &&
@@ -457,7 +469,7 @@ const CourseHistory = ({ showButton, slice }) => {
                     {course?.total_watch_video_count ===
                     course?.total_video_count ? (
                       <div className="flex text-green-600">
-                        <p className="rounded-full w-14 px-2 py-3 text-center h-14 bg-gray-200">
+                        <p className="rounded-full w-14 px-2 py-3 text-center border-green-500 border-2 h-14 bg-gray-200">
                           100%
                         </p>
                         <div className="flex-col mx-2 font-bold">
@@ -466,49 +478,47 @@ const CourseHistory = ({ showButton, slice }) => {
                         </div>
                       </div>
                     ) : (
-                      <div className="flex text-red-600">
-                        <p className="rounded-full text-xl  w-14 px-2 py-3 text-center h-14 bg-gray-200 border-red-600">
-                          {/* {Math.floor(
-                        (100 * course?.total_watch_video_count) / totalVideo
-                      ) || 0} */}
+                      <div className="flex text-red-600 relative">
+                        <div className="absolute top-0 left-0">
+                          <Circle
+                            percent={
+                              Math.floor(
+                                (100 * course?.total_watch_video_count) /
+                                  course?.total_video_count
+                              ) || 0
+                            }
+                            strokeWidth={6}
+                            strokeLinecap="round"
+                            strokeColor="red"
+                            className="h-14 w-14 inline-block"
+                          />
+                        </div>
+                        <p className="rounded-full text-lg  w-14 px-2 py-3 text-center h-14 bg-gray-200">
                           {Math.floor(
                             (100 * course?.total_watch_video_count) /
                               course?.total_video_count
                           ) || 0}
-                          {/* {Math.floor(
-                    (100 * totalSeconds(timeElapsed)) /
-                      totalSeconds(`${course?.total_hours}:00`).toString()
-                  ) || percentage} */}
                           %
+                          {/* {Math.floor(
+                        (100 * totalSeconds(timeElapsed)) /
+                          totalSeconds(`${course?.total_hours}:00`).toString()
+                      ) || percentage} */}
                         </p>
-                        {/* <p className="w-16 h-10 -rotate-90">
-                <svg
-                  fill="#D3D3D3"
-                  stroke="red"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeDasharray="160"
-                  strokeDashoffset="160"
-                  className="animate-progress"
-                >
-                  <circle cx="28" cy="28" r="25"></circle>
-                </svg>
-              </p> */}
                         <div className="flex-col mx-2 text-red-600 font-bold">
                           <span className="block text-xl">
-                            {/* {Math.floor(
-                          (100 * course?.total_watch_video_count) /
-                            totalVideo
-                        ) || 0} */}
                             {Math.floor(
                               (100 * course?.total_watch_video_count) /
                                 course?.total_video_count
                             ) || 0}
                             %
                             {/* {Math.floor(
-                      (100 * totalSeconds(timeElapsed)) /
-                        totalSeconds(`${course?.total_hours}:00`).toString()
-                    ) || percentage} */}
+                              (100 * course?.total_watch_video_count) /
+                                totalVideo
+                            ) || 0} */}
+                            {/* {Math.floor(
+                          (100 * totalSeconds(timeElapsed)) /
+                            totalSeconds(`${course?.total_hours}:00`).toString()
+                        ) || percentage} */}
                           </span>
                           <span className="block text-sm">
                             {/* {timeElapsed === totalTime ? "Done" : "Pending"} */}

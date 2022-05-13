@@ -24,7 +24,7 @@ const Footer = ({ classFooter, normalFooter }) => {
                 <img
                   src={logo}
                   alt="companylogo"
-                  className="sm:h-16 h-16 cursor-pointer object-center object-contain inline-block"
+                  className="sm:h-20 h-16 cursor-pointer object-center object-contain inline-block"
                 />
               </Link>
             </div>

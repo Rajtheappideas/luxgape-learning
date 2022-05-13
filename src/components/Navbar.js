@@ -6,6 +6,8 @@ import { useUserContext } from "../context/usercontext";
 import useUserData from "../hooks/useUserData";
 import { useTranslation } from "react-i18next";
 import { UserIcon } from "@heroicons/react/solid";
+import France from "../assets/france.png";
+import English from "../assets/great-britain.png";
 
 const Navbar = ({ activeText }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -83,28 +85,30 @@ const Navbar = ({ activeText }) => {
             {localStorage.getItem("lang_code")}
           </p>
           <div className="group-hover:block text-center absolute top-10 -left-5 hidden h-auto z-10">
-            <ul className="top-0 w-28 bg-white shadow-2xl px-3 py-4 rounded-xl">
-              <li className="py-1">
+            <ul className="top-0 w-32 bg-white shadow-2xl px-3 py-4 rounded-xl">
+              <li className="py-1 ">
                 <button
                   onClick={() => {
                     window.location.reload();
                     ChangeLanguage("en");
                     localStorage.setItem("lang_code", "en");
                   }}
-                  className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                  className="text-xl flex items-center justify-start font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                 >
+                  <img src={English} className="h-7 mr-1" />
                   {t("english")}
                 </button>
               </li>
-              <li className="py-1">
+              <li className="py-1 flex items-center justify-start">
                 <button
                   onClick={() => {
                     window.location.reload();
                     ChangeLanguage("fr");
                     localStorage.setItem("lang_code", "fr");
                   }}
-                  className="text-xl font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
+                  className="text-xl flex items-center justify-start font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                 >
+                  <img src={France} className="h-7 mr-1" />
                   {t("français")}
                 </button>
               </li>
@@ -215,7 +219,7 @@ const Navbar = ({ activeText }) => {
             </>
           )}
           {/* ----------------language change------------- */}
-          <div className="flex flex-col relative items-center justify-center w-24 h-10 bg-gray-100 rounded-xl">
+          <div className="flex flex-col relative items-center justify-center w-32 h-12 bg-gray-100 rounded-xl">
             <button
               className="inline-flex items-center"
               onClick={() => setShowDropdown(!showDropdown)}
@@ -232,9 +236,12 @@ const Navbar = ({ activeText }) => {
                     ChangeLanguage("en");
                     setShowDropdown(false);
                     localStorage.setItem("lang_code", "en");
+                    window.location.reload();
                   }}
-                  className="hover:bg-gray-400 w-full hover:text-white"
+                  className="hover:bg-gray-400 text-center w-32 flex items-center  justify-center hover:text-white"
                 >
+                  <img src={English} className="h-7 mr-1" />
+
                   {t("english")}
                 </button>
                 <button
@@ -242,9 +249,12 @@ const Navbar = ({ activeText }) => {
                     ChangeLanguage("fr");
                     setShowDropdown(false);
                     localStorage.setItem("lang_code", "fr");
+                    window.location.reload();
                   }}
-                  className="hover:bg-gray-400 w-full hover:text-white"
+                  className="hover:bg-gray-400 flex items-center justify-center w-32 hover:text-white"
                 >
+                  <img src={France} className="h-7 mr-1" />
+
                   {t("français")}
                 </button>
               </div>

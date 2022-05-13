@@ -6,6 +6,7 @@ import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -16,52 +17,53 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
   const [discountAmount, setdiscountAmount] = useState(null);
   const [couponDate, setCouponDate] = useState(null);
   const [success, setSuccess] = useState(null);
+
   const { t } = useTranslation();
 
   const { userLanguage, userData } = useUserContext();
-  const today = new Date();
-  let dd = today.getDate();
-  let mm = today.getMonth();
-  let yyyy = today.getFullYear();
-
-  let hours = today.getHours();
-  let seconds = today.getSeconds();
-  let milliseconds = today.getMilliseconds();
 
   const navigate = useNavigate();
 
   const makePayment = (token) => {
-    axios("https://chessmafia.com/php/luxgap/App/api/course-booking", {
-      method: "POST",
-      params: {
-        lang_code: userLanguage,
-        course_id: product?.course_details?.course_id,
-        coupon_id: couponId,
-        discount_amount: discountAmount,
-        price: product?.price,
-        grand_total: grandTotal,
-        booking_time: `${hours}:${seconds}:${milliseconds}`,
-        booking_date: `${dd}/${mm}/${yyyy}`,
-        stripe_token: token?.id,
-        payment_method: "stripe",
-      },
-      headers: {
-        "content-type": "application/json",
-        "consumer-access-token": userData?.api_token,
-      },
-    })
-      .then((response) => {
-        console.log(response?.data?.data);
-        if (response?.status === 200) {
-          setModalOpen(true);
-          navigate('/mycourses')
-        }
+    if (grandTotal <= 0.0) {
+      // setGrandTotal("1");
+      console.log("true");
+      return false;
+    } else {
+      axios("https://chessmafia.com/php/luxgap/App/api/course-booking", {
+        method: "POST",
+        params: {
+          lang_code: userLanguage,
+          course_id: product?.course_details?.course_id,
+          coupon_id: couponId,
+          discount_amount: discountAmount,
+          price: product?.sale_price,
+          grand_total: grandTotal,
+          booking_time: moment().format("LTS"),
+          booking_date: moment().format("l"),
+          stripe_token: token?.id,
+          payment_method: "stripe",
+        },
+        headers: {
+          "content-type": "application/json",
+          "consumer-access-token": userData?.api_token,
+        },
       })
-      .catch((err) => {
-        if (err?.response?.data) {
-          console.log(err?.response?.data);
-        }
-      });
+        .then((response) => {
+          console.log(response?.data?.data);
+          if (response?.status === 200) {
+            setModalOpen(true);
+            navigate("/mycourses");
+          }
+        })
+        .catch((err) => {
+          if (err?.response?.data) {
+            console.log(err?.response?.data);
+          }
+        });
+    }
+
+    console.log(token);
   };
 
   const handleCouponeCode = () => {
@@ -87,12 +89,15 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
           setCouponDate(response?.data?.data?.expiry_date);
           if (response?.data?.data?.discount_type === "fixed_course") {
             setGrandTotal(
-              finalAmountFixed(product?.price, response?.data?.data?.amount)
+              finalAmountFixed(
+                product?.sale_price,
+                response?.data?.data?.amount
+              )
             );
           } else if (response?.data?.data?.discount_type === "percent") {
             setGrandTotal(
               finalAmountPercentage(
-                product?.price,
+                product?.sale_price,
                 response?.data?.data?.amount
               )
             );
@@ -113,6 +118,7 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
         return false;
       });
   };
+
   function finalAmountPercentage(price, discountamount) {
     return price - (price * parseFloat(discountamount)) / (100).toFixed(2);
   }
@@ -122,11 +128,11 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
   function getPercentageIncrease(numA, numB) {
     return Math.abs(((numA - numB) / numB) * 100);
   }
-
   useEffect(() => {
-    setGrandTotal(null);
-  }, []);
-
+    if (grandTotal <= 0.0) {
+      setGrandTotal(1);
+    }
+  }, [grandTotal]);
   return (
     <>
       <Successful
@@ -188,9 +194,11 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
           {success === true ? (
             <label className="text-green-500 text-base font-semibold">
               -$
-              {(product?.price - grandTotal).toFixed(2)}&nbsp;(
-              {getPercentageIncrease(grandTotal, product?.price).toFixed(2)} %
-              off) Coupon Applied
+              {(product?.sale_price - grandTotal).toFixed(2)}&nbsp;(
+              {getPercentageIncrease(grandTotal, product?.sale_price).toFixed(
+                2
+              )}{" "}
+              % off) Coupon Applied
             </label>
           ) : success === false ? (
             <label className="text-red-500 text-base font-semibold">
@@ -216,7 +224,9 @@ const PaymentMethod = ({ product, grandTotal, setGrandTotal }) => {
             <StripeCheckout
               token={makePayment}
               amount={
-                grandTotal === null ? product?.price * 100 : grandTotal * 100
+                grandTotal === null
+                  ? product?.sale_price * 100
+                  : grandTotal * 100
               }
               name="Buy course"
               stripeKey={process.env.REACT_APP_KEY}

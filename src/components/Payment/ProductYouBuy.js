@@ -3,11 +3,12 @@ import tw from "tailwind-styled-components/dist/tailwind";
 import { useTranslation } from "react-i18next";
 import { ArrowRightIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import SkeletonLoading from "../SkeletonLoading";
+import { StarIcon } from "@heroicons/react/solid";
 
-const ProductYouBuy = ({ product, grandTotal }) => {
+const ProductYouBuy = ({ product, grandTotal, productLoading }) => {
   const { t } = useTranslation();
   console.log(product);
-
   return (
     <div className="md:border-b-0 md:pb-0 pb-5 border-b-2 border-dashed border-[#c4c4c4] h-full w-full lg:px-10 md:px-3">
       <div className="sm:mb-5 mb-3">
@@ -17,40 +18,83 @@ const ProductYouBuy = ({ product, grandTotal }) => {
       </div>
 
       {/* ----------------product you buy deatils----------- */}
-      <Link to={`/courses/aboutcourse/${product?.course_details?.course_id}`}>
-        <RoundedDiv>
-          {/* =---------------------img-------------- */}
-          <img
-            src={`https://chessmafia.com/php/luxgap/App/${product?.course_details?.image}`}
-            alt={product?.course_details?.title}
-            className="h-1/2 w-full object-center object-cover rounded-tl-[182px] border-b"
-          />
-          <div className="p-5 space-y-10">
-            {/* =---------------------title-------------- */}
+      {productLoading ? (
+        <SkeletonLoading />
+      ) : (
+        <Link to={`/courses/aboutcourse/${product?.course_details?.course_id}`}>
+          <RoundedDiv>
+            {/* =---------------------img-------------- */}
+            <img
+              src={`https://chessmafia.com/php/luxgap/App/${product?.course_details?.image}`}
+              alt={product?.course_details?.title}
+              className="h-1/2 w-full object-center object-cover rounded-tl-[182px] border-b"
+            />
+            <div className="p-5 space-y-10">
+              {/* =---------------------title-------------- */}
 
-            <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
-              {product?.course_details?.title}
-            </p>
-            {/* =---------------------description about course-------------- */}
-
-            <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
-              {product?.course_details?.about}
-            </p>
-
-            <div className="flex items-center space-x-3">
-              <p className="text-secondary">
-                <span className="font-bold text-2xl">
-                  ${grandTotal === null ? product?.price : grandTotal}
-                </span>
-                /Course
+              <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
+                {product?.course_details?.title}
               </p>
-              <button className="w-10 h-10 bg-black rounded-tl-2xl rounded-br-2xl rounded-bl-none rounded-tr-none ">
-                <ArrowRightIcon className="p-2" color="white" />
-              </button>
+              {/* =---------------------description about course-------------- */}
+
+              <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">
+                {product?.course_details?.about}
+              </p>
+              {/* --------------reviews in star----------- */}
+              {product?.review_info_count === null ? null : parseInt(
+                  product?.review_info_count
+                ) === 5 ? (
+                <div className="flex items-start space-x-1">
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                </div>
+              ) : parseInt(product?.review_info_count) === 4 ? (
+                <div className="flex items-start space-x-1">
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                </div>
+              ) : parseInt(product?.review_info_count) === 3 ? (
+                <div className="flex items-start space-x-1">
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                </div>
+              ) : parseInt(product?.review_info_count) === 2 ? (
+                <div className="flex items-start space-x-1">
+                  <StarIcon className="w-8 h-8" color="gold" />
+                  <StarIcon className="w-8 h-8" color="gold" />
+                </div>
+              ) : parseInt(product?.review_info_count) === 1 ? (
+                <div className="flex items-start space-x-1">
+                  <StarIcon className="w-8 h-8" color="gold" />
+                </div>
+              ) : (
+                parseInt(product?.review_info_count) <= 0 && (
+                  <div className="flex items-start space-x-1">
+                    <StarIcon className="w-8 h-8" color="gold" />
+                  </div>
+                )
+              )}
+              <div className="flex items-center space-x-3">
+                <p className="text-secondary">
+                  <span className="font-bold text-2xl">
+                    ${grandTotal === null ? product?.sale_price : grandTotal}
+                  </span>
+                  /Course
+                </p>
+                <button className="w-10 h-10 bg-black rounded-tl-2xl rounded-br-2xl rounded-bl-none rounded-tr-none ">
+                  <ArrowRightIcon className="p-2" color="white" />
+                </button>
+              </div>
             </div>
-          </div>
-        </RoundedDiv>
-      </Link>
+          </RoundedDiv>
+        </Link>
+      )}
     </div>
   );
 };

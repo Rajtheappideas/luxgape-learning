@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { UserCircleIcon } from "@heroicons/react/solid";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
+import { Navigation, Pagination, EffectFade } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/effect-fade";
+
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
@@ -41,19 +43,22 @@ const WhatOurEmployerSay = () => {
   return (
     <>
       {loading ? null : reviews.length === 0 ? null : (
-        <div className="my-5 px-3 sm:px-9" id="testimonial">
-          <p className="text-center sm:text-5xl text-3xl font-semibold sm:my-20 my-5 tracking-wide">
+        <div className="my-5 px-3 sm:px-9 overflow-hidden" id="testimonial">
+          <p className="text-center  sm:text-5xl text-3xl font-semibold sm:my-20 my-5 tracking-wide">
             {t("what_our_employer_say")}
           </p>
           <Swiper
-            slidesPerView={1}
-            spaceBetween={10}
-            // pagination={{
-            //   clickable: true,
-            // }}
-            pagination={true}
+            slidesPerView={"auto"}
+            spaceBetween={"auto"}
+            pagination={{
+              clickable: true,
+            }}
+            // speed={600}
+            // effect={"fade"}
+            // parallax={true}
+            // pagination={true}
             navigation={true}
-            modules={[Navigation]}
+            modules={[Navigation, Pagination, EffectFade]}
             breakpoints={{
               640: {
                 slidesPerView: 1,
@@ -61,19 +66,27 @@ const WhatOurEmployerSay = () => {
               },
               768: {
                 slidesPerView: 1,
+                pagination: true,
                 spaceBetween: 40,
               },
               1024: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+                pagination: true,
+              },
+              1330: {
                 slidesPerView: 2,
                 spaceBetween: 20,
+                pagination: false,
               },
             }}
+            className="overflow-hidden"
           >
             {reviews.map((review) => (
               <SwiperSlide
                 color="red"
                 key={review.id}
-                className="flex w-full items-center h-full"
+                className="flex w-full items-center h-full overflow-hidden"
               >
                 <div className="relative sm:p-8 p-6 hover:shadow-xl border w-full sm:h-60 h-96 rounded-tl-[85px] rounded-br-[85px] rounded-tr-none rounded-bl-none bg-white ">
                   {/* ----------------------profile and name div----------------------- */}
