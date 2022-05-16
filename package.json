@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "autoprefixer": "^10.4.2",
     "axios": "^0.26.1",
+    "file-saver": "^2.0.5",
     "formik": "^2.2.9",
     "i18next": "^21.6.12",
     "i18next-browser-languagedetector": "^6.1.3",

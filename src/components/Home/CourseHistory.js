@@ -8,10 +8,15 @@ import axios from "axios";
 import ContentLoader from "react-content-loader";
 import examIcon from "../../assets/exam-icon.png";
 import { Circle, ProgressProps } from "rc-progress";
+import { saveAs } from "file-saver";
+import Lottie from "react-lottie";
+import Loading from "../../assets/animations/3-dots-loading.json";
 
 const CourseHistory = ({ showButton, slice }) => {
   const [courseHistory, setCourseHistory] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [certificateDownloadLoading, setCertificateDownloadLoading] =
+    useState(false);
 
   const { userData, userLanguage } = useUserContext();
 
@@ -46,9 +51,6 @@ const CourseHistory = ({ showButton, slice }) => {
     }, 2000);
   }, []);
 
-  useEffect(() => {
-    DownloadCertificate();
-  });
   // percentage from total time to elapsed time
   function totalSeconds(time) {
     var parts = time.split(":");
@@ -63,11 +65,11 @@ const CourseHistory = ({ showButton, slice }) => {
   var watchedvideo = 3;
   var total = Math.floor((watchedvideo * 100) / totalVideo);
 
-  const DownloadCertificate = () => {
+  const DownloadCertificate = (id) => {
     const fd = new FormData();
     fd.append("lang_code", userLanguage);
-    fd.append("course_id", 3);
-
+    fd.append("course_id", id);
+    setCertificateDownloadLoading(true);
     axios
       .post("https://chessmafia.com/php/luxgap/App/api/get-certificate", fd, {
         headers: {
@@ -80,16 +82,28 @@ const CourseHistory = ({ showButton, slice }) => {
       .then((response) => {
         // if (response?.data?.data?.document === null) return false;
         const json = `https://chessmafia.com/php/luxgap/App/${response?.data?.data?.document}`;
-        const blob = new Blob([json], { type: "application/json" });
+        // const blob = new Blob([json], { type: "application/json" });
         // const href = URL.createObjectURL(blob);
-        const link = document.getElementById("downloadcertificate");
-        if (link) {
-          link.setAttribute("href", json);
-          link.setAttribute("download", `${response?.data?.data?.document}`);
-        }
+        // const link = document.getElementById("downloadcertificate");
+        // if (link) {
+        //   link.setAttribute("href", json);
+        //   link.setAttribute(
+        //     "download",
+        //     `https://chessmafia.com/php/luxgap/App/${response?.data?.data?.document}`
+        //   );
+        // }
+        saveAs(json);
+        setCertificateDownloadLoading(false);
       });
   };
-
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Loading,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <>
       {loading ? (
@@ -250,26 +264,42 @@ const CourseHistory = ({ showButton, slice }) => {
                       course?.start_exam_info?.is_completed === 1 &&
                       course?.start_exam_info?.is_certified === 1 ? (
                         <a
-                          href="#"
-                          download="file.pdf"
-                          target="_blank"
-                          id="downloadcertificate"
+                        // href="#"
+                        // download="file.pdf"
+                        // target="_blank"
+                        // id="downloadcertificate"
                         >
                           <button
                             className="active:scale-95 duration-100 ease-in-out transition-all"
                             type="button"
-                            // onClick={() => DownloadCertificate()}
+                            onClick={() =>
+                              DownloadCertificate(
+                                course?.course_details?.course_id
+                              )
+                            }
                           >
-                            <DownloadIcon className="h-5 w-5" />
+                            {certificateDownloadLoading ? (
+                              <Lottie
+                                options={defaultOptions}
+                                height={20}
+                                width={70}
+                              />
+                            ) : (
+                              <DownloadIcon className="h-5 w-5" />
+                            )}{" "}
                           </button>
                         </a>
                       ) : course?.total_watch_video_count ===
                           course?.total_video_count &&
                         course?.start_exam_info?.is_completed === 1 &&
                         course?.start_exam_info?.is_certified === 0 ? null : (
-                        <button className="text-red-600 underline font-bold">
-                          {t("Resume")}
-                        </button>
+                        <Link
+                          to={`/class/${course?.course_details?.course_id}`}
+                        >
+                          <button className="text-red-600 underline font-bold">
+                            {t("Resume")}
+                          </button>
+                        </Link>
                       )}
                     </div>
                     {course?.total_watch_video_count ===
@@ -444,26 +474,43 @@ const CourseHistory = ({ showButton, slice }) => {
                       course?.start_exam_info?.is_completed === 1 &&
                       course?.start_exam_info?.is_certified === 1 ? (
                         <a
-                          href="https://chessmafia.com/php/luxgap/App/"
-                          download="file.pdf"
-                          target="_blank"
-                          id="downloadcertificate"
+                        // href="https://chessmafia.com/php/luxgap/App/"
+                        // href="#"
+                        // download="file.pdf"
+                        // target="_blank"
+                        // id="downloadcertificate"
                         >
                           <button
                             className="active:scale-95 duration-100 ease-in-out transition-all"
                             type="button"
-                            // onClick={() => DownloadCertificate()}
+                            onClick={() =>
+                              DownloadCertificate(
+                                course?.course_details?.course_id
+                              )
+                            }
                           >
-                            <DownloadIcon className="h-5 w-5" />
+                            {certificateDownloadLoading ? (
+                              <Lottie
+                                options={defaultOptions}
+                                height={20}
+                                width={70}
+                              />
+                            ) : (
+                              <DownloadIcon className="h-5 w-5" />
+                            )}
                           </button>
                         </a>
                       ) : course?.total_watch_video_count ===
                           course?.total_video_count &&
                         course?.start_exam_info?.is_completed === 1 &&
                         course?.start_exam_info?.is_certified === 0 ? null : (
-                        <button className="text-red-600 underline font-bold">
-                          {t("Resume")}
-                        </button>
+                        <Link
+                          to={`/class/${course?.course_details?.course_id}`}
+                        >
+                          <button className="text-red-600 underline font-bold">
+                            {t("Resume")}
+                          </button>
+                        </Link>
                       )}
                     </div>
                     {course?.total_watch_video_count ===

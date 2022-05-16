@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Footer, Navbar, PaymentMethod, ProductYouBuy } from "../components";
 import { useUserContext } from "../context/usercontext";
-import Lottie from "react-lottie";
 import Loading from "../assets/animations/3-dots-loading.json";
 
 const Payment = () => {
@@ -49,15 +48,6 @@ const Payment = () => {
       });
   }, []);
 
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: Loading,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
-
   return (
     <div className="bg-bgblank">
       <MetaTags>
@@ -87,32 +77,32 @@ const Payment = () => {
             style={{ gridRow: 1 / 3 }}
           />
         ) : ( */}
-          <>
-            <div className="md:hidden block">
-              <ProductYouBuy
-                product={product}
-                grandTotal={grandTotal}
-                productLoading={productLoading}
-                paymentLoading={paymentLoading}
-                setPaymentLoading={setPaymentLoading}
-              />
-            </div>
-            <PaymentMethod
+        <>
+          <div className="md:hidden block">
+            <ProductYouBuy
               product={product}
-              productLoading={productLoading}
               grandTotal={grandTotal}
-              setGrandTotal={setGrandTotal}
+              productLoading={productLoading}
               paymentLoading={paymentLoading}
               setPaymentLoading={setPaymentLoading}
             />
-            <div className="md:block hidden">
-              <ProductYouBuy
-                product={product}
-                grandTotal={grandTotal}
-                productLoading={productLoading}
-              />
-            </div>
-          </>
+          </div>
+          <PaymentMethod
+            product={product}
+            productLoading={productLoading}
+            grandTotal={grandTotal}
+            setGrandTotal={setGrandTotal}
+            paymentLoading={paymentLoading}
+            setPaymentLoading={setPaymentLoading}
+          />
+          <div className="md:block hidden">
+            <ProductYouBuy
+              product={product}
+              grandTotal={grandTotal}
+              productLoading={productLoading}
+            />
+          </div>
+        </>
         {/* )} */}
       </div>
       {/* ----------------------------------foooter---------------------------- */}

@@ -121,7 +121,7 @@ const UserProfile = () => {
               }}
               className={`${
                 editProfile ? "bg-primary" : "bg-orange-200"
-              } font-semibold h-12 w-60 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
+              } font-semibold h-12 w-64 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
             >
               {t("edit_profile")}
             </button>
@@ -133,7 +133,7 @@ const UserProfile = () => {
               }}
               className={`${
                 changePassword ? "bg-primary" : "bg-orange-200"
-              } font-semibold h-12 w-60  rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
+              } font-semibold h-12 w-64 whitespace-nowrap px-1  rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none`}
             >
               {t("change_password")}
             </button>

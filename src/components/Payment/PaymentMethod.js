@@ -7,6 +7,8 @@ import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
 import { toast } from "react-toastify";
 import moment from "moment";
+import Lottie from "react-lottie";
+import Loading from '../../assets/animations/3-dots-loading.json'
 
 const PaymentMethod = ({
   product,
@@ -143,6 +145,15 @@ const PaymentMethod = ({
       setGrandTotal(1);
     }
   }, [grandTotal]);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: Loading,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
   return (
     <>
       <Successful
@@ -246,7 +257,16 @@ const PaymentMethod = ({
                 className="font-bold text-center sm:mr-4 sm:mb-0 mb-2 text-xl bg-primary text-white border  sm:w-48 w-60 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
                 // onClick={makePayment}
               >
-                {t("confirm_and_pay")}
+                {paymentLoading ? (
+                  <Lottie
+                    options={defaultOptions}
+                    height={50}
+                    width={150}
+                    style={{ gridRow: 1 / 3 }}
+                  />
+                ) : (
+                  t("confirm_and_pay")
+                )}
               </button>
             </StripeCheckout>
             <Link to="/courses">

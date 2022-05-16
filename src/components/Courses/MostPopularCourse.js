@@ -799,7 +799,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
         {/* ---------------pagination=------------------- */}
         {!loading && (
           <Paginate
-            className="flex items-center justify-center space-x-5 mt-5"
+            className="flex items-center justify-center space-x-5 mt-10"
             breakLabel="..."
             previousLabel={<ChevronLeftIcon className="h-10" />}
             nextLabel={<ChevronRightIcon className="h-10" />}

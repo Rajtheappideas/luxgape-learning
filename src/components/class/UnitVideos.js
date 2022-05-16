@@ -86,11 +86,11 @@ const UnitVideos = ({ units, handlePassData, loading }) => {
                     </div>
                     <p className="font-medium text-lg">
                       <span className="mx-1 text-xl">
-                        {index + 1}.{" "}
-                        <span className="sm:ml-2 text-lg">{video?.title}</span>
+                        {/* {index + 1}.{" "}/ */}
+                        <span className="sm:ml-1 text-lg">{video?.title}</span>
                       </span>
                     </p>
-                    <p className="font-light text-xl">{video?.description}</p>
+                    {/* <p className="font-light text-xl">{video?.description}</p> */}
                   </div>
                 ))}
               </div>

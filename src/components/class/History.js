@@ -118,7 +118,7 @@ const History = ({ handlePassData, courseDetails }) => {
                 />
               </div>
               <p className="font-bold text-xl sm:ml-2 sm:w-full w-72">
-                {index + 1}.
+                {/* {index + 1}. */}
                 <span className="font-medium text-lg">
                   {unites?.video_list?.title}
                 </span>
