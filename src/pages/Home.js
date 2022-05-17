@@ -19,6 +19,7 @@ import { useUserContext } from "../context/usercontext";
 const Home = () => {
   const { t } = useTranslation();
   const { userData, examSubmitted } = useUserContext();
+  
   return (
     <div className="bg-white overflow-hidden">
       <MetaTags>

@@ -41,7 +41,7 @@ const WhatOurEmployerSay = () => {
       });
   }, []);
   return (
-    <>
+    <div id="testimonial">
       {loading ? null : reviews.length === 0 ? null : (
         <div className="my-5 px-3 sm:px-9 overflow-hidden" id="testimonial">
           <p className="text-center  sm:text-5xl text-3xl font-semibold sm:my-20 my-5 tracking-wide">
@@ -119,7 +119,7 @@ const WhatOurEmployerSay = () => {
           </Swiper>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

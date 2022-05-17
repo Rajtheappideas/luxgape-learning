@@ -8,7 +8,7 @@ import { useUserContext } from "../../context/usercontext";
 import { toast } from "react-toastify";
 import moment from "moment";
 import Lottie from "react-lottie";
-import Loading from '../../assets/animations/3-dots-loading.json'
+import Loading from "../../assets/animations/3-dots-loading.json";
 
 const PaymentMethod = ({
   product,
@@ -35,7 +35,6 @@ const PaymentMethod = ({
   const makePayment = (token) => {
     if (grandTotal <= 0.0) {
       // setGrandTotal("1");
-      console.log("true");
       return false;
     } else {
       setPaymentLoading(true);
@@ -120,6 +119,7 @@ const PaymentMethod = ({
           return true;
         } else if (response?.data?.status === "Error") {
           toast(response?.data?.message, { type: "error" });
+          setGrandTotal(product?.sale_price)
           setSuccess(false);
           setLoading(false);
           return false;
@@ -142,7 +142,7 @@ const PaymentMethod = ({
   }
   useEffect(() => {
     if (grandTotal <= 0.0) {
-      setGrandTotal(1);
+      setGrandTotal(1.0);
     }
   }, [grandTotal]);
 

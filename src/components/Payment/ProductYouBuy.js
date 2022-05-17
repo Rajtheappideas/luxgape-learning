@@ -8,7 +8,6 @@ import { StarIcon } from "@heroicons/react/solid";
 
 const ProductYouBuy = ({ product, grandTotal, productLoading }) => {
   const { t } = useTranslation();
-  console.log(product);
   return (
     <div className="md:border-b-0 md:pb-0 pb-5 border-b-2 border-dashed border-[#c4c4c4] h-full w-full lg:px-10 md:px-3">
       <div className="sm:mb-5 mb-3">

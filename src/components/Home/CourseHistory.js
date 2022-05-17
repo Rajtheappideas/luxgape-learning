@@ -106,7 +106,7 @@ const CourseHistory = ({ showButton, slice }) => {
   };
   return (
     <>
-      {loading ? (
+      {userData && loading ? (
         <>
           <div className="sm:p-10 p-3 relative sm:mb-10 mb-5 flex justify-between items-start sm:items-center">
             <p className="sm:text-5xl text-3xl font-semibold tracking-wide">

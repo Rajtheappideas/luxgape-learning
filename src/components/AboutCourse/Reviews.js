@@ -7,6 +7,7 @@ import { useUserContext } from "../../context/usercontext";
 import { toast, ToastContainer } from "react-toastify";
 import ContentLoader from "react-content-loader";
 import { UserCircleIcon } from "@heroicons/react/outline";
+import { useNavigate } from "react-router-dom";
 
 const Reviews = ({ course_id, userReviews, loading }) => {
   const [review, setReview] = useState("");
@@ -17,6 +18,8 @@ const Reviews = ({ course_id, userReviews, loading }) => {
   const { t } = useTranslation();
 
   const stars = Array(5).fill(0);
+
+  const navigate = useNavigate();
 
   // ---context----------
   const { userData, userLanguage } = useUserContext();
@@ -30,6 +33,7 @@ const Reviews = ({ course_id, userReviews, loading }) => {
     }
     if (userData === null) {
       toast(t("Login First!!!"), { type: "warning" });
+      navigate("/signin");
       return false;
     }
     setLoading(true);

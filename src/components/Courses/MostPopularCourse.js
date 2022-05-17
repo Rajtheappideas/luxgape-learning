@@ -464,6 +464,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                           <input
                             type="number"
                             value={minPrice}
+                            min="0"
                             onChange={(e) => setMinPrice(e.target.value)}
                             className="border rounded-md pl-6 h-10 mr-7 w-20 outline-none"
                           />
@@ -479,6 +480,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                           <input
                             type="number"
                             value={maxPrice}
+                            min="0"
                             onChange={(e) => setMaxPrice(e.target.value)}
                             className="border rounded-md pl-6 h-10 mr-7 w-20 outline-none"
                           />

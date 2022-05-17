@@ -4,7 +4,7 @@ import tw from "tailwind-styled-components";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const Footer = ({ classFooter, normalFooter }) => {
+const Footer = ({ classFooter, normalFooter,executeScroll }) => {
   const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
   const ScrollToTop = () => {
@@ -60,7 +60,9 @@ const Footer = ({ classFooter, normalFooter }) => {
                 <Link to="/aboutus">{t("About_Us")}</Link>
               </List>
               <List>
-                <a href="/#contactus">{t("contact_Us")}</a>
+                <a href="/#contactus" rel="noreferrer noopener">
+                  {t("contact_Us")}
+                </a>
               </List>
               <List>
                 <a href="/#testimonial">{t("testimonials")}</a>
