@@ -12,8 +12,8 @@ import English from "../assets/great-britain.png";
 const Navbar = ({ activeText }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const { userData, ChangeLanguage } = useUserContext();
-  const { handleLogout } = useUserData();
+  const { userData, ChangeLanguage,handleLogout } = useUserContext();
+  // const { handleLogout } = useUserData();
 
   const { t } = useTranslation();
 
@@ -225,7 +225,7 @@ const Navbar = ({ activeText }) => {
               onClick={() => setShowDropdown(!showDropdown)}
             >
               {/* <TranslateIcon className="h-5" /> */}
-              {localStorage.getItem("lang_code")}
+              {window.localStorage.getItem("lang_code")}
               <ChevronDownIcon className="h-5" />
             </button>
 
@@ -235,7 +235,7 @@ const Navbar = ({ activeText }) => {
                   onClick={() => {
                     ChangeLanguage("en");
                     setShowDropdown(false);
-                    localStorage.setItem("lang_code", "en");
+                    window.localStorage.setItem("lang_code", "en");
                     window.location.reload();
                   }}
                   className="hover:bg-gray-400 text-center w-32 flex items-center  justify-center hover:text-white"
@@ -248,7 +248,7 @@ const Navbar = ({ activeText }) => {
                   onClick={() => {
                     ChangeLanguage("fr");
                     setShowDropdown(false);
-                    localStorage.setItem("lang_code", "fr");
+                    window.localStorage.setItem("lang_code", "fr");
                     window.location.reload();
                   }}
                   className="hover:bg-gray-400 flex items-center justify-center w-32 hover:text-white"

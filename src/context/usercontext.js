@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BroadcastChannel } from "broadcast-channel";
 
-import useUserData from "../hooks/useUserData";
-
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
@@ -15,9 +13,9 @@ export const UserProvider = ({ children }) => {
   //   ? JSON.parse(localStorage.getItem("user"))
   //   : null
   const [userLanguage, setUserLanguage] = useState(
-    localStorage.getItem("lang_code")
-      ? localStorage.getItem("lang_code")
-      : localStorage.setItem("lang_code", "en")
+    window.localStorage.getItem("lang_code")
+      ? window.localStorage.getItem("lang_code")
+      : window.localStorage.setItem("lang_code", "en")
   );
   const [courseDetails, setCourseDetails] = useState([]);
   const ChangeLanguage = (lang) => {
@@ -25,11 +23,23 @@ export const UserProvider = ({ children }) => {
   };
   const [interval, setinterval] = useState(null);
   const [examSubmitted, setExamSubmitted] = useState(false);
+
   const navigate = useNavigate();
   const logoutChannel = new BroadcastChannel("handleLogout");
+  const loginChannel = new BroadcastChannel("handleSuccess");
 
   // let interval;
   const currentLanguage = userLanguage || "en";
+
+  const handleSuccess = () => {
+    loginChannel.postMessage("Logged in");
+    loginChannel.onmessage = (event) => {
+      loginChannel.close();
+      window.location.reload();
+      console.log(event);
+    };
+  };
+
   const handleLogout = () => {
     axios("https://chessmafia.com/php/luxgap/App/api/logout", {
       method: "POST",
@@ -41,7 +51,11 @@ export const UserProvider = ({ children }) => {
     })
       .then((res) => {
         if (res?.data?.status === "Success") {
-          // logoutChannel.postMessage("Logged out");
+          logoutChannel.postMessage("Logged out");
+          logoutChannel.onmessage = (event) => {
+            logoutChannel.close();
+            console.log(event);
+          };
           toast("Logged out", { type: "success" });
           localStorage.clear();
           setUserdata(null);
@@ -53,15 +67,24 @@ export const UserProvider = ({ children }) => {
 
   const logoutAllTabsEventListener = () => {
     logoutChannel.onmessage = (event) => {
-      handleLogout();
+      window.location.reload();
       logoutChannel.close();
       console.log(event);
     };
   };
+  const loginAllTabsEventListener = () => {
+    loginChannel.onmessage = (event) => {
+      window.location.reload();
+      loginChannel.close();
+      console.log(event);
+    };
+  };
   useEffect(() => {
-    setUserdata(JSON.parse(localStorage.getItem("user")));
-    logoutAllTabsEventListener();
+    setUserdata(JSON.parse(window.localStorage.getItem("user")));
   }, []);
+  // useEffect(() => {
+  //   logoutAllTabsEventListener();
+  // });
   return (
     <UserContext.Provider
       value={{
@@ -76,6 +99,10 @@ export const UserProvider = ({ children }) => {
         setinterval,
         setExamSubmitted,
         examSubmitted,
+        handleLogout,
+        logoutAllTabsEventListener,
+        handleSuccess,
+        loginAllTabsEventListener,
       }}
     >
       {children}

@@ -2,11 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Footer, Navbar, PaymentMethod, ProductYouBuy } from "../components";
 import { useUserContext } from "../context/usercontext";
-import Loading from "../assets/animations/3-dots-loading.json";
 
 const Payment = () => {
   const [product, setProduct] = useState(null);
@@ -14,9 +13,10 @@ const Payment = () => {
   const [grandTotal, setGrandTotal] = useState(null);
   const [paymentLoading, setPaymentLoading] = useState(false);
 
-  const { userLanguage } = useUserContext();
+  const { userLanguage, userData } = useUserContext();
   const { t } = useTranslation();
   const { id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     setProductLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {

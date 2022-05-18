@@ -23,12 +23,14 @@ const AboutCourse = () => {
   const [units, setUnits] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { userLanguage, userData } = useUserContext();
+  const { userLanguage, userData, logoutAllTabsEventListener } =
+    useUserContext();
 
   const { id } = useParams();
   const { t } = useTranslation();
   // fetch data on first rendering page
   useEffect(() => {
+    logoutAllTabsEventListener();
     setTimeout(() => {
       setLoading(true);
       axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ChangePassword, EditProfile, Footer, Navbar } from "../components";
 import { MetaTags } from "react-meta-tags";
-import { t } from "i18next";
 import { ToastContainer } from "react-toastify";
 import { UserIcon, CameraIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../context/usercontext";

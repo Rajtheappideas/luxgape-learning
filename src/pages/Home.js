@@ -19,10 +19,11 @@ import useUserData from "../hooks/useUserData";
 
 const Home = () => {
   const { t } = useTranslation();
-  const { userData, examSubmitted } = useUserContext();
-  const { logoutAllTabsEventListener } = useUserData();
+  const { userData, logoutAllTabsEventListener, loginAllTabsEventListener } =
+    useUserContext();
   useEffect(() => {
     logoutAllTabsEventListener();
+    loginAllTabsEventListener();
   }, []);
 
   return (

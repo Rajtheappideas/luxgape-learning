@@ -101,7 +101,7 @@ const Signup = () => {
         .then((res) => {
           const data = res?.data?.data;
           if (res.status === 200) {
-            localStorage.setItem("user", JSON.stringify(data));
+            window.localStorage.setItem("user", JSON.stringify(data));
             setUserdata(data);
             navigate("/");
             window.scrollTo({
@@ -169,7 +169,7 @@ const Signup = () => {
               onClick={() => setShowDropdown(!showDropdown)}
             >
               {/* <TranslateIcon className="h-5" /> */}
-              {localStorage.getItem("lang_code")}
+              {window.localStorage.getItem("lang_code")}
               <ChevronDownIcon className="h-5 ml-3" />
             </button>
 
@@ -179,7 +179,7 @@ const Signup = () => {
                   onClick={() => {
                     ChangeLanguage("en");
                     setShowDropdown(false);
-                    localStorage.setItem("lang_code", "en");
+                    window.localStorage.setItem("lang_code", "en");
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >
@@ -189,7 +189,7 @@ const Signup = () => {
                   onClick={() => {
                     ChangeLanguage("fr");
                     setShowDropdown(false);
-                    localStorage.setItem("lang_code", "fr");
+                    window.localStorage.setItem("lang_code", "fr");
                   }}
                   className="hover:bg-gray-400 w-full hover:text-white"
                 >

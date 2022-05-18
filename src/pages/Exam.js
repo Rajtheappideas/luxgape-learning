@@ -34,6 +34,7 @@ const Exam = () => {
   const [intervalId, setIntervalId] = useState(0);
   const [currentUrl, setCurrentUrl] = useState(null);
   const [examTime, setExamTime] = useState(null);
+  const [examId, setExamId] = useState(null);
 
   const currentYear = new Date().getFullYear();
 
@@ -43,7 +44,7 @@ const Exam = () => {
 
   // let interval;
 
-  const { id, examid } = useLocation().state;
+  const { id } = useLocation().state;
   const navigate = useNavigate();
 
   // const startTimer = () => {
@@ -231,7 +232,6 @@ const Exam = () => {
       params: {
         lang_code: userLanguage,
         course_id: id,
-        exam_id: examid,
         page: 1,
       },
       headers: {
@@ -250,6 +250,7 @@ const Exam = () => {
         // );
         setCurrentPage(response?.data?.data?.questions?.current_page);
         setEmployerDetails(response?.data?.data?.employer_id);
+        setExamId(response?.data?.data?.questions?.data[0]?.exam_id);
         setLoading(false);
         return true;
       } else if (response?.data?.status === Error) {
@@ -260,7 +261,7 @@ const Exam = () => {
         return false;
       }
     });
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, []);
 
   // nexy questions
@@ -295,7 +296,7 @@ const Exam = () => {
           params: {
             lang_code: userLanguage,
             course_id: id,
-            exam_id: examid,
+            exam_id: examId,
           },
           headers: {
             "consumer-access-token": userData?.api_token,
@@ -325,7 +326,7 @@ const Exam = () => {
           lang_code: userLanguage,
           question_id: selectedQuestionId,
           option_id: selectedOptionId,
-          exam_id: examid,
+          exam_id: examId,
           course_id: id,
         },
         headers: {
@@ -359,7 +360,7 @@ const Exam = () => {
         params: {
           lang_code: userLanguage,
           course_id: id,
-          exam_id: examid,
+          exam_id: examId,
         },
         headers: {
           "consumer-access-token": userData?.api_token,
@@ -405,7 +406,7 @@ const Exam = () => {
         params: {
           lang_code: userLanguage,
           course_id: id,
-          exam_id: examid,
+          exam_id: examId,
         },
         headers: {
           "consumer-access-token": userData?.api_token,
@@ -436,7 +437,7 @@ const Exam = () => {
         question_id: selectedQuestionId,
         option_id: selectedOptionId,
         course_id: id,
-        exam_id: examid,
+        exam_id: examId,
       },
       headers: {
         "consumer-access-token": userData?.api_token,
@@ -456,7 +457,6 @@ const Exam = () => {
 
     setCurrentUrl(null);
   };
-
   // start exam
   const StartExam = () => {
     setStartExam(false);

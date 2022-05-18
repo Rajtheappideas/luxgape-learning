@@ -21,10 +21,11 @@ const Courses = () => {
 
   const { state } = useLocation();
 
-  const { userLanguage } = useUserContext();
+  const { userLanguage, logoutAllTabsEventListener } = useUserContext();
 
   // fetch data when page loads up first time
   useEffect(() => {
+    logoutAllTabsEventListener();
     setLoading(true);
     setTimeout(() => {
       axios("https://chessmafia.com/php/luxgap/App/api/get-course-list", {

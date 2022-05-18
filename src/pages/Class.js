@@ -36,7 +36,6 @@ const Class = () => {
   const [videoTitle, setVideoTitle] = useState("");
   const [startExamInfo, setStartExamInfo] = useState({});
   const [attendedCourseInfo, setAttendedCourseInfo] = useState({});
-  const [examId, setExamId] = useState(null);
 
   const { id } = useParams();
   const { userLanguage, userData } = useUserContext();
@@ -149,7 +148,6 @@ const Class = () => {
           response?.data?.data?.unites[0]?.video_list[0]?.unite_video_id
         );
         setStartExamInfo(response?.data?.data?.start_exam_info);
-        setExamId(response?.data?.data?.start_exam_info?.exam_id);
         setAttendedCourseInfo(response?.data?.data?.attended_course_info);
         setUnitId(response?.data?.data?.unites[0]?.video_list[0]?.unite_id);
         setCourseId(response?.data?.data?.unites[0]?.video_list[0]?.course_id);
@@ -180,9 +178,14 @@ const Class = () => {
         setStartExamLoading(false);
         return false;
       } else if (response?.data?.status === "Success") {
+        console.log(response?.data?.data);
         setStartExamLoading(false);
         navigate("/exam", {
-          state: { id: id, examid: examId },
+          state: {
+            // id: response?.data?.data?.course_id,
+            id: id,
+            // examid: response?.data?.data?.exam_id,
+          },
         });
         return true;
       } else if (response?.data?.status === "Error") {
@@ -207,6 +210,7 @@ const Class = () => {
     setWathcedTime(watchedtime);
     setVideoTitle(videotitle);
   };
+
   return (
     <div className="relative">
       <MetaTags>

@@ -42,7 +42,7 @@ const SignIn = () => {
   const { t } = useTranslation();
 
   // ------------------usercontext-----------------------
-  const { userData } = useUserContext();
+  const { handleSuccess, loginAllTabsEventListener } = useUserContext();
 
   // --------------------yup-------------
   const SigninSchema = yup.object().shape({
@@ -76,8 +76,10 @@ const SignIn = () => {
         .then((res) => {
           const data = res?.data?.data;
           if (res.status === 200) {
-            localStorage.setItem("user", JSON.stringify(data?.result));
+            window.localStorage.setItem("user", JSON.stringify(data?.result));
             setUserdata(data?.result);
+            handleSuccess();
+            loginAllTabsEventListener();
             navigate("/");
             window.scrollTo({
               top: 0,
