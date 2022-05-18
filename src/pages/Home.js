@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Navbar,
   Footer,
@@ -15,11 +15,16 @@ import { MetaTags } from "react-meta-tags";
 import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
 import { useUserContext } from "../context/usercontext";
+import useUserData from "../hooks/useUserData";
 
 const Home = () => {
   const { t } = useTranslation();
   const { userData, examSubmitted } = useUserContext();
-  
+  const { logoutAllTabsEventListener } = useUserData();
+  useEffect(() => {
+    logoutAllTabsEventListener();
+  }, []);
+
   return (
     <div className="bg-white overflow-hidden">
       <MetaTags>

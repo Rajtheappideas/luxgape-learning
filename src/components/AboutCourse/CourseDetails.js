@@ -33,7 +33,6 @@ const CourseDetails = ({ courseDetails, loading }) => {
   function getPercentageIncrease(numA, numB) {
     return Math.abs(((numA - numB) / numB) * 100);
   }
-  console.log(getPercentageIncrease(20, 400).toFixed(0));
   return (
     <div className="sm:p-10 p-3 w-full">
       {/* ---------------course details paragraph-------------- */}

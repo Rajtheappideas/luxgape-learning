@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ClockIcon, PlayIcon } from "@heroicons/react/solid";
 import { GiCircle } from "react-icons/gi";
 import ContentLoader from "react-content-loader";
 
-const UnitVideos = ({ units, handlePassData, loading }) => {
+const UnitVideos = ({ units, handlePassData, loading, GetUnitVideos }) => {
+  useEffect(() => {
+    GetUnitVideos();
+  }, []);
   return (
     <>
       <div className="sm:px-10 px-3">

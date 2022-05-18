@@ -1,12 +1,14 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/usercontext";
 import { toast } from "react-toastify";
+import { BroadcastChannel } from "broadcast-channel";
 
 const useUserData = () => {
   const { userData, setUserdata } = useUserContext();
   const navigate = useNavigate();
+  const logoutChannel = new BroadcastChannel("handleLogout");
   const handleFailure = (result) => {
     console.log(result);
   };
@@ -21,20 +23,34 @@ const useUserData = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "consumer-access-token": userData?.api_token,
+        "consumer-access-token": userData?.api_token || null,
       },
     })
       .then((res) => {
-        if (res?.data?.data) {
-          toast(res?.data?.message, { type: "success" });
-          localStorage.removeItem("user");
+        if (res?.data?.status === "Success") {
+          // logoutChannel.postMessage("Logged out");
+          toast("Logged out", { type: "success" });
+          localStorage.clear();
           setUserdata(null);
           navigate("/");
         }
       })
       .catch((err) => console.log(err?.response?.data));
   };
-  return { handleLogout, handleFailure, handleSuccess };
+
+  const logoutAllTabsEventListener = () => {
+    logoutChannel.onmessage = (event) => {
+      handleLogout();
+      logoutChannel.close();
+      console.log(event);
+    };
+  };
+  return {
+    handleLogout,
+    handleFailure,
+    handleSuccess,
+    logoutAllTabsEventListener,
+  };
 };
 
 export default useUserData;

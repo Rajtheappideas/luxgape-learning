@@ -406,8 +406,6 @@ const Exam = () => {
           lang_code: userLanguage,
           course_id: id,
           exam_id: examid,
-          // course_id: getExamDetails?.data[0]?.course_id,
-          // exam_id: getExamDetails?.data[0]?.exam_id,
         },
         headers: {
           "consumer-access-token": userData?.api_token,
@@ -464,6 +462,7 @@ const Exam = () => {
     setStartExam(false);
     startTimer();
   };
+
   return (
     <div>
       <MetaTags>
@@ -497,7 +496,12 @@ const Exam = () => {
           {/* ---------------------user details========== */}
           <div className="flex items-center bg-gray-100 p-2 rounded-lg">
             {userDetails?.profile === null ? (
-              <UserIcon className="h- w-9" color="gray" />
+              <>
+                <UserIcon className="h- w-9" color="gray" />
+                <span className="text-2xl font-semibold ml-2 text-center">
+                  {userDetails?.name}
+                </span>
+              </>
             ) : userDetailsLoading ? (
               <ContentLoader
                 speed={1}

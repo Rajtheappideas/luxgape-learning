@@ -81,32 +81,32 @@ const AboutClass = ({
   };
   const handleProgress = (seconds) => {
     setPlayed(convertSeconds(seconds.playedSeconds.toFixed(0)));
-    setGetVideoTotalTime(
-      convertSeconds(playerRef.current.getDuration().toFixed(0))
-    );
+    // setGetVideoTotalTime(
+    //   convertSeconds(playerRef.current.getDuration().toFixed(0))
+    // );
 
-    axios("https://chessmafia.com/php/luxgap/App/api/start-video", {
-      method: "POST",
-      params: {
-        lang_code: userLanguage,
-        video_id: UniteVideoId,
-        unit_id: UniteId,
-        course_id: CourseId,
-        total_video_time: getVideoTotalTime,
-        watching_date: moment().format("l"),
-        watched_time: JSON.parse(localStorage.getItem("playedSeconds")),
-      },
-      headers: {
-        "consumer-access-token": userData?.api_token,
-      },
-    }).then((response) => {
-      if (response?.data?.status === "Success") {
-        console.log(response?.data?.data);
-      } else if (response?.data?.status === "Error") {
-        toast(t("Something went wrong"), { type: "error" });
-        console.log(response?.data);
-      }
-    });
+    // axios("https://chessmafia.com/php/luxgap/App/api/start-video", {
+    //   method: "POST",
+    //   params: {
+    //     lang_code: userLanguage,
+    //     video_id: UniteVideoId,
+    //     unit_id: UniteId,
+    //     course_id: CourseId,
+    //     total_video_time: getVideoTotalTime,
+    //     watching_date: moment().format("l"),
+    //     watched_time: JSON.parse(localStorage.getItem("playedSeconds")),
+    //   },
+    //   headers: {
+    //     "consumer-access-token": userData?.api_token,
+    //   },
+    // }).then((response) => {
+    //   if (response?.data?.status === "Success") {
+    //     console.log(response?.data?.data);
+    //   } else if (response?.data?.status === "Error") {
+    //     toast(t("Something went wrong"), { type: "error" });
+    //     console.log(response?.data);
+    //   }
+    // });
   };
   const handlePlay = () => {
     setPlaying(true);

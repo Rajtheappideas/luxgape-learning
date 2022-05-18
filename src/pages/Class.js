@@ -95,6 +95,41 @@ const Class = () => {
         return false;
       }
     });
+    // axios("https://chessmafia.com/php/luxgap/App/api/get-course-video", {
+    //   method: "POST",
+    //   params: {
+    //     lang_code: userLanguage,
+    //     course_id: id,
+    //   },
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     "consumer-access-token": userData?.api_token,
+    //   },
+    // }).then((response) => {
+    //   if (response?.data?.status === "Success") {
+    //     setUnits(response?.data?.data?.unites);
+    //     setUrl(response?.data?.data?.unites[0]?.video_list[0]?.video);
+    //     setUnitVideoId(
+    //       response?.data?.data?.unites[0]?.video_list[0]?.unite_video_id
+    //     );
+    //     setStartExamInfo(response?.data?.data?.start_exam_info);
+    //     setExamId(response?.data?.data?.start_exam_info?.exam_id);
+    //     setAttendedCourseInfo(response?.data?.data?.attended_course_info);
+    //     setUnitId(response?.data?.data?.unites[0]?.video_list[0]?.unite_id);
+    //     setCourseId(response?.data?.data?.unites[0]?.video_list[0]?.course_id);
+    //     setWathcedTime(null);
+    //     setVideoTitle(response?.data?.data?.unites[0]?.video_list[0]?.title);
+    //     setLoading(false);
+    //     return true;
+    //   } else if (response?.data?.message === "Error") {
+    //     setLoading(false);
+    //     return false;
+    //   }
+    // });
+  }, []);
+
+  const GetUnitVideos = () => {
     axios("https://chessmafia.com/php/luxgap/App/api/get-course-video", {
       method: "POST",
       params: {
@@ -122,12 +157,11 @@ const Class = () => {
         setVideoTitle(response?.data?.data?.unites[0]?.video_list[0]?.title);
         return true;
       } else if (response?.data?.message === "Error") {
-        setLoading(false);
         return false;
       }
     });
-  }, []);
-  
+  };
+
   const StartExam = () => {
     setStartExamLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/start-exam", {
@@ -146,7 +180,6 @@ const Class = () => {
         setStartExamLoading(false);
         return false;
       } else if (response?.data?.status === "Success") {
-        console.log(response?.data?.status);
         setStartExamLoading(false);
         navigate("/exam", {
           state: { id: id, examid: examId },
@@ -288,6 +321,7 @@ const Class = () => {
 
       {openVideo && (
         <UnitVideos
+          GetUnitVideos={GetUnitVideos}
           units={units}
           loading={loading}
           handlePassData={handlePassData}

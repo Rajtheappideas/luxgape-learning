@@ -1,7 +1,7 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 import "./App.css";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
-import { UserProvider } from "./context/usercontext";
+import { Route, Routes, BrowserRouter, useNavigate } from "react-router-dom";
+import { UserProvider, useUserContext } from "./context/usercontext";
 import Loading from "./assets/animations/loading.json";
 import Lottie from "react-lottie";
 import { ErrorBoundary } from "react-error-boundary";
@@ -39,6 +39,7 @@ const App = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
   return (
     <BrowserRouter>
       <ErrorBoundary

@@ -27,7 +27,6 @@ const AboutCourse = () => {
 
   const { id } = useParams();
   const { t } = useTranslation();
-  console.log(courseDetails);
   // fetch data on first rendering page
   useEffect(() => {
     setTimeout(() => {
