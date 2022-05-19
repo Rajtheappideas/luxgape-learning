@@ -465,6 +465,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                             type="number"
                             value={minPrice}
                             min="0"
+                            onInput={(minPrice =!!minPrice && Math.abs(minPrice) >= 0 ? Math.abs(minPrice) : null)}
                             onChange={(e) => setMinPrice(e.target.value)}
                             className="border rounded-md pl-6 h-10 mr-7 w-20 outline-none"
                           />
