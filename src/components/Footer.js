@@ -60,12 +60,12 @@ const Footer = ({ classFooter, normalFooter,executeScroll }) => {
                 <Link to="/aboutus">{t("About_Us")}</Link>
               </List>
               <List>
-                <a href="/#contactus" rel="noreferrer noopener">
+                <a href="#contactus" rel="noreferrer noopener">
                   {t("contact_Us")}
                 </a>
               </List>
               <List>
-                <a href="/#testimonial">{t("testimonials")}</a>
+                <a href="#testimonial">{t("testimonials")}</a>
               </List>
               <List onClick={ScrollToTop}>
                 <Link to="/privacypolicy">{t("privacy_policy")}</Link>

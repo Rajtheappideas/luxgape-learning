@@ -5,7 +5,7 @@ import {
   Navbar,
   WhatOurEmployerSay,
   MostPopularCourses,
-  SearchBoxAndFilter,
+  ContactUs,
 } from "../components";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
@@ -122,6 +122,8 @@ const Courses = () => {
 
       {/* ------------------------WhatOurEmployerSay--------------------------- */}
       <WhatOurEmployerSay />
+      {/* ------------------------Contact us--------------------------- */}
+      <ContactUs />
 
       {/* ----------------------------------foooter---------------------------- */}
       <Footer />
