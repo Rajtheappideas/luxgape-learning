@@ -8,6 +8,7 @@ import * as yup from "yup";
 import { useFormik, Form, FormikProvider, ErrorMessage } from "formik";
 import tw from "tailwind-styled-components/dist/tailwind";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = ({ profileImage, userDetails }) => {
   const [loading, setLoading] = useState(false);
@@ -16,6 +17,7 @@ const EditProfile = ({ profileImage, userDetails }) => {
   const { userData } = useUserContext();
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   //   ---------------language code--------
   const lang_code = localStorage.getItem("lang_code");
@@ -66,12 +68,20 @@ const EditProfile = ({ profileImage, userDetails }) => {
           if (response?.data?.status === "Success") {
             toast(t("profile updated"), { type: "success" });
             setLoading(false);
-            window.location.reload();
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
             return true;
           }
         })
         .catch((err) => {
-          if (err?.response?.data?.status === "Error") {
+          if (
+            err?.response?.data?.message === "Un-Authentic" &&
+            err?.response?.data?.status === "Error"
+          ) {
+            toast(err?.response?.data?.message, { type: "error" });
+            navigate({ to: "/signin" });
+          } else if (err?.response?.data?.status === "Error") {
             toast(err?.response?.data?.message, { type: "error" });
             setLoading(false);
             return false;

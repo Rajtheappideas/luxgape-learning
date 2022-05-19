@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ChangePassword, EditProfile, Footer, Navbar } from "../components";
 import { MetaTags } from "react-meta-tags";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import { UserIcon, CameraIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../context/usercontext";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const UserProfile = () => {
   const [editProfile, setEditProfile] = useState(true);
@@ -18,6 +19,8 @@ const UserProfile = () => {
   const { userData, userLanguage } = useUserContext();
 
   const { t } = useTranslation();
+
+  const navigate = useNavigate();
 
   // image upload
   const handleImageUpload = (e) => {
@@ -40,8 +43,12 @@ const UserProfile = () => {
       },
     })
       .then((response) => {
-        setUserDetails(response?.data?.data);
-        return true;
+        if (response?.status === 401) {
+          toast("Un-Authentic", { type: "error" });
+          navigate({ to: "/signin" });
+        } else {
+          setUserDetails(response?.data?.data);
+        }
       })
       .catch((err) => {
         return false;
