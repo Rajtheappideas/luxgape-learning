@@ -330,6 +330,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
     },
   ];
 
+
   return (
     <>
       <div className="sm:p-10 p-3">
@@ -402,9 +403,9 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                       <p className="text-2xl text-[#C4C4C4] font-semibold sm:mb-5">
                         {t("Skills")}
                       </p>
-                      {skills.map((skill) => (
+                      {skills.map((skill,index) => (
                         <div
-                          key={skill.skills_name}
+                          key={index}
                           className="flex items-center mb-2"
                         >
                           <input
@@ -465,8 +466,10 @@ const MostPopularCourse = ({ courses, loading, state }) => {
                             type="number"
                             value={minPrice}
                             min="0"
-                            onInput={(minPrice =!!minPrice && Math.abs(minPrice) >= 0 ? Math.abs(minPrice) : null)}
-                            onChange={(e) => setMinPrice(e.target.value)}
+                            // onInput={Math.abs(minPrice)}
+                            onChange={(e) =>
+                              setMinPrice(Math.abs(e.target.value))
+                            }
                             className="border rounded-md pl-6 h-10 mr-7 w-20 outline-none"
                           />
                         </div>
