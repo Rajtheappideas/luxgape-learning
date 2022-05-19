@@ -97,12 +97,12 @@ const History = ({ handlePassData, courseDetails }) => {
                 )
               }
             >
-              <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden 2xl:w-[35rem] w-72">
+              <div className="relative mix-blend-darken rounded-xl bg-black overflow-hidden w-72">
                 <video
                   width="100%"
                   height="100%"
                   controls={true}
-                  className="h-48 2xl:h-72 object-center w-full object-cover opacity-70 "
+                  className="h-48 object-center w-full object-cover opacity-70 "
                 >
                   <source
                     src={
