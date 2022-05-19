@@ -30,7 +30,7 @@ const Exam = () => {
   const [seconds, setSeconds] = useState("00");
   const [countDown, setCountDown] = useState();
   const [startExam, setStartExam] = useState(true);
-  const [currentPage, setCurrentPage] = useState();
+  const [currentPage, setCurrentPage] = useState(null);
   const [intervalId, setIntervalId] = useState(0);
   const [currentUrl, setCurrentUrl] = useState(null);
   const [examTime, setExamTime] = useState(null);
@@ -47,52 +47,6 @@ const Exam = () => {
   const { id } = useLocation().state;
   const navigate = useNavigate();
 
-  // const startTimer = () => {
-  //   if (intervalId && interval) {
-  //     clearInterval(intervalId);
-  //     clearInterval(interval);
-  //     setIntervalId(0);
-  //     return;
-  //   }
-  //   const timer = 1 * 20 * 1000;
-  //   const nextDay = timer + new Date().getTime();
-  //   // const timer = getExamDetails?.data[0]?.exam_info?.total_time;
-  //   // const nextDay =
-  //   //   timer.split(":")[0] * 60 * 1000 +
-  //   //   timer.split(":")[1] * 1000 +
-  //   //   new Date().getTime();
-  //   const interval = setInterval(() => {
-  //     const now = new Date().getTime();
-  //     const countdown = nextDay - now;
-  //     const Hours = Math.floor(
-  //       (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //     );
-  //     const Minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
-  //     const Seconds = Math.floor((countdown % (1000 * 60)) / 1000);
-
-  //     if (countdown <= 0) {
-  //       console.log("if");
-  //       SubmitExam();
-  //       setCountDown(0);
-  //       // clearTheInt();
-  //       clearInterval(interval);
-  //       alert("Time is Over!! Exam Automatically submitted");
-  //       // clearInterval(intervalId);
-  //       // clearInterval(interval.current);
-  //       // navigate("/");
-  //     } else {
-  //       sethours(Hours);
-  //       setMinutes(Minutes);
-  //       setSeconds(Seconds);
-  //       sessionStorage.setItem("examTime", countdown);
-  //       // sessionStorage.setItem("examTime", interval);
-  //       setExamTime(sessionStorage.getItem("examTime"));
-  //       setIntervalId(interval);
-  //     }
-  //   }, 1000);
-  // };
-
-  let interval;
   const startTimer = () => {
     if (intervalId && interval) {
       clearInterval(intervalId);
@@ -102,20 +56,13 @@ const Exam = () => {
     }
     // const timer = 1 * 20 * 1000;
     // const nextDay = timer + new Date().getTime();
-
     const timer = getExamDetails?.data[0]?.exam_info?.total_time;
     const nextDay =
       timer.split(":")[0] * 60 * 1000 +
       timer.split(":")[1] * 1000 +
       new Date().getTime();
-    if (examTime === null) {
-      console.log("new timer", examTime);
-    } else {
-      console.log("old timer", examTime);
-    }
-    interval = setInterval(() => {
+    const interval = setInterval(() => {
       const now = new Date().getTime();
-
       const countdown = nextDay - now;
       const Hours = Math.floor(
         (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -143,41 +90,94 @@ const Exam = () => {
         setIntervalId(interval);
       }
     }, 1000);
-    // if (examTime === null) {
-    // } else {
-    //   interval = setInterval(() => {
-    //     // const now = new Date().getTime();
-
-    //     // const countdown = nextDay - now;
-    //     const Hours = Math.floor(
-    //       (examTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    //     );
-    //     const Minutes = Math.floor((examTime % (1000 * 60 * 60)) / (1000 * 60));
-    //     const Seconds = Math.floor((examTime % (1000 * 60)) / 1000);
-    //     console.log(examTime);
-    //     console.log(Hours, Minutes, Seconds);
-    //     if (examTime <= 0) {
-    //       console.log("if");
-    //       SubmitExam();
-    //       setCountDown(0);
-    //       // clearTheInt();
-    //       clearInterval(interval);
-    //       alert("Time is Over!! Exam Automatically submitted");
-    //       // clearInterval(intervalId);
-    //       // clearInterval(interval.current);
-    //       // navigate("/");
-    //     } else {
-    //       sethours(Hours);
-    //       setMinutes(Minutes);
-    //       setSeconds(Seconds);
-    //       sessionStorage.setItem("examTime", examTime);
-    //       // sessionStorage.setItem("examTime", interval);
-    //       setExamTime(sessionStorage.getItem("examTime"));
-    //       setIntervalId(interval);
-    //     }
-    //   }, 1000);
-    // }
   };
+
+  let interval;
+  // const startTimer = () => {
+  //   if (intervalId && interval) {
+  //     clearInterval(intervalId);
+  //     clearInterval(interval);
+  //     setIntervalId(0);
+  //     return;
+  //   }
+  //   // const timer = 1 * 20 * 1000;
+  //   // const nextDay = timer + new Date().getTime();
+
+  //   const timer = getExamDetails?.data[0]?.exam_info?.total_time;
+  //   const nextDay =
+  //     timer.split(":")[0] * 60 * 1000 +
+  //     timer.split(":")[1] * 1000 +
+  //     new Date().getTime();
+  //   if (examTime === null) {
+  //     console.log("new timer", examTime);
+  //   } else {
+  //     console.log("old timer", examTime);
+  //   }
+  //   interval = setInterval(() => {
+  //     const now = new Date().getTime();
+
+  //     const countdown = nextDay - now;
+  //     const Hours = Math.floor(
+  //       (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  //     );
+  //     const Minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
+  //     const Seconds = Math.floor((countdown % (1000 * 60)) / 1000);
+
+  //     if (countdown <= 0) {
+  //       console.log("if");
+  //       SubmitExam();
+  //       setCountDown(0);
+  //       // clearTheInt();
+  //       clearInterval(interval);
+  //       alert("Time is Over!! Exam Automatically submitted");
+  //       // clearInterval(intervalId);
+  //       // clearInterval(interval.current);
+  //       // navigate("/");
+  //     } else {
+  //       sethours(Hours);
+  //       setMinutes(Minutes);
+  //       setSeconds(Seconds);
+  //       sessionStorage.setItem("examTime", countdown);
+  //       // sessionStorage.setItem("examTime", interval);
+  //       setExamTime(sessionStorage.getItem("examTime"));
+  //       setIntervalId(interval);
+  //     }
+  //   }, 1000);
+  //   // if (examTime === null) {
+  //   // } else {
+  //   //   interval = setInterval(() => {
+  //   //     // const now = new Date().getTime();
+
+  //   //     // const countdown = nextDay - now;
+  //   //     const Hours = Math.floor(
+  //   //       (examTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  //   //     );
+  //   //     const Minutes = Math.floor((examTime % (1000 * 60 * 60)) / (1000 * 60));
+  //   //     const Seconds = Math.floor((examTime % (1000 * 60)) / 1000);
+  //   //     console.log(examTime);
+  //   //     console.log(Hours, Minutes, Seconds);
+  //   //     if (examTime <= 0) {
+  //   //       console.log("if");
+  //   //       SubmitExam();
+  //   //       setCountDown(0);
+  //   //       // clearTheInt();
+  //   //       clearInterval(interval);
+  //   //       alert("Time is Over!! Exam Automatically submitted");
+  //   //       // clearInterval(intervalId);
+  //   //       // clearInterval(interval.current);
+  //   //       // navigate("/");
+  //   //     } else {
+  //   //       sethours(Hours);
+  //   //       setMinutes(Minutes);
+  //   //       setSeconds(Seconds);
+  //   //       sessionStorage.setItem("examTime", examTime);
+  //   //       // sessionStorage.setItem("examTime", interval);
+  //   //       setExamTime(sessionStorage.getItem("examTime"));
+  //   //       setIntervalId(interval);
+  //   //     }
+  //   //   }, 1000);
+  //   // }
+  // };
   // console.log(hours, minutes, seconds);
   function clearTheInt() {
     // console.log("clearTheInt", interval);
