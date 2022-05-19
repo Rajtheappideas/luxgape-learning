@@ -60,8 +60,14 @@ const WhatOurEmployerSay = () => {
             navigation={true}
             modules={[Navigation, Pagination, EffectFade]}
             breakpoints={{
+              320: {
+                slidesPerView: 1,
+                pagination: true,
+                spaceBetween: 20,
+              },
               640: {
                 slidesPerView: 1,
+                pagination: true,
                 spaceBetween: 20,
               },
               768: {
@@ -86,12 +92,12 @@ const WhatOurEmployerSay = () => {
               <SwiperSlide
                 color="red"
                 key={review.id}
-                className="flex w-full items-center h-full overflow-hidden"
+                className="flex w-full items-center sm:h-full "
               >
-                <div className="relative sm:p-8 p-6 hover:shadow-xl border w-full sm:h-60 h-96 rounded-tl-[85px] rounded-br-[85px] rounded-tr-none rounded-bl-none bg-white ">
+                <div className="relative sm:p-8 p-6 hover:shadow-xl overflow-auto  scrollbar-hide border w-full sm:h-60 h-96 rounded-tl-[85px] rounded-br-[85px] rounded-tr-none rounded-bl-none bg-white ">
                   {/* ----------------------profile and name div----------------------- */}
 
-                  <div className="flex items-center mb-3">
+                  <div className="flex sm:items-center items-start mb-3">
                     {review?.user_info?.profile === null ? (
                       <UserCircleIcon className="h-16 w-16" color="gray" />
                     ) : (

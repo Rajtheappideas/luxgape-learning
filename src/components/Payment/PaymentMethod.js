@@ -69,10 +69,13 @@ const PaymentMethod = ({
           }
         })
         .catch((err) => {
-          if (err?.response?.data) {
-            console.log(err?.response?.data);
-            toast(t("Oops Somthing went wrong"), { type: "error" });
+          if (err?.response?.data?.message === "Un-Authentic") {
+            window.localStorage.clear();
+            toast("Un-authentic!!", { type: "error" });
             setPaymentLoading(false);
+            setTimeout(() => {
+              navigate("/signin");
+            }, 2000);
           }
         });
     }
@@ -119,14 +122,13 @@ const PaymentMethod = ({
           return true;
         } else if (response?.data?.status === "Error") {
           toast(response?.data?.message, { type: "error" });
-          setGrandTotal(product?.sale_price)
+          setGrandTotal(product?.sale_price);
           setSuccess(false);
           setLoading(false);
           return false;
         }
       })
       .catch((err) => {
-        console.log(err?.response?.data);
         setLoading(false);
         return false;
       });

@@ -55,7 +55,6 @@ const Class = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "consumer-access-token": userData?.api_token,
       },
     }).then((response) => {
       if (response?.data?.status === "Success") {
@@ -88,44 +87,17 @@ const Class = () => {
         // toast("course is started", { type: "success" });
         setLoading(false);
         return true;
-      } else if (response?.data?.message === "already exists") {
-        // toast("course is already started", { type: "warning" });
-        setLoading(false);
-        return false;
+      }
+    })
+    .catch((err) => {
+      if (err?.response?.data?.message === "Un-Authentic") {
+        window.localStorage.clear();
+        toast("Un-authentic!!", { type: "error" });
+        setTimeout(() => {
+          navigate("/signin");
+        }, 2000);
       }
     });
-    // axios("https://chessmafia.com/php/luxgap/App/api/get-course-video", {
-    //   method: "POST",
-    //   params: {
-    //     lang_code: userLanguage,
-    //     course_id: id,
-    //   },
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     "consumer-access-token": userData?.api_token,
-    //   },
-    // }).then((response) => {
-    //   if (response?.data?.status === "Success") {
-    //     setUnits(response?.data?.data?.unites);
-    //     setUrl(response?.data?.data?.unites[0]?.video_list[0]?.video);
-    //     setUnitVideoId(
-    //       response?.data?.data?.unites[0]?.video_list[0]?.unite_video_id
-    //     );
-    //     setStartExamInfo(response?.data?.data?.start_exam_info);
-    //     setExamId(response?.data?.data?.start_exam_info?.exam_id);
-    //     setAttendedCourseInfo(response?.data?.data?.attended_course_info);
-    //     setUnitId(response?.data?.data?.unites[0]?.video_list[0]?.unite_id);
-    //     setCourseId(response?.data?.data?.unites[0]?.video_list[0]?.course_id);
-    //     setWathcedTime(null);
-    //     setVideoTitle(response?.data?.data?.unites[0]?.video_list[0]?.title);
-    //     setLoading(false);
-    //     return true;
-    //   } else if (response?.data?.message === "Error") {
-    //     setLoading(false);
-    //     return false;
-    //   }
-    // });
   }, []);
 
   const GetUnitVideos = () => {
@@ -140,24 +112,34 @@ const Class = () => {
         "Content-Type": "application/json",
         "consumer-access-token": userData?.api_token,
       },
-    }).then((response) => {
-      if (response?.data?.status === "Success") {
-        setUnits(response?.data?.data?.unites);
-        setUrl(response?.data?.data?.unites[0]?.video_list[0]?.video);
-        setUnitVideoId(
-          response?.data?.data?.unites[0]?.video_list[0]?.unite_video_id
-        );
-        setStartExamInfo(response?.data?.data?.start_exam_info);
-        setAttendedCourseInfo(response?.data?.data?.attended_course_info);
-        setUnitId(response?.data?.data?.unites[0]?.video_list[0]?.unite_id);
-        setCourseId(response?.data?.data?.unites[0]?.video_list[0]?.course_id);
-        setWathcedTime(null);
-        setVideoTitle(response?.data?.data?.unites[0]?.video_list[0]?.title);
-        return true;
-      } else if (response?.data?.message === "Error") {
-        return false;
-      }
-    });
+    })
+      .then((response) => {
+        if (response?.data?.status === "Success") {
+          setUnits(response?.data?.data?.unites);
+          setUrl(response?.data?.data?.unites[0]?.video_list[0]?.video);
+          setUnitVideoId(
+            response?.data?.data?.unites[0]?.video_list[0]?.unite_video_id
+          );
+          setStartExamInfo(response?.data?.data?.start_exam_info);
+          setAttendedCourseInfo(response?.data?.data?.attended_course_info);
+          setUnitId(response?.data?.data?.unites[0]?.video_list[0]?.unite_id);
+          setCourseId(
+            response?.data?.data?.unites[0]?.video_list[0]?.course_id
+          );
+          setWathcedTime(null);
+          setVideoTitle(response?.data?.data?.unites[0]?.video_list[0]?.title);
+          return true;
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
+      });
   };
 
   const StartExam = () => {
@@ -171,28 +153,35 @@ const Class = () => {
       headers: {
         "consumer-access-token": userData?.api_token,
       },
-    }).then((response) => {
-      if (response?.data?.message === "your course is not finished") {
-        toast("your course is not finished yet!", { type: "warning" });
+    })
+      .then((response) => {
+        if (response?.data?.message === "your course is not finished") {
+          toast("your course is not finished yet!", { type: "warning" });
 
-        setStartExamLoading(false);
-        return false;
-      } else if (response?.data?.status === "Success") {
-        console.log(response?.data?.data);
-        setStartExamLoading(false);
-        navigate("/exam", {
-          state: {
-            // id: response?.data?.data?.course_id,
-            id: id,
-            // examid: response?.data?.data?.exam_id,
-          },
-        });
-        return true;
-      } else if (response?.data?.status === "Error") {
-        setStartExamLoading(false);
-        return false;
-      }
-    });
+          setStartExamLoading(false);
+          return false;
+        } else if (response?.data?.status === "Success") {
+          console.log(response?.data?.data);
+          setStartExamLoading(false);
+          navigate("/exam", {
+            state: {
+              // id: response?.data?.data?.course_id,
+              id: id,
+              // examid: response?.data?.data?.exam_id,
+            },
+          });
+          return true;
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
+      });
   };
 
   const handlePassData = (

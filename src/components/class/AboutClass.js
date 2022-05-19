@@ -11,6 +11,7 @@ import axios from "axios";
 import { useUserContext } from "../../context/usercontext";
 import moment from "moment";
 import { t } from "i18next";
+import { useNavigate } from "react-router-dom";
 
 const AboutClass = ({
   Url,
@@ -29,6 +30,8 @@ const AboutClass = ({
   const [isReady, setIsReady] = useState(false);
   const [getVideoTotalTime, setGetVideoTotalTime] = useState(null);
   const { userLanguage, userData } = useUserContext();
+  const navigate = useNavigate();
+
 
   function convertSeconds(seconds) {
     var convert = function (x) {
@@ -128,14 +131,21 @@ const AboutClass = ({
       headers: {
         "consumer-access-token": userData?.api_token,
       },
-    }).then((response) => {
-      if (response?.data?.status === "Success") {
-        console.log(response?.data?.data);
-      } else if (response?.data?.status === "Error") {
-        toast(t("Something went wrong"), { type: "error" });
-        console.log(response?.data);
-      }
-    });
+    })
+      .then((response) => {
+        if (response?.data?.status === "Success") {
+          console.log(response?.data?.data);
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
+      });
   };
   const handlePause = () => {
     setPlaying(false);
@@ -156,13 +166,21 @@ const AboutClass = ({
       headers: {
         "consumer-access-token": userData?.api_token,
       },
-    }).then((response) => {
-      if (response?.data?.status === "Success") {
-        console.log(response?.data?.data);
-      } else if (response?.data?.status === "Error") {
-        console.log(response?.data);
-      }
-    });
+    })
+      .then((response) => {
+        if (response?.data?.status === "Success") {
+          console.log(response?.data?.data);
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
+      });
   };
   const handleReady = () => {
     setIsReady(true);

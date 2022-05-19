@@ -214,16 +214,24 @@ const Exam = () => {
         "Content-Type": "application/json",
         "consumer-access-token": userData?.api_token,
       },
-    }).then((response) => {
-      if (response?.data?.status === "Success") {
-        setUserDetails(response?.data?.data);
-        setuserDetailsLoading(false);
-        return true;
-      } else if (response?.data?.status === "Error") {
-        setuserDetailsLoading(false);
-        return false;
-      }
-    });
+    })
+      .then((response) => {
+        if (response?.data?.status === "Success") {
+          setUserDetails(response?.data?.data);
+          setuserDetailsLoading(false);
+          return true;
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setuserDetailsLoading(false);
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
+      });
 
     // fetch the exam questions
     setLoading(true);
@@ -237,30 +245,41 @@ const Exam = () => {
       headers: {
         "consumer-access-token": userData?.api_token,
       },
-    }).then((response) => {
-      if (response?.data?.status === "Success") {
-        setGetExamDetails(response?.data?.data?.questions);
-        setGetExamQuestions(
-          response?.data?.data?.questions?.data[0]?.exam_questions_details
-        );
-        // setCurrentUrl(response?.data?.data?.questions?.first_page_url);
-        // sessionStorage.setItem(
-        //   "currentUrl",
-        //   JSON.stringify(response?.data?.data?.questions?.first_page_url)
-        // );
-        setCurrentPage(response?.data?.data?.questions?.current_page);
-        setEmployerDetails(response?.data?.data?.employer_id);
-        setExamId(response?.data?.data?.questions?.data[0]?.exam_id);
-        setLoading(false);
-        return true;
-      } else if (response?.data?.status === Error) {
-        setLoading(false);
-        return false;
-      } else if (response?.status === 500) {
-        setLoading(false);
-        return false;
-      }
-    });
+    })
+      .then((response) => {
+        if (response?.data?.status === "Success") {
+          setGetExamDetails(response?.data?.data?.questions);
+          setGetExamQuestions(
+            response?.data?.data?.questions?.data[0]?.exam_questions_details
+          );
+          // setCurrentUrl(response?.data?.data?.questions?.first_page_url);
+          // sessionStorage.setItem(
+          //   "currentUrl",
+          //   JSON.stringify(response?.data?.data?.questions?.first_page_url)
+          // );
+          setCurrentPage(response?.data?.data?.questions?.current_page);
+          setEmployerDetails(response?.data?.data?.employer_id);
+          setExamId(response?.data?.data?.questions?.data[0]?.exam_id);
+          setLoading(false);
+          return true;
+        } else if (response?.data?.status === Error) {
+          setLoading(false);
+          return false;
+        } else if (response?.status === 500) {
+          setLoading(false);
+          return false;
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setLoading(false);
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
+      });
     // return () => clearInterval(intervalId);
   }, []);
 

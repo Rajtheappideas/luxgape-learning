@@ -62,11 +62,12 @@ const Reviews = ({ course_id, userReviews, loading }) => {
         }
       })
       .catch((err) => {
-        console.log("review err->", err?.response?.data);
-        if (err?.response?.data?.status === "Error") {
-          toast(err?.response?.data?.message, { type: "error" });
-          setLoading(false);
-          return false;
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
         }
       });
   };

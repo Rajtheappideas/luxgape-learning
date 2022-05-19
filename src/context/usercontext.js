@@ -62,7 +62,13 @@ export const UserProvider = ({ children }) => {
           navigate("/");
         }
       })
-      .catch((err) => console.log(err?.response?.data));
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          navigate("/");
+          window.location.reload();
+        }
+      });
   };
 
   const logoutAllTabsEventListener = () => {

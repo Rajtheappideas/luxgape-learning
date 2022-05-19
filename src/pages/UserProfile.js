@@ -51,7 +51,13 @@ const UserProfile = () => {
         }
       })
       .catch((err) => {
-        return false;
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic", { type: "error" });
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
       });
   }, []);
 

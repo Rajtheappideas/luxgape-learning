@@ -6,8 +6,9 @@ import { MetaTags } from "react-meta-tags";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { Footer, Navbar } from "../components";
 import { useUserContext } from "../context/usercontext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SkeletonLoading from "../components/SkeletonLoading";
+import { toast } from "react-toastify";
 
 const MyCourses = () => {
   const [loading, setLoading] = useState(true);
@@ -15,6 +16,8 @@ const MyCourses = () => {
 
   const { userLanguage, userData, setCourseDetails, courseDetails } =
     useUserContext();
+
+  const navigate = useNavigate();
 
   const ScrollToTop = () => {
     window.scrollTo({
@@ -33,18 +36,25 @@ const MyCourses = () => {
       headers: {
         "consumer-access-token": userData?.api_token,
       },
-    }).then((response) => {
-      if (response?.data?.status === "Success") {
-        setGetMyCourse(response?.data?.data);
-        setCourseDetails(response?.data?.data);
-        setLoading(false);
-        return true;
-      } else if (response?.data?.status === "Error") {
-        console.log(response?.data);
-        setLoading(false);
-        return false;
-      }
-    });
+    })
+      .then((response) => {
+        if (response?.data?.status === "Success") {
+          setGetMyCourse(response?.data?.data);
+          setCourseDetails(response?.data?.data);
+          setLoading(false);
+          return true;
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setLoading(false);
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
+      });
   }, []);
   return (
     <>
@@ -83,7 +93,7 @@ const MyCourses = () => {
                     className="h-1/2 w-full object-center rounded-tl-[182px]"
                   />
                   <div className="sm:p-5 p-3 sm:space-y-5 space-y-3">
-                  <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
+                    <p className="sm:text-3xl text-2xl font-semibold truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-80 w-64">
                       {course?.course_details?.title}
                     </p>
                     <p className="text-secondary text-xl font-normal truncate text-ellipsis whitespace-nowrap overflow-hidden sm:w-72 w-64">

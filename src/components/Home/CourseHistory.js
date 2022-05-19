@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import tw from "tailwind-styled-components/dist/tailwind";
 import { DownloadIcon } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useUserContext } from "../../context/usercontext";
 import axios from "axios";
@@ -11,6 +11,7 @@ import { Circle, ProgressProps } from "rc-progress";
 import { saveAs } from "file-saver";
 import Lottie from "react-lottie";
 import Loading from "../../assets/animations/3-dots-loading.json";
+import { toast } from "react-toastify";
 
 const CourseHistory = ({ showButton, slice }) => {
   const [courseHistory, setCourseHistory] = useState([]);
@@ -21,6 +22,8 @@ const CourseHistory = ({ showButton, slice }) => {
   const { userData, userLanguage } = useUserContext();
 
   const { t } = useTranslation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
@@ -34,6 +37,7 @@ const CourseHistory = ({ showButton, slice }) => {
           "consumer-access-token": userData?.api_token,
         },
       }).then((response) => {
+        // if("response->",response?.status === 401)return console.log("treu")
         if (response?.data?.status === "Success") {
           setCourseHistory(
             response?.data?.data.filter(
@@ -41,14 +45,18 @@ const CourseHistory = ({ showButton, slice }) => {
             )
           );
           setLoading(false);
-          return true;
-        } else if (response?.data?.status === "Error") {
-          console.log(response?.data);
-          setLoading(false);
-          return false;
         }
       });
-    }, 2000);
+      // .catch((err) => {
+      //   if (err?.response?.data?.message === "Un-Authentic") {
+      //     window.localStorage.clear();
+      //     toast("Un-authentic login again", { type: "error" });
+      //     setTimeout(() => {
+      //       navigate("/signin");
+      //     }, 2000);
+      //   }
+      // });
+    }, 1000);
   }, []);
 
   // percentage from total time to elapsed time
@@ -231,15 +239,8 @@ const CourseHistory = ({ showButton, slice }) => {
                     <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
                       {course?.total_watch_video_count ===
                         course?.total_video_count &&
-                      course?.start_exam_info?.is_completed === 0 ? (
-                        <p className="font-bold flex">
-                          <img src={examIcon} className="h-7 w-7 mr-1" />
-                          {t("Start_Exam")}
-                        </p>
-                      ) : course?.total_watch_video_count ===
-                          course?.total_video_count &&
-                        course?.start_exam_info?.is_completed === 1 &&
-                        course?.start_exam_info?.is_certified === 1 ? (
+                      course?.start_exam_info?.is_completed === 1 &&
+                      course?.start_exam_info?.is_certified === 1 ? (
                         <p className="font-bold text-secondary text-base">
                           {t("Download_Certificate")}
                         </p>
@@ -249,6 +250,14 @@ const CourseHistory = ({ showButton, slice }) => {
                         course?.start_exam_info?.is_certified === 0 ? (
                         <p className="font-bold text-red-500">
                           {t("Uncertified")}
+                        </p>
+                      ) : course?.total_watch_video_count ===
+                          course?.total_video_count &&
+                        // course?.start_exam_info?.is_completed === 0 &&
+                        course?.attended_course_info?.is_completed === 1 ? (
+                        <p className="font-bold flex">
+                          <img src={examIcon} className="h-7 w-7 mr-1" />
+                          {t("Start_Exam")}
                         </p>
                       ) : (
                         <p className="font-bold text-red-500">
@@ -440,16 +449,8 @@ const CourseHistory = ({ showButton, slice }) => {
                     <div className="flex justify-between items-center border-t border-b border-gray-300 py-3">
                       {course?.total_watch_video_count ===
                         course?.total_video_count &&
-                      course?.start_exam_info?.is_completed === 0 &&
-                      course?.attended_course_info?.is_completed === 1 ? (
-                        <p className="font-bold flex">
-                          <img src={examIcon} className="h-7 w-7 mr-1" />
-                          {t("Start_Exam")}
-                        </p>
-                      ) : course?.total_watch_video_count ===
-                          course?.total_video_count &&
-                        course?.start_exam_info?.is_completed === 1 &&
-                        course?.start_exam_info?.is_certified === 1 ? (
+                      course?.start_exam_info?.is_completed === 1 &&
+                      course?.start_exam_info?.is_certified === 1 ? (
                         <p className="font-bold text-secondary text-base">
                           {t("Download_Certificate")}
                         </p>
@@ -460,13 +461,21 @@ const CourseHistory = ({ showButton, slice }) => {
                         <p className="font-bold text-red-500">
                           {t("Uncertified")}
                         </p>
+                      ) : course?.total_watch_video_count ===
+                          course?.total_video_count &&
+                        // course?.start_exam_info?.is_completed === 0 &&
+                        course?.attended_course_info?.is_completed === 1 ? (
+                        <p className="font-bold flex">
+                          <img src={examIcon} className="h-7 w-7 mr-1" />
+                          {t("Start_Exam")}
+                        </p>
                       ) : (
                         <p className="font-bold text-red-500">
                           {course?.total_watch_video_count} /{" "}
                           {course?.total_video_count}
                           {/* {course?.total_hours
-            ? `${course?.total_hours}:00`
-            : totalTime} */}
+                ? `${course?.total_hours}:00`
+                : totalTime} */}
                         </p>
                       )}
                       {course?.total_watch_video_count ===
