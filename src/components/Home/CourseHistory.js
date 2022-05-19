@@ -36,26 +36,27 @@ const CourseHistory = ({ showButton, slice }) => {
         headers: {
           "consumer-access-token": userData?.api_token,
         },
-      }).then((response) => {
-        // if("response->",response?.status === 401)return console.log("treu")
-        if (response?.data?.status === "Success") {
-          setCourseHistory(
-            response?.data?.data.filter(
-              (course) => course?.course_details !== null
-            )
-          );
-          setLoading(false);
-        }
-      });
-      // .catch((err) => {
-      //   if (err?.response?.data?.message === "Un-Authentic") {
-      //     window.localStorage.clear();
-      //     toast("Un-authentic login again", { type: "error" });
-      //     setTimeout(() => {
-      //       navigate("/signin");
-      //     }, 2000);
-      //   }
-      // });
+      })
+        .then((response) => {
+          // if("response->",response?.status === 401)return console.log("treu")
+          if (response?.data?.status === "Success") {
+            setCourseHistory(
+              response?.data?.data.filter(
+                (course) => course?.course_details !== null
+              )
+            );
+            setLoading(false);
+          }
+        })
+        .catch((err) => {
+          if (err?.response?.data?.message === "Un-Authentic") {
+            window.localStorage.clear();
+            toast("Un-authentic login again", { type: "error" });
+            setTimeout(() => {
+              navigate("/signin");
+            }, 2000);
+          }
+        });
     }, 1000);
   }, []);
 
