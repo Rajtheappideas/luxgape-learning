@@ -23,7 +23,6 @@ const Home = () => {
   useEffect(() => {
     logoutAllTabsEventListener();
     loginAllTabsEventListener();
-    return () => window.location.reload();
   }, []);
 
   return (
