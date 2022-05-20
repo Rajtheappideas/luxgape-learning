@@ -21,14 +21,13 @@ export const UserProvider = ({ children }) => {
   const ChangeLanguage = (lang) => {
     return setUserLanguage(i18next.changeLanguage(lang));
   };
-  const [interval, setinterval] = useState(null);
   const [examSubmitted, setExamSubmitted] = useState(false);
 
   const navigate = useNavigate();
   const logoutChannel = new BroadcastChannel("handleLogout");
   const loginChannel = new BroadcastChannel("handleSuccess");
 
-  // let interval;
+  let interval;
   const currentLanguage = userLanguage || "en";
 
   const handleSuccess = () => {
@@ -88,9 +87,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     setUserdata(JSON.parse(window.localStorage.getItem("user")));
   }, []);
-  // useEffect(() => {
-  //   logoutAllTabsEventListener();
-  // });
+
   return (
     <UserContext.Provider
       value={{
@@ -101,10 +98,9 @@ export const UserProvider = ({ children }) => {
         currentLanguage,
         setCourseDetails,
         courseDetails,
-        interval,
-        setinterval,
         setExamSubmitted,
         examSubmitted,
+        interval,
         handleLogout,
         logoutAllTabsEventListener,
         handleSuccess,

@@ -43,6 +43,7 @@ const Class = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  let source = axios.CancelToken.source();
   // fetch data on first rendering page
   useEffect(() => {
     setLoading(true);
@@ -56,6 +57,7 @@ const Class = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
+      cancelToken: source.token,
     }).then((response) => {
       if (response?.data?.status === "Success") {
         setCourseDetails(response?.data?.data);
@@ -79,25 +81,28 @@ const Class = () => {
         "Content-Type": "application/json",
         "consumer-access-token": userData?.api_token,
       },
-    }).then((response) => {
-      if (
-        response?.data?.status === "Success" &&
-        response?.data?.message === "success"
-      ) {
-        // toast("course is started", { type: "success" });
-        setLoading(false);
-        return true;
-      }
+      cancelToken: source.token,
     })
-    .catch((err) => {
-      if (err?.response?.data?.message === "Un-Authentic") {
-        window.localStorage.clear();
-        toast("Un-authentic!!", { type: "error" });
-        setTimeout(() => {
-          navigate("/signin");
-        }, 2000);
-      }
-    });
+      .then((response) => {
+        if (
+          response?.data?.status === "Success" &&
+          response?.data?.message === "success"
+        ) {
+          // toast("course is started", { type: "success" });
+          setLoading(false);
+          return true;
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.message === "Un-Authentic") {
+          window.localStorage.clear();
+          toast("Un-authentic!!", { type: "error" });
+          setTimeout(() => {
+            navigate("/signin");
+          }, 2000);
+        }
+      });
+    return () => source.cancel;
   }, []);
 
   const GetUnitVideos = () => {
@@ -254,7 +259,7 @@ const Class = () => {
           >
             {t("Videos")}
             {openVideo && (
-              <hr className=" absolute -bottom-4 left-0 h-1 z-10 bg-green-400 w-20" />
+              <hr className=" absolute -bottom-4 -left-2 sm:left-0 h-1 z-10 bg-green-400 w-20" />
             )}
           </button>
           <button
@@ -359,7 +364,7 @@ const Class = () => {
         >
           {startExamLoading ? "loading..." : t("start_exam")}
         </button>
-        <p className="text-center mt-3 w-2/5 font-normal text-base tracking-wide text-gray-500 mx-auto">
+        <p className="text-center mt-3 sm:w-2/5 w-full font-normal text-base tracking-wide text-gray-500 mx-auto">
           {t("history_exam_paragraph")}
         </p>
       </div>

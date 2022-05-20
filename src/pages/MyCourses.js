@@ -144,7 +144,7 @@ const MyCourses = () => {
                     <div className="flex items-center space-x-3">
                       <p className="text-secondary">
                         <span className="font-bold sm:text-2xl text-xl">
-                          ${course?.price}
+                          ${course?.sale_price}
                         </span>
                         /employee
                       </p>

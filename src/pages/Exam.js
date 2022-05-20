@@ -40,19 +40,17 @@ const Exam = () => {
 
   const { t } = useTranslation();
 
-  const { userData, userLanguage, setExamSubmitted } = useUserContext();
-
-  // let interval;
+  const { userData, userLanguage, setExamSubmitted, interval } =
+    useUserContext();
 
   const { id } = useLocation().state;
   const navigate = useNavigate();
-
   const startTimer = () => {
     if (intervalId && interval) {
       clearInterval(intervalId);
       clearInterval(interval);
       setIntervalId(0);
-      return;
+      return false;
     }
     // const timer = 1 * 20 * 1000;
     // const nextDay = timer + new Date().getTime();
@@ -74,135 +72,35 @@ const Exam = () => {
         console.log("if");
         SubmitExam();
         setCountDown(0);
-        // clearTheInt();
         clearInterval(interval);
+        clearTheInt();
         alert("Time is Over!! Exam Automatically submitted");
-        // clearInterval(intervalId);
-        // clearInterval(interval.current);
-        // navigate("/");
       } else {
         sethours(Hours);
         setMinutes(Minutes);
         setSeconds(Seconds);
-        sessionStorage.setItem("examTime", countdown);
-        // sessionStorage.setItem("examTime", interval);
-        setExamTime(sessionStorage.getItem("examTime"));
+        window.sessionStorage.setItem("examTime", countdown);
+        setExamTime(window.sessionStorage.getItem("examTime"));
         setIntervalId(interval);
       }
     }, 1000);
   };
 
-  let interval;
-  // const startTimer = () => {
-  //   if (intervalId && interval) {
-  //     clearInterval(intervalId);
-  //     clearInterval(interval);
-  //     setIntervalId(0);
-  //     return;
-  //   }
-  //   // const timer = 1 * 20 * 1000;
-  //   // const nextDay = timer + new Date().getTime();
-
-  //   const timer = getExamDetails?.data[0]?.exam_info?.total_time;
-  //   const nextDay =
-  //     timer.split(":")[0] * 60 * 1000 +
-  //     timer.split(":")[1] * 1000 +
-  //     new Date().getTime();
-  //   if (examTime === null) {
-  //     console.log("new timer", examTime);
-  //   } else {
-  //     console.log("old timer", examTime);
-  //   }
-  //   interval = setInterval(() => {
-  //     const now = new Date().getTime();
-
-  //     const countdown = nextDay - now;
-  //     const Hours = Math.floor(
-  //       (countdown % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //     );
-  //     const Minutes = Math.floor((countdown % (1000 * 60 * 60)) / (1000 * 60));
-  //     const Seconds = Math.floor((countdown % (1000 * 60)) / 1000);
-
-  //     if (countdown <= 0) {
-  //       console.log("if");
-  //       SubmitExam();
-  //       setCountDown(0);
-  //       // clearTheInt();
-  //       clearInterval(interval);
-  //       alert("Time is Over!! Exam Automatically submitted");
-  //       // clearInterval(intervalId);
-  //       // clearInterval(interval.current);
-  //       // navigate("/");
-  //     } else {
-  //       sethours(Hours);
-  //       setMinutes(Minutes);
-  //       setSeconds(Seconds);
-  //       sessionStorage.setItem("examTime", countdown);
-  //       // sessionStorage.setItem("examTime", interval);
-  //       setExamTime(sessionStorage.getItem("examTime"));
-  //       setIntervalId(interval);
-  //     }
-  //   }, 1000);
-  //   // if (examTime === null) {
-  //   // } else {
-  //   //   interval = setInterval(() => {
-  //   //     // const now = new Date().getTime();
-
-  //   //     // const countdown = nextDay - now;
-  //   //     const Hours = Math.floor(
-  //   //       (examTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //   //     );
-  //   //     const Minutes = Math.floor((examTime % (1000 * 60 * 60)) / (1000 * 60));
-  //   //     const Seconds = Math.floor((examTime % (1000 * 60)) / 1000);
-  //   //     console.log(examTime);
-  //   //     console.log(Hours, Minutes, Seconds);
-  //   //     if (examTime <= 0) {
-  //   //       console.log("if");
-  //   //       SubmitExam();
-  //   //       setCountDown(0);
-  //   //       // clearTheInt();
-  //   //       clearInterval(interval);
-  //   //       alert("Time is Over!! Exam Automatically submitted");
-  //   //       // clearInterval(intervalId);
-  //   //       // clearInterval(interval.current);
-  //   //       // navigate("/");
-  //   //     } else {
-  //   //       sethours(Hours);
-  //   //       setMinutes(Minutes);
-  //   //       setSeconds(Seconds);
-  //   //       sessionStorage.setItem("examTime", examTime);
-  //   //       // sessionStorage.setItem("examTime", interval);
-  //   //       setExamTime(sessionStorage.getItem("examTime"));
-  //   //       setIntervalId(interval);
-  //   //     }
-  //   //   }, 1000);
-  //   // }
-  // };
-  // console.log(hours, minutes, seconds);
   function clearTheInt() {
-    // console.log("clearTheInt", interval);
-    // clearInterval(interval);
-    // setinterval(clearInterval(interval));
-    // sessionStorage.removeItem("examTime");
     clearInterval(intervalId);
-    // clearInterval(interval);
   }
 
   window.onbeforeunload = () => {
-    setCurrentUrl(sessionStorage.getItem("currentUrl"));
-    setExamTime(sessionStorage.getItem("examTime"));
+    clearTheInt();
+    window.sessionStorage.clear();
   };
 
   window.onunload = () => {
-    // sessionStorage.removeItem("examTime");
-    // sessionStorage.removeItem("currentUrl");
-    // sessionStorage.clear();
+    clearTheInt();
+    window.sessionStorage.removeItem("examTime");
   };
   // fetch user details first rendering
   useEffect(() => {
-    setExamTime(sessionStorage.getItem("examTime"));
-    setCurrentUrl(sessionStorage.getItem("currentUrl"));
-
     setuserDetailsLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/get-user-details", {
       method: "POST",
@@ -280,7 +178,8 @@ const Exam = () => {
           }, 2000);
         }
       });
-    // return () => clearInterval(intervalId);
+
+    return () => clearTheInt();
   }, []);
 
   // nexy questions
@@ -433,7 +332,6 @@ const Exam = () => {
       }).then((response) => {
         if (response?.data?.status === "Success") {
           console.log(response?.data?.data);
-          setCountDown(0);
           setSubmitExam(false);
           setExamSubmitted(true);
           clearTheInt();
@@ -506,7 +404,7 @@ const Exam = () => {
             <Link to="/">
               <LazyLoadImage
                 src={logo}
-                className="w-full h-20 object-contain cursor-pointer"
+                className="w-full sm:h-20 h-10 object-contain cursor-pointer"
                 alt="logo"
               />
             </Link>

@@ -56,8 +56,8 @@ const CourseDescription = ({ courseDetails, loading }) => {
           >
             {/* ---------------left side heading-------------- */}
             <div className="w-2/4">
-              <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
-                <GiCircle className="h-3 w-3 bg-gradient-to-br from-to to-from rounded-full mr-2" />
+              <p className="text-2xl flex flex-col sm:flex-row items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
+                <GiCircle className="max-h-3 max-w-3 sm:block hidden bg-gradient-to-br from-to to-from rounded-full sm:mr-2" />
                 {index + 1} {t("Unit")}
               </p>
               <p className="font-bold text-secondary text-base sm:ml-3">
@@ -73,7 +73,7 @@ const CourseDescription = ({ courseDetails, loading }) => {
               </p>
 
               {/* --------------------course deacription----------------- */}
-              <p className="font-light text-lg">{unit?.unite_info?.about}</p>
+              <p className="font-light text-lg sm:w-full w-60 whitespace-normal break-words">{unit?.unite_info?.about}</p>
 
               {/* --------------------video hours ---------------- */}
               <p className="flex font-semibold text-secondary">

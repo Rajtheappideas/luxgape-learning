@@ -15,7 +15,6 @@ import { MetaTags } from "react-meta-tags";
 import { useTranslation } from "react-i18next";
 import { ToastContainer } from "react-toastify";
 import { useUserContext } from "../context/usercontext";
-import useUserData from "../hooks/useUserData";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -24,6 +23,7 @@ const Home = () => {
   useEffect(() => {
     logoutAllTabsEventListener();
     loginAllTabsEventListener();
+    return () => window.location.reload();
   }, []);
 
   return (

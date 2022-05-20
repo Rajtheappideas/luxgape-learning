@@ -74,14 +74,14 @@ const Faq = () => {
         When you’re ready to go beyond prototyping in Figma, Webflow’s ready to
         help you bring your
       </p>
-      <div className="place-items-center items-center w-full grid gap-10 lg:grid-cols-2 grid-cols-1 grid-flow-row">
+      <div className="place-items-center items-center w-full grid sm:gap-10 lg:grid-cols-2 grid-cols-1 grid-flow-row">
         {/* ---------------------left side div----------------- */}
-        <div className="mx-10 w-full h-screen">
+        <div className="mx-10 w-full sm:h-full">
           {firstFiveFaq.map((faq) => (
             <Faq1 {...faq} key={faq.num} />
           ))}
         </div>
-        <div className="mx-10 w-full h-screen">
+        <div className="mx-10 w-full sm:h-full">
           {secondFiveFaq.map((faq) => (
             <Faq2 {...faq} key={faq.num} />
           ))}

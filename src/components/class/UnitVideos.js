@@ -34,7 +34,7 @@ const UnitVideos = ({ units, handlePassData, loading, GetUnitVideos }) => {
                 <div className="flex items-start space-x-5">
                   <div className="flex items-start flex-col">
                     <p className="text-2xl flex items-center tracking-normal font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-br from-to to-from">
-                      <GiCircle className="h-3 w-3 bg-gradient-to-br from-to to-from rounded-full mr-2" />
+                      <GiCircle className="max-h-3 max-w-3 sm:block hidden bg-gradient-to-br from-to to-from rounded-full mr-2" />
                       {index + 1} Unit : {unit?.unite_info?.unite_title}
                     </p>
                     <p className="flex font-semibold text-secondary sm:my-2">
@@ -44,9 +44,9 @@ const UnitVideos = ({ units, handlePassData, loading, GetUnitVideos }) => {
                         ({unit?.hours} hours)
                       </span>
                     </p>
-                    <p className="font-light text-lg">
+                    <div className="font-light text-lg w-[21rem] break-words sm:w-full">
                       {unit?.unite_info?.about}
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>
