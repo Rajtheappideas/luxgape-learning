@@ -318,34 +318,32 @@ const Exam = () => {
     }
 
     setSubmitExam(true);
-    setTimeout(() => {
-      axios("https://chessmafia.com/php/luxgap/App/api/finish-exam", {
-        method: "POST",
-        params: {
-          lang_code: userLanguage,
-          course_id: id,
-          exam_id: examId,
-        },
-        headers: {
-          "consumer-access-token": userData?.api_token,
-        },
-      }).then((response) => {
-        if (response?.data?.status === "Success") {
-          console.log(response?.data?.data);
-          setSubmitExam(false);
-          setExamSubmitted(true);
-          clearTheInt();
-          sessionStorage.clear();
-          navigate("/");
-          toast(t("Exam Succesfully Submitted"), { type: "success" });
-          return true;
-        } else if (response?.data?.status === "Error") {
-          console.log(response?.data);
-          setSubmitExam(false);
-          return false;
-        }
-      });
-    }, 1000);
+    axios("https://chessmafia.com/php/luxgap/App/api/finish-exam", {
+      method: "POST",
+      params: {
+        lang_code: userLanguage,
+        course_id: id,
+        exam_id: examId,
+      },
+      headers: {
+        "consumer-access-token": userData?.api_token,
+      },
+    }).then((response) => {
+      if (response?.data?.status === "Success") {
+        console.log(response?.data?.data);
+        setSubmitExam(false);
+        setExamSubmitted(true);
+        clearTheInt();
+        sessionStorage.clear();
+        navigate("/");
+        toast(t("Exam Succesfully Submitted"), { type: "success" });
+        return true;
+      } else if (response?.data?.status === "Error") {
+        console.log(response?.data);
+        setSubmitExam(false);
+        return false;
+      }
+    });
     // submit answer is here at every single quetion
     axios("https://chessmafia.com/php/luxgap/App/api/submit-answer", {
       method: "POST",

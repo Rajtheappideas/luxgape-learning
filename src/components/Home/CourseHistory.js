@@ -18,6 +18,7 @@ const CourseHistory = ({ showButton, slice }) => {
   const [loading, setLoading] = useState(true);
   const [certificateDownloadLoading, setCertificateDownloadLoading] =
     useState(false);
+  const [courseId, setCourseId] = useState(null);
 
   const { userData, userLanguage } = useUserContext();
 
@@ -79,14 +80,12 @@ const CourseHistory = ({ showButton, slice }) => {
     fd.append("lang_code", userLanguage);
     fd.append("course_id", id);
     setCertificateDownloadLoading(true);
+    console.log(id);
     axios
       .post("https://chessmafia.com/php/luxgap/App/api/get-certificate", fd, {
         headers: {
-          Accept: "multipart/form-data",
-          // "Content-Type": "application/pdf",
           "consumer-access-token": userData?.api_token,
         },
-        // responseType: "blob",
       })
       .then((response) => {
         // if (response?.data?.data?.document === null) return false;
@@ -206,8 +205,8 @@ const CourseHistory = ({ showButton, slice }) => {
             {slice
               ? courseHistory.slice(0, 3).map((course, index) => (
                   <BorderDiv
-                    // key={course?.course_details?.course_id}
-                    key={course?.id}
+                    key={course?.course_details?.course_id}
+                    // key={course?.id}
                     className={`${
                       course?.total_watch_video_count ===
                       course?.total_video_count
@@ -282,13 +281,15 @@ const CourseHistory = ({ showButton, slice }) => {
                           <button
                             className="active:scale-95 duration-100 ease-in-out transition-all"
                             type="button"
-                            onClick={() =>
+                            onClick={() => {
                               DownloadCertificate(
                                 course?.course_details?.course_id
-                              )
-                            }
+                              );
+                              setCourseId(course?.course_details?.course_id);
+                            }}
                           >
-                            {certificateDownloadLoading ? (
+                            {certificateDownloadLoading &&
+                            course?.course_details?.course_id === courseId ? (
                               <Lottie
                                 options={defaultOptions}
                                 height={20}
@@ -296,7 +297,7 @@ const CourseHistory = ({ showButton, slice }) => {
                               />
                             ) : (
                               <DownloadIcon className="h-5 w-5" />
-                            )}{" "}
+                            )}
                           </button>
                         </a>
                       ) : course?.total_watch_video_count ===
@@ -416,8 +417,8 @@ const CourseHistory = ({ showButton, slice }) => {
                 ))
               : courseHistory.map((course, index) => (
                   <BorderDiv
-                    // key={course?.course_details?.course_id}
-                    key={course?.id}
+                    key={course?.course_details?.course_id}
+                    // key={index}
                     className={`${
                       course?.total_watch_video_count ===
                       course?.total_video_count
@@ -493,13 +494,15 @@ const CourseHistory = ({ showButton, slice }) => {
                           <button
                             className="active:scale-95 duration-100 ease-in-out transition-all"
                             type="button"
-                            onClick={() =>
+                            onClick={() => {
                               DownloadCertificate(
                                 course?.course_details?.course_id
-                              )
-                            }
+                              );
+                              setCourseId(course?.course_details?.course_id);
+                            }}
                           >
-                            {certificateDownloadLoading ? (
+                            {certificateDownloadLoading &&
+                            course?.course_details?.course_id === courseId ? (
                               <Lottie
                                 options={defaultOptions}
                                 height={20}

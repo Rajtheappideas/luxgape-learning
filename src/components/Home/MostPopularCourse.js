@@ -20,33 +20,30 @@ const MostPopularCourse = ({ showButton, showEclipse }) => {
     });
   };
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(true);
-      axios("https://chessmafia.com/php/luxgap/App/api/get-popular-course", {
-        method: "POST",
-        params: {
-          lang_code: userLanguage,
-        },
-      })
-        .then((response) => {
-          if (response?.data?.status === "Success") {
-            // setMostPopularCourse(response?.data?.data);
-            setMostPopularCourse(
-              response?.data?.data.filter(
-                (course) => course?.course_details !== null
-              )
-            );
-            setLoading(false);
-            return true;
-          }
-        })
-        .catch((err) => {
-          console.log(err?.response?.data);
+    setLoading(true);
+    axios("https://chessmafia.com/php/luxgap/App/api/get-popular-course", {
+      method: "POST",
+      params: {
+        lang_code: userLanguage,
+      },
+    })
+      .then((response) => {
+        if (response?.data?.status === "Success") {
+          // setMostPopularCourse(response?.data?.data);
+          setMostPopularCourse(
+            response?.data?.data.filter(
+              (course) => course?.course_details !== null
+            )
+          );
           setLoading(false);
-          return false;
-        });
-    }, 3000);
-    return () => {};
+        }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.status === "Error") {
+          window.location.reload();
+          setLoading(false);
+        }
+      });
   }, []);
 
   return (

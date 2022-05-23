@@ -57,7 +57,7 @@ const Courses = () => {
             return false;
           }
         });
-    }, 2000);
+    }, 1000);
     if (state === null) return false;
   }, []);
   return (

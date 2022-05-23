@@ -37,7 +37,8 @@ const History = ({ handlePassData, courseDetails }) => {
   }, []);
   return (
     <>
-      <div className="grid sm:gap-x-16 gap-y-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:place-items-start place-items-center md:items-start items-center grid-flow-row sm:p-10 p-3">
+      {/* <div className="grid sm:gap-x-16 gap-y-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:place-items-start place-items-center md:items-start items-center grid-flow-row sm:p-10 p-3"> */}
+      <div className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 md:place-items-start place-items-center md:items-start items-center gap-5 py-5 border-b border-[#c4c4c4] sm:p-10 p-3">
         {loading ? (
           <>
             <ContentLoader
@@ -118,7 +119,6 @@ const History = ({ handlePassData, courseDetails }) => {
                 />
               </div>
               <p className="font-bold text-xl sm:ml-2 sm:w-full w-72">
-                {/* {index + 1}. */}
                 <span className="font-medium text-lg">
                   {unites?.video_list?.title}
                 </span>

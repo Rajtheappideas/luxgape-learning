@@ -46,6 +46,7 @@ const Class = () => {
   let source = axios.CancelToken.source();
   // fetch data on first rendering page
   useEffect(() => {
+    GetUnitVideos();
     setLoading(true);
     axios("https://chessmafia.com/php/luxgap/App/api/view-course-detail", {
       method: "POST",
@@ -347,27 +348,32 @@ const Class = () => {
         />
       )}
       {/* start Exam button */}
-      <div className="text-center my-10 ">
-        <button
-          type="button"
-          className={`${
-            attendedCourseInfo?.is_completed === 0 && "cursor-not-allowed"
-          } h-10 active:scale-95 duration-100 ease-in-out transition-all delay-75 w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none `}
-          disabled={attendedCourseInfo?.is_completed === 0}
-          onClick={() => {
-            attendedCourseInfo?.is_completed === 1 &&
-            startExamInfo?.is_completed === 1
-              ? toast(t("Exam Is already submitted"), { type: "warning" })
-              : StartExam();
-            // StartExam();
-          }}
-        >
-          {startExamLoading ? "loading..." : t("start_exam")}
-        </button>
-        <p className="text-center mt-3 sm:w-2/5 w-full font-normal text-base tracking-wide text-gray-500 mx-auto">
-          {t("history_exam_paragraph")}
-        </p>
-      </div>
+      {!loading && (
+        <div className="text-center my-10">
+          <button
+            type="button"
+            className={`${
+              attendedCourseInfo?.is_completed === 0 && "cursor-not-allowed"
+            } h-10 active:scale-95 duration-100 ease-in-out transition-all delay-75 w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none `}
+            disabled={
+              attendedCourseInfo?.is_completed === 0 ||
+              attendedCourseInfo === null
+            }
+            onClick={() => {
+              attendedCourseInfo?.is_completed === 1 &&
+              startExamInfo?.is_completed === 1
+                ? toast(t("Exam Is already submitted"), { type: "warning" })
+                : StartExam();
+              // StartExam();
+            }}
+          >
+            {startExamLoading ? "loading..." : t("start_exam")}
+          </button>
+          <p className="text-center mt-3 sm:w-2/5 w-full font-normal text-base tracking-wide text-gray-500 mx-auto">
+            {t("history_exam_paragraph")}
+          </p>
+        </div>
+      )}
       {/* -------------most popular cousrse----------------- */}
       <MostPopularCourse showButton={false} />
 
