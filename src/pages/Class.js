@@ -348,13 +348,20 @@ const Class = () => {
         />
       )}
       {/* start Exam button */}
-      {!loading && (
+      {loading ? (
+        "Loading"
+      ) : (
         <div className="text-center my-10">
           <button
             type="button"
             className={`${
               attendedCourseInfo?.is_completed === 0 && "cursor-not-allowed"
-            } h-10 active:scale-95 duration-100 ease-in-out transition-all delay-75 w-60 text-gray-500 font-semibold bg-gray-200  text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none `}
+            } ${
+              attendedCourseInfo?.is_completed === 0 ||
+              attendedCourseInfo === null
+                ? "text-gray-500 bg-gray-200 "
+                : "text-white bg-gradient-to-r from-from to-to"
+            } h-10 active:scale-95 duration-100 ease-in-out transition-all  delay-75 w-60 font-semibold text-center rounded-tl-3xl rounded-br-3xl rounded-bl-none rounded-tr-none `}
             disabled={
               attendedCourseInfo?.is_completed === 0 ||
               attendedCourseInfo === null

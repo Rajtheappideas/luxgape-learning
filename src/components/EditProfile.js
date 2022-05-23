@@ -80,7 +80,8 @@ const EditProfile = ({ profileImage, userDetails }) => {
             err?.response?.data?.status === "Error"
           ) {
             toast(err?.response?.data?.message, { type: "error" });
-            navigate({ to: "/signin" });
+            setLoading(false);
+            navigate("/signin");
           } else if (err?.response?.data?.status === "Error") {
             toast(err?.response?.data?.message, { type: "error" });
             setLoading(false);
