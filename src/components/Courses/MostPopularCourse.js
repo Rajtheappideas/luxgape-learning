@@ -35,7 +35,7 @@ const MostPopularCourse = ({ courses, loading, state }) => {
   const [searchedCourses, setSearchedCourses] = useState([]);
   const [courseNotFound, setCourseNotFound] = useState(false);
 
-  const { userLanguage } = useUserContext();
+  const { userLanguage,userData } = useUserContext();
 
   // ----------pagination logic-------
   const coursesPerPage = 6;

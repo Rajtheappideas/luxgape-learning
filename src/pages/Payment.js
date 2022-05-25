@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { Footer, Navbar, PaymentMethod, ProductYouBuy } from "../components";
 import { useUserContext } from "../context/usercontext";
@@ -28,10 +28,16 @@ const Payment = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "consumer-access-token": userData?.api_token,
       },
     })
       .then((response) => {
-        if (response?.data?.status === "Success") {
+        if (response?.data?.data?.is_booked_count > 0) {
+          toast("Course is already purchased!!", { type: "warning" });
+          setTimeout(() => {
+            navigate("/mycourses");
+          }, 1000);
+        } else if (response?.data?.status === "Success") {
           setProduct(response?.data?.data);
           setGrandTotal(response?.data?.data?.sale_price);
           setProductLoading(false);

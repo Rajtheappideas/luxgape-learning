@@ -7,7 +7,7 @@ import main from "../../assets/main.jpg";
 import rocket from "../../assets/rocket.png";
 import { useTranslation } from "react-i18next";
 import { toast, ToastContainer } from "react-toastify";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Herosection = () => {
   const [searchValue, setSearchValue] = useState("");

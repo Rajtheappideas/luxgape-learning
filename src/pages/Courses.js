@@ -8,7 +8,7 @@ import {
   ContactUs,
 } from "../components";
 import { useTranslation } from "react-i18next";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import axios from "axios";
 import { useUserContext } from "../context/usercontext";
 import { useLocation } from "react-router-dom";

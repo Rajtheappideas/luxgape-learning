@@ -13,7 +13,6 @@ import {
   SkillsYouGet,
   MostPopularCourse,
 } from "../components";
-import Eclipse from "../components/Eclipse";
 import { useUserContext } from "../context/usercontext";
 
 const AboutCourse = () => {

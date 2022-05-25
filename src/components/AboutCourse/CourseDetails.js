@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CheckCircleIcon, ShareIcon, XIcon } from "@heroicons/react/solid";
 import { BsStarFill, BsStarHalf, BsFillPlayCircleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ReactPlayer from "react-player";
 import ContentLoader from "react-content-loader";
@@ -15,6 +15,7 @@ import {
   LinkedinShareButton,
   LinkedinIcon,
 } from "react-share";
+import { toast } from "react-toastify";
 
 const CourseDetails = ({ courseDetails, loading }) => {
   const [openModal, setOpenModal] = useState(false);
@@ -25,6 +26,7 @@ const CourseDetails = ({ courseDetails, loading }) => {
       behavior: "smooth",
     });
   };
+  const navigate = useNavigate();
   const salePrice = courseDetails?.sale_price;
   // const price = Math.round(salePrice / courseDetails?.price) * 100;
   const discount = 50 / 100;
@@ -32,6 +34,18 @@ const CourseDetails = ({ courseDetails, loading }) => {
 
   function getPercentageIncrease(numA, numB) {
     return Math.abs(((numA - numB) / numB) * 100);
+  }
+  function IsCoursePurchased() {
+    if (courseDetails?.is_booked_count > 0) {
+      toast("Course is already purchased!!", { type: "warning" });
+      setTimeout(() => {
+        navigate("/mycourses");
+      }, 1000);
+    } else {
+      navigate(
+        `/courses/aboutcourse/payment/${courseDetails?.course_details?.course_id}`
+      );
+    }
   }
   return (
     <div className="sm:p-10 p-3 w-full">
@@ -195,18 +209,13 @@ const CourseDetails = ({ courseDetails, loading }) => {
 
             {/* ----------------enroill now & share----------------- */}
             <div className="relative flex flex-row items-center lg:justify-start justify-center w-full sm:space-x-4 space-x-2">
-              <Link
-                // to={`/courses/aboutcourse/payment/${courseDetails?.course_details?.course_id}`}
-                to={{
-                  pathname: `/courses/aboutcourse/payment/${courseDetails?.course_details?.course_id}`,
-                  state: { courseDetails },
-                }}
-                onClick={ScrollToTop}
+              <button
+                type="button"
+                className="active:scale-95 duration-100 ease-in transition-all bg-gradient-to-r  from-to to-from text-white text-center uppercase sm:w-72 w-52 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none"
+                onClick={() => IsCoursePurchased()}
               >
-                <button className="bg-gradient-to-r from-to to-from text-white text-center uppercase sm:w-72 w-52 h-14 font-bold tracking-wider rounded-tl-[30px] rounded-br-[30px] rounded-bl-none rounded-tr-none">
-                  {t("enroll_now")}
-                </button>
-              </Link>
+                {t("enroll_now")}
+              </button>
               <button
                 type="button"
                 onClick={() => setOpenModal(true)}

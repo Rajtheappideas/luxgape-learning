@@ -14,8 +14,7 @@ const MyCourses = () => {
   const [loading, setLoading] = useState(true);
   const [getMyCourse, setGetMyCourse] = useState([]);
 
-  const { userLanguage, userData, setCourseDetails, courseDetails } =
-    useUserContext();
+  const { userLanguage, userData, setCourseDetails } = useUserContext();
 
   const navigate = useNavigate();
 

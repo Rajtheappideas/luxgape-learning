@@ -57,6 +57,7 @@ const Class = () => {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "consumer-access-token": userData?.api_token,
       },
       cancelToken: source.token,
     }).then((response) => {

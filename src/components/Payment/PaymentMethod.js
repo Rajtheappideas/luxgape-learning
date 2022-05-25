@@ -58,14 +58,14 @@ const PaymentMethod = ({
         },
       })
         .then((response) => {
-          console.log(response?.data?.data);
-          if (response?.data?.status === "Success") {
+          console.log(response?.data);
+          if (response?.data?.message === "allredy exist in your booking.") {
+            toast("Course is already purchased!", { type: "warning" });
+            setPaymentLoading(false);
+          } else if (response?.data?.status === "Success") {
             toast(t("Payment Successfully"), { type: "success" });
             setPaymentLoading(false);
             navigate("/mycourses");
-            // setModalOpen(true);
-
-            return true;
           }
         })
         .catch((err) => {
@@ -76,6 +76,8 @@ const PaymentMethod = ({
             setTimeout(() => {
               navigate("/signin");
             }, 2000);
+          } else if (err?.response?.status === "Error") {
+            paymentLoading(false);
           }
         });
     }
@@ -142,6 +144,7 @@ const PaymentMethod = ({
   function getPercentageIncrease(numA, numB) {
     return Math.abs(((numA - numB) / numB) * 100);
   }
+
   useEffect(() => {
     if (grandTotal <= 0.0) {
       setGrandTotal(1.0);
@@ -156,6 +159,7 @@ const PaymentMethod = ({
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
   return (
     <>
       <Successful
@@ -256,7 +260,7 @@ const PaymentMethod = ({
             >
               <button
                 type="button"
-                className="font-bold text-center sm:mr-4 sm:mb-0 mb-2 text-xl bg-primary text-white border  sm:w-48 w-60 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
+                className="font-bold text-center active:scale-95 duration-100 ease-in transition-all sm:mr-4 sm:mb-0 mb-2 text-xl bg-primary text-white border  sm:w-48 w-60 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
                 // onClick={makePayment}
               >
                 {paymentLoading ? (
@@ -274,7 +278,7 @@ const PaymentMethod = ({
             <Link to="/courses">
               <button
                 type="button"
-                className="font-bold text-center text-xl border border-secondary sm:w-28 w-60 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
+                className="font-bold text-center active:scale-95 duration-100 ease-in transition-all text-xl border border-secondary sm:w-28 w-60 h-14 rounded-tl-3xl  rounded-br-3xl rounded-tr-none rounded-bl-none"
               >
                 {t("cancel")}
               </button>

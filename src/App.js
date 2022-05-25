@@ -75,7 +75,14 @@ const App = () => {
                 element={<TermsAndConditions />}
               />
               <Route path="/faq" element={<Faq />} />
-              <Route path="/courses" element={<Courses />} />
+              <Route
+                path="/courses"
+                element={
+                  <PrivateRoute>
+                    <Courses />
+                  </PrivateRoute>
+                }
+              />
               <Route
                 path="/mycourses"
                 element={

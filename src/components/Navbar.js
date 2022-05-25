@@ -13,7 +13,6 @@ const Navbar = ({ activeText }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const { userData, ChangeLanguage,handleLogout } = useUserContext();
-  // const { handleLogout } = useUserData();
 
   const { t } = useTranslation();
 
