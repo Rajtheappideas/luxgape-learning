@@ -127,6 +127,7 @@ const Exam = () => {
           setuserDetailsLoading(false);
           setTimeout(() => {
             navigate("/signin");
+            window.localStorage.clear();
           }, 2000);
         }
       });
@@ -150,11 +151,6 @@ const Exam = () => {
           setGetExamQuestions(
             response?.data?.data?.questions?.data[0]?.exam_questions_details
           );
-          // setCurrentUrl(response?.data?.data?.questions?.first_page_url);
-          // sessionStorage.setItem(
-          //   "currentUrl",
-          //   JSON.stringify(response?.data?.data?.questions?.first_page_url)
-          // );
           setCurrentPage(response?.data?.data?.questions?.current_page);
           setEmployerDetails(response?.data?.data?.employer_id);
           setExamId(response?.data?.data?.questions?.data[0]?.exam_id);
@@ -175,12 +171,22 @@ const Exam = () => {
           setLoading(false);
           setTimeout(() => {
             navigate("/signin");
+            window.localStorage.clear();
           }, 2000);
         }
       });
 
-    return () => clearTheInt();
+    // window.addEventListener("beforeunload", alertUser);
+    return () => {
+      clearTheInt();
+      // window.removeEventListener("beforeunload", alertUser);
+    };
   }, []);
+
+  const alertUser = (e) => {
+    e.preventDefault();
+    e.returnValue = "are you sure?";
+  };
 
   // nexy questions
   const NextQuestions = () => {
@@ -220,7 +226,6 @@ const Exam = () => {
             "consumer-access-token": userData?.api_token,
           },
         }).then((response) => {
-          console.log("new page =>", response?.data?.data?.questions);
           if (response?.data?.status === "Success") {
             setGetExamDetails(response?.data?.data?.questions);
             setGetExamQuestions(
@@ -251,7 +256,6 @@ const Exam = () => {
           "consumer-access-token": userData?.api_token,
         },
       }).then((response) => {
-        console.log("submit answer =>", response?.data?.data);
         if (response?.data?.status === "Success") {
           setSelectedOptionId("");
           setSelectedQuestionId("");
@@ -284,7 +288,6 @@ const Exam = () => {
           "consumer-access-token": userData?.api_token,
         },
       }).then((response) => {
-        console.log("new page =>", response?.data?.data?.questions);
         if (response?.data?.status === "Success") {
           setGetExamDetails(response?.data?.data?.questions);
           setGetExamQuestions(
@@ -330,7 +333,6 @@ const Exam = () => {
       },
     }).then((response) => {
       if (response?.data?.status === "Success") {
-        console.log(response?.data?.data);
         setSubmitExam(false);
         setExamSubmitted(true);
         clearTheInt();

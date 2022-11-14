@@ -2,7 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { MetaTags } from "react-meta-tags";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   Footer,
   Navbar,
@@ -25,6 +26,7 @@ const AboutCourse = () => {
   const { userLanguage, userData, logoutAllTabsEventListener } =
     useUserContext();
 
+  const navigate = useNavigate();
   const { id } = useParams();
   const { t } = useTranslation();
   // fetch data on first rendering page
@@ -57,9 +59,14 @@ const AboutCourse = () => {
         .catch((err) => {
           console.log("error ->", err?.response);
           if (err?.response?.status === 404) {
-            console.log("something went wrong!");
+            toast.error("something went wrong!");
             setLoading(false);
             return false;
+          } else if (err?.response?.status === 401) {
+            toast.error("Invalid user!!!");
+            window.localStorage.clear();
+            navigate("/signin");
+            window.location.reload();
           }
         });
     }, 1000);

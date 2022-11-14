@@ -18,90 +18,105 @@ const AboutUsimg = () => {
   return (
     <div className="sm:p-10 p-3 sm:my-10 w-full grid lg:grid-cols-5 grid-rows-auto md:grid-cols-4 sm:grid-cols-3 grid-cols-2 place-items-center gap-5">
       <LazyLoadImage
+        loading="lazy"
         src={img1}
         alt="img1"
         className="object-center object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img2}
         alt="img1"
         className="object-center mx-auto mt-6 object-cover w-32 h-32 rounded-tl-[65px] rounded-br-[60px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img10}
         alt="img1"
         className="hidden sm:block object-center object-cover w-56 h-56 rounded-tl-none rounded-br-none rounded-tr-[110px] rounded-bl-[110px] "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img3}
         alt="img1"
         className="object-center object-cover mx-auto my-auto w-24 h-24 rounded-tl-[53px] rounded-br-[53px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img5}
         alt="img1"
         className="object-center mt-5 object-cover w-44 h-44 rounded-tl-[83px] rounded-br-[83px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img6}
         alt="img1"
         className="object-center mt-8 mx-auto object-cover w-32 h-32 rounded-tl-none rounded-br-none rounded-tr-[65px] rounded-bl-[60px] "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img7}
         alt="img1"
         className="object-center object-cover w-44 h-44 rounded-tl-[83px] rounded-br-[83px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img8}
         alt="img1"
         className="object-center my-auto object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img9}
         alt="img1"
         className="object-center mt-7 object-cover w-32 h-32 rounded-tl-[65px] rounded-br-[60px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img4}
         alt="img1"
         className="hidden md:block object-center -ml-4 object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img11}
         alt="img1"
         className="hidden md:block object-center object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img12}
         alt="img1"
         className="hidden md:block object-center object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img13}
         alt="img1"
         className="hidden lg:block object-left mt-7  object-cover w-56 h-56 rounded-tl-[110px] rounded-br-[110px] rounded-tr-none rounded-bl-none "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img2}
         alt="img1"
         className="hidden lg:block object-center  object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "
         effect="opacity"
       />
       <LazyLoadImage
+        loading="lazy"
         src={img6}
         alt="img1"
         className="hidden lg:block object-center object-cover w-44 h-44 rounded-tl-none rounded-br-none rounded-tr-[100px] rounded-bl-[91px] "

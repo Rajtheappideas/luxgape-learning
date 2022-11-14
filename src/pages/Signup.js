@@ -201,7 +201,7 @@ const Signup = () => {
         </div>
 
         {/* --------------------grid div---------------- */}
-        <div className="sm:p-10 p-3 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center items-start w-full">
+        <div className="sm:p-10 p-3 lg:grid lg:grid-cols-2 lg:gap-5 lg:grid-rows-1 lg:justify-items-center place-items-start w-full">
           {/* ----------image------------- */}
           <div className="lg:block hidden">
             <LazyLoadImage

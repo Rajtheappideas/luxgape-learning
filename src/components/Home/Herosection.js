@@ -39,9 +39,9 @@ const Herosection = () => {
       />
       <div className="sm:px-10 p-3 xl:grid xl:grid-cols-2 xl:grid-flow-row xl:justify-items-end xl:items-start">
         {/* ------------text and search is here------------------------------ */}
-        <div className="relative sm:space-y-20 space-y-7">
+        <div className="relative xl:space-y-20 sm:space-y-10 space-y-7">
           {/* -------------------------------------text--------------------------------     */}
-          <div className="sm:text-6xl text-3xl space-y-6 font-semibold text-black">
+          <div className="sm:text-6xl text-3xl xl:space-y-6 space-y-3 font-semibold text-black">
             {/* ---------------heading of herosection------------ */}
             <div className="sm:space-y-6 text-left  space-y-3 w-full">
               <span className="block tracking-normal">{t("learning_and")}</span>
@@ -50,7 +50,7 @@ const Herosection = () => {
                 <span className="text-from inline-block">{t("skills")}</span>
               </p>
               {/* ----------------------------------------paragraph--------------------------------- */}
-              <p className="text-xl text-secondary font-semibold capitalize tracking-wide w-full leading-relaxed">
+              <p className="sm:text-xl text-base text-secondary font-semibold capitalize sm:tracking-wide w-full leading-relaxed">
                 {t("hero_section_paragraph")}
               </p>
             </div>
@@ -66,6 +66,7 @@ const Herosection = () => {
             h-[570px] w-[490px] object-right-top object-cover"
                 src={main}
                 alt="ladyimg"
+                loading="lazy"
               />
               {/*-------rocket bg div-------------  */}
               <div
@@ -149,7 +150,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
 
           {/* --------------------------search=-------------------------------- */}
 
-          <div className=" w-[90%] flex items-center">
+          <div className="w-[90%] flex items-center justify-center xl:justify-start">
             <div className="relative w-full">
               <input
                 type="search"
@@ -173,7 +174,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
 
           {/* --------------------------------photos--------------------------------------- */}
 
-          <div className="flex flex-row items-center xl:justify-start justify-start sm:space-x-12 space-x-2 w-full">
+          <div className="flex flex-row items-center xl:justify-start justify-center sm:space-x-12 space-x-2 w-full">
             <img
               className="object-contain object-center sm:h-28 h-16 w-auto"
               src={simg3}
@@ -202,6 +203,7 @@ bg-gradient-to-l from-[#33bac6] to-[#162765]"
 h-[90%] w-[490px] absolute top-5 left-8 object-right-top object-cover"
             src={main}
             alt="ladyimg"
+            loading="lazy"
           />
           {/*-------rocket bg div-------------  */}
           <div

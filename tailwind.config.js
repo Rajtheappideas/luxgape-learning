@@ -36,9 +36,14 @@ module.exports = {
         animate: {
           "100%": { strokeDashoffset: "0" },
         },
+        navbar: {
+          "0%": { transform: 'translateY("-20%")' },
+          "100%": { transform: 'translateY("0%")' },
+        },
       },
       animation: {
         progress: "animate 4s linear",
+        navbarSlide: "navbar 500ms linear ",
       },
     },
   },

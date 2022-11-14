@@ -53,10 +53,9 @@ export const UserProvider = ({ children }) => {
           logoutChannel.postMessage("Logged out");
           logoutChannel.onmessage = (event) => {
             logoutChannel.close();
-            console.log(event);
           };
           toast("Logged out", { type: "success" });
-          localStorage.clear();
+          window.localStorage.clear();
           setUserdata(null);
           navigate("/");
         }
@@ -74,14 +73,12 @@ export const UserProvider = ({ children }) => {
     logoutChannel.onmessage = (event) => {
       window.location.reload();
       logoutChannel.close();
-      console.log(event);
     };
   };
   const loginAllTabsEventListener = () => {
     loginChannel.onmessage = (event) => {
       window.location.reload();
       loginChannel.close();
-      console.log(event);
     };
   };
   useEffect(() => {

@@ -3,7 +3,6 @@ import logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
 import { MenuIcon, XIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { useUserContext } from "../context/usercontext";
-import useUserData from "../hooks/useUserData";
 import { useTranslation } from "react-i18next";
 import { UserIcon } from "@heroicons/react/solid";
 import France from "../assets/france.png";
@@ -12,14 +11,14 @@ import English from "../assets/great-britain.png";
 const Navbar = ({ activeText }) => {
   const [openSidebar, setOpenSidebar] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const { userData, ChangeLanguage,handleLogout } = useUserContext();
+  const { userData, ChangeLanguage, handleLogout } = useUserContext();
 
   const { t } = useTranslation();
 
   return (
     <nav className="xl:flex xl:justify-between xl:items-center sm:p-10 p-3">
       {/* ----------------logo------------------- ------ */}
-      <div className="flex justify-between items-start lg:mb-0 mb-5">
+      <div className="flex justify-between items-start lg:mb-0 mb-5 transition-all ease-in-out duration-500">
         <Link to="/">
           <img
             src={logo}
@@ -29,7 +28,7 @@ const Navbar = ({ activeText }) => {
         </Link>
         <button onClick={() => setOpenSidebar(!openSidebar)}>
           {openSidebar ? (
-            <XIcon className="h-10 inline-block xl:hidden " />
+            <XIcon className="h-10 inline-block xl:hidden" />
           ) : (
             <MenuIcon className="h-10 inline-block xl:hidden " />
           )}
@@ -88,9 +87,9 @@ const Navbar = ({ activeText }) => {
               <li className="py-1 ">
                 <button
                   onClick={() => {
-                    window.location.reload();
                     ChangeLanguage("en");
                     localStorage.setItem("lang_code", "en");
+                    window.location.reload();
                   }}
                   className="text-xl flex items-center justify-start font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                 >
@@ -101,9 +100,9 @@ const Navbar = ({ activeText }) => {
               <li className="py-1 flex items-center justify-start">
                 <button
                   onClick={() => {
-                    window.location.reload();
                     ChangeLanguage("fr");
                     localStorage.setItem("lang_code", "fr");
+                    window.location.reload();
                   }}
                   className="text-xl flex items-center justify-start font-semibold ml-2 cursor-pointer hover:scale-95 hover:text-gray-400 duration-100 transition-all ease-in-out"
                 >
@@ -155,7 +154,7 @@ const Navbar = ({ activeText }) => {
       {/* ------------mobile / tablet--------------- */}
       {openSidebar && (
         <div
-          className={`space-y-10 py-4 shadow-xl text-xl rounded text-secondary font-semibold w-full xl:hidden bg-gray-200 flex flex-col flex-wrap items-center`}
+          className={`space-y-10 py-4 shadow-xl text-xl rounded text-secondary font-semibold w-full xl:hidden bg-gray-200 flex flex-col flex-wrap items-center transition-all ease-in-out duration-500 animate-navbarSlide`}
         >
           <span
             className={`${

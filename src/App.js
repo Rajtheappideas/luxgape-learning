@@ -6,6 +6,7 @@ import Loading from "./assets/animations/loading.json";
 import Lottie from "react-lottie";
 import { ErrorBoundary } from "react-error-boundary";
 import ErrorFallback from "./components/ErrorBoundary";
+import { ToastContainer } from "react-toastify";
 
 // pages import using lazy component of react
 const Home = lazy(() => import("./pages/Home"));
@@ -56,6 +57,17 @@ const App = () => {
           }
         >
           <UserProvider>
+            <ToastContainer
+              position="top-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/signin" element={<SignIn />} />
@@ -93,7 +105,11 @@ const App = () => {
               />
               <Route
                 path="/courses/aboutcourse/:id"
-                element={<AboutCourse />}
+                element={
+                  <PrivateRoute>
+                    <AboutCourse />
+                  </PrivateRoute>
+                }
               />
               <Route
                 path="/courses/aboutcourse/payment/:id"
